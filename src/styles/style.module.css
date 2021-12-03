@@ -1,0 +1,189 @@
+.body{
+    background-color: white;
+}
+.events{
+    margin: 50px;
+
+}
+.name1{
+    font-size: 25px;
+    margin-left: 600px;
+
+}
+.section{
+    text-align: center;
+
+}
+.carousel{
+    width: 100%;
+    height: 700px;
+    margin-top: 50px;
+    align-content: center;
+    display: flex;
+    justify-content: center;
+}
+.image1{
+    width: 200px;
+    height: 200px;
+    margin-left: 650px;
+
+}
+.btn-login{
+    margin: 20px;
+}
+.donaciones{
+    margin: 150px;
+
+
+}
+.imagedonaciones{
+
+    width: 400px;
+    height: 200px;
+    margin-left: 30px;
+}
+.btndonaciones{
+    margin: 50px;
+}
+.news{
+    margin: 50px;
+    background-color: rgba(255, 255, 255, 0.03);
+}
+.image-news{
+    width: 400px;
+    height: 350px;
+    align-content: center;
+
+}
+.linea {
+    border-top: 1px solid black;
+    height: 2px;
+    padding: 0;
+    margin: 20px auto 0 auto;
+}
+.form{
+    margin: 60px;
+}
+.infoeventos{
+    margin: 80px;
+}
+
+.cardContact{
+
+}
+.videos{
+    margin-top: 70px;
+}
+.container{
+    background-color: white;
+    margin: 20px;
+}
+.formasdona{
+    margin: 70px;
+
+
+}
+.imagedonacionespage{
+    width: 150px;
+    height: 70px;
+    margin-left: 170px;
+
+
+}
+.formsDonaciones{
+    margin:100px;
+}
+.nameDona{
+    margin: 30px;
+    background-color: #408bd7;
+}
+.imagedonainfo{
+    width: 100px;
+    height: 100px;
+    margin-left: 70px;
+
+}
+.cardjuegos{
+    width: 300px;
+    height: 200px;
+    border: #1024a8 2px solid;
+   margin: 60px;
+    border-radius: 5px;
+    background-color: rgba(155, 192, 231, 0.84);
+}
+.juegos{
+    border-radius: 5px;
+
+}
+.namejuego{
+  margin-left: 50px;
+}
+.bancos{
+    text-align:center;
+}
+.lineainter{
+    text-align:center;
+    line-height: 2;
+    border-top: 11px solid #1024a8;
+    height: 3px;
+    margin: 30px;
+
+
+}
+.infoDona{
+    margin: 30px;
+}
+.eventRegister{
+    background-color: #408bd7;
+    border-radius: 4px;
+}
+.infoeventosY{
+    text-align: center;
+    margin:100px;
+}
+.videoyoutube{
+    margin-top: 40px;
+}
+.ubicacion{
+    margin-left: 150px;
+}
+.imageinfo{
+    width: 400px;
+    height: 400px;
+    margin-left: 70px;
+
+}
+.borderdona{
+    border-color: #1024a8;
+}
+.imageDonacionestres{
+    width: 350px;
+    height: 200px;
+    margin-left: 50px;
+}
+.titledona{
+    text-align: center;
+
+}
+.name {
+    font-size: 25px;
+    margin-left: 270px;
+
+}
+.image{
+    width: 200px;
+    height: 200px;
+    margin-left: 270px;
+
+}
+.videospage{
+    display: flex;
+    width: 400px;
+    height: 300px;
+    margin-left: 30px;
+}
+.admin{
+    width: 250px;
+    height: 15px;
+    border-color: #1024a8;
+}
