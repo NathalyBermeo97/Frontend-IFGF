@@ -29,7 +29,7 @@ const Videos = () => {
                             <div className={styles.titledona}>
                                 <h5 className="card-title">Videos de la iglesia</h5>
                                 <p className="card-text"></p>
-                                <a href="Login" className="btn btn-primary" >Ver más</a>
+                                <a href="LoginComponent" className="btn btn-primary" >Ver más</a>
                             </div>
 
                         </div>
@@ -41,7 +41,7 @@ const Videos = () => {
                             <div className={styles.titledona}>
                                 <h5 className="card-title">Videos para jóvenes</h5>
                                 <p className="card-text"></p>
-                                <a href="Login" className="btn btn-primary" >Ver más</a>
+                                <a href="LoginComponent" className="btn btn-primary" >Ver más</a>
                             </div>
 
                         </div>
@@ -53,7 +53,7 @@ const Videos = () => {
                             <div className={styles.titledona}>
                                 <h5 className="card-title" >Videos para niños</h5>
                                 <p className="card-text"></p>
-                                <a  href="Login" className="btn btn-primary" >Ver más</a>
+                                <a  href="LoginComponent" className="btn btn-primary" >Ver más</a>
                             </div>
 
                         </div>

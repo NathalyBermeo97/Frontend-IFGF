@@ -32,7 +32,7 @@ const Donacionesnologin = () => {
                         <div className={styles.titledona}>
                             <h5 className="card-title">Donación económica</h5>
                             <p className="card-text"></p>
-                            <a href="Login" className="btn btn-primary" >Ver más</a>
+                            <a href="LoginComponent" className="btn btn-primary" >Ver más</a>
                         </div>
 
                     </div>
@@ -41,7 +41,7 @@ const Donacionesnologin = () => {
                         <div className={styles.titledona}>
                             <h5 className="card-title">Donación de alimentos</h5>
                             <p className="card-text"></p>
-                            <a href="Login" className="btn btn-primary" >Ver más</a>
+                            <a href="LoginComponent" className="btn btn-primary" >Ver más</a>
                         </div>
 
                     </div>
@@ -50,7 +50,7 @@ const Donacionesnologin = () => {
                         <div className={styles.titledona}>
                             <h5 className="card-title" >Donación de ropa</h5>
                             <p className="card-text"></p>
-                            <a  href="Login" className="btn btn-primary" >Ver más</a>
+                            <a  href="LoginComponent" className="btn btn-primary" >Ver más</a>
                         </div>
 
                     </div>

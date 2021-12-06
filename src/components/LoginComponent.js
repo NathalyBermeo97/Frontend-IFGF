@@ -3,41 +3,50 @@ import { useForm } from "react-hook-form";
 import styles from '../styles/Login.module.css'
 import {Button, Grid} from "@material-ui/core";
 import {Input} from "@material-ui/core";
+import Axios from "axios";
+import Link from 'next/link';
 
 
-const LoginPage =() => {
-    const { register, formState: { errors }, handleSubmit } = useForm();
-    const [result,setResult]=useState("");
-    const onSubmit = (formData) =>setResult(JSON.stringify(formData));
+function LoginComponent(props){
 
+
+
+    const [email,setEmail]=useState("");
+    const [password,setPassword]=useState("");
+
+    const login = () => {
+        Axios.post ("https://backend-ifgf.herokuapp.com/api/auth/login",{
+            email:email,
+            password:password,
+        }).then((response)=>{
+            console.log(response);
+        });
+    };
 
     return (
         <div>
 
-            <form onSubmit={handleSubmit(onSubmit)}  className={styles.form}>
+            <form  className={styles.form}>
                 <div className={styles.head}>
                     <h1>BIENVENIDO A LA IGLESIA IFGF ECUADOR</h1>
                     <h3>Iniciar sesión</h3>
                 </div>
 
                 <div>
-                    <Input type="email" variant="outlined"
-                           {...register("email", { required: true })} placeholder="Email"
+                    <Input type="email" variant="outlined" placeholder="Email" onChange={(e)=>{ setEmail(e.target.value);}}
                     />
-                    {errors.email?.type === 'required' && "Este campo obligatorio"}
+
                 </div>
                 <div>
-                    <Input type="password" variant="outlined"
-                           {...register("password", { required: true })} placeholder="Contraseña"
+                    <Input type="password" variant="outlined" placeholder="Contraseña" onChange={(e)=>{ setPassword(e.target.value);}}
                     />
-                    {errors.password?.type === 'required' && "Este campo obligatorio"}
+
                 </div>
 
-                <p>{result}</p>
 
                 <Grid container xs={12}>
                     <Grid  xs={6}>
-                        <Button href="/" variant="outlined" size="medium" >
+                        <Button variant="outlined" size="medium" onClick={login} >
                             Ingresar
                         </Button>
                     </Grid>
@@ -53,4 +62,4 @@ const LoginPage =() => {
         </div>
     );
 }
-export default LoginPage;
+export default LoginComponent;

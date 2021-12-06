@@ -39,7 +39,7 @@ const Juegosnologin = () => {
                                 <h5 className="card-title">Preguntas referentes a la Iglesia</h5>
                                 <p className="card-text">With supporting text below as a natural lead-in to additional
                                     content.</p>
-                                <a href="Login" className="btn btn-primary">Ver más</a>
+                                <a href="LoginComponent" className="btn btn-primary">Ver más</a>
                             </div>
                         </div>
                     </div>
@@ -49,7 +49,7 @@ const Juegosnologin = () => {
                                 <h5 className="card-title">Preguntas referentes a Historia de Dios</h5>
                                 <p className="card-text">With supporting text below as a natural lead-in to additional
                                     content.</p>
-                                <a href="Login" className="btn btn-primary">Ver más</a>
+                                <a href="LoginComponent" className="btn btn-primary">Ver más</a>
                             </div>
                         </div>
                     </div>
@@ -60,7 +60,7 @@ const Juegosnologin = () => {
                                 <h5 className="card-title">Preguntas referentes a la biblia</h5>
                                 <p className="card-text">With supporting text below as a natural lead-in to additional
                                     content.</p>
-                                <a href="Login" className="btn btn-primary">Ver más</a>
+                                <a href="LoginComponent" className="btn btn-primary">Ver más</a>
                             </div>
                         </div>
                     </div>

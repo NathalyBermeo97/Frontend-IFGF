@@ -1,63 +1,52 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import {useEffect,useState} from "react";
-import {Image} from "@mui/icons-material";
-import {Button, Link} from "@material-ui/core";
-import styles from "../styles/courses.module.css";
+import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const News = () => {
+const url = "https://backend-ifgf.herokuapp.com/";
 
-    const [news, setnews] = useState([]);
+const News = ({news}) => {
+    return (
+        <div>
+            <table className="table">
+                <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Descripción</th>
+                    <th>Imagen</th>
 
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                const response = await axios.get('https://backend-ifgf.herokuapp.com/api/news')
-                console.log('response', response);
-                setnews(response.data)
-            } catch (e) {
 
-            }
-        };
-        getData();
-    }, []);
+                </tr>
 
-    return(
-        <div className={styles.body}>
-            <div className={styles.courses}>
-                {news.map((item) => (
-                    <div key={item.id} className={styles.course}>
-                        <div className={styles.coursecontenido}>
-                            <Link href={`/news/${item.id}`}>
-                                <h2 className={styles.name}>{item.name}</h2>
-                            </Link>
+                </thead>
+                <tbody>
+                {news.map(item =>(
+                    <tr key={item.id}>
+                        <th>{item.title}</th>
+                        <th>{item.description}</th>
+                        <th><img src={url+item.imgURL}/></th>
 
-                            <Link href={`/news/${item.id}`}>
-                                <Image
-                                    src={item.image}
-                                    width={300}
-                                    height={200}
-                                    justifyContent="center"
-                                />
-                            </Link>
 
-                            <div className={styles.description}>{item.description}</div>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                href={`/news/${item.id}`}
-                            >
-                                Más información
-                            </Button>
-                        </div>
-                    </div>
+                    </tr>
+
                 ))}
-            </div>
+
+
+                </tbody>
+            </table>
 
         </div>
 
     )
 
-
 }
 export default News;
+export async function getStaticProps(){
+    const response = await fetch ("https://backend-ifgf.herokuapp.com/api/news")
+    const data= await response.json()
+    console.log(data)
+
+    return{
+        props:{
+            news:data,
+        },
+    }
+}

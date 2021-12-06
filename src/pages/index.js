@@ -6,9 +6,21 @@ import Carousel from "../components/Carousel"
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import Noticias from "../components/Noticias";
-import React from "react";
+import React, {useEffect, useState} from "react";
 
-const News = ({ news }) => {
+const News = ({  }) => {
+
+  const[news,setNews]=useState([])
+
+  useEffect(()=>{
+    const getNews =()=>{
+      fetch("https://backend-ifgf.herokuapp.com/api/news")
+          .then(res => res.json())
+          .then(res =>setNews(res))
+    }
+    getNews()
+
+  },[])
   return (
       <body className={styles.body} >
       <Header/>
@@ -38,7 +50,7 @@ const News = ({ news }) => {
 
         <div className="container" >
 
-          <Noticias/>
+          <Noticias news={news}/>
         </div>
 
 
