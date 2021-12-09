@@ -33,7 +33,7 @@ const InfoEvento = () => {
                 <p className="card-text">Some quick example text to build on the card title and make up the bulk of
                     the cards content.</p>
             </div>
-            <a href="Eventos" className="btn btn-primary" >Inscribirse</a>
+            <a href="eventos" className="btn btn-primary" >Inscribirse</a>
 
         </div>
         </body>

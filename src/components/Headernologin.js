@@ -15,7 +15,7 @@ const Headernologin = () => {
                             Registro
                         </Button>
 
-                        <Button variant="disableElevation" href="LoginComponent">
+                        <Button variant="disableElevation" href="LoginPage">
                             Inicio de sesion
                         </Button>
                     </form>

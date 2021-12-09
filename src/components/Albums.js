@@ -6,19 +6,18 @@ import api from "../api/api";
 
 
 
-
-const News = ({news}) => {
+const Albums = ({albums}) => {
     return (
         <div>
-            <h1>Noticias</h1>
+            <h1>Albums</h1>
             <table className="table">
                 <div className={styles.courses}>
-                {news.map(item =>(
-                    <div key={item.id} className={styles.course}>
+                {albums.map(album =>(
+                    <div key={albums.id} className={styles.course}>
                         <div   className={styles.coursecontenido}>
-                        <div justifyContent="center" className={styles.name}>{item.title}</div>
-                        <div><img src={url+item.imgURL} width={210} height={170}  justifyContent="center" className={styles.imgN}/></div>
-                        <div className={styles.description}>{item.description}</div>
+                        <div justifyContent="center" className={styles.name}>{album.title}</div>
+                        <div><img src={url+album.imgURL} width={210} height={170}  justifyContent="center" className={styles.img}/></div>
+                        <div className={styles.description}>{album.description}</div>
                   
                     </div>
                         
@@ -30,20 +29,20 @@ const News = ({news}) => {
     )
 
 }
-export default News;
+export default Albums;
 export async function getStaticProps() {
-    let news = [];
+    let albums = [];
     try {
-      const response = await api.get("news");
+      const response = await api.get("albums");
       console.log("response", response);
-      courses = response.data.data;
+      albums = response.data.data;
     } catch (e) {
       console.log(e);
     }
   
     return {
       props: {
-        news,
+        albums,
       },
     };
   }

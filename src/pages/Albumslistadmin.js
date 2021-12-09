@@ -1,7 +1,10 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import styles from "../styles/cards.module.css";
 
-const Informacionlistadmin = ({informaciones}) => {
+const url="https://backend-ifgf.herokuapp.com";
+
+const Albumslistadmin = ({albums}) => {
     return (
 
         <table className="table">
@@ -16,11 +19,11 @@ const Informacionlistadmin = ({informaciones}) => {
 
             </thead>
             <tbody>
-            {informaciones.map(item =>(
-                <tr key={item.id}>
-                    <th>{item.title}</th>
-                    <th>{item.description}</th>
-                    <th>{item.imgURL}</th>
+            {albums.map(album =>(
+                <tr key={album.id}>
+                    <th>{album.title}</th>
+                    <th>{album.description}</th>
+                    <th>{album.imgURL}</th>
 
 
 
@@ -34,15 +37,15 @@ const Informacionlistadmin = ({informaciones}) => {
     )
 
 }
-export default Informacionlistadmin;
+export default Albumslistadmin;
 export async function getStaticProps(){
-    const response = await fetch ("https://backend-ifgf.herokuapp.com/api/news")
+    const response = await fetch ("https://backend-ifgf.herokuapp.com/api/albums")
     const data= await response.json()
     console.log(data)
 
     return{
         props:{
-            informaciones:data,
+            albums:data,
         },
     }
 }

@@ -8,7 +8,8 @@ import Informacionformadmin from "../components/Informacionformadmin";
 import Navbaradmin from "../components/Navbaradmin";
 import Admin from "../components/Admin";
 import {Grid} from "@material-ui/core";
-
+import Albumslistadmin from "./Albumslistadmin";
+import Messageslistadmin from "./Messageslistadmin";
 
 function Informacionadmin() {
     const [informacion,setInformacion]=useState({
@@ -29,6 +30,42 @@ function Informacionadmin() {
 
     },[])
 
+    const [message,setMessage]=useState({
+        title:'',
+        description:'',
+        imgURL:''
+
+    })
+    const[messages,setMessages]=useState([])
+
+    useEffect(()=>{
+        const getMessages =()=>{
+            fetch("https://backend-ifgf.herokuapp.com/api/messages")
+                .then(res => res.json())
+                .then(res =>setMessages(res))
+        }
+        getMessages()
+
+    },[])
+
+    const [album,setAlbum]=useState({
+        title:'',
+        description:'',
+        imgURL:''
+
+    })
+    const[albums,setAlbums]=useState([])
+
+    useEffect(()=>{
+        const getAlbums =()=>{
+            fetch("https://backend-ifgf.herokuapp.com/api/albums")
+                .then(res => res.json())
+                .then(res =>setAlbums(res))
+        }
+        getAlbums()
+
+    },[])
+
     return(
         <div>
             <Navbaradmin/>
@@ -39,6 +76,7 @@ function Informacionadmin() {
                 </Grid>
                 <Grid xs={10}>
                     <h1  className={styles.formasdona}>INFORMACION GENERAL</h1>
+                    <h1  className={styles.formasdona}>Noticias</h1>
 
                     <div className="container">
 
@@ -52,6 +90,20 @@ function Informacionadmin() {
 
                             </div>
 
+                        </div>
+                        <h1  className={styles.formasdona}>Mensajes biblicos</h1>
+                        <div className="row">
+                            <div className="col-7">
+                                <Messageslistadmin messages={messages}/>
+                            </div>
+                            
+                        </div>
+                        <h1  className={styles.formasdona}>Albums</h1>
+                        <div className="row">
+                            <div className="col-7">
+                                <Albumslistadmin albums={albums}/>
+                            </div>
+                            
                         </div>
 
 

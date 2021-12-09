@@ -1,0 +1,9 @@
+.body{
+    background-color: white;
+    width: 1500px;
+    height: 1000px;
+}
+.card{
+    background-color: #87b6e4;
+    border-radius: 15px;
+}

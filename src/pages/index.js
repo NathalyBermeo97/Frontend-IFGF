@@ -6,6 +6,8 @@ import Carousel from "../components/Carousel"
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import Noticias from "../components/Noticias";
+import Messages from "../components/Messages";
+import Albums from "../components/Albums";
 import React, {useEffect, useState} from "react";
 
 const News = ({  }) => {
@@ -21,6 +23,31 @@ const News = ({  }) => {
     getNews()
 
   },[])
+
+  const[messages,setMessages]=useState([])
+
+  useEffect(()=>{
+    const getMessages =()=>{
+      fetch("https://backend-ifgf.herokuapp.com/api/messages")
+          .then(res => res.json())
+          .then(res =>setMessages(res))
+    }
+    getMessages()
+
+  },[])
+
+  const[albums,setAlbums]=useState([])
+
+  useEffect(()=>{
+    const getAlbums =()=>{
+      fetch("https://backend-ifgf.herokuapp.com/api/albums")
+          .then(res => res.json())
+          .then(res =>setAlbums(res))
+    }
+    getAlbums()
+
+  },[])
+
   return (
       <body className={styles.body} >
       <Header/>
@@ -52,7 +79,14 @@ const News = ({  }) => {
 
           <Noticias news={news}/>
         </div>
+        <div className="container" >
 
+          <Messages messages={messages}/>
+        </div>
+        <div className="container" >
+
+        <Albums albums={albums}/>
+        </div>
 
         <div className={styles.donaciones}>
           <Grid container={12}>

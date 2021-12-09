@@ -1,15 +1,16 @@
 import React, {useEffect, useRef, useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Eventlistadmin from "./Eventlistadmin";
+import styles from '../styles/listas.module.css';
 import Navbaradmin from "../components/Navbaradmin";
 import {Grid} from "@material-ui/core";
 import Admin from "../components/Admin";
-
-
+const url = "https://backend-ifgf.herokuapp.com/";
 function Donacioneslistadmin({donations}) {
 
     return(
         <>
+
+        <div className={styles.body}>
             <Navbaradmin/>
 
             <Grid container={12}>
@@ -26,6 +27,7 @@ function Donacioneslistadmin({donations}) {
                 Lista de donaciones
             </h1>
 
+            <div className={styles.card}>
             <table className="table">
                 <thead>
                 <tr>
@@ -48,21 +50,25 @@ function Donacioneslistadmin({donations}) {
                 <tr key={donation.id}>
                     <th>{donation.name}</th>
                     <th>{donation.lastName}</th>
-                    <th>{donation.descrption}</th>
+                    <th>{donation.description}</th>
                     <th>{donation.type}</th>
                     <th>{donation.delivery}</th>
                     <th>{donation.direction}</th>
                     <th>{donation.dateDelivery}</th>
-                    <th>{donation.imgURL}</th>
+                    <th><img src={url+donation.imgURL} width={210} height={170}  justifyContent="center"/></th>
 
                 </tr>
 
             ))}
                 </tbody>
             </table>
+            </div>
                 </Grid>
             </Grid>
+
+            </div>
         </>
+        
 
     )
 

@@ -11,6 +11,7 @@ const Videoslistadmin = ({videos}) => {
                 <tr>
                     <th>Título</th>
                     <th>Descripción</th>
+                    <th>Video</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -18,6 +19,7 @@ const Videoslistadmin = ({videos}) => {
                     <tr key={video.id}>
                         <th>{video.title}</th>
                         <th>{video.description}</th>
+                        <th>{video.url}</th>
                     </tr>
 
                 ))}

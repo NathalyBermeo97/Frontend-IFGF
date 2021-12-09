@@ -3,6 +3,7 @@
     width: 10%;
     height: 10%;
     position: absolute;
+    margin-left: 900px;
 }
 
 .title{
@@ -25,14 +26,14 @@
 }
 
 .course {
-    width: 400px;
-    height: 500px;
+    width: 300px;
+    height: 300px;
     margin: 20px;
     border-radius: 6px;
     overflow: hidden;
     display: flex;
     box-shadow: 1px 1px 5px rgb(103, 100, 100);
-    background-color: #408bd7;
+    background-color: #87b6e4;
 
 }
 .course:hover{
@@ -54,18 +55,25 @@
 
 }
 .name{
-    font-family: "Arial ";
-    margin-top: 35px;
-    height: 50px;
 
-
+    text-align: center;
 }
 .description{
     font-family: "Arial";
-    margin: 20px;
     height: 85px;
     text-align: justify;
+    margin: 20px;
 
 
 }
+.img{
+   text-align: center;
+   margin-left: 40px;
+}
 
+.imgN{
+    text-align: center;
+    margin-right: 10px;
+
+
+}

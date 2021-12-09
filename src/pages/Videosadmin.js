@@ -46,7 +46,7 @@ function Videosadmin() {
                             </div>
                             <div className="col-5">
 
-                                <Videosformadmin video={video} setVideos={setVideos}/>
+                                <Videosformadmin video={video} setVideo={setVideo}/>
 
                             </div>
 
