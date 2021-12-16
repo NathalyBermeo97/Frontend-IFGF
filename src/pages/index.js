@@ -9,18 +9,10 @@ import Noticias from "../components/Noticias";
 import Messages from "../components/Messages";
 import Albums from "../components/Albums";
 import React, { useEffect, useState } from "react";
+import { useNews } from "../hooks/useNews";
 
 const News = ({}) => {
-  const [news, setNews] = useState([]);
-
-  useEffect(() => {
-    const getNews = () => {
-      fetch("https://backend-ifgf.herokuapp.com/api/news")
-        .then((res) => res.json())
-        .then((res) => setNews(res));
-    };
-    getNews();
-  }, []);
+  const news = useNews();
 
   const [messages, setMessages] = useState([]);
 

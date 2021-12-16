@@ -21,7 +21,7 @@ const User = {
         });
     },
     getAuthenticatedUser: (token) => {
-        return api.get(`/auth/user/${token}`);
+        return api.get(`auth/user/${token}`);
     },
 };
 
