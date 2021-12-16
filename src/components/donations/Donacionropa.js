@@ -5,10 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button} from "@material-ui/core";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {DatePicker} from "antd";
-import Header from "../components/Header";
-import Navbar from "../components/Navbar";
-import Search from "../components/Search";
-import Filtro from "../components/Filtro";
+import Header from "../../components/Header";
+import Navbar from "../../components/Navbar";
+import Search from "../../components/Search";
+import Filtro from "../../components/Filtro";
 
 const Donacionropa = () => {
     return (

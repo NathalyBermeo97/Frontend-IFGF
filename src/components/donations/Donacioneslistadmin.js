@@ -1,9 +1,9 @@
 import React, {useEffect, useRef, useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../styles/listas.module.css';
-import Navbaradmin from "../components/Navbaradmin";
+import Navbaradmin from "../../components/Navbaradmin";
 import {Grid} from "@material-ui/core";
-import Admin from "../components/Admin";
+import Admin from "../../components/Admin";
 const url = "https://backend-ifgf.herokuapp.com/";
 function Donacioneslistadmin({donations}) {
 

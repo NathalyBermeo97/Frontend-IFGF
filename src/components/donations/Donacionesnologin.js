@@ -2,9 +2,9 @@ import React from "react";
 import {Grid} from "@mui/material";
 import styles from '../styles/style.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from "../components/Header";
-import Navbarnologin from "../components/Navbarnologin";
-import Headernologin from "../components/Headernologin";
+import Header from "../../components/Header";
+import Navbarnologin from "../../components/Navbarnologin";
+import Headernologin from "../../components/Headernologin";
 
 const Donacionesnologin = () => {
     return (

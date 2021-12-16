@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import styles from "../styles/Login.module.css";
+import styles from "../../styles/Login.module.css";
 import { Button, Grid } from "@material-ui/core";
 import { Input } from "@material-ui/core";
+import useUser from "../../hooks/useUser";
+import {useRouter} from 'next/router'
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -9,14 +11,25 @@ const LoginPage = () => {
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
 
+  
+  const { login, isLogged } = useUser();
+  
+  const router = useRouter()
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
+    setPassword("");
+    setEmail("");
+    login({ email, password });
   };
+
+  useEffect(() => {
+      if(isLogged) router.push('/')
+  }, [isLogged])
 
   return (
     <div>
-      <form className={styles.form} handleSubmit={(e) => handleSubmit(e)}>
+      <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
         <div className={styles.head}>
           <h1>BIENVENIDO A LA IGLESIA IFGF ECUADOR</h1>
           <h3>Iniciar sesión</h3>
@@ -53,8 +66,18 @@ const LoginPage = () => {
           />
         </div>
 
-        <button type='submit'>Ingresar</button>
-        <button type='submit'>borrar</button>
+        <Button variant="outlined" size="medium" type="submit">
+          Ingresar
+        </Button>
+
+        <Button
+          href="indexnologin"
+          variant="outlined"
+          size="medium"
+          type="submit"
+        >
+          Salir
+        </Button>
       </form>
     </div>
   );

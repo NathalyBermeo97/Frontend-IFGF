@@ -2,8 +2,8 @@
 import styles from '../styles/style.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button, Grid} from "@material-ui/core";
-import Header from "../components/Header";
-import Navbar from "../components/Navbar";
+import Header from "./Header";
+import Navbar from "./Navbar";
 import React from "react";
 
 

@@ -1,12 +1,12 @@
 import React from "react";
 import {Grid} from "@mui/material";
 import styles from '../styles/style.module.css';
-import Search from "../components/Search";
-import Filtroninos from "../components/Filtroninos";
-import Navbar from "../components/Navbar";
-import Header from "../components/Header";
-import Headernologin from "../components/Headernologin";
-import Navbarnologin from "../components/Navbarnologin";
+import Search from "./Search";
+import Filtroninos from "./Filtroninos";
+import Navbar from "./Navbar";
+import Header from "./Header";
+import Headernologin from "./Headernologin";
+import Navbarnologin from "./Navbarnologin";
 
 const Videos = () => {
     return (

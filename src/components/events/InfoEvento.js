@@ -5,8 +5,8 @@ import {Button} from "antd";
 import styles from '../styles/style.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Grid} from "@material-ui/core";
-import Header from "../components/Header";
-import Navbar from "../components/Navbar";
+import Header from "../../components/Header";
+import Navbar from "../../components/Navbar";
 
 
 const InfoEvento = () => {

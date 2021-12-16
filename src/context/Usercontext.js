@@ -1,11 +1,18 @@
-import React,{useState} from 'react'
+import React, { useState } from "react";
 
-const Context =React.createContext({})
+export const JWT_STATES = {
+  NOT_LOGGED: null,
+  NOT_KNOWN: undefined,
+};
 
-export function UsercontextProvider({children}){
-    const[jwt,setJWT]=useState([])
+const Context = React.createContext({});
 
-    return <Context.Provider value={{jwt,setJWT}}>
-        {children}
-    </Context.Provider>
+export function UserContextProvider({ children }) {
+  const [jwt, setJWT] = useState(JWT_STATES.NOT_KNOWN);
+
+  return (
+    <Context.Provider value={{ jwt, setJWT }}>{children}</Context.Provider>
+  );
 }
+
+export default Context;

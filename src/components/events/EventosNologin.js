@@ -4,8 +4,8 @@ import {Button} from "antd";
 import styles from '../styles/style.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Grid} from "@material-ui/core";
-import Headernologin from "../components/Headernologin";
-import Navbarnologin from "../components/Navbarnologin";
+import Headernologin from "../../components/Headernologin";
+import Navbarnologin from "../../components/Navbarnologin";
 
 
 const EventosNologin = () => {

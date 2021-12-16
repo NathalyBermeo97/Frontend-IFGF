@@ -1,11 +1,11 @@
 import React, {useEffect, useRef, useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Eventlistadmin from "./Eventlistadmin";
-import Eventformadmin from "../components/Eventformadmin";
+import Eventformadmin from "../../components/Eventformadmin";
 import styles from '../styles/style.module.css';
-import Navbaradmin from "../components/Navbaradmin";
+import Navbaradmin from "../../components/Navbaradmin";
 import {Grid} from "@material-ui/core";
-import Admin from "../components/Admin";
+import Admin from "../../components/Admin";
 
 
 function Eventosadmin() {
