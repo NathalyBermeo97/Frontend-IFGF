@@ -2,10 +2,13 @@ import React from "react";
 import { Link } from "@material-ui/core";
 import RouterLink from "next/link";
 import { Button, Grid } from "@mui/material";
-import useUser from "../hooks/useUser";
+import useUser, { USER_STATES } from "../hooks/useUser";
 
 const Navbar = () => {
-  const { user, isLogged } = useUser();
+  const { user, isLogged, logout } = useUser();
+  const handleLogout = () => {
+    logout()
+  }
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Grid container={12}>
@@ -48,11 +51,16 @@ const Navbar = () => {
       </Grid>
 
       <Grid xs={2}>
-        <RouterLink className="btn btn-light" href="/login">
-          {
-            isLogged ? user.name : <p>Iniciar Sesión</p>               
-          }
-        </RouterLink>
+          {isLogged ? (
+            <p>
+                {user.name}
+                <button onClick={() => handleLogout()}>LOGOUT</button>
+            </p> 
+          ) : user === USER_STATES.NOT_KNOWN ? (
+            "cargando..."
+          ) : (
+            <RouterLink href="/login">Iniciar Sesión</RouterLink>
+          )}
       </Grid>
     </nav>
   );
