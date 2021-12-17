@@ -5,7 +5,7 @@ const User = {
         return api.post("/register", userData);
     },
     login: (data) => {
-        return api.post("/login", data);
+        return api.post("/auth/login", data);
     },
     logout: () => {
         return api.post("/logout");
@@ -20,8 +20,8 @@ const User = {
             token,
         });
     },
-    getAuthenticatedUser: () => {
-        return api.get("/user");
+    getAuthenticatedUser: (token) => {
+        return api.get(`auth/user/${token}`);
     },
 };
 

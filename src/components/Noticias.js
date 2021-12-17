@@ -36,7 +36,7 @@ export async function getStaticProps() {
     try {
       const response = await api.get("news");
       console.log("response", response);
-      courses = response.data.data;
+      news = response.data.data;
     } catch (e) {
       console.log(e);
     }
