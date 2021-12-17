@@ -1,25 +1,24 @@
 import React, { useRef, useState ,useEffect} from "react";
 import {Button} from "antd";
 //import { Button } from 'antd';
-import styles from '../styles/style.module.css';
+import styles from '../../styles/style.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Grid} from "@material-ui/core";
-import Header from "../components/Header";
-import Navbar from "../components/Navbar";
-import Videoscards from "../components/Videoscards";
+import Header from "../../components/Header";
+import Navbar from "../../components/Navbar";
+import Eventoscards from "../../components/Eventoscards";
 
+const Events = ({}) => {
 
-const Videos = ({}) => {
-
-    const[videos,setVideos]=useState([])
+    const[events,setEvents]=useState([])
 
     useEffect(()=>{
-        const getVideos =()=>{
-            fetch("https://backend-ifgf.herokuapp.com/api/videos")
+        const getEvents =()=>{
+            fetch("https://backend-ifgf.herokuapp.com/api/events")
                 .then(res => res.json())
-                .then(res =>setVideos(res))
+                .then(res =>setEvents(res))
         }
-        getVideos()
+        getEvents()
 
     },[])
 
@@ -34,7 +33,7 @@ const Videos = ({}) => {
             <div className={styles.events}>
 
                 <h1 className={styles.section} >
-                    Videos
+                    EVENTOS
                 </h1>
                 <div className={styles.linea}></div>
 
@@ -45,7 +44,7 @@ const Videos = ({}) => {
 
         <div className="container" >
 
-            <Videoscards videos={videos}/>
+            <Eventoscards events={events}/>
         </div>
         </body>
 
@@ -56,4 +55,4 @@ const Videos = ({}) => {
     );
 };
 
-export default (Videos);
+export default (Events);

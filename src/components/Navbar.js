@@ -29,13 +29,13 @@ const Navbar = () => {
                     Inicio
                   </Link>
                 </RouterLink>
-                <RouterLink href="Eventos">
+                <RouterLink href="/events">
                   <Link className="nav-link">Eventos</Link>
                 </RouterLink>
-                <Link className="nav-link" href="Donaciones">
+                <Link className="nav-link" href="/donations">
                   Donaciones
                 </Link>
-                <Link className="nav-link" href="Videos">
+                <Link className="nav-link" href="/videos">
                   Videos
                 </Link>
                 <Link className="nav-link" href="Juegos">

@@ -5,7 +5,7 @@ import styles from '../styles/style.module.css';
 import Donacioneslistadmin from "./Donacioneslistadmin";
 import Navbaradmin from "../../components/Navbaradmin";
 import {Grid} from "@material-ui/core";
-import Admin from "../../components/Admin";
+import MenuAdmin from "../MenuAdmin";
 
 
 function Donacionesadmin() {

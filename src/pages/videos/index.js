@@ -1,12 +1,9 @@
 import React, { useRef, useState ,useEffect} from "react";
-import {Button} from "antd";
-//import { Button } from 'antd';
-import styles from '../styles/style.module.css';
+import styles from '../../styles/style.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Grid} from "@material-ui/core";
-import Header from "../components/Header";
-import Navbar from "../components/Navbar";
-import Videoscards from "../components/Videoscards";
+import Header from "../../components/Header";
+import Navbar from "../../components/Navbar";
+import Videoscards from "../../components/Videoscards";
 
 
 const Videos = ({}) => {

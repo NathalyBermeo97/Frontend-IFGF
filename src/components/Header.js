@@ -1,6 +1,5 @@
 import React from "react";
 import { Grid } from "@mui/material";
-import { Button } from "@material-ui/core";
 import styles from "../styles/style.module.css";
 
 const Header = () => {

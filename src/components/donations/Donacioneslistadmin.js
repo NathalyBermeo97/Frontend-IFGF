@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../styles/listas.module.css';
 import Navbaradmin from "../../components/Navbaradmin";
 import {Grid} from "@material-ui/core";
-import Admin from "../../components/Admin";
+import MenuAdmin from "../MenuAdmin";
 const url = "https://backend-ifgf.herokuapp.com/";
 function Donacioneslistadmin({donations}) {
 
@@ -15,7 +15,7 @@ function Donacioneslistadmin({donations}) {
 
             <Grid container={12}>
                 <Grid xs={2}>
-                    <Admin/>
+                    <MenuAdmin/>
                 </Grid>
                 <Grid xs={1}>
 

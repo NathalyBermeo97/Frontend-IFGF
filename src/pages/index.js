@@ -10,31 +10,14 @@ import Messages from "../components/Messages";
 import Albums from "../components/Albums";
 import React, { useEffect, useState } from "react";
 import { useNews } from "../hooks/useNews";
+import { useAlbums } from "../hooks/useAlbums";
+import { useMessages } from "../hooks/useMessages";
 
 const News = ({}) => {
+
   const news = useNews();
-
-  const [messages, setMessages] = useState([]);
-
-  useEffect(() => {
-    const getMessages = () => {
-      fetch("https://backend-ifgf.herokuapp.com/api/messages")
-        .then((res) => res.json())
-        .then((res) => setMessages(res));
-    };
-    getMessages();
-  }, []);
-
-  const [albums, setAlbums] = useState([]);
-
-  useEffect(() => {
-    const getAlbums = () => {
-      fetch("https://backend-ifgf.herokuapp.com/api/albums")
-        .then((res) => res.json())
-        .then((res) => setAlbums(res));
-    };
-    getAlbums();
-  }, []);
+  const messages = useMessages();
+  const albums = useAlbums();
 
   return (
     <body className={styles.body}>
