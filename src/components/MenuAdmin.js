@@ -14,12 +14,12 @@ const MenuAdmin = () => {
     return (
         <div>
             <div className={styles.admin} >
-                <Link href="/Administrador/adminnews" className="list-group-item list-group-item-action">Noticias</Link>
-                <Link href="/Administrador/adminmessages" className="list-group-item list-group-item-action">Mensajes bíblicos</Link>
-                <Link href="/Administrador/adminalbums" className="list-group-item list-group-item-action">Albums</Link>
-                <Link href="/Administrador/adminevents" className="list-group-item list-group-item-action">Eventos</Link>
-                <Link href="/Administrador/adminvideos" className="list-group-item list-group-item-action">Videos</Link>
-                <Link href="/Administrador/admindonations" className="list-group-item list-group-item-action">Donaciones</Link>
+                <Link href="/administrador/adminnews" className="list-group-item list-group-item-action">Noticias</Link>
+                <Link href="/administrador/adminmessages" className="list-group-item list-group-item-action">Mensajes bíblicos</Link>
+                <Link href="/administrador/adminalbums" className="list-group-item list-group-item-action">Albums</Link>
+                <Link href="/administrador/adminevents" className="list-group-item list-group-item-action">Eventos</Link>
+                <Link href="/administrador/adminvideos" className="list-group-item list-group-item-action">Videos</Link>
+                <Link href="/administrador/admindonations" className="list-group-item list-group-item-action">Donaciones</Link>
 
             </div>
         </div>

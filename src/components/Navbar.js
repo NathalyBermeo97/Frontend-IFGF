@@ -1,60 +1,38 @@
 import React from "react";
-import { Link } from "@material-ui/core";
-import RouterLink from "next/link";
-import { Button, Grid } from "@mui/material";
 import useUser from "../hooks/useUser";
+import Link from "next/link";
+import styles from "../styles/navbar.module.css";
 
 const Navbar = () => {
   const { user, isLogged } = useUser();
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <Grid container={12}>
-        <Grid xs={10}>
-          <div className="container-fluid">
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNavAltMarkup"
-              aria-controls="navbarNavAltMarkup"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-              <div className="navbar-nav">
-                <RouterLink href="/">
-                  <Link className="nav-link active" aria-current="page">
-                    Inicio
-                  </Link>
-                </RouterLink>
-                <RouterLink href="/events">
-                  <Link className="nav-link">Eventos</Link>
-                </RouterLink>
-                <Link className="nav-link" href="/donations">
-                  Donaciones
-                </Link>
-                <Link className="nav-link" href="/videos">
-                  Videos
-                </Link>
-                <Link className="nav-link" href="Juegos">
-                  Juegos
-                </Link>
-              </div>
-            </div>
+      <nav className="navbar navbar-expand-md  navbar-light bg-light  border-3 border-bottom border-info"  style={{height:'60px'}}>
+        <div className="container-fluid">
+          <img src=" https://play-lh.googleusercontent.com/aOXfWiUukAMFGBqwJ59PrFh4EDIPi1XnH2GQFyLmKDsXLh2qq-ekzTuNlKZq3M7Hyoc" className={styles.image}/>
+          <button  type="button" className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#MenuNavegacion">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div id="MenuNavegacion" className="collapse navbar-collapse">
+            <Link href="/" >
+              <a className="nav-link active" aria-current="page">
+                Inicio
+              </a>
+            </Link>
+            <Link href="/events">
+              <a className="nav-link">Eventos</a>
+            </Link>
+            <Link className="nav-link" href="/donations">
+              <a className="nav-link">Donaciones</a>
+            </Link>
+            <Link className="nav-link" href="/videos">
+            <a className="nav-link">Videos</a>
+            </Link>
+            <Link className="nav-link" href="/juegos">
+            <a className="nav-link" >Juegos</a>
+            </Link>
           </div>
-        </Grid>
-      </Grid>
-
-      <Grid xs={2}>
-        <RouterLink className="btn btn-light" href="/login">
-          {
-            isLogged ? user.name : <p>Iniciar Sesión</p>               
-          }
-        </RouterLink>
-      </Grid>
-    </nav>
+        </div>
+      </nav>
   );
 };
 export default Navbar;
