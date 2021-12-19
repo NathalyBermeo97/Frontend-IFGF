@@ -11,20 +11,16 @@ export const USER_STATES = {
 export default function useUser() {
   const { jwt, setJWT } = useContext(Context);
 
-  const [state, setState] = useState({ loading: false, error: true });
-
   const [user, setUser] = useState(USER_STATES.NOT_KNOWN);
-
-  console.log({ user });
   const login = ({ email, password }) => {
-    setState({ loading: true, error: false });
     User.login({ email, password })
       .then((res) => {
-        setState({ loading: false, error: false });
         setJWT(res.data.token);
-        console.log(res);
+        window.sessionStorage.setItem('jwt', res.data.token)
       })
-      .catch((err) => setState({ loading: false, error: true }));
+      .catch((err) => {
+        window.sessionStorage.removeItem('jwt')
+      })
   };
 
   useEffect(() => {
@@ -34,9 +30,14 @@ export default function useUser() {
         .catch((err) => console.log(err));
     };
     if (jwt) getUser();
-    //TO DO checking user states
-    if (typeof jwt === JWT_STATES.NOT_LOGGED) setUser(USER_STATES.NOT_LOGGED);
+    if (jwt === JWT_STATES.NOT_KNOWN) setUser(USER_STATES.NOT_KNOWN);
+    if (jwt === JWT_STATES.NOT_LOGGED) setUser(USER_STATES.NOT_LOGGED);
   }, [jwt]);
 
-  return { login, isLogged: Boolean(user), user };
+  const logout = () => {
+      setJWT(JWT_STATES.NOT_LOGGED)
+      window.sessionStorage.removeItem('jwt')
+  }
+
+  return { login, logout, isLogged: Boolean(user), user };
 }
