@@ -1,12 +1,8 @@
 import React, { useRef, useState ,useEffect} from "react";
-import {Button} from "antd";
-//import { Button } from 'antd';
-import styles from '../styles/style.module.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {Grid} from "@material-ui/core";
-import Header from "../components/Header";
-import Navbar from "../components/Navbar";
-import Videoscards from "../components/Videoscards";
+import styles from '../../styles/style.module.css';
+import Navbar from "../../components/Navbar";
+import Videoscards from "../../components/Videoscards";
+import Footer from "../../components/Footer";
 
 
 const Videos = ({}) => {
@@ -26,7 +22,7 @@ const Videos = ({}) => {
 
     return(
         <body className={styles.body} >
-        <Header/>
+
         <Navbar/>
 
         <div className={styles.form}>
@@ -47,11 +43,8 @@ const Videos = ({}) => {
 
             <Videoscards videos={videos}/>
         </div>
+        <Footer/>
         </body>
-
-
-
-
 
     );
 };

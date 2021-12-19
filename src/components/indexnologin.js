@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/style.module.css';
 
-import Cards from "../components/Cards";
+import CarouselEventos from "./CarouselEventos";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Grid} from "@material-ui/core";
 import Carousel from "../components/Carousel"
@@ -10,7 +10,7 @@ import Header from "../components/Header";
 import Headernologin from "../components/Headernologin";
 import Navbar from "../components/Navbar";
 import Navbarnologin from "../components/Navbarnologin";
-import Noticias from "../components/Noticias";
+import Noticias from "./News";
 import Messages from "../components/Messages";
 import Albums from "../components/Albums";
 import React, {useEffect, useState} from "react";
@@ -65,7 +65,7 @@ const  Indexnologin =()=> {
             <div className={styles.linea}></div>
 
         </div>
-        <Cards/>
+        <CarouselEventos/>
 
         <div className={styles.news}>
 

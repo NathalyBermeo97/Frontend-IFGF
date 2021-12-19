@@ -1,124 +1,73 @@
-import React, {useEffect, useRef, useState} from "react";
+import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Eventlistadmin from "./Eventlistadmin";
-import Eventformadmin from "../components/Eventformadmin";
-import styles from '../styles/style.module.css';
-import Informacionlistadmin from "./Informacionlistadmin";
-import Informacionformadmin from "../components/Informacionformadmin";
-import Navbaradmin from "../components/Navbaradmin";
-import Admin from "../components/Admin";
-import {Grid} from "@material-ui/core";
-import Albumslistadmin from "./Albumslistadmin";
-import Messageslistadmin from "./Messageslistadmin";
 
-function Informacionadmin() {
-    const [informacion,setInformacion]=useState({
-        title:'',
-        description:'',
-        imgURL:''
+const Informacionadmin = ({informacion,setInformacion}) => {
+    const handleChange = e => {
+        setInformacion({
+            ...informacion,
+            [e.target.name]:e.target.value
+        })
+    }
 
-    })
-    const[informaciones,setInformaciones]=useState([])
+    let {title,description,imgURL} = informacion
+    const handleSubmit = () =>
+    {
 
-    useEffect(()=>{
-        const getEvents =()=>{
-            fetch("https://backend-ifgf.herokuapp.com/api/news")
-                .then(res => res.json())
-                .then(res =>setInformaciones(res))
+        //validacion de datos
+        if(informacion.title === ''|| informacion.description ==='' || informacion.imgURL ==='' ){
+            alert('todos los campos son obligatorios')
+            return
         }
-        getEvents()
-
-    },[])
-
-    const [message,setMessage]=useState({
-        title:'',
-        description:'',
-        imgURL:''
-
-    })
-    const[messages,setMessages]=useState([])
-
-    useEffect(()=>{
-        const getMessages =()=>{
-            fetch("https://backend-ifgf.herokuapp.com/api/messages")
-                .then(res => res.json())
-                .then(res =>setMessages(res))
+        const requestInit={
+            method:'POST',
+            headers:{'Content-Type': 'application/json'},
+            body:JSON.stringify(informacion)
         }
-        getMessages()
 
-    },[])
+        fetch("https://backend-ifgf.herokuapp.com/api/news")
+            .then(res => res.json())
+            .then(res =>console.log(res))
 
-    const [album,setAlbum]=useState({
-        title:'',
-        description:'',
-        imgURL:''
+        setInformacion({
+                title:'',
+                description:'',
+                imgURL:'',
 
-    })
-    const[albums,setAlbums]=useState([])
+            }
+        )
+    }
 
-    useEffect(()=>{
-        const getAlbums =()=>{
-            fetch("https://backend-ifgf.herokuapp.com/api/albums")
-                .then(res => res.json())
-                .then(res =>setAlbums(res))
-        }
-        getAlbums()
+    return (
 
-    },[])
+        <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+                <label htmlFor="title" className="form-label">
+                    Titulo
+                </label>
+                <input  name="title" onChange={handleChange} type="text" id="title" className="form-control"/>
 
-    return(
-        <div>
-            <Navbaradmin/>
+            </div>
+            <div className="mb-3">
+                <label htmlFor="description" className="form-label">
+                    Descripción
+                </label>
+                <input name="description" onChange={handleChange}  type="text" id="name" className="form-control"/>
 
-            <Grid container={12}>
-                <Grid xs={2}>
-                    <Admin/>
-                </Grid>
-                <Grid xs={10}>
-                    <h1  className={styles.formasdona}>INFORMACION GENERAL</h1>
-                    <h1  className={styles.formasdona}>Noticias</h1>
+            </div>
+            <div className="mb-3">
+                <label htmlFor="imgURL" className="form-label">
+                    ImagenURL
+                </label>
+                <input type="file" name="fimagen"   onChange={handleChange}accept="image/gif, image/jpeg, image/png"/>
 
-                    <div className="container">
+            </div>
 
-                        <div className="row">
-                            <div className="col-7">
-                                <Informacionlistadmin informaciones={informaciones}/>
-                            </div>
-                            <div className="col-5">
+            <button type="submit" className="btn btn-primary">Enviar
 
-                                <Informacionformadmin informacion={informacion} setInformacion={setInformacion}/>
-
-                            </div>
-
-                        </div>
-                        <h1  className={styles.formasdona}>Mensajes biblicos</h1>
-                        <div className="row">
-                            <div className="col-7">
-                                <Messageslistadmin messages={messages}/>
-                            </div>
-                            
-                        </div>
-                        <h1  className={styles.formasdona}>Albums</h1>
-                        <div className="row">
-                            <div className="col-7">
-                                <Albumslistadmin albums={albums}/>
-                            </div>
-                            
-                        </div>
-
-
-
-                    </div>
-                </Grid>
-
-            </Grid>
-
-
-
-        </div>
-
-
+            </button>
+        </form>
 
     )
+
 }
 export default Informacionadmin;

@@ -20,9 +20,7 @@ const Informacionlistadmin = ({informaciones}) => {
                 <tr key={item.id}>
                     <th>{item.title}</th>
                     <th>{item.description}</th>
-                    <th>{item.imgURL}</th>
-
-
+                    <th><img src={item.imgURL}/></th>
 
                 </tr>
 

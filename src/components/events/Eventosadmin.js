@@ -5,7 +5,7 @@ import Eventformadmin from "../../components/Eventformadmin";
 import styles from '../styles/style.module.css';
 import Navbaradmin from "../../components/Navbaradmin";
 import {Grid} from "@material-ui/core";
-import Admin from "../../components/Admin";
+import MenuAdmin from "../MenuAdmin";
 
 
 function Eventosadmin() {
@@ -32,7 +32,7 @@ function Eventosadmin() {
 
             <Grid container={12}>
                 <Grid xs={2}>
-                    <Admin/>
+                    <MenuAdmin/>
                 </Grid>
                 <Grid xs={10}>
 
