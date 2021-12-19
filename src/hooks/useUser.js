@@ -16,10 +16,10 @@ export default function useUser() {
     User.login({ email, password })
       .then((res) => {
         setJWT(res.data.token);
-        window.sessionStorage.setItem('jwt', res.data.token)
+        window.localStorage.setItem('jwt', res.data.token)
       })
       .catch((err) => {
-        window.sessionStorage.removeItem('jwt')
+        window.localStorage.removeItem('jwt')
       })
   };
 
@@ -34,9 +34,14 @@ export default function useUser() {
     if (jwt === JWT_STATES.NOT_LOGGED) setUser(USER_STATES.NOT_LOGGED);
   }, [jwt]);
 
-  const logout = () => {
-      setJWT(JWT_STATES.NOT_LOGGED)
-      window.sessionStorage.removeItem('jwt')
+  const logout = async () => {
+      try{
+        await User.logout()
+        setJWT(JWT_STATES.NOT_LOGGED)
+        window.localStorage.removeItem('jwt')
+      }catch(e){
+        console.log('something went wrong', e)
+      }
   }
 
   return { login, logout, isLogged: Boolean(user), user };

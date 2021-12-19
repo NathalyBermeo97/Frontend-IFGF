@@ -8,7 +8,7 @@ const User = {
         return api.post("/auth/login", data);
     },
     logout: () => {
-        return api.post("/logout");
+        return api.get("/auth/logout");
     },
     sendPasswordResetEmail: (email) => {
         return api.post("/forgot-password", { email });
