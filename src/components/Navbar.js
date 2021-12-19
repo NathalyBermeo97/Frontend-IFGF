@@ -1,10 +1,15 @@
 import React from "react";
-import useUser from "../hooks/useUser";
 import Link from "next/link";
 import styles from "../styles/navbar.module.css";
+import { Button, Grid } from "@mui/material";
+import useUser, { USER_STATES } from "../hooks/useUser";
+
 
 const Navbar = () => {
-  const { user, isLogged } = useUser();
+  const { user, isLogged, logout } = useUser();
+  const handleLogout = () => {
+    logout()
+  }
   return (
       <nav className="navbar navbar-expand-md  navbar-light bg-light  border-3 border-bottom border-info"  style={{height:'60px'}}>
         <div className="container-fluid">
@@ -18,10 +23,10 @@ const Navbar = () => {
                 Inicio
               </a>
             </Link>
-            <Link href="/events">
+            <Link href="/eventos">
               <a className="nav-link">Eventos</a>
             </Link>
-            <Link className="nav-link" href="/donations">
+            <Link className="nav-link" href="/donaciones">
               <a className="nav-link">Donaciones</a>
             </Link>
             <Link className="nav-link" href="/videos">
@@ -32,7 +37,26 @@ const Navbar = () => {
             </Link>
           </div>
         </div>
+
+              <Grid xs={2}>
+                  {isLogged ? (
+                      <p>
+                          {user.name}
+                          <button onClick={() => handleLogout()}>LOGOUT</button>
+                      </p>
+                  ) : user === USER_STATES.NOT_KNOWN ? (
+                      "cargando..."
+                  ) : (
+                      <Link href="/login">Iniciar Sesión</Link>
+                  )}
+              </Grid>
+
+
       </nav>
+
+
+
+
   );
 };
 export default Navbar;

@@ -3,7 +3,7 @@ import styles from "../../styles/Login.module.css";
 import { Button, Grid } from "@material-ui/core";
 import { Input } from "@material-ui/core";
 import useUser from "../../hooks/useUser";
-import {useRouter} from 'next/router'
+import { useRouter } from "next/router";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -11,21 +11,22 @@ const LoginPage = () => {
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
 
-  
   const { login, isLogged } = useUser();
-  
-  const router = useRouter()
+
+  const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setPassword("");
-    setEmail("");
     login({ email, password });
   };
 
   useEffect(() => {
-      if(isLogged) router.push('/')
-  }, [isLogged])
+    if (isLogged) {
+      router.push("/");
+      setPassword("");
+      setEmail("");
+    }
+  }, [isLogged]);
 
   return (
     <div>
