@@ -122,9 +122,8 @@ const Footer = () => {
 
             <div className="text-center p-4 bg-info text-white" >
                 © 2021 Copyright:
-                <a className="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+                <a className="text-reset fw-bold" href="https://mdbootstrap.com/">Iglesia IFGF Ecuador</a>
             </div>
-
         </footer>
     )
 }
