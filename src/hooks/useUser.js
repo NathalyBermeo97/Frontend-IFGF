@@ -11,14 +11,18 @@ export const USER_STATES = {
 export default function useUser() {
   const { jwt, setJWT } = useContext(Context);
 
+  const [role, setRole] = useState(null)
   const [user, setUser] = useState(USER_STATES.NOT_LOGGED);
   const login = ({ email, password }) => {
     User.login({ email, password })
       .then((res) => {
+        console.log('role', res.data.role)
+        setRole(res.data.role)
         setJWT(res.data.token);
         window.localStorage.setItem('jwt', res.data.token)
       })
       .catch((err) => {
+        console.log('something went wrong', err)
         window.localStorage.removeItem('jwt')
       })
   };
@@ -44,5 +48,14 @@ export default function useUser() {
       }
   }
 
-  return { login, logout, isLogged: Boolean(user), user };
+  const register = async ({name, lastName, email, password, roles}) => {
+    try{
+      const res = await User.register({name, lastname: lastName, email, password, roles})
+      return res
+    }catch(e){
+      console.log('something went wrong')
+    }
+  }
+
+  return { register, login, logout, isLogged: Boolean(user), user, role };
 }

@@ -15,3 +15,19 @@
     background: white;
     border: #0c94ff 5px solid;
 }
+
+.createAccount{
+    padding: 15px;
+    cursor: pointer;
+}
+
+.createAccount:hover{
+    color:#0c94ff
+}
+
+.loginButtons{
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
