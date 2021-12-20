@@ -1,6 +1,4 @@
 import React, {useState, useEffect} from "react";
-import {useRouter} from 'next/router';
-import { useForm } from "react-hook-form";
 import styles from '../styles/Login.module.css'
 import {Button, Grid} from "@material-ui/core";
 import {Input} from "@material-ui/core";

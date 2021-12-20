@@ -54,9 +54,9 @@ const Eventos = ({ events }) => {
                     <a>Más información</a>
                   </Link>
                   {console.log('id', event._id)}
-                  {/* <button onClick={() => onShowModal(event)}>
+                  <button onClick={() => onShowModal(event)}>
                     More info
-                  </button> */}
+                  </button>
                 </div>
               </div>
             ))}
@@ -64,7 +64,7 @@ const Eventos = ({ events }) => {
         </table>
       </div>
       <Footer />
-      <EventModal isOpen={isOpen} event={event} onOk={() => setIsOpen(false)}/>
+      <EventModal isOpen={isOpen} event={event} setIsOpen={setIsOpen}/>
     </>
   );
 };

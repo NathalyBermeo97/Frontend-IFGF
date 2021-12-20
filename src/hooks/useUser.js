@@ -11,7 +11,7 @@ export const USER_STATES = {
 export default function useUser() {
   const { jwt, setJWT } = useContext(Context);
 
-  const [user, setUser] = useState(USER_STATES.NOT_KNOWN);
+  const [user, setUser] = useState(USER_STATES.NOT_LOGGED);
   const login = ({ email, password }) => {
     User.login({ email, password })
       .then((res) => {
@@ -36,7 +36,7 @@ export default function useUser() {
 
   const logout = async () => {
       try{
-        await User.logout()
+        //await User.logout()
         setJWT(JWT_STATES.NOT_LOGGED)
         window.localStorage.removeItem('jwt')
       }catch(e){
