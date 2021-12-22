@@ -1,7 +1,7 @@
 .carruselevent{
     width: 420px;
     height: 420px;
-    margin-left: 100px;
+
 
 
 }
@@ -28,4 +28,5 @@
 }
 .infoeventos{
     margin: 80px;
+    text-align: center;
 }

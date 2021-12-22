@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Head from "next/head";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { UserContextProvider } from "../context/UserContext";
-import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/globals.css";
 
 export default function MyApp(props) {

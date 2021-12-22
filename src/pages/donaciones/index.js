@@ -51,7 +51,7 @@ const Donaciones = () => {
                         <div className={styles.titledona}>
                             <h5 className="card-title">Donación económica</h5>
                             <p className="card-text"></p>
-                            <a href="Donacioneconomica" className="btn btn-primary" >Ver más</a>
+                            <a href="../donaciones/Donacioneconomica" className="btn btn-primary" >Ver más</a>
                         </div>
 
                     </div>
@@ -60,7 +60,7 @@ const Donaciones = () => {
                         <div className={styles.titledona}>
                             <h5 className="card-title">Donación de alimentos</h5>
                             <p className="card-text"></p>
-                            <a href="Donacionalimentos" className="btn btn-primary" >Ver más</a>
+                            <a href="../donaciones/Donacionalimentos" className="btn btn-primary" >Ver más</a>
                         </div>
 
                     </div>
@@ -69,9 +69,8 @@ const Donaciones = () => {
                         <div className={styles.titledona}>
                             <h5 className="card-title" >Donación de ropa</h5>
                             <p className="card-text"></p>
-                            <a  href="Donacionropa" className="btn btn-primary" >Ver más</a>
+                            <a  href="../donaciones/Donacionropa" className="btn btn-primary" >Ver más</a>
                         </div>
-
                     </div>
                 </div>
             </div>

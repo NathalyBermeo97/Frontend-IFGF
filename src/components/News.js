@@ -15,7 +15,7 @@ const News = ({news}) => {
                 <div className={styles.courses}>
                 {news.map(item =>(
                     <div key={item.id} className={styles.course}>
-                        <div   className={styles.coursecontenido}>
+                        <div  >
                         <div justifyContent="center" className={styles.name}>{item.title}</div>
                         <div><img src={url+item.imgURL} width={210} height={170}  justifyContent="center" className={styles.imgN}/></div>
                         <div className={styles.description}>{item.description}</div>

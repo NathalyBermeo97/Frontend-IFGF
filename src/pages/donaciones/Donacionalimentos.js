@@ -1,8 +1,8 @@
 import React from "react";
 import {Grid} from "@mui/material";
-import styles from '../styles/style.module.css';
+import styles from '../../styles/style.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import FormularioDonaciones from "../FormularioDonaciones";
+import FormularioDonaciones from "../../components/FormularioDonaciones";
 import {Button} from "@material-ui/core";
 import Search from "../../components/Search";
 import Filtro from "../../components/Filtro";
@@ -10,11 +10,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {DatePicker} from "antd";
 import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 
 const Donacionalimentos = () => {
     return (
         <body className={styles.body} >
-        <Header/>
+
         <Navbar/>
 
         <div className={styles.events}>
@@ -155,18 +156,10 @@ const Donacionalimentos = () => {
                             <Button className="btn btn-primary" type="submit" href="Donaciones">Enviar</Button>
                         </div>
                     </form>
-
-
                 </div>
-
-
-
-
             </Grid>
-
-
-
         </Grid>
+        <Footer/>
         </body>
     )
 }

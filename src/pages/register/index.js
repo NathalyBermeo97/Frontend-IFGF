@@ -36,7 +36,7 @@ const RegisterPage = () => {
         <h3>Registrarse</h3>
       </div>
       {error === true && (
-        <div class="alert alert-danger" role="alert">
+        <div className="alert alert-danger" role="alert">
           <h4>{message}</h4>
         </div>
       )}
