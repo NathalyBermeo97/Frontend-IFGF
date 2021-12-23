@@ -3,9 +3,10 @@ import Link from "next/link";
 import styles from "../styles/navbar.module.css";
 import useUser, { USER_STATES } from "../hooks/useUser";
 import { Col, Container, Image, Nav, Navbar, Row } from "react-bootstrap";
+import { useAuth } from "../context/AuthContext";
 
 const NavbarHome = () => {
-  const { user, isLogged, logout } = useUser();
+  const { currentUser, isLoggedIn, logout } = useAuth();
   const handleLogout = () => {
     logout();
   };
@@ -39,12 +40,12 @@ const NavbarHome = () => {
 
         <Row>
           <Col xs={12}>
-            {isLogged ? (
+            {isLoggedIn ? (
               <p>
-                {user.name}
+                {currentUser.name}
                 <button onClick={() => handleLogout()}>LOGOUT</button>
               </p>
-            ) : user === USER_STATES.NOT_KNOWN ? (
+            ) : currentUser === USER_STATES.NOT_KNOWN ? (
               "cargando..."
             ) : (
               <Link href="/login">Iniciar Sesión</Link>

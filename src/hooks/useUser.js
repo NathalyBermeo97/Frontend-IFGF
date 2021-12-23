@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import User from "../api/user";
-import Context from "../context/UserContext";
-import { JWT_STATES } from "../context/UserContext";
+import Context from "../context/AuthContext";
+import { JWT_STATES } from "../context/AuthContext";
 
 export const USER_STATES = {
   NOT_LOGGED: null,
@@ -13,19 +13,21 @@ export default function useUser() {
 
   const [role, setRole] = useState(null)
   const [user, setUser] = useState(USER_STATES.NOT_LOGGED);
-  const login = ({ email, password }) => {
-    User.login({ email, password })
-      .then((res) => {
-        console.log('role', res.data.role)
-        setRole(res.data.role)
-        setJWT(res.data.token);
-        window.localStorage.setItem('jwt', res.data.token)
-      })
-      .catch((err) => {
-        console.log('something went wrong', err)
-        window.localStorage.removeItem('jwt')
-      })
-  };
+  console.log('FromHook', {user, role, jwt})
+  // const login = ({ email, password }) => {
+  //   User.login({ email, password })
+  //     .then((res) => {
+  //       setRole(res.data.role);
+  //       setJWT(res.data.token);
+  //       window.localStorage.setItem('jwt', res.data.token)
+  //       window.localStorage.setItem('role', res.data.role)
+  //     })
+  //     .catch((err) => {
+  //       console.log('something went wrong', err)
+  //       window.localStorage.removeItem('jwt')
+  //       window.localStorage.removeItem('role')
+  //     })
+  // };
 
   useEffect(() => {
     const getUser = () => {
@@ -38,11 +40,16 @@ export default function useUser() {
     if (jwt === JWT_STATES.NOT_LOGGED) setUser(USER_STATES.NOT_LOGGED);
   }, [jwt]);
 
+  useEffect(() => {
+    setRole(window.localStorage.getItem('role'));
+  }, []);
+
   const logout = async () => {
       try{
         //await User.logout()
         setJWT(JWT_STATES.NOT_LOGGED)
         window.localStorage.removeItem('jwt')
+        window.localStorage.removeItem('role')
       }catch(e){
         console.log('something went wrong', e)
       }
@@ -57,5 +64,5 @@ export default function useUser() {
     }
   }
 
-  return { register, login, logout, isLogged: Boolean(user), user, role };
+  return { register, logout, isLogged: Boolean(user), user, role, jwt};
 }

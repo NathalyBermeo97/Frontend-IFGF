@@ -5,33 +5,42 @@ import { Input } from "@material-ui/core";
 import useUser from "../../hooks/useUser";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { withPublic } from "../../hocs/withPublic";
+import Context, { useAuth } from "../../context/AuthContext";
+import { useContext } from "react";
+import { USER_ROLES } from "../../constans/userRoles";
 
-const LoginPage = () => {
+const LoginPage = (props) => {
+  console.log({props})
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
 
-  const { login, isLogged, user, role } = useUser();
+  const { isLoggedIn, currentUser, role, login } = useAuth();
 
   const router = useRouter();
 
+  console.log({router})
   const handleSubmit = (e) => {
     e.preventDefault();
     login({ email, password });
   };
 
-  console.log({ user });
+  console.log({ currentUser });
   useEffect(() => {
-    if (isLogged) {
-      if (role === "user") {
-        router.push("/");
-      }
-      //router.push("/administrador/adminnews");
-      setPassword("");
-      setEmail("");
-    }
-  }, [isLogged]);
+    // if (isLoggedIn) {
+    //   if (role === "user") {
+    //     router.push("/");
+    //   }else{
+    //     router.push('/admin')
+    //   }
+    //   //router.push("/administrador/adminnews");
+    //   setPassword("");
+    //   setEmail("");
+    // }
+  }, [isLoggedIn]);
 
   return (
     <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
@@ -68,10 +77,10 @@ const LoginPage = () => {
         </Button>
 
         <Button
-          href="indexnologin"
           variant="outlined"
           size="medium"
           type="submit"
+          onClick={() => router.push('/')}
         >
           Salir
         </Button>
@@ -82,4 +91,4 @@ const LoginPage = () => {
     </form>
   );
 };
-export default LoginPage;
+export default withPublic(LoginPage);
