@@ -37,7 +37,6 @@ export function UserContextProvider({ children }) {
     return initializeAuth();
   }, []);
 
-  console.log("FromHook", { currentUser, role });
   const login = ({ email, password }) => {
     User.login({ email, password })
       .then((res) => {

@@ -1,46 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./styles.module.css";
 import { Button } from "@material-ui/core";
 import { Input } from "@material-ui/core";
-import useUser from "../../hooks/useUser";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { withPublic } from "../../hocs/withPublic";
-import Context, { useAuth } from "../../context/AuthContext";
-import { useContext } from "react";
-import { USER_ROLES } from "../../constans/userRoles";
+import { useAuth } from "../../context/AuthContext";
 
-const LoginPage = (props) => {
-  console.log({props})
+const LoginPage = () => {
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
 
-  const { isLoggedIn, currentUser, role, login } = useAuth();
-
+  const { login } = useAuth();
   const router = useRouter();
 
-  console.log({router})
   const handleSubmit = (e) => {
     e.preventDefault();
     login({ email, password });
   };
-
-  console.log({ currentUser });
-  useEffect(() => {
-    // if (isLoggedIn) {
-    //   if (role === "user") {
-    //     router.push("/");
-    //   }else{
-    //     router.push('/admin')
-    //   }
-    //   //router.push("/administrador/adminnews");
-    //   setPassword("");
-    //   setEmail("");
-    // }
-  }, [isLoggedIn]);
 
   return (
     <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
@@ -91,4 +71,4 @@ const LoginPage = (props) => {
     </form>
   );
 };
-export default withPublic(LoginPage);
+export default withPublic(LoginPage, '/admin');
