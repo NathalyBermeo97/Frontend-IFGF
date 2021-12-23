@@ -6,6 +6,7 @@ import { Button } from "@material-ui/core";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import { withPrivate } from "../../hocs/withPrivate";
 
 const Donacioneconomica = () => {
   return (
@@ -185,4 +186,4 @@ const Donacioneconomica = () => {
     </body>
   );
 };
-export default Donacioneconomica;
+export default withPrivate(Donacioneconomica);

@@ -3,7 +3,8 @@ import { Grid } from "@mui/material";
 import styles from "../../styles/style.module.css";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-
+import Link from "next/link";
+import {Button} from "react-bootstrap";
 const Donaciones = () => {
   return (
     <body className={styles.body}>
@@ -39,12 +40,15 @@ const Donaciones = () => {
               <div className={styles.titledona}>
                 <h5 className="card-title">Donación económica</h5>
                 <p className="card-text"></p>
-                <a
-                  href="../donaciones/Donacioneconomica"
-                  className="btn btn-primary"
+                <Link
+                    href="../donaciones/Donacioneconomica"
+                    className="btn btn-primary"
                 >
-                  Ver más
-                </a>
+                  <Button variant="primary">
+                    Ver más
+                  </Button>
+
+                </Link>
               </div>
             </div>
             <div className="col-12 col-sm-4">
@@ -56,12 +60,15 @@ const Donaciones = () => {
               <div className={styles.titledona}>
                 <h5 className="card-title">Donación de alimentos</h5>
                 <p className="card-text"></p>
-                <a
-                  href="../donaciones/Donacionalimentos"
-                  className="btn btn-primary"
+                <Link
+                    href="../donaciones/Donacionalimentos"
+                    className="btn btn-primary"
                 >
-                  Ver más
-                </a>
+                  <Button variant="primary">
+                    Ver más
+                  </Button>
+
+                </Link>
               </div>
             </div>
             <div className="col-12 col-sm-4">
@@ -73,12 +80,15 @@ const Donaciones = () => {
               <div className={styles.titledona}>
                 <h5 className="card-title">Donación de ropa</h5>
                 <p className="card-text"></p>
-                <a
+                <Link
                   href="../donaciones/Donacionropa"
                   className="btn btn-primary"
                 >
-                  Ver más
-                </a>
+                  <Button variant="primary">
+                    Ver más
+                  </Button>
+
+                </Link>
               </div>
             </div>
           </div>

@@ -5,6 +5,7 @@ import { Button } from "@material-ui/core";
 import { DatePicker } from "antd";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import { withPrivate } from "../../hocs/withPrivate";
 
 const Donacionropa = () => {
   return (
@@ -199,4 +200,4 @@ const Donacionropa = () => {
     </body>
   );
 };
-export default Donacionropa;
+export default withPrivate (Donacionropa);

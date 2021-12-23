@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import {Button, Col, Container, Row} from "react-bootstrap";
 import {DatePicker} from "antd";
+import { withPrivate } from "../../hocs/withPrivate";
 
 const Donacionalimentos = () => {
   return (
@@ -19,7 +20,7 @@ const Donacionalimentos = () => {
           <Col xs={6}>
             <div className={styles.formasdona}>
               <div>
-                <h4>Haz tu donación voluntaria de "ALIMENTOS".</h4>
+                <h4>Haz tu donación voluntaria de ALIMENTOS </h4>
               </div>
 
               <p>
@@ -37,7 +38,7 @@ const Donacionalimentos = () => {
             </div>
             <div className={styles.formasdona}>
               <div>
-                <h4>Visita "NUESTRAS INSTALACIONES"</h4>
+                <h4>Visita NUESTRAS INSTALACIONES</h4>
               </div>
 
               <p>
@@ -186,4 +187,4 @@ const Donacionalimentos = () => {
     </body>
   );
 };
-export default Donacionalimentos;
+export default withPrivate (Donacionalimentos);
