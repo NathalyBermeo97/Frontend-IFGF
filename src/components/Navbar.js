@@ -1,11 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import styles from "../styles/navbar.module.css";
-import { Button, Grid } from "@mui/material";
-import useUser, { USER_STATES } from "../hooks/useUser";
+import {  Grid } from "@mui/material";
+import { useAuth, USER_STATES } from "../context/AuthContext";
 
 const Navbar = () => {
-  const { user, isLogged, logout } = useUser();
+  const { currentUser, isLoggedIn, logout } = useAuth();
   const handleLogout = () => {
     logout();
   };
@@ -49,12 +49,12 @@ const Navbar = () => {
       </div>
 
       <Grid xs={2}>
-        {isLogged ? (
+        {isLoggedIn ? (
           <p>
-            {user.name}
+            {currentUser.name}
             <button onClick={() => handleLogout()}>LOGOUT</button>
           </p>
-        ) : user === USER_STATES.NOT_KNOWN ? (
+        ) : currentUser === USER_STATES.NOT_KNOWN ? (
           "cargando..."
         ) : (
           <Link href="/login">Iniciar Sesión</Link>
