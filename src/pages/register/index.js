@@ -16,18 +16,18 @@ const RegisterPage = () => {
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
 
-  const {register} = useUser()
+  const { register } = useUser();
 
-  const router = useRouter()
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    console.log({name, lastName, email, password, roles})
-    const response = await register({name, lastName, email, password, roles})
-    if(response.data.message === SERVER_RESPONSE.SUCCESFUL_USER_REGISTRATION){
-        router.push('/login')
+    e.preventDefault();
+    console.log({ name, lastName, email, password, roles });
+    const response = await register({ name, lastName, email, password, roles });
+    if (response.data.message === SERVER_RESPONSE.SUCCESFUL_USER_REGISTRATION) {
+      router.push("/login");
     }
-  }
+  };
 
   return (
     <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
@@ -92,11 +92,7 @@ const RegisterPage = () => {
           Registrarse
         </Button>
 
-        <Button
-          variant="outlined"
-          size="medium"
-          type="submit"
-        >
+        <Button variant="outlined" size="medium" type="submit">
           Salir
         </Button>
       </div>

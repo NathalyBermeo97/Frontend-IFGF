@@ -50,7 +50,7 @@ const Eventos = ({ events }) => {
           ))}
         </Card>
       </Container>
-      <Footer/>
+      <Footer />
     </>
   );
 };

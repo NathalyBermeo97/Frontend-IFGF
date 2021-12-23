@@ -10,9 +10,8 @@ import Link from "next/link";
 import { useNews } from "../hooks/useNews";
 import { useAlbums } from "../hooks/useAlbums";
 import { useMessages } from "../hooks/useMessages";
-import {Col, Container, Row} from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import CarouselEventos from "../components/CarouselEventos";
-
 
 const Home = ({}) => {
   const news = useNews();
@@ -23,41 +22,36 @@ const Home = ({}) => {
     <body className={styles.body}>
       <Navbar />
       <Carousel />
-
       <div className={styles.events}>
-          <h1 className={styles.section}>Conoce nuestros eventos</h1>
-          <div className={styles.linea}></div>
+        <h1 className={styles.section}>Conoce nuestros eventos</h1>
+        <div className={styles.linea}></div>
       </div>
-
       <div>
-          <Container>
-              <Row>
-                  <Col  xs={8}>
-                      <h1 className={styles.infoeventos}>
-                          Comparte con la comunidad de la iglesia asistiendo a nuestros
-                          eventos
-                      </h1>
-                      <div className={styles.infoeventos}>
-                          <Link href="/eventos">
-                              <button type="button" className="btn btn-info">
-                                  Ir a eventos
-                              </button>
-                          </Link>
-                      </div>
-                  </Col>
-                  <Col  xs={4} className={styles.carruselevent} >
-                      <CarouselEventos/>
-                  </Col>
-              </Row>
-          </Container>
-
+        <Container>
+          <Row>
+            <Col xs={8}>
+              <h1 className={styles.infoeventos}>
+                Comparte con la comunidad de la iglesia asistiendo a nuestros
+                eventos
+              </h1>
+              <div className={styles.infoeventos}>
+                <Link href="/eventos">
+                  <button type="button" className="btn btn-info">
+                    Ir a eventos
+                  </button>
+                </Link>
+              </div>
+            </Col>
+            <Col xs={4} className={styles.carruselevent}>
+              <CarouselEventos />
+            </Col>
+          </Row>
+        </Container>
       </div>
-
       <div className={styles.news}>
         <h1 className={styles.section}>Entérate de nuestras noticias</h1>
         <div className={styles.linea}></div>
       </div>
-
       <div className="container">
         <News news={news} />
       </div>
@@ -67,8 +61,7 @@ const Home = ({}) => {
       <div className="container">
         <Albums albums={albums} />
       </div>
-
-    <Footer/>
+      <Footer />
     </body>
   );
 };

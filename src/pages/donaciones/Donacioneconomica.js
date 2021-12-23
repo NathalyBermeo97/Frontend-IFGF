@@ -2,12 +2,8 @@ import React from "react";
 import { Grid } from "@mui/material";
 import styles from "../../styles/style.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import FormularioDonaciones from "../../components/FormularioDonaciones";
 import { Button } from "@material-ui/core";
-import Search from "../../components/Search";
-import Filtro from "../../components/Filtro";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
@@ -15,7 +11,6 @@ const Donacioneconomica = () => {
   return (
     <body className={styles.body}>
       <Navbar />
-
       <div className={styles.events}>
         <h1 className={styles.section}>DONACIÓN ECONÓMICA</h1>
         <div className={styles.linea}></div>
@@ -186,7 +181,7 @@ const Donacioneconomica = () => {
           </div>
         </Grid>
       </Grid>
-    <Footer/>
+      <Footer />
     </body>
   );
 };

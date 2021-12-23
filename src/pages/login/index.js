@@ -21,13 +21,13 @@ const LoginPage = () => {
     login({ email, password });
   };
 
-  console.log({user})
+  console.log({ user });
   useEffect(() => {
     if (isLogged) {
-      if(role === 'user'){
+      if (role === "user") {
         router.push("/");
       }
-     //router.push("/administrador/adminnews");
+      //router.push("/administrador/adminnews");
       setPassword("");
       setEmail("");
     }

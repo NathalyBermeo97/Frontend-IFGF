@@ -1,18 +1,25 @@
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useEffect, useState } from "react";
 import styles from "../styles/videos.module.css";
 import api from "../api/api";
 import ReactPlayer from "react-player";
-import { Card} from "react-bootstrap";
-
-
+import { Card, Form, Button, Container, Row, Col } from "react-bootstrap";
+import { Search } from "react-bootstrap-icons";
 
 const Videoscards = ({ videos }) => {
-
-
-  console.log(videos);
   return (
     <>
+      <Container>
+        <Row>
+          <Col xs={10}>
+            <Form.Control placeholder="Ingrese el nombre de un video" />
+          </Col>
+          <Col xs={2}>
+            <Button variant="primary">
+              <Search />
+            </Button>
+          </Col>
+        </Row>
+      </Container>
       <div className={styles.videos}>
         {videos.map((video) => (
           <Card key={video._id} className={styles.cardVideo}>
@@ -24,7 +31,6 @@ const Videoscards = ({ videos }) => {
               <ReactPlayer
                 url={video.url}
                 className="react-player"
-                playing
                 controls
                 width="40em"
                 height="25em"

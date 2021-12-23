@@ -9,25 +9,33 @@ import api from "../api/api";
 
 const News = ({news}) => {
     return (
-        <div>
-            <h1>Noticias</h1>
-            <table className="table">
-                <div className={styles.courses}>
-                {news.map(item =>(
-                    <div key={item.id} className={styles.course}>
-                        <div  >
-                        <div justifyContent="center" className={styles.name}>{item.title}</div>
-                        <div><img src={url+item.imgURL} width={210} height={170}  justifyContent="center" className={styles.imgN}/></div>
-                        <div className={styles.description}>{item.description}</div>
-                  
-                    </div>
-                        
-                    </div>
-                ))}
+      <div>
+        <h1>Noticias</h1>
+        <table className="table">
+          <div className={styles.courses}>
+            {news.map((item) => (
+              <div key={item.id} className={styles.course}>
+                <div>
+                  <div justifyContent="center" className={styles.name}>
+                    {item.title}
+                  </div>
+                  <div>
+                    <img
+                      src={url + item.imgURL}
+                      width={210}
+                      height={170}
+                      justifyContent="center"
+                      className={styles.imgN}
+                    />
+                  </div>
+                  <div className={styles.description}>{item.description}</div>
                 </div>
-            </table>
-        </div>
-    )
+              </div>
+            ))}
+          </div>
+        </table>
+      </div>
+    );
 
 }
 export default News;
