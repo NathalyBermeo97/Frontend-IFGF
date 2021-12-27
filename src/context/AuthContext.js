@@ -1,12 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useEffect } from "react";
+import api from "../api/api";
 import User from "../api/user";
-
-export const JWT_STATES = {
-  NOT_LOGGED: null,
-  NOT_KNOWN: undefined,
-  STORAGE_JWT: () => window.localStorage.getItem("jwt"),
-};
 
 export const USER_STATES = {
   NOT_LOGGED: null,
@@ -26,7 +21,7 @@ export function UserContextProvider({ children }) {
       setRole(role);
       if (jwt) {
         try {
-          const user = await User.getAuthenticatedUser(jwt);
+          const user = await User.getAuthenticatedUser();
           setCurrentUser(user);
         } catch (e) {
           console.log("Something went wrong", e);
@@ -40,11 +35,14 @@ export function UserContextProvider({ children }) {
   const login = ({ email, password }) => {
     User.login({ email, password })
       .then((res) => {
+        console.log(res)
         const token = res.data.token;
         window.localStorage.setItem("jwt", token);
         window.localStorage.setItem("role", res.data.role);
+        api.defaults.headers.common['x-access-token'] = token
+        console.log(api.headers)
         setRole(res.data.role);
-        User.getAuthenticatedUser(token).then((user) => setCurrentUser(user));
+        User.getAuthenticatedUser().then((user) => setCurrentUser(user));
       })
       .catch((err) => {
         console.log("something went wrong", err);

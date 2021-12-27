@@ -14,7 +14,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import CarouselEventos from "../components/CarouselEventos";
 
 const Home = ({}) => {
-  const news = useNews();
+  const {news} = useNews();
   const messages = useMessages();
   const albums = useAlbums();
 

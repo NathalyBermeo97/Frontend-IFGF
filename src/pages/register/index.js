@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./styles.module.css";
-import { Button, Grid } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { Input } from "@material-ui/core";
-import useUser from "../../hooks/useUser";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { SERVER_RESPONSE } from "../../constans/inidex";
+import { useAuth } from "../../context/AuthContext";
 
 const RegisterPage = () => {
   const [email, setEmail] = useState("");
@@ -16,7 +16,7 @@ const RegisterPage = () => {
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
 
-  const { register } = useUser();
+  const { register } = useAuth();
 
   const router = useRouter();
 
