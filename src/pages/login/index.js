@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { withPublic } from "../../hocs/withPublic";
 import Context, { useAuth } from "../../context/AuthContext";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import { useContext } from "react";
 import { USER_ROLES } from "../../constans/userRoles";
 

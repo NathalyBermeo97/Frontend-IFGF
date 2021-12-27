@@ -18,22 +18,18 @@ const Donacionropa = () => {
       </div>
       <Grid container={12}>
         <Grid xs={8}>
-          <div className={styles.formasdona}>
-            <Search />
-          </div>
+          <div className={styles.formasdona}></div>
         </Grid>
 
         <Grid xs={4}>
-          <div className={styles.formasdona}>
-            <Filtro />
-          </div>
+          <div className={styles.formasdona}></div>
         </Grid>
       </Grid>
       <Grid container={12}>
         <Grid xs={6}>
           <div className={styles.formasdona}>
             <div>
-              <h4>Haz tu donación voluntaria de "ROPA".</h4>
+              <h4>Haz tu donación voluntaria de ROPA</h4>
             </div>
 
             <p>
@@ -50,7 +46,7 @@ const Donacionropa = () => {
           </div>
           <div className={styles.formasdona}>
             <div>
-              <h4>Visita "NUESTRAS INSTALACIONES"</h4>
+              <h4>Visita NUESTRAS INSTALACIONES</h4>
             </div>
 
             <p>
@@ -200,4 +196,4 @@ const Donacionropa = () => {
     </body>
   );
 };
-export default withPrivate (Donacionropa);
+export default withPrivate(Donacionropa);

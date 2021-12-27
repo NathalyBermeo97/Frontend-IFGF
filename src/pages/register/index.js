@@ -12,6 +12,7 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
+    const [cellphone, setCellphone] = useState("");
   const [roles, setRoles] = useState([]);
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
@@ -86,6 +87,7 @@ const RegisterPage = () => {
             setPassword(e.target.value);
           }}
         />
+
       </div>
       <div className={styles.registerButtons}>
         <Button variant="outlined" size="medium" type="submit">

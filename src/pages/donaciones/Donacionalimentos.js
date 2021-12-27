@@ -1,12 +1,52 @@
 import React from "react";
 import styles from "../../styles/style.module.css";
+import { Controller, useForm } from "react-hook-form";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import {Button, Col, Container, Row} from "react-bootstrap";
-import {DatePicker} from "antd";
-import { withPrivate } from "../../hocs/withPrivate";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import Donation from "../../api/donation";
+import swal from "sweetalert"
+const schema = yup.object().shape({
+  description: yup.string().required("Ingrese una descripción de la donación"),
+  type: yup
+    .string()
+    .required("Ingrese el tipo de donación (comida,dinero o ropa)"),
+  delivery: yup
+    .string()
+    .required(
+      "Especifique si la donación realizada es a domicilio o prefiere llevar a la iglesia"
+    ),
+  direction: yup.string().required("Ingrese su dirección"),
+});
 
 const Donacionalimentos = () => {
+  const {
+    handleSubmit,
+    formState: { errors },
+    control,
+    register,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+
+
+  const onSubmit = async (values) => {
+    console.log("values", values);
+
+    const formData = new FormData();
+
+    formData.append("description", values.description);
+    formData.append("type", values.type);
+    formData.append("delivery", values.delivery);
+    formData.append("direction", values.direction);
+    formData.append("imgURL", values.imgURL);
+    const response = await Donation.create(formData);
+    console.log("response", response);
+  };
+
   return (
     <body className={styles.body}>
       <Navbar />
@@ -58,128 +98,104 @@ const Donacionalimentos = () => {
               </div>
             </div>
           </Col>
-          <Col xs={6}  className={styles.borderdona}>
+          <Col xs={6} className={styles.borderdona}>
             <h2 className={styles.formasdona}>Formulario de donación</h2>
-            <div className={styles.formsDonaciones}>
-              <form className="row g-3 needs-validation" noValidate>
-                <div className="col-md-6">
-                  <label htmlFor="validationCustom01" className="form-label">
-                    Nombre
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="validationCustom01"
-                    required
-                  />
-                  <div className="valid-feedback">Looks good!</div>
-                </div>
-                <div className="col-md-6">
-                  <label htmlFor="validationCustom02" className="form-label">
-                    Apellido
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="validationCustom02"
-                    required
-                  />
-                  <div className="valid-feedback">Looks good!</div>
-                </div>
-                <div className="col-md-6">
-                  <label
-                    htmlFor="validationCustomUsername"
-                    className="form-label"
-                  >
-                    Email
-                  </label>
-                  <div className="input-group has-validation">
-                    <span className="input-group-text" id="inputGroupPrepend">
-                      @
-                    </span>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="validationCustomUsername"
-                      aria-describedby="inputGroupPrepend"
-                      required
+            <Form
+              className="row g-3 needs-validation"
+              noValidate
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Tipo de donación :</Form.Label>
+                <Controller
+                  name="type"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <Form.Control
+                      {...field}
+                      label="Tipo de donación"
+                      variant="outlined"
+                      size="small"
                     />
-                    <div className="invalid-feedback">
-                      Please choose a username.
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <label htmlFor="validationCustom03" className="form-label">
-                    Ciudad
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="validationCustom03"
-                    required
-                  />
-                  <div className="invalid-feedback">
-                    Please provide a valid city.
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <label htmlFor="validationCustom03" className="form-label">
-                    Dirección
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="validationCustom03"
-                    required
-                  />
-                  <div className="invalid-feedback">
-                    Please provide a valid city.
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <label htmlFor="validationCustom03" className="form-label">
-                    Teléfono/Celular
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="validationCustom03"
-                    required
-                  />
-                  <div className="invalid-feedback">
-                    Please provide a valid city.
-                  </div>
-                </div>
+                  )}
+                />
+                <p>{errors.title?.message}</p>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Tipo de entrega:</Form.Label>
+                <Controller
+                  name="delivery"
+                  inputRef={register}
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <Form.Control
+                      {...field}
+                      label="Domicilio o entrega personal"
+                      variant="outlined"
+                      size="small"
+                    />
+                  )}
+                />
+                <p>{errors.title?.message}</p>
+              </Form.Group>
 
-                <div className="col-md-6">
-                  <label htmlFor="validationCustom03" className="form-label">
-                    Fecha del día de la entrega de la donación
-                  </label>
-                  <DatePicker />
-                </div>
-
-                <div className="col-md-6">
-                  <label htmlFor="validationCustom03" className="form-label">
-                    Descripción del tipo de donación
-                  </label>
-                  <textarea
-                    className="form-control"
-                    id="floatingTextarea2"
-                  ></textarea>
-                </div>
-
-                <div className="col-12">
-                  <Button
-                    className="btn btn-primary"
-                    type="submit"
-                    href="Donaciones"
-                  >
-                    Enviar
-                  </Button>
-                </div>
-              </form>
-            </div>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Dirección :</Form.Label>
+                <Controller
+                  name="direction"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <Form.Control
+                      {...field}
+                      label="Direccion"
+                      variant="outlined"
+                      size="small"
+                    />
+                  )}
+                />
+                <p>{errors.title?.message}</p>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Descripción :</Form.Label>
+                <Controller
+                  name="description"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <Form.Control
+                      as="textarea"
+                      rows={3}
+                      {...field}
+                      label="Descripción"
+                      variant="outlined"
+                    />
+                  )}
+                />
+                <p>{errors.title?.message}</p>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Imagen :</Form.Label>
+                <Controller
+                    name="imgURL"
+                    control={control}
+                    defaultValue=""
+                    render={({ field }) => (
+                        <Form.Control
+                            type="file"
+                        />
+                    )}
+                />
+                <p>{errors.title?.message}</p>
+              </Form.Group>
+              <div className="col-12">
+                <Button className="btn btn-primary" type="submit">
+                  Enviar
+                </Button>
+              </div>
+            </Form>
           </Col>
         </Row>
       </Container>
@@ -187,4 +203,5 @@ const Donacionalimentos = () => {
     </body>
   );
 };
-export default withPrivate (Donacionalimentos);
+
+export default Donacionalimentos;

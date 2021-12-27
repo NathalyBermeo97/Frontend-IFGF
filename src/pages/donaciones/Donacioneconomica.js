@@ -79,7 +79,6 @@ const Donacioneconomica = () => {
                   type="text"
                   className="form-control"
                   id="validationCustom01"
-                  value="Mark"
                   required
                 />
                 <div className="valid-feedback">Looks good!</div>
@@ -92,7 +91,6 @@ const Donacioneconomica = () => {
                   type="text"
                   className="form-control"
                   id="validationCustom02"
-                  value="Otto"
                   required
                 />
                 <div className="valid-feedback">Looks good!</div>

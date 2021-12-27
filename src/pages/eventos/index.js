@@ -6,7 +6,7 @@ import Footer from "../../components/Footer";
 import { EventModal } from "../../components/Modal";
 import { useState } from "react";
 import { Card, Container, Image, Button } from "react-bootstrap";
-import { withPrivate } from "../../hocs/withPrivate";
+
 
 const Eventos = ({ events }) => {
   console.log({ events });
@@ -55,7 +55,7 @@ const Eventos = ({ events }) => {
     </>
   );
 };
-export default withPrivate(Eventos);
+export default Eventos;
 
 export async function getServerSideProps(context) {
   try {
