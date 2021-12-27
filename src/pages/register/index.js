@@ -12,7 +12,6 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
-    const [cellphone, setCellphone] = useState("");
   const [roles, setRoles] = useState([]);
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);

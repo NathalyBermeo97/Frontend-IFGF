@@ -45,6 +45,7 @@ const LoginPage = (props) => {
   }, [isLoggedIn]);
 
   return (
+
     <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
       <div className={styles.head}>
         <h1>BIENVENIDO A LA IGLESIA IFGF ECUADOR</h1>
