@@ -20,8 +20,8 @@ const User = {
             token,
         });
     },
-    getAuthenticatedUser: (token) => {
-        return api.get(`auth/user/${token}`).then(response => response.data.user);
+    getAuthenticatedUser: () => {
+        return api.get(`auth/user`).then(response => {console.log(response); return response.data.user});
     },
 };
 

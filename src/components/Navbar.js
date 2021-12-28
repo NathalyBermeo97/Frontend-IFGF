@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import styles from "../styles/navbar.module.css";
-import useUser, { USER_STATES } from "../hooks/useUser";
+import { USER_STATES } from "../context/AuthContext"; 
 import { Col, Container, Image, Nav, Navbar, Row } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 

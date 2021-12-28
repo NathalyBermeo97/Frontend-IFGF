@@ -8,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Donation from "../../api/donation";
 import swal from "sweetalert"
+
 const schema = yup.object().shape({
   description: yup.string().required("Ingrese una descripción de la donación"),
   type: yup

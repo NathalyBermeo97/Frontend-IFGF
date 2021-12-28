@@ -1,265 +1,86 @@
-import React, { Component } from "react";
-import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
-import Navbaradmin from "../../components/Navbaradmin";
-
-
-const url = "https://backend-ifgf.herokuapp.com/api/news";
+import React from "react";
 import { withPrivate } from "../../hocs/withPrivate";
-import MenuAdmin from "../../components/MenuAdmin";
+import { useState } from "react";
+import { useNews } from "../../hooks/useNews";
+import { ListGroup, Badge, Button } from "react-bootstrap";
+import { NewsModal } from "../../components/NewsModal";
+import styles from './styles.module.css'
 
-class News extends Component {
-    state = {
-        data: [],
-        modalInsertar: false,
-        modalEliminar: false,
-        form: {
+const Admin = () => {
+  const { news, setNews, updateNews } = useNews();
+  console.log({ newsFromAdmin: news });
+  const [showModal, setShowModal] = useState(false);
+  const [newsItem, setNesItem] = useState([]);
+  const [newNewsItem, setNewNewsItem] = useState({});
 
-            id: "",
-            title: "",
-            description: "",
-            imgURL: "",
-        },
-    };
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
-    peticionGet = () => {
-        axios
-            .get(url)
-            .then((response) => {
-                this.setState({ data: response.data });
-            })
-            .catch((error) => {
-                console.log(error.message);
-            });
-    };
+  const onShowModal = (newsItem) => {
+    setNesItem(newsItem);
+    setShowModal(true);
+  };
 
-    peticionPost = async () => {
-        delete this.state.form.id;
-        await axios
-            .post(url, this.state.form)
-            .then((response) => {
-                this.modalInsertar();
-                this.peticionGet();
-            })
-            .catch((error) => {
-                console.log(error.message);
-            });
-    };
+  const handleSave = () => {
+    const newNews = news.map(newsitem => newsitem._id === newNewsItem._id ? newNewsItem : newsitem)
+    console.log({newNews, newNewsItem}) 
+    updateNews(newNewsItem._id, newNews).then((response) => {
+      console.log(response)
+      if (
+        response &&
+        response.data.message === "Noticia actualizada correctamente"
+      ) {
+        // const newNews = news.map((newsitem) =>
+        //   newsitem._id === newsItem._id ? newNewsItem : newsitem
+        // );
+        setNews(newNews);
+        setShowModal(false);
+      }
+    });
+    // const newNews = news.map((newsitem) =>
+    //   newsitem._id === newsItem._id ? data : newsitem
+    // );
+    // setNews([newNewsItem]);
+    // setShowModal(false);
+  };
 
-    peticionPut = () => {
-        axios.put(url + this.state.form.id, this.state.form).then((response) => {
-            this.modalInsertar();
-            this.peticionGet();
-        });
-    };
+  return (
+    <>
+      <div className={styles.newsHeader}>
+        <h2>Noticias</h2>
+        <Button variant='outline-primary' size='sm'>Crear</Button>
+      </div>
+      <ListGroup as="ol" numbered>
+        {news.map((newsItem) => {
+          return (
+            <ListGroup.Item
+              key={newsItem._id}
+              as="li"
+              className="d-flex justify-content-between align-items-start"
+            >
+              <div className="ms-2 me-auto">
+                <div className="fw-bold">{newsItem.title}</div>
+                {newsItem.description}
+              </div>
+              <Button size="sm" onClick={() => onShowModal(newsItem)}>
+                ver
+              </Button>
+            </ListGroup.Item>
+          );
+        })}
+      </ListGroup>
+      <NewsModal
+        show={showModal}
+        setData={setNewNewsItem}
+        handleSave={handleSave}
+        setShowModal={setShowModal}
+        handleClose={handleCloseModal}
+        newsItem={newsItem}
+      />
+    </>
+  );
+};
 
-    peticionDelete = () => {
-        axios.delete(url + this.state.form.id).then((response) => {
-            this.setState({ modalEliminar: false });
-            this.peticionGet();
-        });
-    };
-
-    modalInsertar = () => {
-        this.setState({ modalInsertar: !this.state.modalInsertar });
-    };
-
-    seleccionarNoticia = (news) => {
-        this.setState({
-            tipoModal: "actualizar",
-            form: {
-                title: news.title,
-                description: news.description,
-            },
-        });
-    };
-
-    handleChange = async (e) => {
-        e.persist();
-        await this.setState({
-            form: {
-                ...this.state.form,
-                [e.target.name]: e.target.value,
-            },
-        });
-        console.log(this.state.form);
-    };
-
-    componentDidMount() {
-        this.peticionGet();
-    }
-
-    render() {
-        const { form } = this.state;
-        return (
-            <div>
-                <Navbaradmin />
-                <MenuAdmin/>
-                <div>
-                    <div className="row">
-                        <div className="col-lg-2">
-                        </div>
-                        <div className="col-lg-10 ">
-                            <div className="App">
-                                <br />
-                                <br />
-                                <br />
-                                <button
-                                    className="btn btn-primary"
-                                    onClick={() => {
-                                        this.setState({ form: null, tipoModal: "insertar" });
-                                        this.modalInsertar();
-                                    }}
-                                >
-                                    Agregar Noticia
-                                </button>
-                                <br />
-                                <br />
-                                <table className="table">
-                                    <thead>
-                                    <tr>
-                                        <th>Titulo</th>
-                                        <th>Descripción</th>
-                                        <th>Imagen</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {this.state.data.map((news) => {
-                                        return (
-                                            <tr key={news._id}>
-                                                <td>{news.title}</td>
-                                                <td>{news.description}</td>
-                                                <th>
-                                                    <img src={news.imgURL} />
-                                                </th>
-                                                <td>
-                                                    <button
-                                                        className="btn btn-primary"
-                                                        onClick={() => {
-                                                            this.seleccionarNoticia(news);
-                                                            this.modalInsertar();
-                                                        }}
-                                                    >
-                                                        <FontAwesomeIcon icon={faEdit} />
-                                                    </button>
-                                                    {"   "}
-                                                    <button
-                                                        className="btn btn-danger"
-                                                        onClick={() => {
-                                                            this.seleccionarNoticia(news);
-                                                            this.setState({ modalEliminar: true });
-                                                        }}
-                                                    >
-                                                        <FontAwesomeIcon icon={faTrashAlt} />
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        );
-                                    })}
-                                    </tbody>
-                                </table>
-
-                                <Modal isOpen={this.state.modalInsertar}>
-                                    <ModalHeader style={{ display: "block" }}>
-                    <span
-                        style={{ float: "right" }}
-                        onClick={() => this.modalInsertar()}
-                    >
-                      x
-                    </span>
-                                    </ModalHeader>
-                                    <ModalBody>
-                                        <div className="form-group">
-                                            <label htmlFor="title">Titulo</label>
-                                            <input
-                                                className="form-control"
-                                                type="text"
-                                                name="title"
-                                                id="title"
-                                                onChange={this.handleChange}
-                                                value={form ? form.title : ""}
-                                            />
-                                            <br />
-                                            <label htmlFor="description">Descripcion</label>
-                                            <textarea
-                                                className="form-control"
-                                                type="text"
-                                                name="description"
-                                                id="description"
-                                                rows="3"
-                                                onChange={this.handleChange}
-                                                value={form ? form.description : ""}
-                                            ></textarea>
-                                            <br />
-                                            <label htmlFor="imgURL">Imagen</label>
-                                            <input
-                                                type="file"
-                                                name="imgURL"
-                                                accept="image/gif, image/jpeg, image/png"
-                                                className="form-control"
-                                                id="imgURL"
-                                                onChange={this.handleChange}
-                                                value={form ? form.imgURL : ""}
-                                            />
-                                            <br />
-                                        </div>
-                                    </ModalBody>
-
-                                    <ModalFooter>
-                                        {this.state.tipoModal == "insertar" ? (
-                                            <button
-                                                className="btn btn-primary"
-                                                onClick={() => this.peticionPost()}
-                                            >
-                                                Insertar
-                                            </button>
-                                        ) : (
-                                            <button
-                                                className="btn btn-primary"
-                                                onClick={() => this.peticionPut()}
-                                            >
-                                                Actualizar
-                                            </button>
-                                        )}
-                                        <button
-                                            className="btn btn-danger"
-                                            onClick={() => this.modalInsertar()}
-                                        >
-                                            Cancelar
-                                        </button>
-                                    </ModalFooter>
-                                </Modal>
-
-                                <Modal isOpen={this.state.modalEliminar}>
-                                    <ModalBody>
-                                        Estás seguro que deseas eliminar la noticia{" "}
-                                        {form && form.nombre}
-                                    </ModalBody>
-                                    <ModalFooter>
-                                        <button
-                                            className="btn btn-danger"
-                                            onClick={() => this.peticionDelete()}
-                                        >
-                                            Sí
-                                        </button>
-                                        <button
-                                            className="btn btn-dark"
-                                            onClick={() => this.setState({ modalEliminar: false })}
-                                        >
-                                            No
-                                        </button>
-                                    </ModalFooter>
-                                </Modal>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-}
-export default withPrivate(News);
+export default withPrivate(Admin);
 
