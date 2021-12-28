@@ -5,11 +5,14 @@ import News from "../api/news";
 export const useNews = () => {
   const [news, setNews] = useState([]);
 
-  //console.log({news})
+  console.log({news})
   useEffect(() => {
     const getNews = () => {
       News.get()
-        .then(response => setNews(response.data));
+        .then(response => {
+          console.log({response})
+          setNews(response.data)
+        }).catch(err => console.log('something went wrong', err));
     };
     getNews();
   }, []);

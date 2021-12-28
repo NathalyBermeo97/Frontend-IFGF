@@ -9,7 +9,7 @@ export const useAlbums = () => {
     useEffect(() => {
         const getAlbums = () => {
             Albums.get()
-                .then(response => setAlbums(response.data));
+                .then(response => setAlbums(response.data)).catch(err => console.log('something went wrong', err));
         };
         getAlbums();
     }, []);

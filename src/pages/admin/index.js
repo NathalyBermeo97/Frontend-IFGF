@@ -5,6 +5,7 @@ import { useNews } from "../../hooks/useNews";
 import { ListGroup, Badge, Button } from "react-bootstrap";
 import { NewsModal } from "../../components/NewsModal";
 import styles from './styles.module.css'
+import News from "../../api/news";
 
 const Admin = () => {
   const { news, setNews, updateNews } = useNews();
@@ -25,24 +26,17 @@ const Admin = () => {
   const handleSave = () => {
     const newNews = news.map(newsitem => newsitem._id === newNewsItem._id ? newNewsItem : newsitem)
     console.log({newNews, newNewsItem}) 
-    updateNews(newNewsItem._id, newNews).then((response) => {
-      console.log(response)
-      if (
-        response &&
-        response.data.message === "Noticia actualizada correctamente"
-      ) {
-        // const newNews = news.map((newsitem) =>
-        //   newsitem._id === newsItem._id ? newNewsItem : newsitem
-        // );
-        setNews(newNews);
-        setShowModal(false);
-      }
-    });
-    // const newNews = news.map((newsitem) =>
-    //   newsitem._id === newsItem._id ? data : newsitem
-    // );
-    // setNews([newNewsItem]);
-    // setShowModal(false);
+    News.update(newNewsItem._id, newNews).then(res => console.log(res))
+    // updateNews(newNewsItem._id, newNews).then((response) => {
+    //   console.log(response)
+    //   if (
+    //     response &&
+    //     response.data.message === "Noticia actualizada correctamente"
+    //   ) {
+    //     setNews(newNews);
+    //     setShowModal(false);
+    //   }
+    // });
   };
 
   return (

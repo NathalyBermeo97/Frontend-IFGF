@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Button, Modal, InputGroup, FormControl } from "react-bootstrap";
+import api from "../api/api";
+import { useNews } from "../hooks/useNews";
 
 export const NewsModal = ({
   show,

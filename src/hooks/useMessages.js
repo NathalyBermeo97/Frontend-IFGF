@@ -9,7 +9,7 @@ export const useMessages = () => {
     useEffect(() => {
         const getMessages = () => {
             Messages.get()
-                .then(response => setMessages(response.data));
+                .then(response => setMessages(response.data)).catch(err => console.log('something went wrong', err));
         };
         getMessages();
     }, []);
