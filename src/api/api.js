@@ -5,8 +5,8 @@ const api = axios.create({
   withCredentials: false,
 });
 
-// if(typeof window !== 'undefined'){
-//   api.defaults.headers.common['x-access-token'] = window.localStorage.getItem('jwt')
-// }
+if(typeof window !== 'undefined'){
+  api.defaults.headers.common['x-access-token'] = window.localStorage.getItem('jwt')
+}
 
 export default api;

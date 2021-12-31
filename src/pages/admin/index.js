@@ -6,6 +6,7 @@ import { ListGroup, Badge, Button } from "react-bootstrap";
 import { NewsModal } from "../../components/NewsModal";
 import styles from './styles.module.css'
 import News from "../../api/news";
+import {CreateNewsItemModal} from '../../components/CreateNewsItemModal'
 
 const Admin = () => {
   const { news, setNews, updateNews } = useNews();
@@ -13,6 +14,7 @@ const Admin = () => {
   const [showModal, setShowModal] = useState(false);
   const [newsItem, setNesItem] = useState([]);
   const [newNewsItem, setNewNewsItem] = useState({});
+  const [showCreateNewsItemModal, setShowCreateNewsItemModal] = useState(false)
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -23,27 +25,28 @@ const Admin = () => {
     setShowModal(true);
   };
 
-  const handleSave = () => {
-    const newNews = news.map(newsitem => newsitem._id === newNewsItem._id ? newNewsItem : newsitem)
-    console.log({newNews, newNewsItem}) 
-    News.update(newNewsItem._id, newNews).then(res => console.log(res))
-    // updateNews(newNewsItem._id, newNews).then((response) => {
-    //   console.log(response)
-    //   if (
-    //     response &&
-    //     response.data.message === "Noticia actualizada correctamente"
-    //   ) {
-    //     setNews(newNews);
-    //     setShowModal(false);
-    //   }
-    // });
-  };
+  // const handleSave = () => {
+  //   const newNews = news.map(newsitem => newsitem._id === newNewsItem._id ? newNewsItem : newsitem)
+  //   //console.log({newNews, newNewsItem}) 
+  //   News.update(newNewsItem._id, newNews).then(res => {
+  //     console.log(res)
+  //     setShowModal(false)})
+  //   // updateNews(newNewsItem._id, newNews).then((response) => {
+  //   //   console.log(response)
+  //     // if (
+  //     //   response &&
+  //     //   response.data.message === "Noticia actualizada correctamente"
+  //     // ) {
+  //     //   setNews(newNews);
+  //     // }
+  //   // });
+  // };
 
   return (
     <>
       <div className={styles.newsHeader}>
         <h2>Noticias</h2>
-        <Button variant='outline-primary' size='sm'>Crear</Button>
+        <Button variant='outline-primary' size='sm' onClick={() => setShowCreateNewsItemModal(true)}>Crear</Button>
       </div>
       <ListGroup as="ol" numbered>
         {news.map((newsItem) => {
@@ -67,10 +70,14 @@ const Admin = () => {
       <NewsModal
         show={showModal}
         setData={setNewNewsItem}
-        handleSave={handleSave}
+        //handleSave={handleSave}
         setShowModal={setShowModal}
         handleClose={handleCloseModal}
         newsItem={newsItem}
+      />
+      <CreateNewsItemModal 
+        showModal={showCreateNewsItemModal}
+        setShowModal={setShowCreateNewsItemModal}
       />
     </>
   );

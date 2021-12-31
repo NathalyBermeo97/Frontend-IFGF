@@ -18,19 +18,19 @@ export const useNews = () => {
   }, []);
 
   const updateNews = async (id, newNews) => {
-    try{
-      // const newNews = news.map(newsItem => newsItem._id === id ? data : newsItem)
-      const response = await News.update(id, newNews)
-      console.log('message', response)
-      //if(response && response.data.message === 'Noticia actualizada correctamente'){
-        //const newNews = news.map(newsItem => newsItem._id === id ? data : newsItem)
-        //console.log({newNews, news})
-        // setNews(newNews)
-      //}
-      return response
-    }catch(e){
-      console.log('Something went wrong', e)
-    }
+    // try{
+    //   // const newNews = news.map(newsItem => newsItem._id === id ? data : newsItem)
+    //   const response = await News.update(id, newNews)
+    //   console.log('message', response)
+    //   //if(response && response.data.message === 'Noticia actualizada correctamente'){
+    //     //const newNews = news.map(newsItem => newsItem._id === id ? data : newsItem)
+    //     //console.log({newNews, news})
+    //     // setNews(newNews)
+    //   //}
+    //   return response
+    // }catch(e){
+    //   console.log('Something went wrong', e)
+    // }
   }
 
   return {news, setNews, updateNews};

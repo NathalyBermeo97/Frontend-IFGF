@@ -1,30 +1,21 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
 import { Button, Modal, InputGroup, FormControl } from "react-bootstrap";
-import api from "../api/api";
-import { useNews } from "../hooks/useNews";
+import News from "../api/news";
 
-export const NewsModal = ({
-  show,
-  handleClose,
-  handleSave,
-  newsItem,
-  setData,
-}) => {
+export const CreateNewsItemModal = ({ showModal, setShowModal }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  useEffect(() => {
-    setTitle(newsItem.title);
-    setDescription(newsItem.description);
-  }, [newsItem]);
-  
-  useEffect(() => {
-    setData({ _id: newsItem._id, title, description });
-  }, [newsItem, title, description]);
+  const handleClose = () => setShowModal(false);
 
+  const handleSave = () => {
+    const newNewsItem = { title, description };
+    News.create(newNewsItem).then(response => console.log(response))
+  };
+
+  console.log({showModal})
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={showModal} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Noticia</Modal.Title>
         <br />
