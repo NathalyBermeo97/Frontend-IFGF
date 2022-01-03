@@ -1,83 +1,134 @@
-import React from "react";
 import { withPrivate } from "../../hocs/withPrivate";
 import { useState } from "react";
 import { useNews } from "../../hooks/useNews";
-import { ListGroup, Badge, Button } from "react-bootstrap";
-import { NewsModal } from "../../components/NewsModal";
-import styles from './styles.module.css'
-import News from "../../api/news";
-import {CreateNewsItemModal} from '../../components/CreateNewsItemModal'
+import { ListGroup, Button } from "react-bootstrap";
+import { UpdateNewsItemModal } from "../../components/UpdateNewsItemModal";
+import styles from "./styles.module.css";
+import { CreateNewsItemModal } from "../../components/CreateNewsItemModal";
+import { ERROR_MESSAGES, SERVER_RESPONSE } from "../../constans/inidex";
+import { ListOfNews } from "../../components/ListOfNews";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
+import * as yup from "yup";
+
+const newsItemSchema = yup.object().shape({
+  title: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED("título"))
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+  description: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED("descripción"))
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+});
 
 const Admin = () => {
-  const { news, setNews, updateNews } = useNews();
-  console.log({ newsFromAdmin: news });
+  const { news, setNews, updateNews, createNewsItem } = useNews();
   const [showModal, setShowModal] = useState(false);
-  const [newsItem, setNesItem] = useState([]);
-  const [newNewsItem, setNewNewsItem] = useState({});
-  const [showCreateNewsItemModal, setShowCreateNewsItemModal] = useState(false)
+  const [showCreateNewsItemModal, setShowCreateNewsItemModal] = useState(false);
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+    clearErrors,
+  } = useForm({
+    defaultValues: {
+      title: "",
+      description: "",
+    },
+    resolver: yupResolver(newsItemSchema),
+  });
+
+  const updateNewsItemForm = useForm({
+    resolver: yupResolver(newsItemSchema),
+  });
 
   const onShowModal = (newsItem) => {
-    setNesItem(newsItem);
+    updateNewsItemForm.reset(newsItem);
     setShowModal(true);
   };
 
-  // const handleSave = () => {
-  //   const newNews = news.map(newsitem => newsitem._id === newNewsItem._id ? newNewsItem : newsitem)
-  //   //console.log({newNews, newNewsItem}) 
-  //   News.update(newNewsItem._id, newNews).then(res => {
-  //     console.log(res)
-  //     setShowModal(false)})
-  //   // updateNews(newNewsItem._id, newNews).then((response) => {
-  //   //   console.log(response)
-  //     // if (
-  //     //   response &&
-  //     //   response.data.message === "Noticia actualizada correctamente"
-  //     // ) {
-  //     //   setNews(newNews);
-  //     // }
-  //   // });
-  // };
+  console.log({ errors });
+  const onSubmit = (data) => {
+    console.log(data);
+    createNewsItem(data).then((message) => {
+      if (message === SERVER_RESPONSE.NEWS_ITEM_CREATED) {
+        //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
+        setNews((prevState) => [
+          ...prevState,
+          { _id: Math.floor(Math.random() * 1000000000000), ...data },
+        ]);
+        setShowCreateNewsItemModal(false);
+        reset();
+      }
+    });
+    // setNews((prevState) => [
+    //   ...prevState,
+    //   { _id: Math.floor(Math.random() * 1000000000000), ...data },
+    // ]);
+    // setShowCreateNewsItemModal(false);
+    // reset();
+  };
+
+  const onSubmitUpdateNewsItem = (data) => {
+    const { _id: id } = data;
+    updateNews(id, data).then((message) => {
+      if (message === "Noticia actualizada correctamente") {
+        const newNews = news.map((newsItem) =>
+          newsItem._id === data._id ? data : newsItem
+        );
+        setNews(newNews);
+        setShowModal(false);
+      }
+    });
+    // const newNews = news.map((newsItem) =>
+    //   newsItem._id === data._id ? data : newsItem
+    // );
+    // setNews(newNews);
+    // setShowModal(false);
+  };
 
   return (
     <>
       <div className={styles.newsHeader}>
         <h2>Noticias</h2>
-        <Button variant='outline-primary' size='sm' onClick={() => setShowCreateNewsItemModal(true)}>Crear</Button>
+        <Button
+          variant="outline-primary"
+          size="sm"
+          onClick={() => setShowCreateNewsItemModal(true)}
+        >
+          Crear
+        </Button>
       </div>
       <ListGroup as="ol" numbered>
-        {news.map((newsItem) => {
-          return (
-            <ListGroup.Item
-              key={newsItem._id}
-              as="li"
-              className="d-flex justify-content-between align-items-start"
-            >
-              <div className="ms-2 me-auto">
-                <div className="fw-bold">{newsItem.title}</div>
-                {newsItem.description}
-              </div>
-              <Button size="sm" onClick={() => onShowModal(newsItem)}>
-                ver
-              </Button>
-            </ListGroup.Item>
-          );
-        })}
+        {news.map((newsItem) => (
+          <ListOfNews
+            key={newsItem._id}
+            newsItem={newsItem}
+            onShowModal={onShowModal}
+          />
+        ))}
       </ListGroup>
-      <NewsModal
+
+      <UpdateNewsItemModal
         show={showModal}
-        setData={setNewNewsItem}
-        //handleSave={handleSave}
         setShowModal={setShowModal}
-        handleClose={handleCloseModal}
-        newsItem={newsItem}
+        register={updateNewsItemForm.register}
+        handleSubmit={updateNewsItemForm.handleSubmit}
+        onSubmit={onSubmitUpdateNewsItem}
+        errors={updateNewsItemForm.formState.errors}
       />
-      <CreateNewsItemModal 
+
+      <CreateNewsItemModal
         showModal={showCreateNewsItemModal}
         setShowModal={setShowCreateNewsItemModal}
+        register={register}
+        handleSubmit={handleSubmit}
+        onSubmit={onSubmit}
+        errors={errors}
+        clearErrors={clearErrors}
       />
     </>
   );
