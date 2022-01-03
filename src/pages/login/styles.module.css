@@ -1,19 +1,28 @@
-.head {
-    background: #ffffff;
-    padding-top: 5px;
+.body{
+    background-color: #ffffff;
 }
-
+.title {
+    color: #ffffff;
+}
+.head {
+    background: rgba(155, 192, 231, 0.84);
+    padding-top: 5px
+}
 .button {
     background: #408bd7;
     justify-content: center;
     margin: 5%;
 }
-
 .form {
+
     margin: 5% 35%;
+    width: 500px;
     text-align: center;
-    background: white;
-    border: #0c94ff 5px solid;
+    background: rgba(155, 192, 231, 0.84);
+    border: rgb(64, 139, 215) 3px solid;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 1px rgba(155, 192, 231, 0.84)
+
 }
 
 .createAccount{
@@ -30,4 +39,8 @@
     display: flex;
     justify-content: center;
     gap: 10px;
+}
+.inputs{
+    background: rgba(155, 192, 231, 0.84);
+    margin-top: 10px;
 }

@@ -7,7 +7,8 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Donation from "../../api/donation";
-import swal from "sweetalert"
+
+
 
 const schema = yup.object().shape({
   description: yup.string().required("Ingrese una descripción de la donación"),
@@ -23,6 +24,7 @@ const schema = yup.object().shape({
 });
 
 const Donacionalimentos = () => {
+
   const {
     handleSubmit,
     formState: { errors },
@@ -31,8 +33,6 @@ const Donacionalimentos = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
-
 
   const onSubmit = async (values) => {
     console.log("values", values);
@@ -43,7 +43,7 @@ const Donacionalimentos = () => {
     formData.append("type", values.type);
     formData.append("delivery", values.delivery);
     formData.append("direction", values.direction);
-    formData.append("imgURL", values.imgURL);
+    formData.append("file", values.file);
     const response = await Donation.create(formData);
     console.log("response", response);
   };
@@ -121,7 +121,7 @@ const Donacionalimentos = () => {
                     />
                   )}
                 />
-                <p>{errors.title?.message}</p>
+                <p>{errors.type?.message}</p>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Tipo de entrega:</Form.Label>
@@ -139,7 +139,7 @@ const Donacionalimentos = () => {
                     />
                   )}
                 />
-                <p>{errors.title?.message}</p>
+                <p>{errors.delivery?.message}</p>
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -157,7 +157,7 @@ const Donacionalimentos = () => {
                     />
                   )}
                 />
-                <p>{errors.title?.message}</p>
+                <p>{errors.direction?.message}</p>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Descripción :</Form.Label>
@@ -175,21 +175,17 @@ const Donacionalimentos = () => {
                     />
                   )}
                 />
-                <p>{errors.title?.message}</p>
+                <p>{errors.description?.message}</p>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Imagen :</Form.Label>
                 <Controller
-                    name="imgURL"
-                    control={control}
-                    defaultValue=""
-                    render={({ field }) => (
-                        <Form.Control
-                            type="file"
-                        />
-                    )}
+                  name="imgURL"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => <Form.Control type="file" />}
                 />
-                <p>{errors.title?.message}</p>
+                <p>{errors.imgURL?.message}</p>
               </Form.Group>
               <div className="col-12">
                 <Button className="btn btn-primary" type="submit">
