@@ -53,7 +53,7 @@ const Home = ({}) => {
         <div className={styles.linea}></div>
       </div>
       <div className="container">
-          {/*<News news={news} />*/}
+          <News news={news} />
       </div>
       <div className="container">
           {/*<Messages messages={messages} />*/}

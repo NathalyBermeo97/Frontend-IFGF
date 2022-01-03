@@ -9,6 +9,9 @@ const Messages = {
     },
     update: (id, newObject) => {
         return api.put(`/messages/${id}`, newObject)
+    },
+    delete: (id) => {
+        return api.delete(`/messages/${id}`)
     }
 };
 
