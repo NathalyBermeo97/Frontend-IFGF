@@ -3,3 +3,13 @@
     justify-content: space-around;
     padding: 15px 15px
 }
+.albumsHeader{
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 15px
+}
+.messagesHeader{
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 15px
+}

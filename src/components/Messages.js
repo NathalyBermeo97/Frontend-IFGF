@@ -11,7 +11,7 @@ const Messages = ({ messages }) => {
       <table className="table">
         <div className={styles.courses}>
           {messages.map((message) => (
-            <div key={message.id} className={styles.course}>
+            <div key={message._id} className={styles.course}>
               <div className={styles.coursecontenido}>
                 <div justifyContent="center" className={styles.name}>
                   {message.title}
@@ -35,10 +35,11 @@ const Messages = ({ messages }) => {
   );
 };
 export default Messages;
+
 export async function getStaticProps() {
   let messages = [];
   try {
-    const response = await api.get("messages");
+    const response = await api.get("/messages");
     console.log("response", response);
     messages = response.data.data;
   } catch (e) {
