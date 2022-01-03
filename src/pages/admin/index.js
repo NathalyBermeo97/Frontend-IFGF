@@ -1,141 +1,263 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { makeStyles } from "@material-ui/core/styles";
 import { withPrivate } from "../../hocs/withPrivate";
-import { useState } from "react";
-import { useNews } from "../../hooks/useNews";
-import { ListGroup, Button } from "react-bootstrap";
-import { UpdateNewsItemModal } from "../../components/UpdateNewsItemModal";
-import styles from "./styles.module.css";
-import { CreateNewsItemModal } from "../../components/CreateNewsItemModal";
-import { ERROR_MESSAGES, SERVER_RESPONSE } from "../../constans/inidex";
-import { ListOfNews } from "../../components/ListOfNews";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
-import * as yup from "yup";
+import {
+  Table,
+  TableContainer,
+  TableHead,
+  TableCell,
+  TableBody,
+  TableRow,
+  Modal,
+  Button,
+  TextField,
+} from "@material-ui/core";
+import { Edit, Delete } from "@material-ui/icons";
+const baseUrl = "https://backend-ifgf.herokuapp.com/api/news/";
 
-const newsItemSchema = yup.object().shape({
-  title: yup
-    .string()
-    .required(ERROR_MESSAGES.REQUIRED("título"))
-    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
-  description: yup
-    .string()
-    .required(ERROR_MESSAGES.REQUIRED("descripción"))
-    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
-});
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    position: "absolute",
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+  },
+  iconos: {
+    cursor: "pointer",
+  },
+  inputMaterial: {
+    width: "100%",
+  },
+}));
 
-const Admin = () => {
-  const { news, setNews, updateNews, createNewsItem } = useNews();
-  const [showModal, setShowModal] = useState(false);
-  const [showCreateNewsItemModal, setShowCreateNewsItemModal] = useState(false);
+function AdminNews() {
+  const styles = useStyles();
+  const [data, setData] = useState([]);
+  const [modalInsertar, setModalInsertar] = useState(false);
+  const [modalEditar, setModalEditar] = useState(false);
+  const [modalEliminar, setModalEliminar] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-    clearErrors,
-  } = useForm({
-    defaultValues: {
-      title: "",
-      description: "",
-    },
-    resolver: yupResolver(newsItemSchema),
+  const [consolaSeleccionada, setConsolaSeleccionada] = useState({
+    title: "",
+    description: "",
+
   });
 
-  const updateNewsItemForm = useForm({
-    resolver: yupResolver(newsItemSchema),
-  });
-
-  const onShowModal = (newsItem) => {
-    updateNewsItemForm.reset(newsItem);
-    setShowModal(true);
-  };
-
-  console.log({ errors });
-  const onSubmit = (data) => {
-    console.log(data);
-    {
-      /*createNewsItem(data).then((message) => {
-            if (message === SERVER_RESPONSE.NEWS_ITEM_CREATED) {
-                //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
-                setNews((prevState) => [
-                    ...prevState,
-                    { _id: Math.floor(Math.random() * 1000000000000), ...data },
-                ]);
-                setShowCreateNewsItemModal(false);
-                reset();
-            }
-        });*/
-    }
-    setNews((prevState) => [
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setConsolaSeleccionada((prevState) => ({
       ...prevState,
-      { _id: Math.floor(Math.random() * 1000000000000), ...data },
-    ]);
-    setShowCreateNewsItemModal(false);
-    reset();
+      [name]: value,
+    }));
+    console.log(consolaSeleccionada);
   };
 
-  const onSubmitUpdateNewsItem = (data) => {
-    const { _id: id } = data;
-      {/*updateNews(id, data).then((message) => {
-      if (message === "Noticia actualizada correctamente") {
-        const newNews = news.map((newsItem) =>
-          newsItem._id === data._id ? data : newsItem
-        );
-        setNews(newNews);
-        setShowModal(false);
-      }
-    });*/}
-
-    const newNews = news.map((newsItem) =>
-    newsItem._id === data._id ? data : newsItem
-    );
-    setNews(newNews);
-    setShowModal(false);
+  const peticionGet = async () => {
+    await axios.get(baseUrl).then((response) => {
+      setData(response.data);
+    });
   };
 
+  const peticionPost = async () => {
+    await axios.post(baseUrl, consolaSeleccionada).then((response) => {
+      setData(data.concat(response.data));
+      abrirCerrarModalInsertar();
+    });
+  };
+
+  const peticionPut = async () => {
+    await axios
+        .put(baseUrl + consolaSeleccionada._id, consolaSeleccionada)
+        .then((response) => {
+          let dataNueva = data;
+          dataNueva.map((consola) => {
+            if (consolaSeleccionada._id === consola._id) {
+              consola.title = consolaSeleccionada.title;
+              consola.description = consolaSeleccionada.description;
+
+            }
+          });
+          setData(dataNueva);
+          abrirCerrarModalEditar();
+        });
+  };
+
+  const peticionDelete = async () => {
+    await axios.delete(baseUrl + consolaSeleccionada._id).then((response) => {
+      setData(
+          data.filter((consola) => consola._id !== consolaSeleccionada._id)
+      );
+      abrirCerrarModalEliminar();
+    });
+  };
+
+  const abrirCerrarModalInsertar = () => {
+    setModalInsertar(!modalInsertar);
+  };
+
+  const abrirCerrarModalEditar = () => {
+    setModalEditar(!modalEditar);
+  };
+
+  const abrirCerrarModalEliminar = () => {
+    setModalEliminar(!modalEliminar);
+  };
+
+  const seleccionarConsola = (consola, caso) => {
+    setConsolaSeleccionada(consola);
+    caso === "Editar" ? abrirCerrarModalEditar() : abrirCerrarModalEliminar();
+  };
+
+  useEffect(async () => {
+    await peticionGet();
+  }, []);
+
+  const bodyInsertar = (
+      <div className={styles.modal}>
+        <h3>Agregar Nueva Consola</h3>
+        <TextField
+            name="title"
+            className={styles.inputMaterial}
+            label="Titulo"
+            onChange={handleChange}
+        />
+        <br />
+        <TextField
+            name="description"
+            className={styles.inputMaterial}
+            label="Descripcion"
+            onChange={handleChange}
+        />
+        <br />
+        <TextField
+            name="type"
+            className={styles.inputMaterial}
+            label="Tipo"
+            onChange={handleChange}
+        />
+        <br />
+        <TextField
+            name="url"
+            className={styles.inputMaterial}
+            label="Url"
+            onChange={handleChange}
+        />
+        <br />
+        <br />
+        <div align="right">
+          <Button color="primary" onClick={() => peticionPost()}>
+            Insertar
+          </Button>
+          <Button onClick={() => abrirCerrarModalInsertar()}>Cancelar</Button>
+        </div>
+      </div>
+  );
+
+  const bodyEditar = (
+      <div className={styles.modal}>
+        <h3>Editar Consola</h3>
+        <TextField
+            name="title"
+            className={styles.inputMaterial}
+            label="Titulo"
+            onChange={handleChange}
+            value={consolaSeleccionada && consolaSeleccionada.title}
+        />
+        <br />
+        <TextField
+            name="description"
+            className={styles.inputMaterial}
+            label="Descripcion"
+            onChange={handleChange}
+            value={consolaSeleccionada && consolaSeleccionada.description}
+        />
+        <br />
+
+        <br />
+        <br />
+        <div align="right">
+          <Button color="primary" onClick={() => peticionPut()}>
+            Editar
+          </Button>
+          <Button onClick={() => abrirCerrarModalEditar()}>Cancelar</Button>
+        </div>
+      </div>
+  );
+
+  const bodyEliminar = (
+      <div className={styles.modal}>
+        <p>
+          Estás seguro que deseas eliminar la noticia {" "}
+          <b>{consolaSeleccionada && consolaSeleccionada.title}</b> ?{" "}
+        </p>
+        <div align="right">
+          <Button color="secondary" onClick={() => peticionDelete()}>
+            Sí
+          </Button>
+          <Button onClick={() => abrirCerrarModalEliminar()}>No</Button>
+        </div>
+      </div>
+  );
 
   return (
-    <>
-      <div className={styles.newsHeader}>
-        <h2>Noticias</h2>
-        <Button
-          variant="outline-primary"
-          size="sm"
-          onClick={() => setShowCreateNewsItemModal(true)}
-        >
-          Crear
-        </Button>
+      <div className="App">
+        <br />
+        <Button onClick={() => abrirCerrarModalInsertar()}>Insertar</Button>
+        <br />
+        <br />
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Titulo</TableCell>
+                <TableCell>Descripcion</TableCell>
+
+                <TableCell>Acciones</TableCell>
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
+              {data.map((consola) => (
+                  <TableRow key={consola._id}>
+                    <TableCell>{consola.title}</TableCell>
+                    <TableCell>{consola.description}</TableCell>
+
+                    <TableCell>
+                      <Edit
+                          className={styles.iconos}
+                          onClick={() => seleccionarConsola(consola, "Editar")}
+                      />
+                      &nbsp;&nbsp;&nbsp;
+                      <Delete
+                          className={styles.iconos}
+                          onClick={() => seleccionarConsola(consola, "Eliminar")}
+                      />
+                    </TableCell>
+                  </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+        <Modal open={modalInsertar} onClose={abrirCerrarModalInsertar}>
+          {bodyInsertar}
+        </Modal>
+
+        <Modal open={modalEditar} onClose={abrirCerrarModalEditar}>
+          {bodyEditar}
+        </Modal>
+
+        <Modal open={modalEliminar} onClose={abrirCerrarModalEliminar}>
+          {bodyEliminar}
+        </Modal>
       </div>
-      <ListGroup as="ol" numbered>
-        {news.map((newsItem) => (
-          <ListOfNews
-            key={newsItem._id}
-            newsItem={newsItem}
-            onShowModal={onShowModal}
-          />
-        ))}
-      </ListGroup>
-
-      <UpdateNewsItemModal
-        show={showModal}
-        setShowModal={setShowModal}
-        register={updateNewsItemForm.register}
-        handleSubmit={updateNewsItemForm.handleSubmit}
-        onSubmit={onSubmitUpdateNewsItem}
-        errors={updateNewsItemForm.formState.errors}
-      />
-
-      <CreateNewsItemModal
-        showModal={showCreateNewsItemModal}
-        setShowModal={setShowCreateNewsItemModal}
-        register={register}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-        clearErrors={clearErrors}
-      />
-    </>
   );
-};
+}
 
-export default (Admin);
+export default withPrivate(AdminNews);

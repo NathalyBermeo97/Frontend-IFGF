@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, ListGroup } from "react-bootstrap";
 
-export const ListOfNews = ({newsItem, onShowModal}) => {
+export const ListOfNews = ({newsItem, onShowModal, handleDelete}) => {
   return (
     <ListGroup.Item
       as="li"
@@ -13,6 +13,9 @@ export const ListOfNews = ({newsItem, onShowModal}) => {
       </div>
       <Button size="sm" onClick={() => onShowModal(newsItem)}>
         ver
+      </Button>
+      <Button size="sm" variant='danger' onClick={() => handleDelete(newsItem._id)}>
+        eliminar
       </Button>
     </ListGroup.Item>
   );

@@ -9,6 +9,9 @@ const News = {
     },
     update: (id, newObject) => {
         return api.put(`/news/${id}`, newObject)
+    },
+    delete: (id) => {
+        return api.delete(`/news/${id}`)
     }
 };
 
