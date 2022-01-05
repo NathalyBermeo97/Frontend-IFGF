@@ -1,16 +1,13 @@
-import React, {useEffect} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { UserContextProvider } from "../context/AuthContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/globals.css";
+import { MainLayout } from "../components/MainLayout";
 
 export default function MyApp(props) {
-
-    useEffect(() => {
-        import("bootstrap/dist/js/bootstrap");
-    }, []);
 
   const { Component, pageProps } = props;
 
@@ -28,7 +25,9 @@ export default function MyApp(props) {
       <CssBaseline />
 
       <UserContextProvider>
-        <Component {...pageProps} />
+        <MainLayout >
+          <Component {...pageProps} />
+        </MainLayout>
       </UserContextProvider>
     </React.Fragment>
   );

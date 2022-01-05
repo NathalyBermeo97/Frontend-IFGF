@@ -4,7 +4,7 @@ import { Button } from "@material-ui/core";
 import { Input } from "@material-ui/core";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { SERVER_RESPONSE } from "../../constans/inidex";
+import { SERVER_RESPONSE } from "../../constants/inidex";
 import { useAuth } from "../../context/AuthContext";
 
 const RegisterPage = () => {

@@ -1,7 +1,7 @@
 import styles from "../../styles/events.module.css";
 import React from "react";
 const url = "https://backend-ifgf.herokuapp.com/";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/FinalUserNavbar";
 import Footer from "../../components/Footer";
 import { EventModal } from "../../components/Modal";
 import { useState } from "react";

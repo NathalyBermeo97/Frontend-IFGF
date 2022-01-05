@@ -8,3 +8,4 @@ export const ERROR_MESSAGES = {
     REQUIRED: (field) => `El campo ${field} es requerido`,
     NUMBER: (field) => `El campo ${field} debe ser un número`
 }
+

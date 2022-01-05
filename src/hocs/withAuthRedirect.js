@@ -14,8 +14,8 @@ export function withAuthRedirect({ Component, expectedAuth, location }) {
       return <>Cargando...........</>;
     }
     if (router.pathname.startsWith("/admin") && role !== "admin") {
-        router.replace('/')
-        return <>Cargando...</>
+      router.replace("/");
+      return <>Cargando...</>;
     }
     return <Component {...props} />;
   };

@@ -5,7 +5,7 @@ import { ListGroup, Button, FormControl, InputGroup } from "react-bootstrap";
 import { UpdateEventsItemModal } from "../../../components/UpdateEventsItemModal";
 import styles from "./styles.module.css";
 import { CreateEventsItemModal } from "../../../components/CreateEventsItemModal";
-import { ERROR_MESSAGES, SERVER_RESPONSE } from "../../../constans/inidex";
+import { ERROR_MESSAGES, SERVER_RESPONSE } from "../../../constans/index";
 import { ListOfEvents } from "../../../components/ListOfEvents";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";

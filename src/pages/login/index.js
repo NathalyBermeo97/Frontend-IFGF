@@ -4,9 +4,7 @@ import { Button } from "@material-ui/core";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { withPublic } from "../../hocs/withPublic";
-import Context, { useAuth } from "../../context/AuthContext";
-import Footer from "../../components/Footer";
-import Navbar from "../../components/Navbar";
+import { useAuth } from "../../context/AuthContext";
 import {Form} from "react-bootstrap";
 
 const LoginPage = () => {
@@ -25,7 +23,6 @@ const LoginPage = () => {
 
   return (
     <body className={styles.body}>
-      <Navbar />
       <Form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
         <div >
           <h1 className={styles.title}>Bienvenido</h1>
@@ -74,8 +71,7 @@ const LoginPage = () => {
           <p className={styles.createAccount}>¿No tiene una cuenta?</p>
         </Link>
       </Form>
-      <Footer />
     </body>
   );
 };
-export default withPublic(LoginPage, "/admin");
+export default withPublic(LoginPage, "/admin/news");

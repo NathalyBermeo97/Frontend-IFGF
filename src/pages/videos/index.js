@@ -8,7 +8,6 @@ import Footer from "../../components/Footer";
 const Videos = () => {
   return (
     <body className={styles.body}>
-      <Navbar />
       <div className={styles.form}>
         <div className={styles.events}>
           <h1 className={styles.section}>Videos</h1>
