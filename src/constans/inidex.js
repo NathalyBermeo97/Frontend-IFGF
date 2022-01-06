@@ -5,6 +5,8 @@ export const SERVER_RESPONSE = {
 
 export const ERROR_MESSAGES = {
     MATCH: 'Entrada no válida',
+    EMAIL: 'El campo debe ser un email válido',
     REQUIRED: (field) => `El campo ${field} es requerido`,
-    NUMBER: (field) => `El campo ${field} debe ser un número`
+    NUMBER: (field) => `El campo ${field} debe ser un número`,
+    MIN: (field, min) => `El campo ${field} debe tener al menos ${min} caracteres`
 }
