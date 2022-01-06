@@ -5,7 +5,7 @@ import { ListGroup, Button, FormControl, InputGroup } from "react-bootstrap";
 import { UpdateEventsItemModal } from "../../../components/UpdateEventsItemModal";
 import styles from "./styles.module.css";
 import { CreateEventsItemModal } from "../../../components/CreateEventsItemModal";
-import { ERROR_MESSAGES, SERVER_RESPONSE } from "../../../constans/inidex";
+import { ERROR_MESSAGES, SERVER_RESPONSE } from "../../../constants/inidex";
 import { ListOfEvents } from "../../../components/ListOfEvents";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
@@ -80,41 +80,41 @@ const EventsPage = () => {
   console.log({ errors });
   const onSubmit = (data) => {
     console.log(data);
-    // createNewsItem(data).then((message) => {
-    //   if (message === SERVER_RESPONSE.NEWS_ITEM_CREATED) {
-    //     //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
-    //     setNews((prevState) => [
-    //       ...prevState,
-    //       { _id: Math.floor(Math.random() * 1000000000000), ...data },
-    //     ]);
-    //     setShowCreateNewsItemModal(false);
-    //     reset();
-    //   }
-    // });
+  createEventsItem(data).then((message) => {
+     if (message === SERVER_RESPONSE.NEWS_ITEM_CREATED) {
+     //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
     setEvents((prevState) => [
+       ...prevState,
+        { _id: Math.floor(Math.random() * 1000000000000), ...data },
+    ]);
+      setShowCreateEventsItemModal(false);
+    reset();
+}
+  });
+    {/*setEvents((prevState) => [
       ...prevState,
       { _id: Math.floor(Math.random() * 1000000000000), ...data },
     ]);
     setShowCreateEventsItemModal(false);
-    reset();
+    reset();*/}
   };
 
   const onSubmitUpdateEventsItem = (data) => {
     const { _id: id } = data;
-    // updateNews(id, data).then((message) => {
-    //   if (message === "Noticia actualizada correctamente") {
-    //     const newNews = news.map((newsItem) =>
-    //       newsItem._id === data._id ? data : newsItem
-    //     );
-    //     setNews(newNews);
-    //     setShowModal(false);
-    //   }
-    // });
-    const newEvents = events.map((eventsItem) =>
+    updateEvents(id, data).then((message) => {
+     if (message === "Evento actualizado correctamente") {
+      const newNews = events.map((newsItem) =>
+       newsItem._id === data._id ? data : newsItem
+     );
+     setEvents(newNews);
+    setShowModal(false);
+}
+ });
+    {/*const newEvents = events.map((eventsItem) =>
       eventsItem._id === data._id ? data : eventsItem
     );
     setEvents(newEvents);
-    setShowModal(false);
+    setShowModal(false);*/}
   };
 
   return (

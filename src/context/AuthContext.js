@@ -11,7 +11,7 @@ const Context = React.createContext({});
 
 export function UserContextProvider({ children }) {
   const [role, setRole] = useState(null);
-  const [currentUser, setCurrentUser] = useState(USER_STATES.NOT_LOGGED);
+  const [currentUser, setCurrentUser] = useState(USER_STATES.NOT_KNOWN);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
   useEffect(() => {
@@ -26,6 +26,8 @@ export function UserContextProvider({ children }) {
         } catch (e) {
           console.log("Something went wrong", e);
         }
+      }else{
+        setCurrentUser(USER_STATES.NOT_LOGGED)
       }
       setIsCheckingAuth(false);
     };
@@ -35,14 +37,13 @@ export function UserContextProvider({ children }) {
   const login = ({ email, password }) => {
     User.login({ email, password })
       .then((res) => {
-        console.log(res)
         const token = res.data.token;
         window.localStorage.setItem("jwt", token);
         window.localStorage.setItem("role", res.data.role);
         api.defaults.headers.common['x-access-token'] = token
-        console.log(api.headers)
         setRole(res.data.role);
-        User.getAuthenticatedUser().then((user) => setCurrentUser(user));
+        const user = res.data.user
+        setCurrentUser(user)
       })
       .catch((err) => {
         console.log("something went wrong", err);
@@ -53,10 +54,10 @@ export function UserContextProvider({ children }) {
 
   const logout = async () => {
     try {
-      //await User.logout()
+      await User.logout()
       window.localStorage.removeItem("jwt");
       window.localStorage.removeItem("role");
-      setCurrentUser(null);
+      setCurrentUser(USER_STATES.NOT_LOGGED);
     } catch (e) {
       console.log("something went wrong", e);
     }

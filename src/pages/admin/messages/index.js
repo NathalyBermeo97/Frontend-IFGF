@@ -5,7 +5,7 @@ import { ListGroup, Button, FormControl, InputGroup } from "react-bootstrap";
 import { UpdateMessagesItemModal } from "../../../components/UpdateMessagesItemModal";
 import styles from "./styles.module.css";
 import { CreateMessagesItemModal } from "../../../components/CreateMessagesItemModal";
-import { ERROR_MESSAGES, SERVER_RESPONSE } from "../../../constans/inidex";
+import { ERROR_MESSAGES, SERVER_RESPONSE } from "../../../constants/inidex";
 import { ListOfMessages } from "../../../components/ListOfMessages";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";

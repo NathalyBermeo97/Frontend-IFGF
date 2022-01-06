@@ -6,20 +6,11 @@ import { Card, Form, Button, Container, Row, Col } from "react-bootstrap";
 import { Search } from "react-bootstrap-icons";
 
 const Videoscards = ({ videos }) => {
+
+
   return (
     <>
-      <Container>
-        <Row>
-          <Col xs={10}>
-            <Form.Control placeholder="Ingrese el nombre de un video" />
-          </Col>
-          <Col xs={2}>
-            <Button variant="primary">
-              <Search />
-            </Button>
-          </Col>
-        </Row>
-      </Container>
+
       <div className={styles.videos}>
         {videos.map((video) => (
           <Card key={video._id} className={styles.cardVideo}>

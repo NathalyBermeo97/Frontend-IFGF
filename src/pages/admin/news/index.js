@@ -5,7 +5,7 @@ import { ListGroup, Button, FormControl, InputGroup } from "react-bootstrap";
 import { UpdateNewsItemModal } from "../../../components/UpdateNewsItemModal";
 import styles from "./styles.module.css";
 import { CreateNewsItemModal } from "../../../components/CreateNewsItemModal";
-import { ERROR_MESSAGES, SERVER_RESPONSE } from "../../../constans/inidex";
+import { ERROR_MESSAGES, SERVER_RESPONSE } from "../../../constants/inidex";
 import { ListOfNews } from "../../../components/ListOfNews";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
@@ -163,4 +163,4 @@ const NewsPage = () => {
   );
 };
 
-export default NewsPage;
+export default withPrivate(NewsPage);

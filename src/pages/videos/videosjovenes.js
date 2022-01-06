@@ -1,8 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import styles from "../../styles/style.module.css";
-import Navbar from "../../components/Navbar";
 import Videoscards from "../../components/Videoscards";
-import Footer from "../../components/Footer";
+
 import { withPrivate } from "../../hocs/withPrivate";
 
 const Videos = ({}) => {
@@ -19,8 +18,6 @@ const Videos = ({}) => {
 
   return (
     <body className={styles.body}>
-      <Navbar />
-
       <div className={styles.form}>
         <div className={styles.events}>
           <h1 className={styles.section}>Videos</h1>
@@ -30,7 +27,6 @@ const Videos = ({}) => {
       <div className="container">
         <Videoscards videos={videos} />
       </div>
-      <Footer />
     </body>
   );
 };

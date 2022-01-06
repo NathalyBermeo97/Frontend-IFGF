@@ -1,204 +1,165 @@
-import React from "react";
-import styles from "../../styles/style.module.css";
-import { Controller, useForm } from "react-hook-form";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { withPrivate } from "../../hocs/withPrivate";
+import { useEffect, useState } from "react";
+import { useDonations } from "../../hooks/useDonations";
+import styles from "./styles.module.css";
+import {Button, Col, Container, FormControl, InputGroup, Row} from "react-bootstrap";
+import { CreateFormDonationsFoodModal } from "../../components/CreateFormDonationsFoodModal";
+import { ERROR_MESSAGES, SERVER_RESPONSE } from "../../constants/inidex";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
-import Donation from "../../api/donation";
 
 
-
-const schema = yup.object().shape({
-  description: yup.string().required("Ingrese una descripción de la donación"),
-  type: yup
-    .string()
-    .required("Ingrese el tipo de donación (comida,dinero o ropa)"),
-  delivery: yup
-    .string()
-    .required(
-      "Especifique si la donación realizada es a domicilio o prefiere llevar a la iglesia"
-    ),
-  direction: yup.string().required("Ingrese su dirección"),
+const donationsItemSchema = yup.object().shape({
+    description: yup
+        .string()
+        .required(ERROR_MESSAGES.REQUIRED("título"))
+        .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+    type: yup
+        .string()
+        .required(ERROR_MESSAGES.REQUIRED("descripción"))
+        .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+    delivery: yup
+        .string()
+        .required(ERROR_MESSAGES.REQUIRED("entrega"))
+        .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+    direction: yup
+        .string()
+        .required(ERROR_MESSAGES.REQUIRED("dirección"))
+        .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+    dateDelivery: yup
+        .string()
+        .required(ERROR_MESSAGES.REQUIRED("fecha de entrega"))
+        .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
 });
 
-const Donacionalimentos = () => {
+const DonationsPage = () => {
+    const {donations, setDonations, createDonationsItem } = useDonations();
+    const [showModal, setShowModal] = useState(false);
+    const [showCreateDonationsItemModal, setShowCreateDonationsItemModal] = useState(false);
 
-  const {
-    handleSubmit,
-    formState: { errors },
-    control,
-    register,
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
 
-  const onSubmit = async (values) => {
-    console.log("values", values);
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+        clearErrors,
+    } = useForm({
+        defaultValues: {
+            description: "",
+            type:"",
+            delivery: "",
+            direction:"",
+            dateDelivery: "",
 
-    const formData = new FormData();
+        },
+        resolver: yupResolver(donationsItemSchema),
+    });
 
-    formData.append("description", values.description);
-    formData.append("type", values.type);
-    formData.append("delivery", values.delivery);
-    formData.append("direction", values.direction);
-    formData.append("file", values.file);
-    const response = await Donation.create(formData);
-    console.log("response", response);
-  };
 
-  return (
-    <body className={styles.body}>
-      <Navbar />
+    console.log({ errors });
+    const onSubmit = (data) => {
+        console.log(data);
+        createDonationsItem(data).then((message) => {
+            if (message === SERVER_RESPONSE.NEWS_ITEM_CREATED) {
+                //     //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
+                setDonations((prevState) => [
+                    ...prevState,
+                    { _id: Math.floor(Math.random() * 1000000000000), ...data },
+                ]);
+                setShowCreateDonationsItemModal(false);
+                reset();
+            }
+        });
+        {/*setNews((prevState) => [
+      ...prevState,
+      { _id: Math.floor(Math.random() * 1000000000000), ...data },
+    ]);
+    setShowCreateNewsItemModal(false);
+    reset();*/}
+    };
 
-      <div className={styles.events}>
-        <h1 className={styles.section}>DONACIÓN DE ALIMENTOS</h1>
-        <div className={styles.linea}></div>
-      </div>
-      <Container>
-        <Row>
-          <Col xs={6}>
-            <div className={styles.formasdona}>
-              <div>
-                <h4>Haz tu donación voluntaria de ALIMENTOS </h4>
-              </div>
 
-              <p>
-                Hay personas que viven en absoluta pobreza que necesitan de tu
-                colaboración, puedes ayudarlos donando cualquier tipo de
-                alimento.
-              </p>
-              <div>
-                <img
-                  className={styles.ubicacion}
-                  width="300px"
-                  src="https://st.depositphotos.com/1177973/4836/i/600/depositphotos_48368247-stock-photo-volunteers-with-donation-box-with.jpg"
-                />
-              </div>
+
+    return (
+        <>
+            <div className={styles.events}>
+                <h1 className={styles.section}>DONACIÓN DE ALIMENTOS</h1>
+                <div className={styles.linea}></div>
             </div>
-            <div className={styles.formasdona}>
-              <div>
-                <h4>Visita NUESTRAS INSTALACIONES</h4>
-              </div>
+            <Container className={styles.donations} >
+                <Row>
+                    <Col xs={12}>
+                        <div >
+                            <div>
+                                <h4>Haz tu donación voluntaria de ALIMENTOS </h4>
+                            </div>
 
-              <p>
-                Puedes visitar nuestras instalaciones para mayor información y
-                para realizar cualquier tipo de pago o donación.
-              </p>
+                            <p>
+                                Hay personas que viven en absoluta pobreza que necesitan de tu
+                                colaboración, puedes ayudarlos donando cualquier tipo de
+                                alimento.
+                            </p>
+                            <div>
+                                <img
+                                    className={styles.ubicacion}
+                                    width="300px"
+                                    src="https://st.depositphotos.com/1177973/4836/i/600/depositphotos_48368247-stock-photo-volunteers-with-donation-box-with.jpg"
+                                />
+                            </div>
+                        </div>
 
-              <div>
-                <iframe
-                  className={styles.ubicacion}
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7643285934228!2d-78.45924674973766!3d-0.2980747997814547!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d599082e934a23%3A0xe9afca3fb0d1c771!2sIFGF%20Quito!5e0!3m2!1ses!2sec!4v1637617369934!5m2!1ses!2sec"
-                  width="300"
-                  height="150"
-                  allowFullScreen=""
-                  loading="lazy"
-                ></iframe>
-              </div>
-            </div>
-          </Col>
-          <Col xs={6} className={styles.borderdona}>
-            <h2 className={styles.formasdona}>Formulario de donación</h2>
-            <Form
-              className="row g-3 needs-validation"
-              noValidate
-              onSubmit={handleSubmit(onSubmit)}
-            >
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Tipo de donación :</Form.Label>
-                <Controller
-                  name="type"
-                  control={control}
-                  defaultValue=""
-                  render={({ field }) => (
-                    <Form.Control
-                      {...field}
-                      label="Tipo de donación"
-                      variant="outlined"
-                      size="small"
-                    />
-                  )}
-                />
-                <p>{errors.type?.message}</p>
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Tipo de entrega:</Form.Label>
-                <Controller
-                  name="delivery"
-                  inputRef={register}
-                  control={control}
-                  defaultValue=""
-                  render={({ field }) => (
-                    <Form.Control
-                      {...field}
-                      label="Domicilio o entrega personal"
-                      variant="outlined"
-                      size="small"
-                    />
-                  )}
-                />
-                <p>{errors.delivery?.message}</p>
-              </Form.Group>
+                        <div >
+                            <div>
+                                <br/>
+                                <h4>Visita NUESTRAS INSTALACIONES</h4>
+                            </div>
 
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Dirección :</Form.Label>
-                <Controller
-                  name="direction"
-                  control={control}
-                  defaultValue=""
-                  render={({ field }) => (
-                    <Form.Control
-                      {...field}
-                      label="Direccion"
-                      variant="outlined"
-                      size="small"
-                    />
-                  )}
-                />
-                <p>{errors.direction?.message}</p>
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Descripción :</Form.Label>
-                <Controller
-                  name="description"
-                  control={control}
-                  defaultValue=""
-                  render={({ field }) => (
-                    <Form.Control
-                      as="textarea"
-                      rows={3}
-                      {...field}
-                      label="Descripción"
-                      variant="outlined"
-                    />
-                  )}
-                />
-                <p>{errors.description?.message}</p>
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Imagen :</Form.Label>
-                <Controller
-                  name="imgURL"
-                  control={control}
-                  defaultValue=""
-                  render={({ field }) => <Form.Control type="file" />}
-                />
-                <p>{errors.imgURL?.message}</p>
-              </Form.Group>
-              <div className="col-12">
-                <Button className="btn btn-primary" type="submit">
-                  Enviar
-                </Button>
-              </div>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
-      <Footer />
-    </body>
-  );
+                            <p>
+                                Puedes visitar nuestras instalaciones para mayor información y
+                                para realizar cualquier tipo de pago o donación.
+                            </p>
+
+                            <div>
+                                <iframe
+                                    className={styles.ubicacion}
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7643285934228!2d-78.45924674973766!3d-0.2980747997814547!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d599082e934a23%3A0xe9afca3fb0d1c771!2sIFGF%20Quito!5e0!3m2!1ses!2sec!4v1637617369934!5m2!1ses!2sec"
+                                    width="300"
+                                    height="150"
+                                    allowFullScreen=""
+                                    loading="lazy"
+                                ></iframe>
+                            </div>
+                        </div>
+
+                        <br/>
+
+                        <Button
+                            variant="outline-primary"
+                            size="sm"
+                            onClick={() => setShowCreateDonationsItemModal(true)}
+                        >
+                            Donar
+                        </Button>
+                    </Col>
+                </Row>
+            </Container>
+
+
+
+            <CreateFormDonationsFoodModal
+                showModal={showCreateDonationsItemModal}
+                setShowModal={setShowCreateDonationsItemModal}
+                register={register}
+                handleSubmit={handleSubmit}
+                onSubmit={onSubmit}
+                errors={errors}
+                clearErrors={clearErrors}
+            />
+
+        </>
+    );
 };
 
-export default Donacionalimentos;
+export default withPrivate(DonationsPage);
