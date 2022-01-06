@@ -1,9 +1,7 @@
 import React from "react";
 import styles from "../../styles/style.module.css";
-import Navbar from "../../components/Navbar";
 import Link from "next/link";
 import { Button } from "react-bootstrap";
-import Footer from "../../components/Footer";
 
 const Videos = () => {
   return (
@@ -88,7 +86,6 @@ const Videos = () => {
           </div>
         </section>
       </div>
-      <Footer />
     </body>
   );
 };

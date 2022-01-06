@@ -1,8 +1,6 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import styles from "../../styles/style.module.css";
-import Navbar from "../../components/FinalUserNavbar";
-import Footer from "../../components/Footer";
 import Link from "next/link";
 import {Button} from "react-bootstrap";
 const Donaciones = () => {
@@ -92,7 +90,6 @@ const Donaciones = () => {
           </div>
         </div>
       </section>
-      <Footer />
     </body>
   );
 };
