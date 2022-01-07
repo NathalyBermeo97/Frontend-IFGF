@@ -1,10 +1,11 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import styles from "../../styles/style.module.css";
-import Link from "next/link";
-import {Button} from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import { useRouter } from "next/router";
 
 const Donaciones = () => {
+  const router = useRouter();
   return (
     <body className={styles.body}>
       <div className={styles.events}>
@@ -37,15 +38,12 @@ const Donaciones = () => {
               <div className={styles.titledona}>
                 <h5 className="card-title">Donación económica</h5>
                 <p className="card-text"></p>
-                <Link
-                    href="../donaciones/Donacioneconomica"
-                    className="btn btn-primary"
+                <Button
+                  variant="primary"
+                  onClick={() => router.push("/donations/economic")}
                 >
-                  <Button variant="primary">
-                    Ver más
-                  </Button>
-
-                </Link>
+                  Ver más
+                </Button>
               </div>
             </div>
             <div className="col-12 col-sm-4">
@@ -57,15 +55,12 @@ const Donaciones = () => {
               <div className={styles.titledona}>
                 <h5 className="card-title">Donación de alimentos</h5>
                 <p className="card-text"></p>
-                <Link
-                    href="../donaciones/Donacionalimentos"
-                    className="btn btn-primary"
+                <Button
+                  variant="primary"
+                  onClick={() => router.push("/donations/food")}
                 >
-                  <Button variant="primary">
-                    Ver más
-                  </Button>
-
-                </Link>
+                  Ver más
+                </Button>
               </div>
             </div>
             <div className="col-12 col-sm-4">
@@ -77,15 +72,12 @@ const Donaciones = () => {
               <div className={styles.titledona}>
                 <h5 className="card-title">Donación de ropa</h5>
                 <p className="card-text"></p>
-                <Link
-                  href="../donaciones/Donacionropa"
-                  className="btn btn-primary"
+                <Button
+                  variant="primary"
+                  onClick={() => router.push("/donations/clothe")}
                 >
-                  <Button variant="primary">
-                    Ver más
-                  </Button>
-
-                </Link>
+                  Ver más
+                </Button>
               </div>
             </div>
           </div>

@@ -3,7 +3,7 @@ const PUBLIC_ROUTES = {
     LOGIN: '/login',
     SIGNUP: '/register',
     EVENTS: '/eventos',
-    DONATIONS: '/donaciones',
+    DONATIONS: '/donations',
     VIDEOS: '/videos',
     GAMES: '/juegos'
 }

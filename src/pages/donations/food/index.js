@@ -1,10 +1,10 @@
-import { withPrivate } from "../../hocs/withPrivate";
-import { useEffect, useState } from "react";
-import { useDonations } from "../../hooks/useDonations";
-import styles from "./styles.module.css";
-import {Button, Col, Container, FormControl, InputGroup, Row} from "react-bootstrap";
-import { CreateFormDonationsFoodModal } from "../../components/CreateFormDonationsFoodModal";
-import { ERROR_MESSAGES, SERVER_RESPONSE } from "../../constants/inidex";
+import { withPrivate } from "../../../hocs/withPrivate";
+import { useState } from "react";
+import { useDonations } from "../../../hooks/useDonations";
+import styles from "../styles.module.css";
+import {Button, Col, Container, Row} from "react-bootstrap";
+import { CreateFormDonationsFoodModal } from "../../../components/CreateFormDonationsFoodModal";
+import { ERROR_MESSAGES, SERVER_RESPONSE } from "../../../constants/inidex";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
