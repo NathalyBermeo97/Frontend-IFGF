@@ -50,6 +50,24 @@ export const AdminNavbar = () => {
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
+            <Nav.Link
+                eventKey={ROUTES.ADMIN_MESSAGES}
+                onClick={() => router.push(ROUTES.ADMIN_MESSAGES)}
+                disabled={router.pathname === ROUTES.ADMIN_MESSAGES}
+            >
+              Mensajes Biblicos
+            </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                  eventKey={ROUTES.ADMIN_ALBUMS}
+                  onClick={() => router.push(ROUTES.ADMIN_ALBUMS)}
+                  disabled={router.pathname === ROUTES.ADMIN_ALBUMS}
+              >
+                Albums
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
               <Nav.Link
                 eventKey={ROUTES.ADMIN_EVENTS}
                 onClick={() => router.push(ROUTES.ADMIN_EVENTS)}

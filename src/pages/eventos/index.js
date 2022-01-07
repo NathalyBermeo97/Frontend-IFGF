@@ -1,8 +1,6 @@
 import styles from "../../styles/events.module.css";
 import React from "react";
 const url = "https://backend-ifgf.herokuapp.com/";
-import Navbar from "../../components/FinalUserNavbar";
-import Footer from "../../components/Footer";
 import { EventModal } from "../../components/Modal";
 import { useState } from "react";
 import { Card, Container, Image, Button } from "react-bootstrap";
@@ -22,36 +20,39 @@ const Eventos = ({ events }) => {
   console.log({ isOpen });
   return (
     <>
-      <Navbar />
       <Container>
         <div className={styles.events}>
           <h1 className={styles.section}>Eventos</h1>
           <div className={styles.linea}></div>
         </div>
-        <Card style={{ width: "18rem" }} className={styles.cardEvent}>
+        <div className={styles.courses}>
           {events.map((event) => (
-            <Card.Body key={event._id}>
-              <Card.Title className={styles.title}>{event.title}</Card.Title>
-              <Image
-                src={url + event.imgURL}
-                width={210}
-                height={170}
-                justifyContent="center"
-                className={styles.img}
-              />
-              <Button
-                variant="light"
-                className={styles.button}
-                onClick={() => onShowModal(event)}
-              >
-                Más información
-              </Button>
-              <EventModal isOpen={isOpen} event={event} setIsOpen={setIsOpen} />
-            </Card.Body>
+              <div key={event._id} className={styles.course}>
+                <div className={styles.coursecontenido}>
+                    <h2 className={styles.name}>{event.title}</h2>
+
+                    <Image
+                      src={url + event.imgURL}
+                      width={210}
+                      height={170}
+                      justifyContent="center"
+                      className={styles.img}
+                      />
+
+                  <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => onShowModal(event)}
+                  >
+                    Más información
+                  </Button>
+                  <EventModal isOpen={isOpen} event={event} setIsOpen={setIsOpen} />
+                </div>
+              </div>
           ))}
-        </Card>
+        </div>
+
       </Container>
-      <Footer />
     </>
   );
 };

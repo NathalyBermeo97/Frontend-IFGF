@@ -3,6 +3,7 @@ import { Grid } from "@mui/material";
 import styles from "../../styles/style.module.css";
 import Link from "next/link";
 import {Button} from "react-bootstrap";
+
 const Donaciones = () => {
   return (
     <body className={styles.body}>

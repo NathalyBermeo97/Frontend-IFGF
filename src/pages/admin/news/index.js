@@ -67,41 +67,43 @@ const NewsPage = () => {
   console.log({ errors });
   const onSubmit = (data) => {
     console.log(data);
-    // createNewsItem(data).then((message) => {
-    //   if (message === SERVER_RESPONSE.NEWS_ITEM_CREATED) {
+    createNewsItem(data).then((message) => {
+    if (message === SERVER_RESPONSE.NEWS_ITEM_CREATED) {
     //     //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
-    //     setNews((prevState) => [
-    //       ...prevState,
-    //       { _id: Math.floor(Math.random() * 1000000000000), ...data },
-    //     ]);
-    //     setShowCreateNewsItemModal(false);
-    //     reset();
-    //   }
-    // });
     setNews((prevState) => [
+    ...prevState,
+    { _id: Math.floor(Math.random() * 1000000000000), ...data },
+     ]);
+     setShowCreateNewsItemModal(false);
+     reset();
+     }
+    });
+    {/*setNews((prevState) => [
       ...prevState,
       { _id: Math.floor(Math.random() * 1000000000000), ...data },
     ]);
     setShowCreateNewsItemModal(false);
-    reset();
+    reset();*/}
   };
 
   const onSubmitUpdateNewsItem = (data) => {
     const { _id: id } = data;
-    // updateNews(id, data).then((message) => {
-    //   if (message === "Noticia actualizada correctamente") {
-    //     const newNews = news.map((newsItem) =>
-    //       newsItem._id === data._id ? data : newsItem
-    //     );
-    //     setNews(newNews);
-    //     setShowModal(false);
-    //   }
-    // });
-    const newNews = news.map((newsItem) =>
+  updateNews(id, data).then((message) => {
+    if (message === "Noticia actualizada correctamente") {
+       const newNews = news.map((newsItem) =>
+     newsItem._id === data._id ? data : newsItem
+       );
+     setNews(newNews);
+   setShowModal(false);
+   }
+   });
+
+    {/*const newNews = news.map((newsItem) =>
       newsItem._id === data._id ? data : newsItem
     );
     setNews(newNews);
     setShowModal(false);
+    */}
   };
 
   return (

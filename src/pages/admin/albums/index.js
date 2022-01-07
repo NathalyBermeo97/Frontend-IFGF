@@ -5,7 +5,7 @@ import { ListGroup, Button, FormControl, InputGroup } from "react-bootstrap";
 import { UpdateAlbumsItemModal } from "../../../components/UpdateAlbumsItemModal";
 import styles from "./styles.module.css";
 import { CreateAlbumsItemModal } from "../../../components/CreateAlbumsItemModal";
-import { ERROR_MESSAGES, SERVER_RESPONSE } from "../../../constans/inidex";
+import { ERROR_MESSAGES, SERVER_RESPONSE } from "../../../constants/inidex";
 import { ListOfAlbums } from "../../../components/ListOfAlbums";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
@@ -67,41 +67,41 @@ const AlbumsPage = () => {
     console.log({ errors });
     const onSubmit = (data) => {
         console.log(data);
-        // createNewsItem(data).then((message) => {
-        //   if (message === SERVER_RESPONSE.NEWS_ITEM_CREATED) {
-        //     //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
-        //     setNews((prevState) => [
-        //       ...prevState,
-        //       { _id: Math.floor(Math.random() * 1000000000000), ...data },
-        //     ]);
-        //     setShowCreateNewsItemModal(false);
-        //     reset();
-        //   }
-        // });
-        setAlbums((prevState) => [
+       createAlbumsItem(data).then((message) => {
+           if (message === SERVER_RESPONSE.NEWS_ITEM_CREATED) {
+          //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
+           setAlbums((prevState) => [
+             ...prevState,
+              { _id: Math.floor(Math.random() * 1000000000000), ...data },
+            ]);
+            setShowCreateAlbumsItemModal(false);
+             reset();
+          }
+   });
+        {/*setAlbums((prevState) => [
             ...prevState,
             { _id: Math.floor(Math.random() * 1000000000000), ...data },
         ]);
         setShowCreateAlbumsItemModal(false);
-        reset();
+        reset();*/}
     };
 
     const onSubmitUpdateAlbumsItem = (data) => {
         const { _id: id } = data;
-        // updateNews(id, data).then((message) => {
-        //   if (message === "Album actualizado correctamente") {
-        //     const newNews = news.map((newsItem) =>
-        //       newsItem._id === data._id ? data : newsItem
-        //     );
-        //     setNews(newNews);
-        //     setShowModal(false);
-        //   }
-        // });
-        const newAlbums = albums.map((albumsItem) =>
+   updateAlbums(id, data).then((message) => {
+    if (message === "Album actualizado correctamente") {
+        const newAlbums = albums.map((newsItem) =>
+             newsItem._id === data._id ? data : newsItem
+      );
+       setAlbums(newAlbums);
+          setShowModal(false);
+          }
+ });
+        {/*const newAlbums = albums.map((albumsItem) =>
             albumsItem._id === data._id ? data : albumsItem
         );
         setAlbums(newAlbums);
-        setShowModal(false);
+        setShowModal(false);*/}
     };
 
     return (

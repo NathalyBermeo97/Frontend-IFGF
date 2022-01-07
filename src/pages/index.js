@@ -1,7 +1,5 @@
 import styles from "../styles/indexHome.module.css";
 import Carousel from "../components/Carousel";
-import Navbar from "../components/FinalUserNavbar";
-import Footer from "../components/Footer";
 import News from "../components/News";
 import Messages from "../components/Messages";
 import Albums from "../components/Albums";

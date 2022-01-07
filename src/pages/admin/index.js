@@ -10,6 +10,6 @@ const Admin = () => {
   )
 }
 
-export default withPrivate(Admin)
+export default (Admin)
 
 
