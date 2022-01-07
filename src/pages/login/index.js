@@ -104,4 +104,4 @@ const LoginPage = () => {
         </body>
     );
 };
-export default withPublic(LoginPage, "/admin");
+export default withPublic(LoginPage, "/admin/news");
