@@ -1,28 +1,22 @@
 import styles from "../../styles/events.module.css";
 import React from "react";
 const url = "https://backend-ifgf.herokuapp.com/";
-import Navbar from "../../components/FinalUserNavbar";
-import Footer from "../../components/Footer";
-import { EventModal } from "../../components/Modal";
+import { EventModal } from "../../components/EventModal";
 import { useState } from "react";
 import { Card, Container, Image, Button } from "react-bootstrap";
-
+import Events from '../../api/events'
 
 const Eventos = ({ events }) => {
-  console.log({ events });
   const [isOpen, setIsOpen] = useState(false);
-  const [event, setEvent] = useState(null);
+  const [event, setEvent] = useState({});
 
-  console.log({ event });
   const onShowModal = (event) => {
     setEvent(event);
     setIsOpen(true);
   };
 
-  console.log({ isOpen });
   return (
     <>
-      <Navbar />
       <Container>
         <div className={styles.events}>
           <h1 className={styles.section}>Eventos</h1>
@@ -46,12 +40,11 @@ const Eventos = ({ events }) => {
               >
                 Más información
               </Button>
-              <EventModal isOpen={isOpen} event={event} setIsOpen={setIsOpen} />
             </Card.Body>
           ))}
         </Card>
+        <EventModal isOpen={isOpen} event={event} setIsOpen={setIsOpen} />
       </Container>
-      <Footer />
     </>
   );
 };
@@ -59,12 +52,11 @@ export default Eventos;
 
 export async function getServerSideProps(context) {
   try {
-    const peticion = await fetch(
-      "https://backend-ifgf.herokuapp.com/api/events"
-    );
-    const events = await peticion.json();
+    const events = await Events.get()
     return {
       props: { events },
     };
-  } catch (error) {}
+  } catch (error) {
+    console.log('Something went wrong', e)
+  }
 }

@@ -5,11 +5,12 @@ import { ListGroup, Button, FormControl, InputGroup } from "react-bootstrap";
 import { UpdateEventsItemModal } from "../../../components/UpdateEventsItemModal";
 import styles from "./styles.module.css";
 import { CreateEventsItemModal } from "../../../components/CreateEventsItemModal";
-import { ERROR_MESSAGES, SERVER_RESPONSE } from "../../../constans/index";
+import { ERROR_MESSAGES, SERVER_RESPONSE } from "../../../constants/inidex";
 import { ListOfEvents } from "../../../components/ListOfEvents";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
+import {useInscription} from '../../../hooks/useInscription'
 
 const eventsItemSchema = yup.object().shape({
   title: yup
@@ -42,8 +43,12 @@ const EventsPage = () => {
   const [keyword, setKeyword] = useState("");
   const [filteredEvents, setFilteredEvents] = useState([]);
 
+  //console.log({ events });
+  const {allInscriptions} = useInscription()
+  console.log({allInscriptions})
+
   useEffect(() => {
-    const filteredEvents = events.filter((ni) =>
+    const filteredEvents = events?.filter((ni) =>
       ni.title.toLowerCase().includes(keyword.toLowerCase())
     );
     setFilteredEvents(filteredEvents);

@@ -1,14 +1,10 @@
 import React from "react";
 import styles from "../../styles/style.module.css";
 import { Controller, useForm } from "react-hook-form";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import Donation from "../../api/donation";
-
-
+import Donation from "../../../api/donation";
 
 const schema = yup.object().shape({
   description: yup.string().required("Ingrese una descripción de la donación"),
@@ -50,8 +46,6 @@ const Donacionalimentos = () => {
 
   return (
     <body className={styles.body}>
-      <Navbar />
-
       <div className={styles.events}>
         <h1 className={styles.section}>DONACIÓN DE ALIMENTOS</h1>
         <div className={styles.linea}></div>
@@ -196,7 +190,6 @@ const Donacionalimentos = () => {
           </Col>
         </Row>
       </Container>
-      <Footer />
     </body>
   );
 };

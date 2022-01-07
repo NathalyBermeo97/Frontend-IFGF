@@ -1,74 +1,69 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import styles from "../../styles/style.module.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "@material-ui/core";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
-import { withPrivate } from "../../hocs/withPrivate";
+import { DatePicker } from "antd";
+import { withPrivate } from "../../../hocs/withPrivate";
 
-const Donacioneconomica = () => {
+const Donacionropa = () => {
   return (
     <body className={styles.body}>
-      <Navbar />
       <div className={styles.events}>
-        <h1 className={styles.section}>DONACIÓN ECONÓMICA</h1>
+        <h1 className={styles.section}>DONACIÓN DE ROPA</h1>
         <div className={styles.linea}></div>
       </div>
+      <Grid container={12}>
+        <Grid xs={8}>
+          <div className={styles.formasdona}></div>
+        </Grid>
+
+        <Grid xs={4}>
+          <div className={styles.formasdona}></div>
+        </Grid>
+      </Grid>
       <Grid container={12}>
         <Grid xs={6}>
           <div className={styles.formasdona}>
             <div>
-              <h4>Haz tu donación a través de una "TRANSFERENCIA BANCARIA".</h4>
+              <h4>Haz tu donación voluntaria de ROPA</h4>
             </div>
 
             <p>
-              En el portal web de tu Banco puedes crearnos como BENEFICIARIO y
-              colaborar con nuestra obra de evangelización mediante una
-              transferencia bancaria.
+              Hay personas que viven en absoluta pobreza que necesitan de tu
+              colaboración, puedes ayudarlos donando cualquier tipo de ropa.
             </p>
+            <div>
+              <img
+                className={styles.ubicacion}
+                width="300px"
+                src="https://www.caritas.org.mx/wp-content/uploads/2020/08/donde-donar-ropa-usada-1024x768.jpg"
+              />
+            </div>
           </div>
           <div className={styles.formasdona}>
-            <h4>INFORMACIÓN PARA SUS DONACIONES</h4>
-            <p>Puedes donar en cualquiera de estos establecimientos.</p>
+            <div>
+              <h4>Visita NUESTRAS INSTALACIONES</h4>
+            </div>
+
+            <p>
+              Puedes visitar nuestras instalaciones para mayor información y
+              para realizar cualquier tipo de pago o donación.
+            </p>
 
             <div>
-              <Grid container={12}>
-                <Grid xs={4}>
-                  <img
-                    className={styles.imagedonainfo}
-                    src="https://www.bolsadequito.com/images/2018/06/05/LOGO-BANCO-PICHINCHA-min.jpg"
-                    alt="..."
-                  />
-
-                  <p className={styles.bancos}>Cuenta corriente</p>
-                  <p className={styles.bancos}>17265180</p>
-                </Grid>
-                <Grid xs={4}>
-                  <img
-                    className={styles.imagedonainfo}
-                    src="https://www.edina.com.ec/logos/1210100060-361106.jpg"
-                    alt="..."
-                  />
-                  <p className={styles.bancos}>Cuenta corriente</p>
-                  <p className={styles.bancos}>17265180</p>
-                </Grid>
-                <Grid xs={4}>
-                  <img
-                    className={styles.imagedonainfo}
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsPLsZGquk2osozjQNw2ZJSMZUkUuCpFbR9FOJk5ztCMCVEVuY12sKBrgQBapkhU0wzLs&usqp=CAU"
-                    alt="..."
-                  />
-                  <p className={styles.bancos}>Cuenta corriente</p>
-                  <p className={styles.bancos}>17265180</p>
-                </Grid>
-              </Grid>
+              <iframe
+                className={styles.ubicacion}
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7643285934228!2d-78.45924674973766!3d-0.2980747997814547!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d599082e934a23%3A0xe9afca3fb0d1c771!2sIFGF%20Quito!5e0!3m2!1ses!2sec!4v1637617369934!5m2!1ses!2sec"
+                width="300"
+                height="150"
+                allowFullScreen=""
+                loading="lazy"
+              ></iframe>
             </div>
           </div>
         </Grid>
         <Grid xs={6} className={styles.borderdona}>
-          <h2 className={styles.formasdona}>Formulario de comprobación</h2>
+          <h2 className={styles.formasdona}>Formulario de donación</h2>
           <div className={styles.formsDonaciones}>
             <form className="row g-3 needs-validation" noValidate>
               <div className="col-md-6">
@@ -79,6 +74,7 @@ const Donacioneconomica = () => {
                   type="text"
                   className="form-control"
                   id="validationCustom01"
+                  value="Mark"
                   required
                 />
                 <div className="valid-feedback">Looks good!</div>
@@ -91,6 +87,7 @@ const Donacioneconomica = () => {
                   type="text"
                   className="form-control"
                   id="validationCustom02"
+                  value="Otto"
                   required
                 />
                 <div className="valid-feedback">Looks good!</div>
@@ -161,12 +158,23 @@ const Donacioneconomica = () => {
                 </div>
               </div>
 
-              <div className="col-12">
-                <label htmlFor="formFile" className="form-label">
-                  Ingresa una imagen con el comprobante de pago
+              <div className="col-md-6">
+                <label htmlFor="validationCustom03" className="form-label">
+                  Fecha del día de la entrega de la donación
                 </label>
-                <input className="form-control" type="file" id="formFile" />
+                <DatePicker />
               </div>
+
+              <div className="col-md-6">
+                <label htmlFor="validationCustom03" className="form-label">
+                  Descripción del tipo de donación
+                </label>
+                <textarea
+                  className="form-control"
+                  id="floatingTextarea2"
+                ></textarea>
+              </div>
+
               <div className="col-12">
                 <Button
                   className="btn btn-primary"
@@ -180,8 +188,7 @@ const Donacioneconomica = () => {
           </div>
         </Grid>
       </Grid>
-      <Footer />
     </body>
   );
 };
-export default withPrivate(Donacioneconomica);
+export default withPrivate(Donacionropa);

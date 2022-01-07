@@ -35,8 +35,10 @@ export function UserContextProvider({ children }) {
   }, []);
 
   const login = ({ email, password }) => {
+    console.log({email, password})
     User.login({ email, password })
       .then((res) => {
+        console.log({res})
         const token = res.data.token;
         window.localStorage.setItem("jwt", token);
         window.localStorage.setItem("role", res.data.role);
@@ -72,6 +74,7 @@ export function UserContextProvider({ children }) {
         password,
         roles,
       });
+      console.log({res})
       return res;
     } catch (e) {
       console.log("something went wrong");
