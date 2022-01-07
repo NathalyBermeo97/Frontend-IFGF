@@ -2,7 +2,7 @@ import api from "./api";
 
 const Events = {
     get: () => {
-        return api.get("/events");
+        return api.get("/events").then(response => response.data);
     },
     create: (newEventsItem) => {
         return api.post('/events', newEventsItem)

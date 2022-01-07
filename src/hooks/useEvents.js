@@ -5,12 +5,12 @@ import Events from "../api/events";
 export const useEvents = () => {
     const [events, setEvents] = useState([]);
 
+    console.log('events', events)
     useEffect(() => {
         const getEvents= () => {
             Events.get()
-                .then(response => {
-                    console.log({response})
-                    setEvents(response.data)
+                .then(data => {
+                    setEvents(data)
                 }).catch(err => console.log('something went wrong', err));
         };
         getEvents();
