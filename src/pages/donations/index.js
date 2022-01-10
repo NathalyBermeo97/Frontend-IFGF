@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 const Donaciones = () => {
   const router = useRouter();
   return (
-    <body className={styles.body}>
+    <div className={styles.body}>
       <div className={styles.events}>
         <h1 className={styles.section}>DONACIONES</h1>
         <div className={styles.linea}></div>
@@ -74,7 +74,7 @@ const Donaciones = () => {
                 <p className="card-text"></p>
                 <Button
                   variant="primary"
-                  onClick={() => router.push("/donations/clothe")}
+                  onClick={() => router.push("/donations/clothes")}
                 >
                   Ver más
                 </Button>
@@ -83,7 +83,7 @@ const Donaciones = () => {
           </div>
         </div>
       </section>
-    </body>
+    </div>
   );
 };
 export default Donaciones;

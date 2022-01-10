@@ -1,6 +1,6 @@
 import { withPrivate } from "../../../hocs/withPrivate";
 import { useState } from "react";
-import { useDonations } from "../../../hooks/useDonations";
+import { useDonations } from "../../../hooks/useDonation";
 import styles from "../styles.module.css";
 import {Button, Col, Container, Row} from "react-bootstrap";
 import { CreateFormDonationsMoneyModal } from "../../../components/CreateFormDonationsMoneyModal";
