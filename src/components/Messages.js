@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "../styles/cards.module.css";
+import styles from "../styles/events.module.css";
 const url = "https://backend-ifgf.herokuapp.com/";
 import api from "../api/api";
 

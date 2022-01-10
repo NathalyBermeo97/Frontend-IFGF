@@ -2,8 +2,6 @@
     width: 420px;
     height: 420px;
 
-
-
 }
 .body{
     background-color: rgb(255, 255, 255);
@@ -29,4 +27,12 @@
 .infoeventos{
     margin: 80px;
     text-align: center;
+}
+.ubication{
+    width: 620px;
+    height: 320px;
+    margin-left: 300px;
+}
+.button{
+    background-color: #0e6494;
 }

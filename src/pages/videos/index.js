@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import styles from "../../styles/style.module.css";
 import Videoscards from "../../components/Videoscards";
 import { withPrivate } from "../../hocs/withPrivate";
-import {FormControl} from "react-bootstrap";
+import {FormControl, ListGroup} from "react-bootstrap";
+import {ListOfVideos} from "../../components/ListOfVideos";
 
 const Videos = ({}) => {
   const [videos, setVideos] = useState([]);
@@ -45,6 +46,7 @@ const Videos = ({}) => {
       <div className="container">
         <Videoscards videos={videos} />
       </div>
+
 
     </body>
 

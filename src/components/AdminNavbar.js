@@ -33,15 +33,6 @@ export const AdminNavbar = () => {
           >
             <Nav.Item>
               <Nav.Link
-                eventKey={ROUTES.USERS}
-                onClick={() => router.push(ROUTES.USERS)}
-                disabled={router.pathname === ROUTES.USERS}
-              >
-                Usuarios
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link
                 eventKey={ROUTES.ADMIN_NEWS}
                 onClick={() => router.push(ROUTES.ADMIN_NEWS)}
                 disabled={router.pathname === ROUTES.ADMIN_NEWS}

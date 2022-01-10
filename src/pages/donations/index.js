@@ -12,16 +12,6 @@ const Donaciones = () => {
         <h1 className={styles.section}>DONACIONES</h1>
         <div className={styles.linea}></div>
       </div>
-
-      <Grid container={12}>
-        <Grid xs={8}>
-          <div className={styles.formasdona}></div>
-        </Grid>
-
-        <Grid xs={4}>
-          <div className={styles.formasdona}></div>
-        </Grid>
-      </Grid>
       <h2 className={styles.formasdona}>
         Puedes colaborar con la iglesia con los siguientes tipos de donaciones
       </h2>

@@ -1,4 +1,4 @@
-import styles from "../../styles/events.module.css";
+import styles from "./styles.module.css";
 import React from "react";
 const url = "https://backend-ifgf.herokuapp.com/";
 import { EventModal } from "../../components/EventModal";
@@ -22,6 +22,7 @@ const Eventos = ({ events }) => {
           <h1 className={styles.section}>Eventos</h1>
           <div className={styles.linea}></div>
         </div>
+        <table className="table">
         <div className={styles.courses}>
           {events.map((event) => (
             <div key={event._id} className={styles.course}>
@@ -47,6 +48,7 @@ const Eventos = ({ events }) => {
             </div>
           ))}
         </div>
+        </table>
         <EventModal isOpen={isOpen} event={event} setIsOpen={setIsOpen} />
       </Container>
     </>

@@ -8,8 +8,9 @@ import Link from "next/link";
 import { useNews } from "../hooks/useNews";
 import { useAlbums } from "../hooks/useAlbums";
 import { useMessages } from "../hooks/useMessages";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row,Button } from "react-bootstrap";
 import CarouselEventos from "../components/CarouselEventos";
+
 
 const Home = ({}) => {
   const { news } = useNews();
@@ -31,9 +32,9 @@ const Home = ({}) => {
           </h1>
           <div className={styles.infoeventos}>
             <Link href="/eventos">
-              <button type="button" className="btn btn-info">
+              <Button type="button" className={styles.button}>
                 Ir a eventos
-              </button>
+              </Button>
             </Link>
           </div>
         </Col>
@@ -50,6 +51,25 @@ const Home = ({}) => {
       </div>
       <div className="container"><Messages messages={messages} /></div>
       <div className="container"><Albums albums={albums} /></div>
+        <div className={styles.events}>
+            <h1 className={styles.section}>Vista nuestras instalaciones</h1>
+            <div className={styles.linea}></div>
+            <br/>
+            <br/>
+            <div >
+
+                    <iframe
+                        className={styles.ubication}
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7643285934228!2d-78.45924674973766!3d-0.2980747997814547!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d599082e934a23%3A0xe9afca3fb0d1c771!2sIFGF%20Quito!5e0!3m2!1ses!2sec!4v1637617369934!5m2!1ses!2sec"
+                        width="300"
+                        height="150"
+                        allowFullScreen=""
+                        loading="lazy"
+                    ></iframe>
+
+            </div>
+            <a href='https://web.whatsapp.com/' target="_blank" rel="noopener noreferrer"><bi-facebook/></a>
+        </div>
     </>
   );
 };

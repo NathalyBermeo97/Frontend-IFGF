@@ -31,9 +31,9 @@ const RegisterPage = () => {
 
     return (
         <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
-            <div className={styles.head}>
-                <h1>BIENVENIDO A LA IGLESIA IFGF ECUADOR</h1>
-                <h3>Registrarse</h3>
+            <div >
+                <h1 className={styles.title}>BIENVENIDO A LA IGLESIA IFGF ECUADOR</h1>
+                <h3 className={styles.title}>Registrarse</h3>
             </div>
             {error === true && (
                 <div className="alert alert-danger" role="alert">

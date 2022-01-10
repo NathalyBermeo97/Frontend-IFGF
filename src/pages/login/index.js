@@ -55,7 +55,8 @@ const LoginPage = () => {
         <body className={styles.body}>
         <Form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
             <div>
-                <h1 className={styles.title}>Bienvenido</h1>
+                <h1
+                >Bienvenido</h1>
                 <h3 className={styles.title}>Inicio de sesión</h3>
             </div>
             <Form.Group className="mb-3" controlId="formBasicEmail">
