@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 
-const donationsItemSchema = yup.object().shape({
+const schema = yup.object().shape({
   type: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("tipo"))
@@ -25,7 +25,7 @@ const donationsItemSchema = yup.object().shape({
     .max(60, ERROR_MESSAGES.MAX_STRING('dirección', 60))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
   dateDelivery: yup
-    .string()
+    .date()
     .required(ERROR_MESSAGES.REQUIRED("fecha de entrega"))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
   description: yup
@@ -52,7 +52,7 @@ const DonationsPage = () => {
       dateDelivery: "",
       description: "",
     },
-    resolver: yupResolver(donationsItemSchema),
+    resolver: yupResolver(schema),
   });
 
   const handleModalState = () => {

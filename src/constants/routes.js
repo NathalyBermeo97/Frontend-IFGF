@@ -14,7 +14,7 @@ const PRIVATE_ROUTES = {
     ADMIN_MESSAGES: '/admin/messages',
     ADMIN_ALBUMS: '/admin/albums',
     ADMIN_EVENTS: '/admin/events',
-    //ADMIN_DONATIONS: '/admin/donations',
+    ADMIN_DONATIONS: '/admin/donations',
     ADMIN_VIDEOS: '/admin/videos',
     ADMIN_GAMES: '/admin/games',
     USERS: '/admin/users'
