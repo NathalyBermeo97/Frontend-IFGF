@@ -1,10 +1,17 @@
 
 import { useEffect, useState } from "react";
 import Donations from "../api/donations";
+import { useAuth } from "../context/AuthContext";
 
 export const useDonation = () => {
-
+    const {currentUser} = useAuth()
     const [donations, setDonations] = useState([])
+    const [userDonations, setUserDonations] = useState([])
+
+    useEffect(() => {
+        const userDonations = donations.filter(donation => donation?.user_id === currentUser?._id)
+        setUserDonations(userDonations)
+    }, [donations, currentUser])
 
     useEffect(() => {
         const getDonations = async () => {
@@ -32,5 +39,7 @@ export const useDonation = () => {
         }
     }
 
-    return {donations, setDonations, createDonation, updateDonation};
+
+
+    return {donations, setDonations, createDonation, updateDonation, userDonations};
 };

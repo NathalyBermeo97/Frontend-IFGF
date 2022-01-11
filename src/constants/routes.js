@@ -5,7 +5,10 @@ const PUBLIC_ROUTES = {
     EVENTS: '/eventos',
     DONATIONS: '/donations',
     VIDEOS: '/videos',
-    GAMES: '/juegos'
+    GAMES: '/juegos',
+    ECONOMIC_DONATIONS: '/donations/economic',
+    FOOD_DONATIONS: '/donations/food',
+    CLOTHES_DONATIONS: '/donations/clothes'
 }
 
 const PRIVATE_ROUTES = {
@@ -17,7 +20,8 @@ const PRIVATE_ROUTES = {
     ADMIN_DONATIONS: '/admin/donations',
     ADMIN_VIDEOS: '/admin/videos',
     ADMIN_GAMES: '/admin/games',
-    USERS: '/admin/users'
+    USERS: '/admin/users',
+    MY_DONATIONS: '/my-donations'
 }
 
 export const ROUTES = {

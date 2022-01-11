@@ -1,89 +1,76 @@
 import React from "react";
-import { Grid } from "@mui/material";
 import styles from "../../styles/style.module.css";
-import { Button } from "react-bootstrap";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useRouter } from "next/router";
+import { ROUTES } from "../../constants/routes";
+
+const DONATIONS_TYPES = [
+  {
+    title: "Donación económica",
+    description: "",
+    imgURL:
+      "https://assets.change.org/photos/2/vq/dw/gmVqDwsBWiCaqot-800x450-noPad.jpg?1530696440",
+    route: ROUTES.ECONOMIC_DONATIONS,
+  },
+  {
+    title: "Donación de alimentos",
+    description: "",
+    imgURL:
+      "https://i1.wp.com/elmundoboston.com/wp-content/uploads/2020/04/alimentos.jpeg?fit=1800%2C1200&ssl=1",
+    route: ROUTES.FOOD_DONATIONS,
+  },
+  {
+    title: "Donación de ropa",
+    description: "",
+    imgURL:
+      "https://www.caritas.org.mx/wp-content/uploads/2020/05/moda-sostenible-cuida-al-planeta-y-ayuda-a-otros-con-tu-ropa-1024x768.jpg",
+    route: ROUTES.CLOTHES_DONATIONS,
+  },
+];
 
 const Donaciones = () => {
   const router = useRouter();
   return (
-    <div className={styles.body}>
-      <div className={styles.events}>
+    <Container>
+      <Row
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "15px 0px",
+        }}
+      >
         <h1 className={styles.section}>DONACIONES</h1>
         <div className={styles.linea}></div>
-      </div>
-
-      <Grid container={12}>
-        <Grid xs={8}>
-          <div className={styles.formasdona}></div>
-        </Grid>
-
-        <Grid xs={4}>
-          <div className={styles.formasdona}></div>
-        </Grid>
-      </Grid>
-      <h2 className={styles.formasdona}>
-        Puedes colaborar con la iglesia con los siguientes tipos de donaciones
-      </h2>
-
-      <section>
-        <div className={styles.container}>
-          <div className="row">
-            <div className="col-12 col-sm-4">
-              <img
-                src="https://assets.change.org/photos/2/vq/dw/gmVqDwsBWiCaqot-800x450-noPad.jpg?1530696440"
-                className={styles.imageDonacionestres}
-                alt="..."
-              />
-              <div className={styles.titledona}>
-                <h5 className="card-title">Donación económica</h5>
-                <p className="card-text"></p>
-                <Button
-                  variant="primary"
-                  onClick={() => router.push("/donations/economic")}
+        <h2>
+          Puedes colaborar con la iglesia con los siguientes tipos de donaciones
+        </h2>
+        {DONATIONS_TYPES.map((type) => (
+          <Col
+            style={{
+              justifyContent: "center",
+              display: "flex",
+            }}
+          >
+            <Card style={{ width: "18rem" }}>
+              <Card.Img variant="top" src={type.imgURL} />
+              <Card.Body>
+                <Card.Title>{type.title}</Card.Title>
+                <Card.Text>{type.description}</Card.Text>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: "0px 5px",
+                  }}
                 >
-                  Ver más
-                </Button>
-              </div>
-            </div>
-            <div className="col-12 col-sm-4">
-              <img
-                src="https://i1.wp.com/elmundoboston.com/wp-content/uploads/2020/04/alimentos.jpeg?fit=1800%2C1200&ssl=1"
-                className={styles.imageDonacionestres}
-                alt="..."
-              />
-              <div className={styles.titledona}>
-                <h5 className="card-title">Donación de alimentos</h5>
-                <p className="card-text"></p>
-                <Button
-                  variant="primary"
-                  onClick={() => router.push("/donations/food")}
-                >
-                  Ver más
-                </Button>
-              </div>
-            </div>
-            <div className="col-12 col-sm-4">
-              <img
-                src="https://www.caritas.org.mx/wp-content/uploads/2020/05/moda-sostenible-cuida-al-planeta-y-ayuda-a-otros-con-tu-ropa-1024x768.jpg"
-                className={styles.imageDonacionestres}
-                alt="..."
-              />
-              <div className={styles.titledona}>
-                <h5 className="card-title">Donación de ropa</h5>
-                <p className="card-text"></p>
-                <Button
-                  variant="primary"
-                  onClick={() => router.push("/donations/clothes")}
-                >
-                  Ver más
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+                  <Button onClick={() => router.push(type.route)}>DONAR</Button>
+                </div>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </Container>
   );
 };
 export default Donaciones;

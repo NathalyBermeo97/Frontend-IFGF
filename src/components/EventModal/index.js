@@ -29,7 +29,7 @@ export const EventModal = ({ isOpen, event, setIsOpen }) => {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={() => setIsOpen(false)}>
-          Close
+          Cerrar
         </Button>
         <Button variant="primary" onClick={handleCreateInscription}>Inscribirse</Button>
       </Modal.Footer>

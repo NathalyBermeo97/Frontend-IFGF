@@ -26,8 +26,7 @@ const schema = yup.object().shape({
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
   dateDelivery: yup
     .date()
-    .required(ERROR_MESSAGES.REQUIRED("fecha de entrega"))
-    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+    .required(ERROR_MESSAGES.REQUIRED("fecha de entrega")),
   description: yup
     .string()
 });
@@ -65,7 +64,6 @@ const DonationsPage = () => {
   const onSubmit = (data) => {
     const description = data.description.trim()
     const direction = data.direction === 'no direction no direction ' ? '' : data.direction
-    // console.log('data', {...data, direction, description});
     const parsedData = {...data, direction, description}
     console.log({parsedData})
     createDonation(parsedData).then((d) => {
@@ -81,11 +79,6 @@ const DonationsPage = () => {
       // }
     });
   };
-
-  const handleTestSubmit = (e) => {
-    e.preventDefault()
-    console.log(e.currentTarget.seleccionar.value)
-  }
 
   return (
     <>
@@ -162,17 +155,6 @@ const DonationsPage = () => {
         watch={watch}
         setValue={setValue}
       />
-
-      {/* <form onSubmit={handleTestSubmit}>
-        <input type='text' name='name' placeholder="name"></input>
-        <input ref={(s) => console.log({'si': s.value})} type='text' name='lastName' placeholder='lastName'></input>
-        <select name="seleccionar" onChange={(e) => console.log(e.target.value)} ref={(ref) => console.log('ref', ref.value)}>
-           <option value={1}>option 1</option>
-           <option value={2}>option 2</option>
-           <option value={3}>option 3</option>
-        </select>
-        <button>TEST</button>
-      </form> */}
     </>
   );
 };

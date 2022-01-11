@@ -1,32 +1,24 @@
-import { Badge, Button, Card, ListGroup } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
+import { DonationItem } from "./DonationItem";
 
-export const ListOfDonations = ({ donation, onShowModal, handleDelete, updateDonation }) => {
-  const bg = donation.status === "aceptado" ? "success" : "danger";
-  const disabledAcction = donation.status === 'aceptado' || donation.status === 'denegado'
+export const ListOfDonations = ({ donations, updateDonationStatus }) => {
   return (
-    <Card style={{ width: "18rem" }}>
-      <Card.Img
-        variant="top"
-        src="https://miro.medium.com/max/1200/1*4XRAX4obUOvMVqWibVCneQ.jpeg"
-      />
-      <Card.Body>
-        <Card.Title>Donación de {donation.type}</Card.Title>
-        <Card.Text>
-          Estado{" "}
-          {donation.status === "undefined" ? (
-            <Badge bg="secondary">Sin definir</Badge>
-          ) : (
-            <Badge bg={bg}>{donation.status}</Badge>
-          )}
-          <br />
-          {donation.description}
-        </Card.Text>
-        <section style={{display: 'flex', gap: '0px 5px'}}>
-          <Button variant="success" id='aceptado' disabled={disabledAcction} onClick={({target}) => updateDonation(target.id, donation)}>Aceptar</Button>
-          <Button variant="warning" id='denegado' disabled={disabledAcction} onClick={({target}) => updateDonation(target.id, donation)}>Denegar</Button>
-          <Button variant="info">Ver</Button>
-        </section>
-      </Card.Body>
-    </Card>
+    <Container>
+      <Row
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "15px 0px",
+        }}
+      >
+        {donations.map((donation) => (
+          <DonationItem
+            key={donation._id}
+            donation={donation}
+            updateDonation={updateDonationStatus}
+          />
+        ))}
+      </Row>
+    </Container>
   );
 };

@@ -38,7 +38,7 @@ const Eventos = ({ events }) => {
 
                 <Button
                   variant="contained"
-                  color="primary"
+                  color="secondary"
                   onClick={() => onShowModal(event)}
                 >
                   Más información
