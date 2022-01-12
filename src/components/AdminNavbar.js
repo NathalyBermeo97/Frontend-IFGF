@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { Container, Image, Nav, Navbar, NavDropdown } from "react-bootstrap";
@@ -10,7 +9,7 @@ export const AdminNavbar = () => {
   const { currentUser, isLoggedIn, logout } = useAuth();
 
   const router = useRouter();
-  
+
   return (
     <Navbar bg="light" expand="lg" sticky="top">
       <Container>
@@ -26,11 +25,7 @@ export const AdminNavbar = () => {
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav
-            className={`me-auto ${styles.nav}`}
-            variant="tabs"
-            activeKey={router.pathname}
-          >
+          <Nav className="me-auto" variant="tabs" activeKey={router.pathname}>
             <Nav.Item>
               <Nav.Link
                 eventKey={ROUTES.ADMIN_NEWS}
@@ -41,19 +36,19 @@ export const AdminNavbar = () => {
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-            <Nav.Link
+              <Nav.Link
                 eventKey={ROUTES.ADMIN_MESSAGES}
                 onClick={() => router.push(ROUTES.ADMIN_MESSAGES)}
                 disabled={router.pathname === ROUTES.ADMIN_MESSAGES}
-            >
-              Mensajes Biblicos
-            </Nav.Link>
+              >
+                Mensajes Biblicos
+              </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link
-                  eventKey={ROUTES.ADMIN_ALBUMS}
-                  onClick={() => router.push(ROUTES.ADMIN_ALBUMS)}
-                  disabled={router.pathname === ROUTES.ADMIN_ALBUMS}
+                eventKey={ROUTES.ADMIN_ALBUMS}
+                onClick={() => router.push(ROUTES.ADMIN_ALBUMS)}
+                disabled={router.pathname === ROUTES.ADMIN_ALBUMS}
               >
                 Albums
               </Nav.Link>
@@ -94,19 +89,24 @@ export const AdminNavbar = () => {
                 Juegos
               </Nav.Link>
             </Nav.Item>
-            <Nav>
-              {isLoggedIn ? (
-                <NavDropdown title={currentUser.name} id="nav-dropdown">
-                  <NavDropdown.Item onClick={() => logout()}>
-                    LOGOUT
-                  </NavDropdown.Item>
-                </NavDropdown>
-              ) : currentUser === USER_STATES.NOT_KNOWN ? (
-                "cargando..."
-              ) : (
-                <Link href={ROUTES.LOGIN}>Iniciar Sesión</Link>
-              )}
-            </Nav>
+            {isLoggedIn ? (
+              <NavDropdown title={currentUser.name} id="nav-dropdown">
+                <NavDropdown.Item onClick={() => logout()}>
+                  Cerrar Sesión
+                </NavDropdown.Item>
+              </NavDropdown>
+            ) : currentUser === USER_STATES.NOT_KNOWN ? (
+              "cargando..."
+            ) : (
+              <Nav.Item>
+                <Nav.Link
+                  eventKey={ROUTES.LOGIN}
+                  onClick={() => router.push(ROUTES.LOGIN)}
+                >
+                  Iniciar Sesión
+                </Nav.Link>
+              </Nav.Item>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

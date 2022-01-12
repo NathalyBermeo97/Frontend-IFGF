@@ -33,7 +33,7 @@ const NewsPage = () => {
     const filteredNews = news.filter((ni) =>
       ni.title.toLowerCase().includes(keyword.toLowerCase())
     );
-    setFilteredNews(filteredNews)
+    setFilteredNews(filteredNews);
   }, [keyword, news]);
 
   const {
@@ -60,50 +60,33 @@ const NewsPage = () => {
   };
 
   const handleDelete = (id) => {
-    const newNews = news.filter(ni => ni._id !== id)
-    setNews(newNews)
-  }
+    const newNews = news.filter((ni) => ni._id !== id);
+    setNews(newNews);
+  };
 
   console.log({ errors });
-  const onSubmit = (data) => {
-    console.log(data);
-    createNewsItem(data).then((message) => {
-    if (message === SERVER_RESPONSE.NEWS_ITEM_CREATED) {
-    //     //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
-    setNews((prevState) => [
-    ...prevState,
-    { _id: Math.floor(Math.random() * 1000000000000), ...data },
-     ]);
-     setShowCreateNewsItemModal(false);
-     reset();
-     }
-    });
-    {/*setNews((prevState) => [
-      ...prevState,
-      { _id: Math.floor(Math.random() * 1000000000000), ...data },
-    ]);
-    setShowCreateNewsItemModal(false);
-    reset();*/}
+  const onSubmit = async (data) => {
+    try{
+      const newNewsItem = await createNewsItem(data);
+      setNews((prevState) => [...prevState, newNewsItem]);
+      setShowCreateNewsItemModal(false);
+      reset();
+    }catch(e){
+      console.log('something went wrong', e)
+    }
   };
 
   const onSubmitUpdateNewsItem = (data) => {
     const { _id: id } = data;
-  updateNews(id, data).then((message) => {
-    if (message === "Noticia actualizada correctamente") {
-       const newNews = news.map((newsItem) =>
-     newsItem._id === data._id ? data : newsItem
-       );
-     setNews(newNews);
-   setShowModal(false);
-   }
-   });
-
-    {/*const newNews = news.map((newsItem) =>
-      newsItem._id === data._id ? data : newsItem
-    );
-    setNews(newNews);
-    setShowModal(false);
-    */}
+    updateNews(id, data).then((message) => {
+      if (message === "Noticia actualizada correctamente") {
+        const newNews = news.map((newsItem) =>
+          newsItem._id === data._id ? data : newsItem
+        );
+        setNews(newNews);
+        setShowModal(false);
+      }
+    });
   };
 
   return (
@@ -130,15 +113,14 @@ const NewsPage = () => {
       </InputGroup>
 
       <ListGroup as="ol" numbered>
-        {filteredNews
-          .map((newsItem) => (
-            <ListOfNews
-              key={newsItem._id}
-              newsItem={newsItem}
-              onShowModal={onShowModal}
-              handleDelete={handleDelete}
-            />
-          ))}
+        {filteredNews.map((newsItem) => (
+          <ListOfNews
+            key={newsItem._id}
+            newsItem={newsItem}
+            onShowModal={onShowModal}
+            handleDelete={handleDelete}
+          />
+        ))}
       </ListGroup>
 
       <UpdateNewsItemModal

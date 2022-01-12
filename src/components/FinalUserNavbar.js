@@ -1,5 +1,3 @@
-import React from "react";
-import Link from "next/link";
 import styles from "../styles/navbar.module.css";
 import { USER_STATES } from "../context/AuthContext";
 import { Container, Image, Nav, Navbar, NavDropdown } from "react-bootstrap";
@@ -22,10 +20,11 @@ const NavbarHome = () => {
             className={styles.image}
           />
         </Navbar.Brand>
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav
-            className={`me-auto ${styles.nav}`}
+            className={`me-auto`}
             variant="tabs"
             activeKey={router.pathname}
           >
@@ -77,7 +76,10 @@ const NavbarHome = () => {
             {isLoggedIn ? (
               <NavDropdown title={currentUser.name} id="nav-dropdown">
                 <NavDropdown.Item onClick={() => logout()}>
-                  LOGOUT
+                  Cerrar Sesión
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => router.push(ROUTES.MY_DONATIONS)}>
+                  Mis Donaciones
                 </NavDropdown.Item>
               </NavDropdown>
             ) : currentUser === USER_STATES.NOT_KNOWN ? (

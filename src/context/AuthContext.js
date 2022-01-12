@@ -14,6 +14,7 @@ export function UserContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(USER_STATES.NOT_KNOWN);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
+  console.log({currentUser})
   useEffect(() => {
     const initializeAuth = async () => {
       const jwt = window.localStorage.getItem("jwt");
@@ -25,6 +26,9 @@ export function UserContextProvider({ children }) {
           setCurrentUser(user);
         } catch (e) {
           console.log("Something went wrong", e);
+          window.localStorage.removeItem("jwt");
+          window.localStorage.removeItem("role");
+          setCurrentUser(USER_STATES.NOT_LOGGED)
         }
       }else{
         setCurrentUser(USER_STATES.NOT_LOGGED)

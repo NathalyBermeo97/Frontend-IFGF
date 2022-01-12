@@ -28,7 +28,7 @@ export const useNews = () => {
   const createNewsItem = async (newNewsItem) => {
     try{
       const response = await News.create(newNewsItem)
-      return response.data.message
+      return response.data
     }catch(e){
       console.log('something went wrong', e)
     }

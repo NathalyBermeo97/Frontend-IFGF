@@ -8,5 +8,6 @@ export const ERROR_MESSAGES = {
     EMAIL: 'El campo debe ser un email válido',
     REQUIRED: (field) => `El campo ${field} es requerido`,
     NUMBER: (field) => `El campo ${field} debe ser un número`,
-    MIN: (field, min) => `El campo ${field} debe tener al menos ${min} caracteres`
+    MIN_STRING: (field, min) => `El campo ${field} debe tener al menos ${min} caracteres`,
+    MAX_STRING: (field, max) => `El campo ${field} debe tener como máximo ${max} caracteres`
 }
