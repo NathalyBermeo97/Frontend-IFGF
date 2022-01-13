@@ -16,7 +16,7 @@
     align-content: center;
     width: 300px;
     height: 400px;
-    background-color: rgba(155, 192, 231, 0.84);
+    background-color: rgb(255, 255, 255);
 
 }
 .button{
@@ -41,7 +41,8 @@
 .img{
     width: 220px;
     height: 220px;
-    margin-left: 30px;
+    display: flex;
+    margin:auto;
 
 }
 
@@ -91,14 +92,13 @@
 }
 
 .course {
-    width: 300px;
-    height: 400px;
+
     margin: 20px;
     border-radius: 6px;
     overflow: hidden;
     display: flex;
-    box-shadow: 1px 1px 5px rgb(103, 100, 100);
-    background-color: rgba(187, 207, 227, 0.84);
+    box-shadow: 1px 1px 5px rgba(155, 192, 231, 0.84);
+    background-color: rgb(255, 255, 255);
 
 }
 

@@ -1,12 +1,13 @@
 import React from "react";
 import { Carousel } from "react-bootstrap";
+import styles from "../styles/indexHome.module.css";
 
 const CarouselEventos = () => {
   return (
-    <Carousel variant="dark">
+    <Carousel style={{ width: '28rem' }}>
       <Carousel.Item>
         <img
-          className="d-block w-100"
+          className="d-flex w-100"
           src="https://scontent.fuio1-1.fna.fbcdn.net/v/t39.30808-6/p843x403/270299823_5391435947552827_1036702787305805522_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=a26aad&_nc_eui2=AeHGDJHAoYUcWAs90XCO01W1D7hJntmgs3YPuEme2aCzdq5Rj3a_CpRR6I4IL-q9BDUGiPfcbIMQY3RFyQWDepoa&_nc_ohc=bcygDQ0KFtgAX_-eKAy&_nc_ht=scontent.fuio1-1.fna&oh=00_AT9zM87q2P4r9YZMoqKhsBdum4tyk5V-RGxYlXBrW7_Heg&oe=61DBB763"
           alt="First slide"
         />

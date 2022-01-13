@@ -65,6 +65,7 @@ const NewsPage = () => {
   };
 
   console.log({ errors });
+
   const onSubmit = async (data) => {
     try{
       const newNewsItem = await createNewsItem(data);

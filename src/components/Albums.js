@@ -3,36 +3,36 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "../styles/events.module.css";
 const url = "https://backend-ifgf.herokuapp.com/";
 import api from "../api/api";
+import {Card, Container, Row} from "react-bootstrap";
 
 const Albums = ({ albums }) => {
   return (
-    <div>
-      <h1>Albums</h1>
-      <table className="table">
-        <div className={styles.courses}>
-          {albums.map((album) => (
-            <div key={albums.id} className={styles.course}>
-              <div className={styles.coursecontenido}>
-                <div justifyContent="center" className={styles.name}>
-                  {album.title}
-                </div>
-                <div>
-                  <img
-                    src={url + album.imgURL}
-                    width={210}
-                    height={170}
-                    justifyContent="center"
-                    className={styles.img}
-                  />
-                </div>
-                <div className={styles.description}>{album.description}</div>
-              </div>
-            </div>
+      <Container>
+        <Row style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "15px 0px",
+        }}>
+          <h1>Albums</h1>
+
+          {albums.map((item) => (
+              <Card key={item.id} className={styles.course} style={{ width: '15rem' , height: '25rem'}} >
+                <Card.Img
+                    src={url + item.imgURL}
+                    variant="top"
+                />
+                <Card.Body>
+                  <Card.Title className={styles.name}>
+                    {item.title}
+                  </Card.Title>
+                  <Card.Text className={styles.description}>{item.description}</Card.Text>
+                </Card.Body>
+              </Card>
           ))}
-        </div>
-      </table>
-    </div>
+        </Row>
+      </Container>
   );
+
 };
 export default Albums;
 export async function getStaticProps() {

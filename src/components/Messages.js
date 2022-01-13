@@ -3,36 +3,36 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "../styles/events.module.css";
 const url = "https://backend-ifgf.herokuapp.com/";
 import api from "../api/api";
+import {Card, Container, Row} from "react-bootstrap";
 
 const Messages = ({ messages }) => {
   return (
-    <div>
-      <h1>Mensajes biblicos</h1>
-      <table className="table">
-        <div className={styles.courses}>
-          {messages.map((message) => (
-            <div key={message._id} className={styles.course}>
-              <div className={styles.coursecontenido}>
-                <div justifyContent="center" className={styles.name}>
-                  {message.title}
-                </div>
-                <div>
-                  <img
-                    src={url + message.imgURL}
-                    width={210}
-                    height={170}
-                    justifyContent="center"
-                    className={styles.img}
-                  />
-                </div>
-                <div className={styles.description}>{message.description}</div>
-              </div>
-            </div>
+      <Container>
+        <Row style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "15px 0px",
+        }}>
+          <h1>Mensajes bíblicos</h1>
+
+          {messages.map((item) => (
+              <Card key={item.id} className={styles.course} style={{ width: '15rem' , height: '25rem'}} >
+                <Card.Img
+                    src={url + item.imgURL}
+                    variant="top"
+                />
+                <Card.Body>
+                  <Card.Title className={styles.name}>
+                    {item.title}
+                  </Card.Title>
+                  <Card.Text className={styles.description}>{item.description}</Card.Text>
+                </Card.Body>
+              </Card>
           ))}
-        </div>
-      </table>
-    </div>
+        </Row>
+      </Container>
   );
+
 };
 export default Messages;
 

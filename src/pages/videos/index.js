@@ -3,7 +3,6 @@ import styles from "../../styles/style.module.css";
 import Videoscards from "../../components/Videoscards";
 import { withPrivate } from "../../hocs/withPrivate";
 import {FormControl, ListGroup} from "react-bootstrap";
-import {ListOfVideos} from "../../components/ListOfVideos";
 
 const Videos = ({}) => {
   const [videos, setVideos] = useState([]);
