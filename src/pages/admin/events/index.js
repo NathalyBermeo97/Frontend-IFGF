@@ -22,7 +22,7 @@ const eventsItemSchema = yup.object().shape({
     .string()
     .required(ERROR_MESSAGES.REQUIRED("descripción"))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
-  ubication: yup
+  location: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("ubicación"))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
@@ -45,7 +45,6 @@ const EventsPage = () => {
   const [keyword, setKeyword] = useState("");
   const [filteredEvents, setFilteredEvents] = useState([]);
 
-  //console.log({ events });
   const { allInscriptions } = useInscription();
   console.log({ allInscriptions });
 
@@ -150,17 +149,6 @@ const EventsPage = () => {
           onChange={(e) => setKeyword(e.target.value)}
         />
       </InputGroup>
-
-      {/* <ListGroup as="ol" numbered>
-        {filteredEvents.map((eventsItem) => (
-          <ListOfEvents
-            key={eventsItem._id}
-            eventsItem={eventsItem}
-            onShowModal={onShowModal}
-            handleDelete={handleDelete}
-          />
-        ))}
-      </ListGroup> */}
 
       <ListOfEvents_ events={filteredEvents} onShowEditModal={onShowModal} handleDelete={handleDelete}/>
 

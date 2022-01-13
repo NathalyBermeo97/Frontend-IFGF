@@ -54,11 +54,11 @@ export const UpdateEventsItemModal = ({
               as="textarea"
               type="text"
               placeholder="Ingresar la ubicación del evento "
-              {...register("ubication")}
-              isInvalid={!!errors.ubication?.message}
+              {...register("location")}
+              isInvalid={!!errors.location?.message}
             />
             <Form.Control.Feedback type="invalid">
-              {errors.ubication?.message}
+              {errors.location?.message}
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">

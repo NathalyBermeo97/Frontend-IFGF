@@ -2,8 +2,8 @@ import { Badge, Button, Card, Col } from "react-bootstrap";
 import { USER_ROLES } from "../constants/userRoles";
 import { useAuth } from "../context/AuthContext";
 
-export const DonationItem = ({ donation, updateDonation }) => {
-    console.log({donation})
+export const DonationItem = ({ donation, onShowModal }) => {
+  console.log({ donation });
   const { role } = useAuth();
   const bg = donation.status === "aceptado" ? "success" : "danger";
   const disabledAcction =
@@ -24,16 +24,21 @@ export const DonationItem = ({ donation, updateDonation }) => {
           <Card.Title>Donación de {donation.type}</Card.Title>
           <Card.Text>
             {role === USER_ROLES.ADMIN ? `Por: ${donation?.user_id}` : ""}
-            <br />
-            Estado:{" "}
+            <p>Estado:{" "}
             {donation.status === "undefined" ? (
               <Badge bg="secondary">Sin definir</Badge>
             ) : (
               <Badge bg={bg}>{donation.status}</Badge>
+            )}</p>
+            <p>{donation.description}</p>
+            {donation.message ? (
+              <>
+                <p style={{fontWeight: 'bold'}}>Comentario de retroalimentación:</p>
+                <p>{donation.message}</p>
+              </>
+            ) : (
+              ""
             )}
-            <br />
-            <br />
-            {donation.description}
           </Card.Text>
           {role === USER_ROLES.ADMIN ? (
             <div
@@ -47,17 +52,9 @@ export const DonationItem = ({ donation, updateDonation }) => {
                 variant="success"
                 id="aceptado"
                 disabled={disabledAcction}
-                onClick={({ target }) => updateDonation(target.id, donation)}
+                onClick={() => onShowModal(donation)}
               >
-                Aceptar
-              </Button>
-              <Button
-                variant="warning"
-                id="denegado"
-                disabled={disabledAcction}
-                onClick={({ target }) => updateDonation(target.id, donation)}
-              >
-                Denegar
+                Retroalimentar
               </Button>
             </div>
           ) : (

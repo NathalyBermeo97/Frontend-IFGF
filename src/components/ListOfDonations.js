@@ -1,7 +1,7 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { DonationItem } from "./DonationItem";
 
-export const ListOfDonations = ({ donations, updateDonationStatus }) => {
+export const ListOfDonations = ({ donations, onShowModal }) => {
   return (
     <Container>
       <Row
@@ -15,7 +15,7 @@ export const ListOfDonations = ({ donations, updateDonationStatus }) => {
           <DonationItem
             key={donation._id}
             donation={donation}
-            updateDonation={updateDonationStatus}
+            onShowModal={onShowModal}
           />
         ))}
       </Row>
