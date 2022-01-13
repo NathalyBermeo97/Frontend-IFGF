@@ -72,9 +72,9 @@ export const CreateClothesDonationModal = ({
                 as="textarea"
                 type="text"
                 placeholder="Ingresa su dirección"
-                {...register("direction")}
-                isInvalid={!!errors.direction?.message}
-                isValid={!errors.direction?.message}
+                {...register("location")}
+                isInvalid={!!errors.location?.message}
+                isValid={!errors.location?.message}
               />
               <Form.Control.Feedback type="invalid">
                 {errors.direction?.message}
@@ -89,15 +89,13 @@ export const CreateClothesDonationModal = ({
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Fecha de entrega</Form.Label>
             <Form.Control
-              //style={{ height: "50px" }}
-              //as="date"
               type="date"
               placeholder="Ingrese la fecha de entrega"
-              {...register("dateDelivery")}
-              isInvalid={!!errors.dateDelivery?.message}
+              {...register("date")}
+              isInvalid={!!errors.date?.message}
             />
             <Form.Control.Feedback type="invalid">
-              {errors.dateDelivery?.message}
+              {errors.date?.message}
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicEmail">

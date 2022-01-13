@@ -59,11 +59,11 @@ export const CreateEventsItemModal = ({
               as="textarea"
               type="text"
               placeholder="Ingresar la ubicación del evento "
-              {...register("ubication")}
-              isInvalid={!!errors.ubication?.message}
+              {...register("location")}
+              isInvalid={!!errors.location?.message}
             />
             <Form.Control.Feedback type="invalid">
-              {errors.ubication?.message}
+              {errors.location?.message}
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -92,6 +92,19 @@ export const CreateEventsItemModal = ({
             />
             <Form.Control.Feedback type="invalid">
               {errors.cost?.message}
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Límite de personas</Form.Label>
+            <Form.Control
+              style={{ height: "50px" }}
+              type="number"
+              placeholder="Ingresar el límite de personas"
+              {...register("number")}
+              isInvalid={!!errors.number?.message}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.number?.message}
             </Form.Control.Feedback>
           </Form.Group>
         </Form>

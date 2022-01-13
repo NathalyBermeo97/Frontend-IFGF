@@ -10,7 +10,8 @@ import { ListOfEvents } from "../../../components/ListOfEvents";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
-import {useInscription} from '../../../hooks/useInscription'
+import { useInscription } from "../../../hooks/useInscription";
+import { ListOfEvents_ } from "../../../components/ListOfEvents_";
 
 const eventsItemSchema = yup.object().shape({
   title: yup
@@ -21,7 +22,7 @@ const eventsItemSchema = yup.object().shape({
     .string()
     .required(ERROR_MESSAGES.REQUIRED("descripción"))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
-  ubication: yup
+  location: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("ubicación"))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
@@ -33,6 +34,7 @@ const eventsItemSchema = yup.object().shape({
     .string()
     .required(ERROR_MESSAGES.REQUIRED("costo"))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+  number: yup.number().required(ERROR_MESSAGES.REQUIRED("costo")),
 });
 
 const EventsPage = () => {
@@ -43,9 +45,8 @@ const EventsPage = () => {
   const [keyword, setKeyword] = useState("");
   const [filteredEvents, setFilteredEvents] = useState([]);
 
-  //console.log({ events });
-  const {allInscriptions} = useInscription()
-  console.log({allInscriptions})
+  const { allInscriptions } = useInscription();
+  console.log({ allInscriptions });
 
   useEffect(() => {
     const filteredEvents = events?.filter((ni) =>
@@ -85,41 +86,45 @@ const EventsPage = () => {
   console.log({ errors });
   const onSubmit = (data) => {
     console.log(data);
-  createEventsItem(data).then((message) => {
-     if (message === SERVER_RESPONSE.NEWS_ITEM_CREATED) {
-     //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
-    setEvents((prevState) => [
-       ...prevState,
-        { _id: Math.floor(Math.random() * 1000000000000), ...data },
-    ]);
-      setShowCreateEventsItemModal(false);
-    reset();
-}
-  });
-    {/*setEvents((prevState) => [
+    createEventsItem(data).then((data) => {
+      if (data) {
+        //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
+        setEvents((prevState) => [
+          ...prevState,
+          { _id: Math.floor(Math.random() * 1000000000000), ...data },
+        ]);
+        setShowCreateEventsItemModal(false);
+        reset();
+      }
+    });
+    {
+      /*setEvents((prevState) => [
       ...prevState,
       { _id: Math.floor(Math.random() * 1000000000000), ...data },
     ]);
     setShowCreateEventsItemModal(false);
-    reset();*/}
+    reset();*/
+    }
   };
 
   const onSubmitUpdateEventsItem = (data) => {
     const { _id: id } = data;
     updateEvents(id, data).then((message) => {
-     if (message === "Evento actualizado correctamente") {
-      const newNews = events.map((newsItem) =>
-       newsItem._id === data._id ? data : newsItem
-     );
-     setEvents(newNews);
-    setShowModal(false);
-}
- });
-    {/*const newEvents = events.map((eventsItem) =>
+      if (message === "Evento actualizado correctamente") {
+        const newNews = events.map((newsItem) =>
+          newsItem._id === data._id ? data : newsItem
+        );
+        setEvents(newNews);
+        setShowModal(false);
+      }
+    });
+    {
+      /*const newEvents = events.map((eventsItem) =>
       eventsItem._id === data._id ? data : eventsItem
     );
     setEvents(newEvents);
-    setShowModal(false);*/}
+    setShowModal(false);*/
+    }
   };
 
   return (
@@ -145,16 +150,7 @@ const EventsPage = () => {
         />
       </InputGroup>
 
-      <ListGroup as="ol" numbered>
-        {filteredEvents.map((eventsItem) => (
-          <ListOfEvents
-            key={eventsItem._id}
-            eventsItem={eventsItem}
-            onShowModal={onShowModal}
-            handleDelete={handleDelete}
-          />
-        ))}
-      </ListGroup>
+      <ListOfEvents_ events={filteredEvents} onShowEditModal={onShowModal} handleDelete={handleDelete}/>
 
       <UpdateEventsItemModal
         show={showModal}

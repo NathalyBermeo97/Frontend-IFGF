@@ -18,13 +18,13 @@ const schema = yup.object().shape({
     .string()
     .required(ERROR_MESSAGES.REQUIRED("entrega"))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
-  direction: yup
+  location: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("dirección"))
     .min(25, ERROR_MESSAGES.MIN_STRING('dirección', 25))
     .max(60, ERROR_MESSAGES.MAX_STRING('dirección', 60))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
-  dateDelivery: yup
+  date: yup
     .date()
     .required(ERROR_MESSAGES.REQUIRED("fecha de entrega")),
   description: yup
@@ -47,8 +47,8 @@ const DonationsPage = () => {
     defaultValues: {
       type: "",
       delivery: "",
-      direction: "",
-      dateDelivery: "",
+      location: "",
+      date: "",
       description: "",
     },
     resolver: yupResolver(schema),
@@ -63,8 +63,8 @@ const DonationsPage = () => {
   console.log({ errors });
   const onSubmit = (data) => {
     const description = data.description.trim()
-    const direction = data.direction === 'no direction no direction ' ? '' : data.direction
-    const parsedData = {...data, direction, description}
+    const location = data.location === 'no direction no direction ' ? '' : data.location
+    const parsedData = {...data, location, description}
     console.log({parsedData})
     createDonation(parsedData).then((d) => {
       console.log({d})

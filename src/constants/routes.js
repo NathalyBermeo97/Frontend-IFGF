@@ -21,7 +21,8 @@ const PRIVATE_ROUTES = {
     ADMIN_VIDEOS: '/admin/videos',
     ADMIN_GAMES: '/admin/games',
     USERS: '/admin/users',
-    MY_DONATIONS: '/my-donations'
+    MY_DONATIONS: '/my-donations',
+    MY_EVENTS: '/my-events'
 }
 
 export const ROUTES = {

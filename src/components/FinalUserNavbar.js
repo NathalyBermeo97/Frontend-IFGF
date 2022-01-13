@@ -81,6 +81,9 @@ const NavbarHome = () => {
                 <NavDropdown.Item onClick={() => router.push(ROUTES.MY_DONATIONS)}>
                   Mis Donaciones
                 </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => router.push(ROUTES.MY_EVENTS)}>
+                  Mis Eventos
+                </NavDropdown.Item>
               </NavDropdown>
             ) : currentUser === USER_STATES.NOT_KNOWN ? (
               "cargando..."
