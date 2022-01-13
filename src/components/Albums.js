@@ -16,7 +16,7 @@ const Albums = ({ albums }) => {
           <h1>Albums</h1>
 
           {albums.map((item) => (
-              <Card key={item.id} className={styles.course} style={{ width: '15rem' , height: '25rem'}} >
+              <Card key={item._id} className={styles.course} style={{ width: '15rem' , height: '25rem'}} >
                 <Card.Img
                     src={url + item.imgURL}
                     variant="top"

@@ -53,25 +53,37 @@ const LoginPage = () => {
   return (
     <body className={styles.body}>
       <Container>
+        <Row>
+          <Col style={{
+            justifyContent: "center",
+            width: '18rem',
+          }} >
+            <Card.Img
+                className="d-flex w-100"
+                src="https://scontent.fuio1-2.fna.fbcdn.net/v/t1.6435-9/65510633_2787099614653153_7989606629123293184_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=730e14&_nc_ohc=hKw6qg18Hl8AX9bDyxy&_nc_ht=scontent.fuio1-2.fna&oh=00_AT9I1x7TlXnC2iYUY0Tsbliu66t_x_zOtdVxDosDpmQVhw&oe=6204C3D5"
+            />
+          </Col>
+
+          <Col
+              style={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+          >
+
         <Card style={{
           display: "flex",
           justifyContent: "center",
-          gap: "15px 0px",
-          width:"500px"
+          width: '28rem',
+          margin:'20px',
         }}>
+
           <Card.Body>
-        <Row>
-          <Col
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              gap: "15px 0px",
-              backgroundColor: "red",
-            }}
-          >
+
+
             <Form  onSubmit={handleSubmit(onSubmit)}>
               <div>
-                <h1>Inicio de sesion</h1>
+                <h1>Inicio de sesión</h1>
                 <h3 className={styles.title}>Inicio de sesión</h3>
               </div>
               <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -117,25 +129,17 @@ const LoginPage = () => {
                 <p className={styles.createAccount}>¿No tiene una cuenta?</p>
               </Link>
             </Form>
-          </Col>
-          <Col
-            style={{
-              justifyContent: "center",
-              display: "flex",
-                width:"400px",
-                height:"300px"
 
-            }}
-          >
-            <img
-              className="d-flex w-100"
-              src="https://scontent.fuio1-2.fna.fbcdn.net/v/t1.6435-9/65510633_2787099614653153_7989606629123293184_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=730e14&_nc_ohc=hKw6qg18Hl8AX9bDyxy&_nc_ht=scontent.fuio1-2.fna&oh=00_AT9I1x7TlXnC2iYUY0Tsbliu66t_x_zOtdVxDosDpmQVhw&oe=6204C3D5"
-            />
-          </Col>
 
-        </Row>
+
+
+
+
+
           </Card.Body>
         </Card>
+                    </Col>
+        </Row>
       </Container>
     </body>
   );
