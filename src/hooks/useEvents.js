@@ -1,11 +1,17 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Events from "../api/events";
+import { useAuth } from "../context/AuthContext";
 
 export const useEvents = () => {
+    const {currentUser} = useAuth()
     const [events, setEvents] = useState([]);
+    const [userEvents, setUserEvents] = useState([])
+    
+    useEffect(() => {
+        const userEvents = events.filter(event => event?.inscriptions.includes(currentUser?._id))
+        setUserEvents(userEvents)
+    }, [events, currentUser])
 
-    console.log('events', events)
     useEffect(() => {
         const getEvents= () => {
             Events.get()
@@ -28,7 +34,7 @@ export const useEvents = () => {
     const createEventsItem = async (newEventsItem) => {
         try{
             const response = await Events.create(newEventsItem)
-            return response.data.message
+            return response.data
         }catch(e){
             console.log('something went wrong', e)
         }
@@ -43,5 +49,5 @@ export const useEvents = () => {
     }
 
 
-    return {events, setEvents,deleteEvents,updateEvents, createEventsItem};
+    return {events, setEvents, deleteEvents, updateEvents, createEventsItem, userEvents};
 };

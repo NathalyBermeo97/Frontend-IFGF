@@ -3,6 +3,7 @@ import { USER_ROLES } from "../constants/userRoles";
 import { useAuth } from "../context/AuthContext";
 
 export const DonationItem = ({ donation, updateDonation }) => {
+    console.log({donation})
   const { role } = useAuth();
   const bg = donation.status === "aceptado" ? "success" : "danger";
   const disabledAcction =

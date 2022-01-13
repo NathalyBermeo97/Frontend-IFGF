@@ -29,10 +29,10 @@ export const useInscription = () => {
     getAllInscriptions();
   }, []);
 
-  const createInscription = async (newInscription) => {
+  const createInscription = async (eventId) => {
     try {
-      console.log({newInscription})
-      const response = await Inscriptions.create(newInscription);
+      console.log({eventId})
+      const response = await Inscriptions.create(eventId);
       return response;
     } catch (e) {
       console.log("something went wrong", e);

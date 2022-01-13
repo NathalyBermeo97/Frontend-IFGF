@@ -94,6 +94,19 @@ export const CreateEventsItemModal = ({
               {errors.cost?.message}
             </Form.Control.Feedback>
           </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Límite de personas</Form.Label>
+            <Form.Control
+              style={{ height: "50px" }}
+              type="number"
+              placeholder="Ingresar el límite de personas"
+              {...register("number")}
+              isInvalid={!!errors.number?.message}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.number?.message}
+            </Form.Control.Feedback>
+          </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer>

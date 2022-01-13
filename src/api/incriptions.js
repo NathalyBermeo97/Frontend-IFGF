@@ -7,8 +7,8 @@ const Inscriptions = {
     getAll: () => {
         return api.get("/inscriptions/all").then(response => response.data);
     },
-    create: (newInscription) => {
-        return api.post('/inscriptions', newInscription)
+    create: (eventId) => {
+        return api.post(`/inscriptions/${eventId}`)
     },
     update: (id, newObject) => {
         return api.put(`/events/${id}`, newObject)
