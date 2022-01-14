@@ -7,6 +7,9 @@ const Events = {
     create: (newEventsItem) => {
         return api.post('/events', newEventsItem)
     },
+    createInscription: (eventId) => {
+        return api.put(`/inscriptions/${eventId}`)
+    },
     update: (id, newObject) => {
         return api.put(`/events/${id}`, newObject)
     },

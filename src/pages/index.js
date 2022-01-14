@@ -17,7 +17,6 @@ const Home = ({}) => {
   const { messages } = useMessages();
   const { albums } = useAlbums();
 
-
   return (
     <>
       <Carousel />

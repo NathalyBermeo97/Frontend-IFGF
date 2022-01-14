@@ -1,16 +1,14 @@
 import { withPrivate } from "../../../hocs/withPrivate";
 import { useEffect, useState } from "react";
 import { useEvents } from "../../../hooks/useEvents";
-import { ListGroup, Button, FormControl, InputGroup } from "react-bootstrap";
+import { Button, FormControl, InputGroup } from "react-bootstrap";
 import { UpdateEventsItemModal } from "../../../components/UpdateEventsItemModal";
 import styles from "./styles.module.css";
 import { CreateEventsItemModal } from "../../../components/CreateEventsItemModal";
 import { ERROR_MESSAGES, SERVER_RESPONSE } from "../../../constants/inidex";
-import { ListOfEvents } from "../../../components/ListOfEvents";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
-import { useInscription } from "../../../hooks/useInscription";
 import { ListOfEvents_ } from "../../../components/ListOfEvents_";
 
 const eventsItemSchema = yup.object().shape({
@@ -44,9 +42,6 @@ const EventsPage = () => {
     useState(false);
   const [keyword, setKeyword] = useState("");
   const [filteredEvents, setFilteredEvents] = useState([]);
-
-  const { allInscriptions } = useInscription();
-  console.log({ allInscriptions });
 
   useEffect(() => {
     const filteredEvents = events?.filter((ni) =>
@@ -109,14 +104,12 @@ const EventsPage = () => {
 
   const onSubmitUpdateEventsItem = (data) => {
     const { _id: id } = data;
-    updateEvents(id, data).then((message) => {
-      if (message === "Evento actualizado correctamente") {
-        const newNews = events.map((newsItem) =>
-          newsItem._id === data._id ? data : newsItem
-        );
-        setEvents(newNews);
-        setShowModal(false);
-      }
+    updateEvents(id, data).then((returnedEvent) => {
+      const newEvents = events.map((event) =>
+        event._id === returnedEvent._id ? returnedEvent : event
+      );
+      setEvents(newEvents);
+      setShowModal(false);
     });
     {
       /*const newEvents = events.map((eventsItem) =>
@@ -150,7 +143,11 @@ const EventsPage = () => {
         />
       </InputGroup>
 
-      <ListOfEvents_ events={filteredEvents} onShowEditModal={onShowModal} handleDelete={handleDelete}/>
+      <ListOfEvents_
+        events={filteredEvents}
+        onShowEditModal={onShowModal}
+        handleDelete={handleDelete}
+      />
 
       <UpdateEventsItemModal
         show={showModal}
@@ -174,4 +171,4 @@ const EventsPage = () => {
   );
 };
 
-export default EventsPage;
+export default withPrivate(EventsPage);

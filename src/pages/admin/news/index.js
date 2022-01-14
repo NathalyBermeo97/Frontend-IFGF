@@ -29,6 +29,7 @@ const NewsPage = () => {
   const [keyword, setKeyword] = useState("");
   const [filteredNews, setFilteredNews] = useState([]);
 
+  console.log({news})
   useEffect(() => {
     const filteredNews = news.filter((ni) =>
       ni.title.toLowerCase().includes(keyword.toLowerCase())

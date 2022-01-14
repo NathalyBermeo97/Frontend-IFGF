@@ -48,8 +48,9 @@ export function UserContextProvider({ children }) {
         window.localStorage.setItem("role", res.data.role);
         api.defaults.headers.common["x-access-token"] = token;
         setRole(res.data.role);
-        const user = res.data.user;
-        setCurrentUser(user);
+        delete res.data.token
+        const user = res.data
+        setCurrentUser(user)
       })
       .catch((err) => {
         console.log("something went wrong", err);
