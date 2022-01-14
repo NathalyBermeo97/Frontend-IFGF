@@ -21,7 +21,7 @@ export const EventItem = ({
       <Card style={{ width: "18rem" }}>
         <Card.Img
           variant="top"
-          src="https://backend-ifgf.herokuapp.com/ifgf.png"
+          src="https://zetaoptimization.com/wp-content/uploads/2020/10/Event-social-media.jpg"
         />
         <Card.Body>
           <Card.Title>{event.title}</Card.Title>

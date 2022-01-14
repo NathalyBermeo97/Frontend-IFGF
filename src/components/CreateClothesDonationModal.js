@@ -72,12 +72,12 @@ export const CreateClothesDonationModal = ({
                 as="textarea"
                 type="text"
                 placeholder="Ingresa su dirección"
-                {...register("location")}
-                isInvalid={!!errors.location?.message}
-                isValid={!errors.location?.message}
+                {...register("address")}
+                isInvalid={!!errors.address?.message}
+                isValid={!errors.address?.message}
               />
               <Form.Control.Feedback type="invalid">
-                {errors.direction?.message}
+                {errors.address?.message}
               </Form.Control.Feedback>
               <Form.Control.Feedback type="valid">
                 Escribe tú dirección lo más exacta posible

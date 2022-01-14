@@ -109,14 +109,12 @@ const EventsPage = () => {
 
   const onSubmitUpdateEventsItem = (data) => {
     const { _id: id } = data;
-    updateEvents(id, data).then((message) => {
-      if (message === "Evento actualizado correctamente") {
-        const newNews = events.map((newsItem) =>
-          newsItem._id === data._id ? data : newsItem
-        );
-        setEvents(newNews);
-        setShowModal(false);
-      }
+    updateEvents(id, data).then((returnedEvent) => {
+      const newEvents = events.map((event) =>
+        event._id === returnedEvent._id ? returnedEvent : event
+      );
+      setEvents(newEvents);
+      setShowModal(false);
     });
     {
       /*const newEvents = events.map((eventsItem) =>
@@ -150,7 +148,11 @@ const EventsPage = () => {
         />
       </InputGroup>
 
-      <ListOfEvents_ events={filteredEvents} onShowEditModal={onShowModal} handleDelete={handleDelete}/>
+      <ListOfEvents_
+        events={filteredEvents}
+        onShowEditModal={onShowModal}
+        handleDelete={handleDelete}
+      />
 
       <UpdateEventsItemModal
         show={showModal}
@@ -174,4 +176,4 @@ const EventsPage = () => {
   );
 };
 
-export default EventsPage;
+export default withPrivate(EventsPage);

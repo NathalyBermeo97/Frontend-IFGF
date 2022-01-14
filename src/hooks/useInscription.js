@@ -17,17 +17,17 @@ export const useInscription = () => {
     getInscriptions();
   }, []);
 
-  useEffect(() => {
-    const getAllInscriptions = async () => {
-        try{
-            const allInscriptions = await Inscriptions.getAll();
-            setAllInscriptions(allInscriptions)
-        }catch(e){
-            console.log('something went wrong', e)
-        }
-    };
-    getAllInscriptions();
-  }, []);
+  // useEffect(() => {
+  //   const getAllInscriptions = async () => {
+  //       try{
+  //           const allInscriptions = await Inscriptions.getAll();
+  //           setAllInscriptions(allInscriptions)
+  //       }catch(e){
+  //           console.log('something went wrong', e)
+  //       }
+  //   };
+  //   getAllInscriptions();
+  // }, []);
 
   const createInscription = async (eventId) => {
     try {
