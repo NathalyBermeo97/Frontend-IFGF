@@ -14,7 +14,7 @@ export function UserContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(USER_STATES.NOT_KNOWN);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
-  console.log({currentUser})
+  console.log({ currentUser });
   useEffect(() => {
     const initializeAuth = async () => {
       const jwt = window.localStorage.getItem("jwt");
@@ -28,10 +28,10 @@ export function UserContextProvider({ children }) {
           console.log("Something went wrong", e);
           window.localStorage.removeItem("jwt");
           window.localStorage.removeItem("role");
-          setCurrentUser(USER_STATES.NOT_LOGGED)
+          setCurrentUser(USER_STATES.NOT_LOGGED);
         }
-      }else{
-        setCurrentUser(USER_STATES.NOT_LOGGED)
+      } else {
+        setCurrentUser(USER_STATES.NOT_LOGGED);
       }
       setIsCheckingAuth(false);
     };
@@ -39,17 +39,17 @@ export function UserContextProvider({ children }) {
   }, []);
 
   const login = ({ email, password }) => {
-    console.log({email, password})
+    console.log({ email, password });
     User.login({ email, password })
       .then((res) => {
-        console.log({res})
+        console.log({ res });
         const token = res.data.token;
         window.localStorage.setItem("jwt", token);
         window.localStorage.setItem("role", res.data.role);
-        api.defaults.headers.common['x-access-token'] = token
+        api.defaults.headers.common["x-access-token"] = token;
         setRole(res.data.role);
-        const user = res.data.user
-        setCurrentUser(user)
+        const user = res.data.user;
+        setCurrentUser(user);
       })
       .catch((err) => {
         console.log("something went wrong", err);
@@ -60,7 +60,7 @@ export function UserContextProvider({ children }) {
 
   const logout = async () => {
     try {
-      await User.logout()
+      await User.logout();
       window.localStorage.removeItem("jwt");
       window.localStorage.removeItem("role");
       setCurrentUser(USER_STATES.NOT_LOGGED);
@@ -78,7 +78,7 @@ export function UserContextProvider({ children }) {
         password,
         roles,
       });
-      console.log({res})
+      console.log({ res });
       return res;
     } catch (e) {
       console.log("something went wrong");

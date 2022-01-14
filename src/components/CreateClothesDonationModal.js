@@ -77,7 +77,7 @@ export const CreateClothesDonationModal = ({
                 isValid={!errors.location?.message}
               />
               <Form.Control.Feedback type="invalid">
-                {errors.direction?.message}
+                {errors.location?.message}
               </Form.Control.Feedback>
               <Form.Control.Feedback type="valid">
                 Escribe tú dirección lo más exacta posible
