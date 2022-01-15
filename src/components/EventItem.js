@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
-import React from "react";
 import { Button, Card, Col } from "react-bootstrap";
 import { ROUTES } from "../constants/routes";
+import { useAuth } from "../context/AuthContext";
 
 export const EventItem = ({
   event,
@@ -10,6 +10,13 @@ export const EventItem = ({
   handleDelete,
 }) => {
   const router = useRouter();
+  const { users } = useAuth();
+
+  const eventUsers = event?.inscriptions?.map((userId) => {
+    return users?.find((user) => user._id === userId);
+  });
+
+  const newEvent = { ...event, inscriptions: eventUsers };
 
   return (
     <Col
@@ -35,7 +42,7 @@ export const EventItem = ({
           >
             {router.pathname.startsWith(ROUTES.ADMIN) ? (
               <>
-                <Button size="sm" onClick={() => onShowEditModal(event)}>
+                <Button size="sm" onClick={() => onShowEditModal(newEvent)}>
                   Editar
                 </Button>
                 <Button

@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useDonation } from "../../../hooks/useDonation";
 import styles from "../styles.module.css";
 import { Button, Col, Container, Row } from "react-bootstrap";
-import { CreateClothesDonationModal } from "../../../components/CreateClothesDonationModal";
-import { ERROR_MESSAGES, SERVER_RESPONSE } from "../../../constants/inidex";
+import { CreateDonationModal } from "../../../components/CreateDonationModal";
+import { ERROR_MESSAGES } from "../../../constants/inidex";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
@@ -21,18 +21,15 @@ const schema = yup.object().shape({
   address: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("dirección"))
-    .min(25, ERROR_MESSAGES.MIN_STRING('dirección', 25))
-    .max(60, ERROR_MESSAGES.MAX_STRING('dirección', 60))
+    .min(25, ERROR_MESSAGES.MIN_STRING("dirección", 25))
+    .max(60, ERROR_MESSAGES.MAX_STRING("dirección", 60))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
-  date: yup
-    .date()
-    .required(ERROR_MESSAGES.REQUIRED("fecha de entrega")),
-  description: yup
-    .string()
+  date: yup.date().required(ERROR_MESSAGES.REQUIRED("fecha de entrega")),
+  description: yup.string(),
 });
 
 const DonationsPage = () => {
-  const { donations, setDonations, createDonation } = useDonation();
+  const { setDonations, createDonation } = useDonation();
   const [showModal, setShowModal] = useState(false);
 
   const {
@@ -42,7 +39,7 @@ const DonationsPage = () => {
     formState: { errors },
     clearErrors,
     setValue,
-    watch
+    watch,
   } = useForm({
     defaultValues: {
       type: "",
@@ -55,30 +52,24 @@ const DonationsPage = () => {
   });
 
   const handleModalState = () => {
-    setShowModal(true)
-    setValue('type', 'ropa')
-    setValue('delivery', 'Delivery in Church via some service')
-  }
+    setShowModal(true);
+    setValue("type", "ropa");
+    setValue("delivery", "Delivery in Church via some service");
+  };
 
-  console.log({ errors });
   const onSubmit = (data) => {
-    const description = data.description.trim()
-    const location = data.location === 'no direction no direction ' ? '' : data.location
-    const date = new Date(data.date).toISOString()
-    console.log({date})
-    const parsedData = {...data, location, description, date}
-    console.log({parsedData})
-    createDonation(parsedData).then((d) => {
-      console.log({d})
-      // if (message === SERVER_RESPONSE.NEWS_ITEM_CREATED) {
-      //   //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
-      //   setDonations((prevState) => [
-      //     ...prevState,
-      //     { _id: Math.floor(Math.random() * 1000000000000), ...data },
-      //   ]);
-      //   setShowCreateDonationsItemModal(false);
-      //   reset();
-      // }
+    const description = data.description.trim();
+    const address =
+      data.address === "no direction no direction " ? "" : data.address;
+    const date = new Date(data.date).toISOString();
+    const parsedData = { ...data, address, description, date };
+    createDonation(parsedData).then((newDonation) => {
+      setDonations((prevState) => [
+        ...prevState,
+        newDonation,
+      ]);
+      setShowModal(false);
+      reset();
     });
   };
 
@@ -145,7 +136,7 @@ const DonationsPage = () => {
         </Row>
       </Container>
 
-      <CreateClothesDonationModal
+      <CreateDonationModal
         showModal={showModal}
         setShowModal={setShowModal}
         register={register}
@@ -156,6 +147,7 @@ const DonationsPage = () => {
         reset={reset}
         watch={watch}
         setValue={setValue}
+        donationType='ropa'
       />
     </>
   );

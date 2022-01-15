@@ -23,11 +23,7 @@ const NavbarHome = () => {
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav
-            className={`me-auto`}
-            variant="tabs"
-            activeKey={router.pathname}
-          >
+          <Nav className={`me-auto`} variant="tabs" activeKey={router.pathname}>
             <Nav.Item>
               <Nav.Link
                 eventKey={ROUTES.HOME}
@@ -47,13 +43,30 @@ const NavbarHome = () => {
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link
+              {/* <Nav.Link
                 eventKey={ROUTES.DONATIONS}
                 onClick={() => router.push(ROUTES.DONATIONS)}
                 disabled={router.pathname === ROUTES.DONATIONS}
               >
                 Donaciones
-              </Nav.Link>
+              </Nav.Link> */}
+              <NavDropdown title="Donaciones" id="nav-dropdown-donaciones">
+                <NavDropdown.Item
+                  onClick={() => router.push(ROUTES.CLOTHES_DONATIONS)}
+                >
+                  Donar ropa
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  onClick={() => router.push(ROUTES.FOOD_DONATIONS)}
+                >
+                  Donar comida
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  onClick={() => router.push(ROUTES.ECONOMIC_DONATIONS)}
+                >
+                  Donar dinero
+                </NavDropdown.Item>
+              </NavDropdown>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link
@@ -78,7 +91,9 @@ const NavbarHome = () => {
                 <NavDropdown.Item onClick={() => logout()}>
                   Cerrar Sesión
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={() => router.push(ROUTES.MY_DONATIONS)}>
+                <NavDropdown.Item
+                  onClick={() => router.push(ROUTES.MY_DONATIONS)}
+                >
                   Mis Donaciones
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={() => router.push(ROUTES.MY_EVENTS)}>

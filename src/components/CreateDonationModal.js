@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 
-export const CreateClothesDonationModal = ({
+export const CreateDonationModal = ({
   showModal,
   setShowModal,
   register,
@@ -13,6 +13,7 @@ export const CreateClothesDonationModal = ({
   reset,
   watch,
   setValue,
+  donationType,
 }) => {
   const handleClose = () => {
     setShowModal(false);
@@ -21,20 +22,18 @@ export const CreateClothesDonationModal = ({
   };
 
   const selectValue = watch("delivery");
-  console.log({ selectValue });
   useEffect(() => {
     if (selectValue === "Picking up At House") {
-      setValue("direction", "");
+      setValue("address", "");
     } else {
-      setValue("direction", "no direction ".repeat(2));
+      setValue("address", "no direction ".repeat(2));
     }
   }, [selectValue]);
 
-  console.log(errors.direction?.message)
   return (
     <Modal show={showModal} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Donación de ropa</Modal.Title>
+        <Modal.Title>Donación de {donationType}</Modal.Title>
         <br />
       </Modal.Header>
       <Modal.Body>
@@ -53,9 +52,15 @@ export const CreateClothesDonationModal = ({
               <option value="Delivery in Church">
                 Ir a entregar en la Iglésia personalemente
               </option>
-              <option value="Delivery in Church via some service">
-                Enviar a la iglésia por ServiEntrega
-              </option>
+              {donationType === "dinero" ? (
+                <option value="Delivery in Church via transaction">
+                  Enviar a la iglésia por transacción
+                </option>
+              ) : (
+                <option value="Delivery in Church via some service">
+                  Enviar a la iglésia por ServiEntrega
+                </option>
+              )}
               <option value="Picking up At House">
                 Ser recogido en el hogar
               </option>
@@ -83,6 +88,8 @@ export const CreateClothesDonationModal = ({
                 Escribe tú dirección lo más exacta posible
               </Form.Control.Feedback>
             </Form.Group>
+          ) : selectValue === "Delivery in Church via transaction" ? (
+            <p>Cuenta de transacción: 17265188XX - Banco XXXXX</p>
           ) : (
             ""
           )}

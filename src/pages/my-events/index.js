@@ -14,6 +14,12 @@ const MyEventsPage = () => {
     setIsOpen(true);
   };
 
+  if (userEvents.length === 0)
+    return (
+      <h2 style={{ display: "flex", justifyContent: "center" }}>
+        SIN EVENTOS REGISTRADOS
+      </h2>
+    );
   return (
     <>
       <ListOfEvents_ events={userEvents} onShowModal={onShowModal} />;
