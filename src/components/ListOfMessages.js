@@ -1,26 +1,26 @@
 import React from "react";
-import { Button, ListGroup } from "react-bootstrap";
+import {Button, Container, ListGroup, Row} from "react-bootstrap";
+import {MessagesItem} from "./MessagesItem";
 
-export const ListOfMessages = ({ messagesItem, onShowModal, handleDelete }) => {
-    return (
-        <ListGroup.Item
-            as="li"
-            className="d-flex justify-content-between align-items-start"
-        >
-            <div className="ms-2 me-auto">
-                <div className="fw-bold">{messagesItem.title}</div>
-                {messagesItem.description}
-            </div>
-            <Button size="sm" onClick={() => onShowModal(messagesItem)}>
-                ver
-            </Button>
-            <Button
-                size="sm"
-                variant="danger"
-                onClick={() => handleDelete(messagesItem._id)}
+export const ListOfMessages = ({ messages, onShowModal,onShowEditModal }) => {
+    return(
+        <Container>
+            <Row
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: "15px 0px",
+                }}
             >
-                eliminar
-            </Button>
-        </ListGroup.Item>
-    );
+                {messages?.map((messages) => (
+                    <MessagesItem
+                        key={messages._id}
+                        messages={messages}
+                        onShowModal={onShowModal}
+                        onShowEditModal={onShowEditModal}
+                    />
+                ))}
+            </Row>
+        </Container>
+    )
 };

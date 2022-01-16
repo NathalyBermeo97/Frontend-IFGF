@@ -114,16 +114,13 @@ const NewsPage = () => {
         />
       </InputGroup>
 
-      <ListGroup as="ol" numbered>
-        {filteredNews.map((newsItem) => (
+
           <ListOfNews
-            key={newsItem._id}
-            newsItem={newsItem}
+            news={news}
             onShowModal={onShowModal}
             handleDelete={handleDelete}
           />
-        ))}
-      </ListGroup>
+
 
       <UpdateNewsItemModal
         show={showModal}

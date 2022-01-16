@@ -1,26 +1,26 @@
 import React from "react";
-import { Button, ListGroup } from "react-bootstrap";
+import {Button, Container, ListGroup, Row} from "react-bootstrap";
+import {AlbumsItem} from "./AlbumsItem";
 
-export const ListOfAlbums = ({ albumsItem, onShowModal, handleDelete }) => {
-    return (
-        <ListGroup.Item
-            as="li"
-            className="d-flex justify-content-between align-items-start"
-        >
-            <div className="ms-2 me-auto">
-                <div className="fw-bold">{albumsItem.title}</div>
-                {albumsItem.description}
-            </div>
-            <Button size="sm" onClick={() => onShowModal(albumsItem)}>
-                Editar
-            </Button>
-            <Button
-                size="sm"
-                variant="danger"
-                onClick={() => handleDelete(albumsItem._id)}
+export const ListOfAlbums = ({ albums, onShowModal,onShowEditModal }) => {
+    return(
+        <Container>
+            <Row
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: "15px 0px",
+                }}
             >
-                Eliminar
-            </Button>
-        </ListGroup.Item>
-    );
+                {albums?.map((albums) => (
+                    <AlbumsItem
+                        key={albums._id}
+                        albums={albums}
+                        onShowModal={onShowModal}
+                        onShowEditModal={onShowEditModal}
+                    />
+                ))}
+            </Row>
+        </Container>
+    )
 };

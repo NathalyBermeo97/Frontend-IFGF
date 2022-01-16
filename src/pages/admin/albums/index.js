@@ -127,17 +127,14 @@ const AlbumsPage = () => {
                 />
             </InputGroup>
 
-            <ListGroup as="ol" numbered>
-                {filteredAlbums
-                    .map((albumsItem) => (
+
                         <ListOfAlbums
-                            key={albumsItem._id}
-                            albumsItem={albumsItem}
+                            key={albums._id}
+                            albums={albums}
                             onShowModal={onShowModal}
                             handleDelete={handleDelete}
                         />
-                    ))}
-            </ListGroup>
+
 
             <UpdateAlbumsItemModal
                 show={showModal}
