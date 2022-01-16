@@ -13,8 +13,21 @@ export function UserContextProvider({ children }) {
   const [role, setRole] = useState(null);
   const [currentUser, setCurrentUser] = useState(USER_STATES.NOT_KNOWN);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+  const [users, setUsers] = useState()
 
-  console.log({ currentUser });
+  console.log({ currentUser, users });
+  useEffect(() => {
+      const getUsers = async () => {
+        try{
+          const users = await User.getUsers()
+          setUsers(users)
+        }catch(e){
+          console.log('something went wrong', e)
+        }
+      }
+      getUsers()
+  }, [])
+
   useEffect(() => {
     const initializeAuth = async () => {
       const jwt = window.localStorage.getItem("jwt");
@@ -96,6 +109,7 @@ export function UserContextProvider({ children }) {
         isLoggedIn: Boolean(currentUser),
         role,
         isCheckingAuth,
+        users
       }}
     >
       {children}

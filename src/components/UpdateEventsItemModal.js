@@ -1,4 +1,4 @@
-import { Button, Modal, InputGroup, FormControl, Form } from "react-bootstrap";
+import { Button, Modal, Form, Table } from "react-bootstrap";
 
 export const UpdateEventsItemModal = ({
   show,
@@ -7,8 +7,10 @@ export const UpdateEventsItemModal = ({
   handleSubmit,
   onSubmit,
   errors,
+  getValues,
 }) => {
   const handleClose = () => setShowModal(false);
+  const signedInUsers = getValues("inscriptions");
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -90,6 +92,33 @@ export const UpdateEventsItemModal = ({
             </Form.Control.Feedback>
           </Form.Group>
         </Form>
+        <h5>Usuarios registrados</h5>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Teléfono</th>
+            </tr>
+          </thead>
+          <tbody>
+            {signedInUsers?.length > 0 ? (
+              signedInUsers.map((user) => (
+                <tr key={user._id}>
+                  <td>{user.name}</td>
+                  <td>{user.lastname}</td>
+                  <td>{user.cellphone}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={3} style={{ textAlign: "center" }}>
+                  Sin usuarios registrados
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </Table>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>

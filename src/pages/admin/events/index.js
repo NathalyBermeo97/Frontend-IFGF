@@ -5,7 +5,7 @@ import { Button, FormControl, InputGroup } from "react-bootstrap";
 import { UpdateEventsItemModal } from "../../../components/UpdateEventsItemModal";
 import styles from "./styles.module.css";
 import { CreateEventsItemModal } from "../../../components/CreateEventsItemModal";
-import { ERROR_MESSAGES, SERVER_RESPONSE } from "../../../constants/inidex";
+import { ERROR_MESSAGES } from "../../../constants/inidex";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
@@ -68,8 +68,8 @@ const EventsPage = () => {
     resolver: yupResolver(eventsItemSchema),
   });
 
-  const onShowModal = (eventsItem) => {
-    updateEventsItemForm.reset(eventsItem);
+  const onShowModal = (event) => {
+    updateEventsItemForm.reset(event);
     setShowModal(true);
   };
 
@@ -156,6 +156,7 @@ const EventsPage = () => {
         handleSubmit={updateEventsItemForm.handleSubmit}
         onSubmit={onSubmitUpdateEventsItem}
         errors={updateEventsItemForm.formState.errors}
+        getValues={updateEventsItemForm.getValues}
       />
 
       <CreateEventsItemModal

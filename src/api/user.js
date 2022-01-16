@@ -21,8 +21,11 @@ const User = {
         });
     },
     getAuthenticatedUser: () => {
-        return api.get(`auth/user`).then(response => {console.log(response); return response.data.user});
+        return api.get(`/auth/user`).then(response => {console.log(response); return response.data.user});
     },
+    getUsers: () => {
+        return api.get('/users').then(res => res.data)
+    }
 };
 
 export default User;
