@@ -43,13 +43,6 @@ const NavbarHome = () => {
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              {/* <Nav.Link
-                eventKey={ROUTES.DONATIONS}
-                onClick={() => router.push(ROUTES.DONATIONS)}
-                disabled={router.pathname === ROUTES.DONATIONS}
-              >
-                Donaciones
-              </Nav.Link> */}
               <NavDropdown title="Donaciones" id="nav-dropdown-donaciones">
                 <NavDropdown.Item
                   onClick={() => router.push(ROUTES.CLOTHES_DONATIONS)}
@@ -79,11 +72,11 @@ const NavbarHome = () => {
             </Nav.Item>
             <Nav.Item>
               <Nav.Link
-                eventKey={ROUTES.GAMES}
-                onClick={() => router.push(ROUTES.GAMES)}
-                disabled={router.pathname === ROUTES.GAMES}
+                eventKey={ROUTES.QUESTIONNAIRES}
+                onClick={() => router.push(ROUTES.QUESTIONNAIRES)}
+                disabled={router.pathname === ROUTES.QUESTIONNAIRES}
               >
-                Juegos
+                Cuestionarios
               </Nav.Link>
             </Nav.Item>
             {isLoggedIn ? (

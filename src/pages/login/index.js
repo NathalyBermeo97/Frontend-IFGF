@@ -8,6 +8,7 @@ import * as yup from "yup";
 import { ERROR_MESSAGES } from "../../constants/inidex";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
+import { useAuth } from "../../context/AuthContext";
 
 const loginSchema = yup.object().shape({
   email: yup

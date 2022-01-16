@@ -34,7 +34,7 @@ export async function getServerSideProps(context) {
     return {
       props: { events },
     };
-  } catch (error) {
+  } catch (e) {
     console.log("Something went wrong", e);
   }
 }

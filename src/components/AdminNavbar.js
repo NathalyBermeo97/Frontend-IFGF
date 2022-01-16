@@ -82,11 +82,11 @@ export const AdminNavbar = () => {
             </Nav.Item>
             <Nav.Item>
               <Nav.Link
-                eventKey={ROUTES.ADMIN_GAMES}
-                onClick={() => router.push(ROUTES.ADMIN_GAMES)}
-                disabled={router.pathname === ROUTES.ADMIN_GAMES}
+                eventKey={ROUTES.ADMIN_QUESTIONNAIRES}
+                onClick={() => router.push(ROUTES.ADMIN_QUESTIONNAIRES)}
+                disabled={router.pathname === ROUTES.ADMIN_QUESTIONNAIRES}
               >
-                Juegos
+                Cuestionarios
               </Nav.Link>
             </Nav.Item>
             {isLoggedIn ? (
