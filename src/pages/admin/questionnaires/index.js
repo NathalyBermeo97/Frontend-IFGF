@@ -1,12 +1,14 @@
+import { useRouter } from "next/router";
 import { Button } from "react-bootstrap";
 import { ListOfQuestionnaires } from "../../../components/ListOfQuestionnaires";
+import { ROUTES } from "../../../constants/routes";
 import { withPrivate } from "../../../hocs/withPrivate";
 import { useQuestionnaire } from "../../../hooks/useQuestionnaire";
 import styles from './style.module.css'
 
 const Questionnaires = () => {
   const { questionnaires } = useQuestionnaire();
-  console.log({ questionnaires });
+  const router = useRouter()
   return (
     <>
       <div className={styles.header}>
@@ -14,7 +16,7 @@ const Questionnaires = () => {
         <Button
           variant="outline-primary"
           size="sm"
-          onClick={() => {}}
+          onClick={() => router.push(ROUTES.CREATE_QUESTIONNAIRE)}
         >
           Crear
         </Button>
