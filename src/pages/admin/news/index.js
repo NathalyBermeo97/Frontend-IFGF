@@ -73,9 +73,14 @@ const NewsPage = () => {
       setNews((prevState) => [...prevState, newNewsItem]);
       setShowCreateNewsItemModal(false);
       reset();
+
     }catch(e){
       console.log('something went wrong', e)
     }
+
+
+
+
   };
 
   const onSubmitUpdateNewsItem = (data) => {

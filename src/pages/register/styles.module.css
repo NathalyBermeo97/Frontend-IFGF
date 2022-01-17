@@ -1,19 +1,20 @@
-.head {
-    background: rgba(155, 192, 231, 0.84);
-    padding-top: 5px
+.body{
+    background-color: #ffffff;
 }
 .title {
     color: #ffffff;
 }
-
+.head {
+    background: rgba(155, 192, 231, 0.84);
+    padding-top: 5px
+}
 .button {
-
     background: #408bd7;
     justify-content: center;
     margin: 5%;
 }
-
 .form {
+
     margin: 5% 35%;
     width: 500px;
     text-align: center;
@@ -21,6 +22,7 @@
     border: rgb(64, 139, 215) 3px solid;
     border-radius: 10px;
     box-shadow: 0px 0px 5px 1px rgba(155, 192, 231, 0.84)
+
 }
 
 .createAccount{
@@ -32,17 +34,18 @@
     color:#0c94ff
 }
 
-.registerInputs{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.loginButtons{
     padding: 15px;
+    display: flex;
+    justify-content: center;
     gap: 10px;
 }
-
-.registerButtons{
+.inputs{
+    background: rgba(155, 192, 231, 0.84);
+    margin-top: 10px;
+}
+.card{
+    width: 900px;
+    text-align: center;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 15px;
 }

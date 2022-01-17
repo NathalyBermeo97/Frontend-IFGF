@@ -1,5 +1,6 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { DonationItem } from "./DonationItem";
+import React from "react";
 
 export const ListOfDonations = ({ donations, onShowModal }) => {
   return (

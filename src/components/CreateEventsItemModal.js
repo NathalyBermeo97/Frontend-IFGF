@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Modal, Form, InputGroup } from "react-bootstrap";
+import {router} from "next/client";
 
 export const CreateEventsItemModal = ({
   showModal,
@@ -113,7 +114,7 @@ export const CreateEventsItemModal = ({
         <Button variant="secondary" onClick={handleClose}>
           Cerrar
         </Button>
-        <Button form="create-events-form" variant="primary" type="submit">
+        <Button form="create-events-form" variant="primary" type="submit" >
           Guardar
         </Button>
       </Modal.Footer>

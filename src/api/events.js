@@ -1,5 +1,6 @@
 import api from "./api";
 
+
 const Events = {
     get: () => {
         return api.get("/events").then(response => response.data);

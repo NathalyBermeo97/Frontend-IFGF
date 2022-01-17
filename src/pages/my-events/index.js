@@ -3,6 +3,7 @@ import { EventModal } from "../../components/EventModal";
 import { ListOfEvents_ } from "../../components/ListOfEvents_";
 import { withPrivate } from "../../hocs/withPrivate";
 import { useEvents } from "../../hooks/useEvents";
+import styles from "../../styles/indexHome.module.css";
 
 const MyEventsPage = () => {
   const { userEvents } = useEvents();
@@ -22,6 +23,11 @@ const MyEventsPage = () => {
     );
   return (
     <>
+      <div>
+        <h1 className={styles.section}>Mis eventos</h1>
+        <div className={styles.linea}></div>
+      </div>
+      <br />
       <ListOfEvents_ events={userEvents} onShowModal={onShowModal} />;
       <EventModal isOpen={isOpen} event={event} setIsOpen={setIsOpen} />
     </>

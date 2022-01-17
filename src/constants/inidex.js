@@ -1,5 +1,5 @@
 export const SERVER_RESPONSE = {
-    SUCCESFUL_USER_REGISTRATION: "Usuario registrado con exito",
+    SUCCESFUL_USER_REGISTRATION: "Usuario registrado con éxito",
     NEWS_ITEM_CREATED: 'registro de donación correctamente'
 }
 
@@ -9,5 +9,6 @@ export const ERROR_MESSAGES = {
     REQUIRED: (field) => `El campo ${field} es requerido`,
     NUMBER: (field) => `El campo ${field} debe ser un número`,
     MIN_STRING: (field, min) => `El campo ${field} debe tener al menos ${min} caracteres`,
-    MAX_STRING: (field, max) => `El campo ${field} debe tener como máximo ${max} caracteres`
+    MAX_STRING: (field, max) => `El campo ${field} debe tener como máximo ${max} caracteres`,
+    MAX_NUMBER: (field, max) => `El campo ${field} debe tener como máximo ${max} dígitos`
 }

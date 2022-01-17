@@ -23,14 +23,16 @@ export const DonationItem = ({ donation, onShowModal }) => {
         <Card.Body>
           <Card.Title>Donación de {donation.type}</Card.Title>
           <Card.Text>
-            {role === USER_ROLES.ADMIN ? `Por: ${donation?.user_id}` : ""}
+
             <p>Estado:{" "}
             {donation.status === "undefined" ? (
               <Badge bg="secondary">Sin definir</Badge>
             ) : (
               <Badge bg={bg}>{donation.status}</Badge>
             )}</p>
-            <p>{donation.description}</p>
+            <p style={{fontWeight: 'bold'}}>Descripción:</p><p> {donation.description}</p>
+            <p style={{fontWeight: 'bold'}}>Entrega:</p><p> {donation.delivery} </p>
+            <p style={{fontWeight: 'bold'}}>Dirección:</p><p> {donation.address} </p>
             {donation.message ? (
               <>
                 <p style={{fontWeight: 'bold'}}>Comentario de retroalimentación:</p>

@@ -10,7 +10,6 @@ import { useAlbums } from "../hooks/useAlbums";
 import { useMessages } from "../hooks/useMessages";
 import { Col, Row, Button, Container } from "react-bootstrap";
 import CarouselEventos from "../components/CarouselEventos";
-import Loading from "../components/loading";
 
 const Home = ({}) => {
   const { news } = useNews();
@@ -39,11 +38,13 @@ const Home = ({}) => {
               </Link>
             </div>
           </Col>
-          <Col  style={{
-            justifyContent: "center",
-            display: "flex",
-            marginTop: "30px",
-          }}>
+          <Col
+            style={{
+              justifyContent: "center",
+              display: "flex",
+              marginTop: "30px",
+            }}
+          >
             <CarouselEventos />
           </Col>
         </Row>
@@ -54,13 +55,34 @@ const Home = ({}) => {
         </div>
         <Col>
           <News news={news} />
+          <div className={styles.infonews}>
+            <Link href="/news">
+              <Button type="button" className={styles.button}>
+                Ir a noticias
+              </Button>
+            </Link>
+          </div>
         </Col>
 
         <Col className="container">
           <Messages messages={messages} />
+          <div className={styles.infonews}>
+            <Link href="/messages">
+              <Button type="button" className={styles.button}>
+                Ir a mensajes bíblicos
+              </Button>
+            </Link>
+          </div>
         </Col>
         <Col className="container">
           <Albums albums={albums} />
+          <div className={styles.infonews}>
+            <Link href="/albums">
+              <Button type="button" className={styles.button}>
+                Ir a albums de fotos
+              </Button>
+            </Link>
+          </div>
         </Col>
         <div>
           <h1 className={styles.section}>Visita nuestras instalaciones</h1>
