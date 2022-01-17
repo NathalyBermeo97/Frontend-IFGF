@@ -13,20 +13,20 @@ export function UserContextProvider({ children }) {
   const [role, setRole] = useState(null);
   const [currentUser, setCurrentUser] = useState(USER_STATES.NOT_KNOWN);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
-  const [users, setUsers] = useState()
+  const [users, setUsers] = useState();
 
   console.log({ currentUser, users });
   useEffect(() => {
-      const getUsers = async () => {
-        try{
-          const users = await User.getUsers()
-          setUsers(users)
-        }catch(e){
-          console.log('something went wrong', e)
-        }
+    const getUsers = async () => {
+      try {
+        const users = await User.getUsers();
+        setUsers(users);
+      } catch (e) {
+        console.log("something went wrong", e);
       }
-      getUsers()
-  }, [])
+    };
+    getUsers();
+  }, []);
 
   useEffect(() => {
     const initializeAuth = async () => {
@@ -61,9 +61,9 @@ export function UserContextProvider({ children }) {
         window.localStorage.setItem("role", res.data.role);
         api.defaults.headers.common["x-access-token"] = token;
         setRole(res.data.role);
-        delete res.data.token
-        const user = res.data
-        setCurrentUser(user)
+        delete res.data.token;
+        const user = res.data;
+        setCurrentUser(user);
       })
       .catch((err) => {
         console.log("something went wrong", err);
@@ -83,11 +83,19 @@ export function UserContextProvider({ children }) {
     }
   };
 
-  const register = async ({ name, lastName, email, password, roles }) => {
+  const register = async ({
+    name,
+    lastname,
+    cellphone,
+    email,
+    password,
+    roles,
+  }) => {
     try {
       const res = await User.register({
         name,
-        lastname: lastName,
+        lastname,
+        cellphone,
         email,
         password,
         roles,
@@ -109,7 +117,7 @@ export function UserContextProvider({ children }) {
         isLoggedIn: Boolean(currentUser),
         role,
         isCheckingAuth,
-        users
+        users,
       }}
     >
       {children}

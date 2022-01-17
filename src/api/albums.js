@@ -9,6 +9,9 @@ const Albums = {
     },
     update: (id, newObject) => {
         return api.put(`/albums/${id}`, newObject)
+    },
+    delete: (id) => {
+        return api.delete(`/albums/${id}`)
     }
 };
 

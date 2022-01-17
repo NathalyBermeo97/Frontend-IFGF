@@ -1,21 +1,13 @@
-import React, { useState, useEffect } from "react";
-import styles from "../../styles/style.module.css";
-import Videoscards from "../../components/Videoscards";
-import { withPrivate } from "../../hocs/withPrivate";
-import {FormControl, ListGroup} from "react-bootstrap";
+import React, {useEffect, useState} from "react";
+import { useVideos } from "../../hooks/useVideos";
+import {Col, Row, Button, Container, Card, InputGroup, FormControl} from "react-bootstrap";
+import styles from "../../styles/events.module.css";
+import {ListOfVideosPage} from "../../components/ListOfVideosPage";
 
-const Videos = ({}) => {
-  const [videos, setVideos] = useState([]);
+const url = "https://backend-ifgf.herokuapp.com/";
 
-  useEffect(() => {
-    const getVideos = () => {
-      fetch("https://backend-ifgf.herokuapp.com/api/videos")
-          .then((res) => res.json())
-          .then((res) => setVideos(res));
-    };
-    getVideos();
-  }, []);
-
+const HomeVideos = ({}) => {
+  const { videos } = useVideos();
     const [keyword, setKeyword] = useState("");
     const [filteredVideos, setFilteredVideos] = useState([]);
 
@@ -26,31 +18,42 @@ const Videos = ({}) => {
         setFilteredVideos(filteredVideos);
     }, [keyword, videos]);
 
-
-    return (
-      <body className={styles.body}>
-      <div className={styles.form}>
-        <div className={styles.events}>
+  return (
+      <>
+        <div className={styles.news}>
           <h1 className={styles.section}>Videos</h1>
           <div className={styles.linea}></div>
         </div>
-          <FormControl
-              placeholder="Buscar video"
-              aria-label="search_new"
-              aria-describedby="basic-addon1"
-              value={keyword}
-              onChange={(e) => setKeyword(e.target.value)}
-          />
-      </div>
-      <div className="container">
-        <Videoscards videos={videos} />
-      </div>
+        <Container>
+            <InputGroup className="mb-3" style={{ padding: "15px" }}>
+                <FormControl
+                    placeholder="Buscar video"
+                    aria-label="search_new"
+                    aria-describedby="basic-addon1"
+                    value={keyword}
+                    onChange={(e) => setKeyword(e.target.value)}
+                />
+            </InputGroup>
+          <Row>
+            <Col
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  gap: "15px 0px",
+                }}
+            >
+
+                <ListOfVideosPage
+
+                    videos={filteredVideos}
+                />
 
 
-    </body>
 
+            </Col>
+          </Row>
+        </Container>
+      </>
   );
 };
-
-export default withPrivate(Videos);
-
+export default HomeVideos;

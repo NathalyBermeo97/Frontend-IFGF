@@ -1,52 +1,33 @@
-import React, { useEffect, useState } from "react";
-import styles from "../styles/videos.module.css";
-import api from "../api/api";
+import { Badge, Button, Card, Col } from "react-bootstrap";
+import React from "react";
 import ReactPlayer from "react-player";
-import { Card, Form, Button, Container, Row, Col } from "react-bootstrap";
 
-
-const Videoscards = ({ videos }) => {
-
+export const Videoscards = ({ videos }) => {
+  console.log({ videos});
 
   return (
-    <>
-
-      <div className={styles.videos}>
-        {videos.map((video) => (
-          <Card key={video._id} className={styles.cardVideo}>
+      <Col
+          style={{
+            justifyContent: "center",
+            display: "flex",
+          }}
+      >
+        <Card style={{ width: "40em",height: "30em" }}>
+          <ReactPlayer
+              url={videos.url}
+              className="react-player"
+              controls
+              width="40em"
+              height="25em"
+          />
+          <Card.Body>
             <Card.Body>
-              <Card.Title className={styles.title}>{video.title}</Card.Title>
-              <div>{video.description}</div>
-              <div>{video.type}</div>
-
-              <ReactPlayer
-                url={video.url}
-                className="react-player"
-                controls
-                width="40em"
-                height="25em"
-              />
+              <Card.Title>{videos.title}</Card.Title>
+              <Card.Text>{videos.description}</Card.Text>
             </Card.Body>
-          </Card>
-        ))}
-      </div>
-    </>
+          </Card.Body>
+        </Card>
+      </Col>
   );
 };
-export default Videoscards;
-export async function getStaticProps() {
-  let videos = [];
-  try {
-    const response = await api.get("videos");
-    console.log("response", response);
-    videos = response.data.data;
-  } catch (e) {
-    console.log(e);
-  }
 
-  return {
-    props: {
-      videos,
-    },
-  };
-}

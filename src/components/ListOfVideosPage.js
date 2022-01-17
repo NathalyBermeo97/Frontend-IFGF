@@ -1,8 +1,9 @@
 import React from "react";
 import {Button, Container, ListGroup, Row} from "react-bootstrap";
-import {VideosItem} from "./VideosItem";
+import {Videoscards} from "./Videoscards";
 
-export const ListOfVideos = ({ videos, onShowModal, onShowEditModal }) => {
+
+export const ListOfVideosPage = ({ videos}) => {
     return (
         <Container>
             <Row
@@ -13,11 +14,9 @@ export const ListOfVideos = ({ videos, onShowModal, onShowEditModal }) => {
                 }}
             >
                 {videos?.map((videos) => (
-                    <VideosItem
+                    <Videoscards
                         key={videos._id}
                         videos={videos}
-                        onShowModal={onShowModal}
-                        onShowEditModal={onShowEditModal}
                     />
                 ))}
             </Row>

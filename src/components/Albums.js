@@ -23,7 +23,10 @@ const Albums = ({ albums }) => {
             className={styles.course}
             style={{ width: "15rem", height: "25rem" }}
           >
-            <Card.Img src={url + item.imgURL} variant="top" />
+              <Card.Img
+                  variant="top"
+                  src="https://us.123rf.com/450wm/bestvectorstock/bestvectorstock1808/bestvectorstock180806895/107283376-vector-de-icono-de-c%C3%A1mara-de-foto-digital-aislado-sobre-fondo-blanco-para-su-dise%C3%B1o-web-y-aplicacion.jpg?ver=6"
+              />
             <Card.Body>
               <Card.Title className={styles.name}>{item.title}</Card.Title>
               <Card.Text className={styles.description}>

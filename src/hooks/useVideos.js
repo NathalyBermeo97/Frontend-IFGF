@@ -19,7 +19,7 @@ export const useVideos = () => {
     const updateVideos = async (id, newVideosItem) => {
         try{
             const response = await Videos.update(id, newVideosItem)
-            return response.data.message
+            return response.data
         }catch(e){
             console.log('Something went wrong', e)
         }

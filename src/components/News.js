@@ -14,6 +14,8 @@ const News = ({ news }) => {
           gap: "15px 0px",
         }}
       >
+
+
         <h1>Noticias</h1>
 
         {news.slice(0,3).map((item) => (
@@ -22,7 +24,10 @@ const News = ({ news }) => {
             className={styles.course}
             style={{ width: "15rem", height: "25rem" }}
           >
-            <Card.Img src={url + item.imgURL} variant="top" />
+              <Card.Img
+                  variant="top"
+                  src="https://thumbs.dreamstime.com/b/muestra-y-s%C3%ADmbolo-del-vector-icono-de-las-noticias-aislados-en-el-fondo-blanco-concepto-logotipo-133757450.jpg"
+              />
             <Card.Body>
               <Card.Title className={styles.name}>{item.title}</Card.Title>
               <Card.Text className={styles.description}>

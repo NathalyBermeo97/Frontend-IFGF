@@ -8,7 +8,9 @@ import * as yup from "yup";
 import { ERROR_MESSAGES } from "../../constants/inidex";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
-import {useAuth} from "../../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
+import swal from "sweetalert"
+
 
 const loginSchema = yup.object().shape({
   email: yup
@@ -25,6 +27,9 @@ const loginSchema = yup.object().shape({
 const LoginPage = () => {
   const { login } = useAuth();
   const router = useRouter();
+  const Alert=()=>{
+    swal("Bienvenido")
+  }
 
   const onSubmit = (data) => {
     console.log({ data });
@@ -108,7 +113,7 @@ const LoginPage = () => {
                   </Form.Control.Feedback>
                 </Form.Group>
                 <div className={styles.loginButtons}>
-                  <Button variant="outlined" size="medium" type="submit">
+                  <Button variant="outlined" size="medium" type="submit" onClick={()=>Alert()}>
                     Ingresar
                   </Button>
 

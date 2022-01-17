@@ -12,10 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 
 const videosItemSchema = yup.object().shape({
-  title: yup
-    .string()
-    .required(ERROR_MESSAGES.REQUIRED("título"))
-    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+
   description: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("descripción"))
@@ -76,16 +73,17 @@ const VideosPage = () => {
   console.log({ errors });
   const onSubmit = (data) => {
     console.log(data);
-    createVideosItem(data).then((message) => {
-      if (message === SERVER_RESPONSE.NEWS_ITEM_CREATED) {
+    createVideosItem(data).then((newVideo) => {
+        console.log({newVideo})
         //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
         setVideos((prevState) => [
           ...prevState,
-          { _id: Math.floor(Math.random() * 1000000000000), ...data },
+          newVideo
+
         ]);
         setShowCreateVideosItemModal(false);
         reset();
-      }
+
     });
     {
       /*setVideos((prevState) => [
@@ -97,16 +95,17 @@ const VideosPage = () => {
     }
   };
 
+
   const onSubmitUpdateVideosItem = (data) => {
     const { _id: id } = data;
-    updateVideos(id, data).then((message) => {
-      if (message === "Video actualizado correctamente") {
-        const newVideos = videos.map((newsItem) =>
-          newsItem._id === data._id ? data : newsItem
+    updateVideos(id, data).then((newVideo) => {
+
+        const newVideos = videos.map((video) =>
+          video._id === newVideo._id ? newVideo : video
         );
         setVideos(newVideos);
         setShowModal(false);
-      }
+
     });
 
     {
@@ -141,16 +140,14 @@ const VideosPage = () => {
         />
       </InputGroup>
 
-      <ListGroup as="ol" numbered>
-        {filteredVideos.map((videosItem) => (
+
           <ListOfVideos
-            key={videosItem._id}
-            videosItem={videosItem}
+
+            videos={filteredVideos}
             onShowModal={onShowModal}
             handleDelete={handleDelete}
           />
-        ))}
-      </ListGroup>
+
 
       <UpdateVideosItemModal
         show={showModal}

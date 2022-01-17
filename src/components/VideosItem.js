@@ -1,8 +1,9 @@
 import { Badge, Button, Card, Col } from "react-bootstrap";
 import React from "react";
+import ReactPlayer from "react-player";
 
-export const NewsItem = ({ news, onShowModal, handleDelete  }) => {
-    console.log({ news });
+export const VideosItem = ({ videos, onShowModal, handleDelete  }) => {
+    console.log({ videos});
 
     return (
         <Col
@@ -12,14 +13,17 @@ export const NewsItem = ({ news, onShowModal, handleDelete  }) => {
             }}
         >
             <Card style={{ width: "18rem" }}>
-                <Card.Img
-                    variant="top"
-                    src="https://thumbs.dreamstime.com/b/muestra-y-s%C3%ADmbolo-del-vector-icono-de-las-noticias-aislados-en-el-fondo-blanco-concepto-logotipo-133757450.jpg"
+                <ReactPlayer
+                    url={videos.url}
+                    className="react-player"
+                    controls
+                    width="20em"
+                    height="10em"
                 />
                 <Card.Body>
                     <Card.Body>
-                        <Card.Title>{news.title}</Card.Title>
-                        <Card.Text>{news.description}</Card.Text>
+                        <Card.Title>{videos.title}</Card.Title>
+                        <Card.Text>{videos.description}</Card.Text>
                         <div
                             style={{
                                 display: "flex",
@@ -27,14 +31,14 @@ export const NewsItem = ({ news, onShowModal, handleDelete  }) => {
                                 gap: "0px 5px",
                             }}
                         >
-                            <Button size="sm" onClick={() => onShowModal(news)}>
+                            <Button size="sm" onClick={() => onShowModal(videos)}>
                                 Editar
                             </Button>
                             <br />
                             <Button
                                 size="sm"
                                 variant="danger"
-                                onClick={() => handleDelete(news._id)}
+                                onClick={() => handleDelete(videos._id)}
                             >
                                 Eliminar
                             </Button>

@@ -67,26 +67,22 @@ const MessagesPage = () => {
   };
 
   console.log({ errors });
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-    // createNewsItem(data).then((message) => {
-    //   if (message === SERVER_RESPONSE.NEWS_ITEM_CREATED) {
-    //     //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
-    //     setNews((prevState) => [
-    //       ...prevState,
-    //       { _id: Math.floor(Math.random() * 1000000000000), ...data },
-    //     ]);
-    //     setShowCreateNewsItemModal(false);
-    //     reset();
-    //   }
-    // });
-    setMessages((prevState) => [
-      ...prevState,
-      { _id: Math.floor(Math.random() * 1000000000000), ...data },
-    ]);
-    setShowCreateMessagesItemModal(false);
-    reset();
+    createMessagesItem(data).then((data) => {
+      if (data) {
+        //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
+        setMessages((prevState) => [
+          ...prevState,
+          { _id: Math.floor(Math.random() * 1000000000000), ...data },
+        ]);
+        setShowCreateMessagesItemModal(false);
+        reset();
+      }
+    });
+
   };
+
 
   const onSubmitUpdateMessagesItem = (data) => {
     const { _id: id } = data;
@@ -130,8 +126,7 @@ const MessagesPage = () => {
       </InputGroup>
 
       <ListOfMessages
-        key={messages._id}
-        messages={messages}
+          messages={filteredMessages}
         onShowModal={onShowModal}
         handleDelete={handleDelete}
       />

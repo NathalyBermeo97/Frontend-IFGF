@@ -7,8 +7,9 @@ export const UpdateNewsItemModal = ({
   handleSubmit,
   onSubmit,
   errors,
+
 }) => {
-  const handleClose = () => setShowModal(false)
+  const handleClose = () => setShowModal(false);
 
   return (
     <Modal show={show} onHide={handleClose}>

@@ -68,31 +68,28 @@ const NewsPage = () => {
   console.log({ errors });
 
   const onSubmit = async (data) => {
-    try{
-      const newNewsItem = await createNewsItem(data);
-      setNews((prevState) => [...prevState, newNewsItem]);
-      setShowCreateNewsItemModal(false);
-      reset();
-
-    }catch(e){
-      console.log('something went wrong', e)
-    }
-
-
-
-
+    console.log(data);
+    createNewsItem(data).then((data) => {
+      if (data) {
+        //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
+        setNews((prevState) => [
+          ...prevState,
+          { _id: Math.floor(Math.random() * 1000000000000), ...data },
+        ]);
+        setShowCreateNewsItemModal(false);
+        reset();
+      }
+    });
   };
 
   const onSubmitUpdateNewsItem = (data) => {
-    const { _id: id } = data;
-    updateNews(id, data).then((message) => {
-      if (message === "Noticia actualizada correctamente") {
-        const newNews = news.map((newsItem) =>
-          newsItem._id === data._id ? data : newsItem
-        );
-        setNews(newNews);
-        setShowModal(false);
-      }
+    const {_id: id} = data;
+    updateNews(id, data).then((returnedNews) => {
+      const newNews = news.map((item) =>
+          item._id === returnedNews._id ? returnedNews : item
+      );
+      setNews(newNews);
+      setShowModal(false);
     });
   };
 
@@ -121,7 +118,7 @@ const NewsPage = () => {
 
 
           <ListOfNews
-            news={news}
+             news={filteredNews}
             onShowModal={onShowModal}
             handleDelete={handleDelete}
           />
@@ -134,6 +131,7 @@ const NewsPage = () => {
         handleSubmit={updateNewsItemForm.handleSubmit}
         onSubmit={onSubmitUpdateNewsItem}
         errors={updateNewsItemForm.formState.errors}
+        getValues={updateNewsItemForm.getValues}
       />
 
       <CreateNewsItemModal
