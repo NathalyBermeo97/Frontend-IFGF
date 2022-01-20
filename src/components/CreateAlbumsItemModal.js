@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Button, Modal, Form, InputGroup } from "react-bootstrap";
+
 
 export const CreateAlbumsItemModal = ({
   showModal,
@@ -14,6 +15,7 @@ export const CreateAlbumsItemModal = ({
     setShowModal(false);
     clearErrors();
   };
+
 
   return (
     <Modal show={showModal} onHide={handleClose}>
@@ -51,6 +53,14 @@ export const CreateAlbumsItemModal = ({
             <Form.Control.Feedback type="invalid">
               {errors.description?.message}
             </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Imagen</Form.Label>
+            <Form.Control
+                name="file"
+                type="file"
+                {...register("file")}
+            />
           </Form.Group>
         </Form>
       </Modal.Body>

@@ -1,7 +1,7 @@
 import { Badge, Button, Card, Col } from "react-bootstrap";
 import { USER_ROLES } from "../constants/userRoles";
 import { useAuth } from "../context/AuthContext";
-
+const URL = "http://localhost:3030/";
 export const DonationItem = ({ donation, onShowModal }) => {
   console.log({ donation });
   const { role } = useAuth();
@@ -16,9 +16,9 @@ export const DonationItem = ({ donation, onShowModal }) => {
       }}
     >
       <Card style={{ width: "18rem" }}>
+
         <Card.Img
-          variant="top"
-          src="https://miro.medium.com/max/1200/1*4XRAX4obUOvMVqWibVCneQ.jpeg"
+            src={URL+donation.imgURL}
         />
         <Card.Body>
           <Card.Title>Donación de {donation.type}</Card.Title>

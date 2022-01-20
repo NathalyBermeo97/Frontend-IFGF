@@ -2,7 +2,8 @@ import React from "react";
 import { useNews } from "../../hooks/useNews";
 import { Col, Row, Button, Container, Card } from "react-bootstrap";
 import styles from "../../styles/events.module.css";
-const url = "https://backend-ifgf.herokuapp.com/";
+import NewsPage from "../../components/NewsPage";
+
 
 const HomeNews = ({}) => {
   const { news } = useNews();
@@ -14,29 +15,15 @@ const HomeNews = ({}) => {
         <div className={styles.linea}></div>
       </div>
       <Container>
-        <Row>
+        <Row style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "15px 0px",
+        }}>
           <Col
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              gap: "15px 0px",
-            }}
           >
-            {news.map((item) => (
-              <Card
-                key={item._id}
-                className={styles.course}
-                style={{ width: "15rem", height: "25rem" }}
-              >
-                <Card.Img src={url + item.imgURL} variant="top" />
-                <Card.Body>
-                  <Card.Title className={styles.name}>{item.title}</Card.Title>
-                  <Card.Text className={styles.description}>
-                    {item.description}
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            ))}
+
+             <NewsPage news={news}/>
           </Col>
         </Row>
       </Container>

@@ -8,6 +8,7 @@ import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
 import {Button, Card, Col, Container, Form, Row} from "react-bootstrap";
+import swal from "sweetalert";
 
 const registerSchema = yup.object().shape({
     name: yup
@@ -37,7 +38,9 @@ const RegisterPage = () => {
 
     const { register: doRegister } = useAuth();
     const router = useRouter();
-
+    const Alert=()=>{
+        swal("Usuario registrado")
+    }
 
     const onSubmit = (data) => {
 
@@ -166,7 +169,7 @@ const RegisterPage = () => {
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <div className={styles.loginButtons}>
-                                    <Button variant="outlined" size="medium" type="submit">
+                                    <Button variant="outlined" size="medium" type="submit" onClick={()=>Alert()}>
                                         Registrarse
                                     </Button>
 

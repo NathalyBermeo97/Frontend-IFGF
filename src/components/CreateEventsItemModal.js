@@ -54,12 +54,12 @@ export const CreateEventsItemModal = ({
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Ubicación</Form.Label>
+            <Form.Label>Dirección</Form.Label>
             <Form.Control
               style={{ height: "50px" }}
               as="textarea"
               type="text"
-              placeholder="Ingresar la ubicación del evento "
+              placeholder="Ingresar la dirección del evento "
               {...register("location")}
               isInvalid={!!errors.location?.message}
             />
@@ -107,6 +107,14 @@ export const CreateEventsItemModal = ({
             <Form.Control.Feedback type="invalid">
               {errors.number?.message}
             </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Imagen</Form.Label>
+            <Form.Control
+                name="file"
+                type="file"
+                {...register("file")}
+            />
           </Form.Group>
         </Form>
       </Modal.Body>

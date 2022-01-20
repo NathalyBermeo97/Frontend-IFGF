@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row } from "react-bootstrap";
 import { EventItem } from "./EventItem";
 
-export const ListOfEvents_ = ({events, onShowModal, onShowEditModal}) => {
+export const ListOfEvents_ = ({events, onShowModal, onShowEditModal,handleDelete}) => {
   return (
     <Container>
       <Row
@@ -18,6 +18,7 @@ export const ListOfEvents_ = ({events, onShowModal, onShowEditModal}) => {
             event={event}
             onShowModal={onShowModal}
             onShowEditModal={onShowEditModal}
+            handleDelete={handleDelete}
           />
         ))}
       </Row>

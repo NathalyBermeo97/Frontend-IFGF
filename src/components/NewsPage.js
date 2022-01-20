@@ -1,10 +1,11 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "../styles/events.module.css";
-const URL = "http://localhost:3030/";
+const url = "https://backend-ifgf.herokuapp.com/";
 import api from "../api/api";
 import { Card, Col, Container, Row } from "react-bootstrap";
-const News = ({ news }) => {
+
+const NewsPage = ({ news }) => {
   return (
     <Container>
       <Row
@@ -14,24 +15,29 @@ const News = ({ news }) => {
           gap: "15px 0px",
         }}
       >
-
-
-        <h1>Noticias</h1>
-
-        {news.slice(0,3).map((item) => (
+        {news.slice(0, 8).map((item) => (
           <Card
             key={item._id}
             className={styles.course}
-            style={{ width: "28rem", margin: "20px" }}
+            style={{ width: "15rem", height: "25rem" }}
           >
-              <Card.Img src={URL + item.imgURL} style={{ display: "flex" }} />
+            <Card.Img
+              variant="top"
+              src="https://thumbs.dreamstime.com/b/muestra-y-s%C3%ADmbolo-del-vector-icono-de-las-noticias-aislados-en-el-fondo-blanco-concepto-logotipo-133757450.jpg"
+            />
+            <Card.Body>
+              <Card.Title className={styles.name}>{item.title}</Card.Title>
+              <Card.Text className={styles.description}>
+                {item.description}
+              </Card.Text>
+            </Card.Body>
           </Card>
         ))}
       </Row>
     </Container>
   );
 };
-export default News;
+export default NewsPage;
 export async function getStaticProps() {
   let news = [];
   try {

@@ -52,6 +52,15 @@ export const CreateMessagesItemModal = ({
               {errors.description?.message}
             </Form.Control.Feedback>
           </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Imagen</Form.Label>
+            <Form.Control
+
+                name="file"
+                type="file"
+                {...register("file")}
+            />
+          </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer>

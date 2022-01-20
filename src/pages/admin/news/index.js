@@ -10,6 +10,8 @@ import { ListOfNews } from "../../../components/ListOfNews";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
+import Albums from "../../../api/albums";
+import News from "../../../api/news";
 
 const newsItemSchema = yup.object().shape({
   title: yup
@@ -23,13 +25,13 @@ const newsItemSchema = yup.object().shape({
 });
 
 const NewsPage = () => {
-  const { news, setNews, updateNews, createNewsItem } = useNews();
+  const { news, setNews, updateNews, createNewsItem, deleteNews } = useNews();
   const [showModal, setShowModal] = useState(false);
   const [showCreateNewsItemModal, setShowCreateNewsItemModal] = useState(false);
   const [keyword, setKeyword] = useState("");
   const [filteredNews, setFilteredNews] = useState([]);
 
-  console.log({news})
+  console.log({ news });
   useEffect(() => {
     const filteredNews = news.filter((ni) =>
       ni.title.toLowerCase().includes(keyword.toLowerCase())
@@ -61,36 +63,55 @@ const NewsPage = () => {
   };
 
   const handleDelete = (id) => {
-    const newNews = news.filter((ni) => ni._id !== id);
-    setNews(newNews);
+    deleteNews(id).then((data) => {
+      console.log({ data });
+      if (data.message === SERVER_RESPONSE.DELETED_NEWS) {
+        const newNews = news.filter((item) => item._id !== id);
+        setNews(newNews);
+      }
+    });
   };
 
   console.log({ errors });
 
   const onSubmit = async (data) => {
+    console.log("data", data.file);
     console.log(data);
-    createNewsItem(data).then((data) => {
-      if (data) {
-        //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
-        setNews((prevState) => [
-          ...prevState,
-          { _id: Math.floor(Math.random() * 1000000000000), ...data },
-        ]);
-        setShowCreateNewsItemModal(false);
-        reset();
+
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("file", data.file[0]);
+
+    News.create(formData).then((response) => {
+      const newNewsItem = response.data;
+      const callback =(prevState)=>{
+        return [...prevState,newNewsItem]
       }
+      setNews(callback);
+      setShowCreateNewsItemModal(false);
+      reset();
+    }).catch(error=>{
+      console.log(error)
     });
   };
 
   const onSubmitUpdateNewsItem = (data) => {
-    const {_id: id} = data;
-    updateNews(id, data).then((returnedNews) => {
+    const { _id: id } = data;
+    updateNews(id, data).then((newNew) => {
       const newNews = news.map((item) =>
-          item._id === returnedNews._id ? returnedNews : item
+        item._id === newNew._id ? newNew : item
       );
       setNews(newNews);
       setShowModal(false);
     });
+    {
+      /*const newAlbums = albums.map((albumsItem) =>
+            albumsItem._id === data._id ? data : albumsItem
+        );
+        setAlbums(newAlbums);
+        setShowModal(false);*/
+    }
   };
 
   return (
@@ -116,13 +137,11 @@ const NewsPage = () => {
         />
       </InputGroup>
 
-
-          <ListOfNews
-             news={filteredNews}
-            onShowModal={onShowModal}
-            handleDelete={handleDelete}
-          />
-
+      <ListOfNews
+        news={filteredNews}
+        onShowModal={onShowModal}
+        handleDelete={handleDelete}
+      />
 
       <UpdateNewsItemModal
         show={showModal}
@@ -131,7 +150,6 @@ const NewsPage = () => {
         handleSubmit={updateNewsItemForm.handleSubmit}
         onSubmit={onSubmitUpdateNewsItem}
         errors={updateNewsItemForm.formState.errors}
-        getValues={updateNewsItemForm.getValues}
       />
 
       <CreateNewsItemModal

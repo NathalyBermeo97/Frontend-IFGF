@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "../styles/events.module.css";
-const url = "https://backend-ifgf.herokuapp.com/";
+const URL = "http://localhost:3030/";
 import api from "../api/api";
 import { Card, Container, Row } from "react-bootstrap";
 
@@ -17,22 +17,30 @@ const Albums = ({ albums }) => {
       >
         <h1>Albums</h1>
 
-        {albums.map((item) => (
+        {albums.slice(0,3).map((item) => (
           <Card
             key={item._id}
-            className={styles.course}
-            style={{ width: "15rem", height: "25rem" }}
+            style={{ width: "28rem" ,margin:"20px"}}
+            className="bg-dark text-white"
+
           >
               <Card.Img
-                  variant="top"
-                  src="https://us.123rf.com/450wm/bestvectorstock/bestvectorstock1808/bestvectorstock180806895/107283376-vector-de-icono-de-c%C3%A1mara-de-foto-digital-aislado-sobre-fondo-blanco-para-su-dise%C3%B1o-web-y-aplicacion.jpg?ver=6"
+                  src={URL+item.imgURL}
+                  alt="Card image"
+                  style={{display:"flex"}}
               />
+              <Card.ImgOverlay>
+
             <Card.Body>
-              <Card.Title className={styles.name}>{item.title}</Card.Title>
-              <Card.Text className={styles.description}>
+              <Card.Title >{item.title}</Card.Title>
+
+              <Card.Text >
                 {item.description}
+
               </Card.Text>
+
             </Card.Body>
+              </Card.ImgOverlay>
           </Card>
         ))}
       </Row>

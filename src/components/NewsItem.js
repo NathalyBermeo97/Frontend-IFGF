@@ -1,5 +1,6 @@
 import { Badge, Button, Card, Col } from "react-bootstrap";
 import React from "react";
+const URL = "http://localhost:3030/";
 
 export const NewsItem = ({ news, onShowModal, handleDelete  }) => {
     console.log({ news });
@@ -13,13 +14,14 @@ export const NewsItem = ({ news, onShowModal, handleDelete  }) => {
         >
             <Card style={{ width: "18rem" }}>
                 <Card.Img
-                    variant="top"
-                    src="https://thumbs.dreamstime.com/b/muestra-y-s%C3%ADmbolo-del-vector-icono-de-las-noticias-aislados-en-el-fondo-blanco-concepto-logotipo-133757450.jpg"
+                    src={URL+news.imgURL}
+
                 />
                 <Card.Body>
                     <Card.Body>
                         <Card.Title>{news.title}</Card.Title>
                         <Card.Text>{news.description}</Card.Text>
+
                         <div
                             style={{
                                 display: "flex",

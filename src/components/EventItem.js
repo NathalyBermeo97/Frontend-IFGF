@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { Button, Card, Col } from "react-bootstrap";
 import { ROUTES } from "../constants/routes";
 import { useAuth } from "../context/AuthContext";
+const URL = "http://localhost:3030/";
 
 export const EventItem = ({
   event,
@@ -27,8 +28,7 @@ export const EventItem = ({
     >
       <Card style={{ width: "18rem" }}>
         <Card.Img
-          variant="top"
-          src="https://zetaoptimization.com/wp-content/uploads/2020/10/Event-social-media.jpg"
+            src={URL+event.imgURL}
         />
         <Card.Body>
           <Card.Title>{event.title}</Card.Title>

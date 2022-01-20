@@ -39,10 +39,11 @@
     text-align: center;
 }
 .img{
-    width: 220px;
-    height: 220px;
+    width: 420px;
+    height: 420px;
     display: flex;
-    margin:auto;
+    margin:20px;
+
 
 }
 

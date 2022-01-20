@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import Messages from "../api/messages";
+import News from "../api/news";
 
 
 
@@ -18,7 +19,7 @@ export const useMessages = () => {
     const updateMessages = async (id, newMessagesItem) => {
         try{
             const response = await Messages.update(id, newMessagesItem)
-            return response.data.message
+            return response.data
         }catch(e){
             console.log('Something went wrong', e)
         }
@@ -27,10 +28,18 @@ export const useMessages = () => {
     const createMessagesItem = async (newMessagesItem) => {
         try{
             const response = await Messages.create(newMessagesItem)
-            return response.data.message
+            return response.data
         }catch(e){
             console.log('something went wrong', e)
         }
     }
-    return {messages, setMessages, updateMessages, createMessagesItem};
+    const deleteMessages = async (newMessagesItem) => {
+        try{
+            const response = await Messages.delete(newMessagesItem)
+            return response.data
+        }catch(e){
+            console.log('something went wrong', e)
+        }
+    }
+    return {messages, setMessages, updateMessages, createMessagesItem,deleteMessages};
 };

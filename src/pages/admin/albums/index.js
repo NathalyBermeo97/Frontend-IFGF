@@ -10,6 +10,7 @@ import { ListOfAlbums } from "../../../components/ListOfAlbums";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
+import Albums from "../../../api/albums";
 
 const albumsItemSchema = yup.object().shape({
   title: yup
@@ -23,7 +24,7 @@ const albumsItemSchema = yup.object().shape({
 });
 
 const AlbumsPage = () => {
-  const { albums, setAlbums, updateAlbums, createAlbumsItem } = useAlbums();
+  const { albums, setAlbums, updateAlbums, createAlbumsItem,deleteAlbums } = useAlbums();
   const [showModal, setShowModal] = useState(false);
   const [showCreateAlbumsItemModal, setShowCreateAlbumsItemModal] =
     useState(false);
@@ -46,7 +47,7 @@ const AlbumsPage = () => {
   } = useForm({
     defaultValues: {
       title: "",
-      description: "",
+      description: ""
     },
     resolver: yupResolver(albumsItemSchema),
   });
@@ -61,14 +62,30 @@ const AlbumsPage = () => {
   };
 
   const handleDelete = (id) => {
-    const newAlbums = albums.filter((ni) => ni._id !== id);
-    setAlbums(newAlbums);
+    deleteAlbums(id).then((data) => {
+      console.log({data})
+      if (data.message === SERVER_RESPONSE.DELETED_ALBUMS){
+
+        const newAlbums = albums.filter((album) => album._id !== id);
+        setAlbums(newAlbums);
+      }
+
+    });
   };
 
   console.log({ errors });
 
   const onSubmit = async (data) => {
+    console.log("data",data.file);
     console.log(data);
+
+    const formData = new FormData();
+    formData.append("title",data.title);
+    formData.append("description",data.description);
+    formData.append("file",data.file[0]);
+
+    const response= await Albums.create(formData);
+    console.log("response",response)
     createAlbumsItem(data).then((data) => {
       if (data) {
         //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
@@ -84,14 +101,14 @@ const AlbumsPage = () => {
 
   const onSubmitUpdateAlbumsItem = (data) => {
     const { _id: id } = data;
-    updateAlbums(id, data).then((message) => {
-      if (message === "Album actualizado correctamente") {
-        const newAlbums = albums.map((newsItem) =>
-          newsItem._id === data._id ? data : newsItem
-        );
-        setAlbums(newAlbums);
-        setShowModal(false);
-      }
+    updateAlbums(id, data).then((newAlbum) => {
+
+      const newAlbums = albums.map((album) =>
+          album._id === newAlbum._id ? newAlbum : album
+      );
+      setAlbums(newAlbums);
+      setShowModal(false);
+
     });
     {
       /*const newAlbums = albums.map((albumsItem) =>

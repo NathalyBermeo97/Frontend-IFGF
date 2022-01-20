@@ -1,7 +1,7 @@
 import { withPrivate } from "../../../hocs/withPrivate";
 import { useEffect, useState } from "react";
 import { useMessages } from "../../../hooks/useMessages";
-import { ListGroup, Button, FormControl, InputGroup } from "react-bootstrap";
+import { Button, FormControl, InputGroup } from "react-bootstrap";
 import { UpdateMessagesItemModal } from "../../../components/UpdateMessagesItemModal";
 import styles from "./styles.module.css";
 import { CreateMessagesItemModal } from "../../../components/CreateMessagesItemModal";
@@ -10,6 +10,7 @@ import { ListOfMessages } from "../../../components/ListOfMessages";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
+import Messages from "../../../api/messages";
 
 const messagesItemSchema = yup.object().shape({
   title: yup
@@ -23,7 +24,7 @@ const messagesItemSchema = yup.object().shape({
 });
 
 const MessagesPage = () => {
-  const { messages, setMessages, updateMessages, createMessagesItem } =
+  const { messages, setMessages, updateMessages, createMessagesItem,deleteMessages } =
     useMessages();
   const [showModal, setShowModal] = useState(false);
   const [showCreateMessagesItemModal, setShowCreateMessagesItemModal] =
@@ -47,7 +48,7 @@ const MessagesPage = () => {
   } = useForm({
     defaultValues: {
       title: "",
-      description: "",
+      description: ""
     },
     resolver: yupResolver(messagesItemSchema),
   });
@@ -62,13 +63,30 @@ const MessagesPage = () => {
   };
 
   const handleDelete = (id) => {
-    const newNews = messages.filter((ni) => ni._id !== id);
-    setMessages(newNews);
+    deleteMessages(id).then((data) => {
+      console.log({data})
+      if (data.message === SERVER_RESPONSE.DELETED_MESSAGES){
+
+        const newMessages = messages.filter((message) => message._id !== id);
+        setMessages(newMessages);
+      }
+
+    });
   };
 
   console.log({ errors });
   const onSubmit = async (data) => {
+    console.log("data",data.file);
     console.log(data);
+
+    const formData = new FormData();
+    formData.append("title",data.title);
+    formData.append("description",data.description);
+    formData.append("file",data.file[0]);
+
+    const response= await Messages.create(formData);
+
+    console.log("response",response)
     createMessagesItem(data).then((data) => {
       if (data) {
         //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
@@ -86,20 +104,16 @@ const MessagesPage = () => {
 
   const onSubmitUpdateMessagesItem = (data) => {
     const { _id: id } = data;
-    // updateNews(id, data).then((message) => {
-    //   if (message === "Noticia actualizada correctamente") {
-    //     const newNews = news.map((newsItem) =>
-    //       newsItem._id === data._id ? data : newsItem
-    //     );
-    //     setNews(newNews);
-    //     setShowModal(false);
-    //   }
-    // });
-    const newMessages = messages.map((messagesItem) =>
-      messagesItem._id === data._id ? data : messagesItem
-    );
-    setMessages(newMessages);
-    setShowModal(false);
+    updateMessages(id, data).then((newMessage) => {
+
+      const newMessages = messages.map((message) =>
+          message._id === newMessage._id ? newMessage : message
+      );
+      setMessages(newMessages);
+      setShowModal(false);
+
+    });
+
   };
 
   return (

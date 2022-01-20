@@ -2,7 +2,7 @@ import React from "react";
 import { useAlbums } from "../../hooks/useAlbums";
 import { Col, Row, Button, Container, Card } from "react-bootstrap";
 import styles from "../../styles/events.module.css";
-const url = "https://backend-ifgf.herokuapp.com/";
+const URL = "http://localhost:3030/";
 
 const HomeAlbums = ({}) => {
     const { albums } = useAlbums();
@@ -14,30 +14,41 @@ const HomeAlbums = ({}) => {
                 <div className={styles.linea}></div>
             </div>
             <Container>
-                <Row>
-                    <Col
-                        style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            gap: "15px 0px",
-                        }}
-                    >
-                        {albums.map((item) => (
-                            <Card
-                                key={item._id}
-                                className={styles.course}
-                                style={{ width: "15rem", height: "25rem" }}
-                            >
-                                <Card.Img src={url + item.imgURL} variant="top" />
+                <Row
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        gap: "15px 0px",
+                    }}
+                >
+                    <h1>Albums</h1>
+
+                    {albums.slice(0,3).map((item) => (
+                        <Card
+                            key={item._id}
+                            style={{ width: "28rem" ,margin:"20px"}}
+                            className="bg-dark text-white"
+
+                        >
+                            <Card.Img
+                                src={URL+item.imgURL}
+                                alt="Card image"
+                                style={{display:"flex"}}
+                            />
+                            <Card.ImgOverlay>
+
                                 <Card.Body>
-                                    <Card.Title className={styles.name}>{item.title}</Card.Title>
-                                    <Card.Text className={styles.description}>
+                                    <Card.Title >{item.title}</Card.Title>
+
+                                    <Card.Text >
                                         {item.description}
+
                                     </Card.Text>
+
                                 </Card.Body>
-                            </Card>
-                        ))}
-                    </Col>
+                            </Card.ImgOverlay>
+                        </Card>
+                    ))}
                 </Row>
             </Container>
         </>

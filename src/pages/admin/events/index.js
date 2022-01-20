@@ -5,11 +5,12 @@ import { Button, FormControl, InputGroup } from "react-bootstrap";
 import { UpdateEventsItemModal } from "../../../components/UpdateEventsItemModal";
 import styles from "./styles.module.css";
 import { CreateEventsItemModal } from "../../../components/CreateEventsItemModal";
-import { ERROR_MESSAGES } from "../../../constants/inidex";
+import {ERROR_MESSAGES, SERVER_RESPONSE} from "../../../constants/inidex";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 import { ListOfEvents_ } from "../../../components/ListOfEvents_";
+import Events from "../../../api/events";
 
 const eventsItemSchema = yup.object().shape({
   title: yup
@@ -22,7 +23,7 @@ const eventsItemSchema = yup.object().shape({
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
   location: yup
     .string()
-    .required(ERROR_MESSAGES.REQUIRED("ubicación"))
+    .required(ERROR_MESSAGES.REQUIRED("dirección"))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
   schedule: yup
     .string()
@@ -36,7 +37,7 @@ const eventsItemSchema = yup.object().shape({
 });
 
 const EventsPage = () => {
-  const { events, setEvents, updateEvents, createEventsItem } = useEvents();
+  const { events, setEvents, updateEvents, createEventsItem,deleteEvents} = useEvents();
   const [showModal, setShowModal] = useState(false);
   const [showCreateEventsItemModal, setShowCreateEventsItemModal] =
     useState(false);
@@ -74,13 +75,34 @@ const EventsPage = () => {
   };
 
   const handleDelete = (id) => {
-    const newEvents = events.filter((ni) => ni._id !== id);
-    setEvents(newEvents);
+    deleteEvents(id).then((data) => {
+      console.log({data})
+      if (data.message === SERVER_RESPONSE.DELETED_ALBUMS){
+
+        const newEvents = events.filter((event) => event._id !== id);
+        setEvents(newEvents);
+      }
+
+    });
   };
 
   console.log({ errors });
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    console.log("data",data.file);
     console.log(data);
+
+    const formData = new FormData();
+    formData.append("title",data.title);
+    formData.append("description",data.description);
+    formData.append("location",data.location);
+    formData.append("schedule",data.schedule);
+    formData.append("cost",data.cost);
+    formData.append("number",data.number);
+    formData.append("file",data.file[0]);
+
+    const response= await Events.create(formData);
+    console.log("response",response)
+
     createEventsItem(data).then((data) => {
       if (data) {
         //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE

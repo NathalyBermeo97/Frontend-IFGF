@@ -89,7 +89,16 @@ export const CreateDonationModal = ({
               </Form.Control.Feedback>
             </Form.Group>
           ) : selectValue === "Delivery in Church via transaction" ? (
-            <p>Cuenta de transacción: 17265188XX - Banco XXXXX</p>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Cuenta de transacción: 17265188XX - Banco XXXXX</Form.Label>
+                <br/>
+                <Form.Label>Imagen de la transacción bancaria</Form.Label>
+                <Form.Control
+                    name="file"
+                    type="file"
+                    {...register("file")}
+                />
+              </Form.Group>
           ) : (
             ""
           )}

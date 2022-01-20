@@ -62,6 +62,7 @@ const DonationsPage = () => {
     const address =
       data.address === "no direction no direction " ? "" : data.address;
     const date = new Date(data.date).toISOString();
+
     const parsedData = { ...data, address, description, date };
     createDonation(parsedData).then((newDonation) => {
       setDonations((prevState) => [

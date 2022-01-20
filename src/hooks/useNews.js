@@ -19,7 +19,7 @@ export const useNews = () => {
   const updateNews = async (id, newNewsItem) => {
     try{
       const response = await News.update(id, newNewsItem)
-      return response.data.message
+      return response.data
     }catch(e){
       console.log('Something went wrong', e)
     }
@@ -36,7 +36,7 @@ export const useNews = () => {
   const deleteNews = async (newNewsItem) => {
     try{
       const response = await News.delete(newNewsItem)
-      return response.data.message
+      return response.data
     }catch(e){
       console.log('something went wrong', e)
     }

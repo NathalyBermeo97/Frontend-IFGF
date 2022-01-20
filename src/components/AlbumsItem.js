@@ -1,5 +1,6 @@
 import { Badge, Button, Card, Col } from "react-bootstrap";
 import React from "react";
+const URL = "http://localhost:3030/";
 
 export const AlbumsItem = ({ albums, onShowModal, handleDelete  }) => {
     console.log({ albums });
@@ -13,8 +14,8 @@ export const AlbumsItem = ({ albums, onShowModal, handleDelete  }) => {
         >
             <Card style={{ width: "18rem" }}>
                 <Card.Img
-                    variant="top"
-                    src="https://us.123rf.com/450wm/bestvectorstock/bestvectorstock1808/bestvectorstock180806895/107283376-vector-de-icono-de-c%C3%A1mara-de-foto-digital-aislado-sobre-fondo-blanco-para-su-dise%C3%B1o-web-y-aplicacion.jpg?ver=6"
+                    src={URL+albums.imgURL}
+
                 />
                 <Card.Body>
                     <Card.Title>{albums.title}</Card.Title>
