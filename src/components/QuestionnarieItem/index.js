@@ -3,6 +3,7 @@ import styles from "./style.module.css";
 import { useRouter } from "next/router";
 import { ROUTES } from "../../constants/routes";
 export const QuestionnaireItem = ({ questionnaire }) => {
+  const token = window.localStorage.getItem('jwt')
   const router = useRouter();
   const questionsNumber = questionnaire.questions.length;
   return (
@@ -32,7 +33,7 @@ export const QuestionnaireItem = ({ questionnaire }) => {
             ) : (
               <Button
                 size="sm"
-                onClick={() => router.push(ROUTES.GAME(questionnaire._id))}
+                onClick={() => router.push(ROUTES.GAME(questionnaire._id, token))}
               >
                 Intentar
               </Button>

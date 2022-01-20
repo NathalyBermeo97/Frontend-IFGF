@@ -20,6 +20,18 @@
   padding: 15px 15px;
 }
 
+.deleteOption {
+  padding: 10px;
+  margin: 0px;
+  align-self: center;
+  cursor: pointer;
+}
+
+.deleteOption:hover{
+  background-color:rgb(224, 224, 224);
+  border-radius: 99px
+}
+
 @media (max-width: 580px) {
   .groupForm {
     width: 100%;

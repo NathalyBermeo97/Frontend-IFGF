@@ -11,7 +11,17 @@ export const useQuestionnaire = () => {
       setQuestionnaires(q);
     };
     getQ();
+    console.log('Mounted')
   }, []);
+
+  const createQuestionnaire = async (newQuestionnaire) => {
+    try{
+      const response = await Questionnaires.create(newQuestionnaire)
+      return response.data
+    }catch(e){
+      console.log('something went wrong', e)
+    }
+  }
   
-  return {questionnaires};
+  return {questionnaires, createQuestionnaire, setQuestionnaires};
 };

@@ -23,7 +23,7 @@ const PRIVATE_ROUTES = {
     USERS: '/admin/users',
     MY_DONATIONS: '/my-donations',
     MY_EVENTS: '/my-events',
-    GAME: (id) => `/game/${id}`,
+    GAME: (id, token) => `/game/${id}?token=${token}`,
     CREATE_QUESTIONNAIRE: '/admin/questionnaires/create'
 }
 

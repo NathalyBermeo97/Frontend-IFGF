@@ -42,7 +42,7 @@ export const CreateDonationModal = ({
             <Form.Label>Tipo de donación</Form.Label>
             <Form.Control {...register("type")} disabled />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Group className="mb-3">
             <Form.Label>Tipo de entrega</Form.Label>
             <Form.Select
               aria-label="Default select example"
