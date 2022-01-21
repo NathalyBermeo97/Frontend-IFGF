@@ -10,10 +10,7 @@ import * as yup from "yup";
 import { CreateDonationModal } from "../../../components/CreateDonationModal";
 
 const donationsItemSchema = yup.object().shape({
-  description: yup
-    .string()
-    .required(ERROR_MESSAGES.REQUIRED("título"))
-    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+  description: yup.string(),
   type: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("descripción"))
@@ -26,7 +23,10 @@ const donationsItemSchema = yup.object().shape({
     .string()
     .required(ERROR_MESSAGES.REQUIRED("dirección"))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
-  date: yup.date().required(ERROR_MESSAGES.REQUIRED("fecha de entrega")),
+  date: yup
+    .date()
+    .typeError(ERROR_MESSAGES.DATE)
+    .required(ERROR_MESSAGES.REQUIRED("fecha de entrega")),
 });
 
 const DonationsPage = () => {

@@ -16,32 +16,33 @@ export const DonationItem = ({ donation, onShowModal }) => {
       }}
     >
       <Card style={{ width: "18rem" }}>
-
-        <Card.Img
-            src={URL+donation.imgURL}
-        />
+        <Card.Img src={URL + donation.imgURL} />
         <Card.Body>
           <Card.Title>Donación de {donation.type}</Card.Title>
           <Card.Text>
-
-            <p>Estado:{" "}
+            Estado:{" "}
             {donation.status === "undefined" ? (
               <Badge bg="secondary">Sin definir</Badge>
             ) : (
               <Badge bg={bg}>{donation.status}</Badge>
-            )}</p>
-            <p style={{fontWeight: 'bold'}}>Descripción:</p><p> {donation.description}</p>
-            <p style={{fontWeight: 'bold'}}>Entrega:</p><p> {donation.delivery} </p>
-            <p style={{fontWeight: 'bold'}}>Dirección:</p><p> {donation.address} </p>
-            {donation.message ? (
-              <>
-                <p style={{fontWeight: 'bold'}}>Comentario de retroalimentación:</p>
-                <p>{donation.message}</p>
-              </>
-            ) : (
-              ""
             )}
           </Card.Text>
+          <Card.Text style={{ fontWeight: "bold" }}>Descripción:</Card.Text>
+          <Card.Text> {donation.description}</Card.Text>
+          <Card.Text style={{ fontWeight: "bold" }}>Entrega:</Card.Text>
+          <Card.Text> {donation.delivery} </Card.Text>
+          <Card.Text style={{ fontWeight: "bold" }}>Dirección:</Card.Text>
+          <Card.Text> {donation.address} </Card.Text>
+          {donation.message ? (
+            <>
+              <Card.Text style={{ fontWeight: "bold" }}>
+                Comentario de retroalimentación:
+              </Card.Text>
+              <Card.Text>{donation.message}</Card.Text>
+            </>
+          ) : (
+            ""
+          )}
           {role === USER_ROLES.ADMIN ? (
             <div
               style={{

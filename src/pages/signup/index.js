@@ -1,17 +1,28 @@
 import styles from "./styles.module.css";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { withPublic } from "../../hocs/withPublic";
-import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
-import * as yup from "yup";
 import { ERROR_MESSAGES } from "../../constants/inidex";
+import { useAuth } from "../../context/AuthContext";
+import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
-import { useAuth } from "../../context/AuthContext";
+import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import swal from "sweetalert";
 import { ROUTES } from "../../constants/routes";
 
-const loginSchema = yup.object().shape({
+const registerSchema = yup.object().shape({
+  name: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED("nombre"))
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+  lastname: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED("apellido"))
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+  cellphone: yup
+    .number()
+    .lessThan(9999999999, ERROR_MESSAGES.MAX_NUMBER("celular", 10))
+    .required(ERROR_MESSAGES.NUMBER("celular/telefono")),
   email: yup
     .string()
     .email(ERROR_MESSAGES.EMAIL)
@@ -22,21 +33,23 @@ const loginSchema = yup.object().shape({
     .required(ERROR_MESSAGES.REQUIRED("password"))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
 });
-
-const LoginPage = () => {
-  const { login } = useAuth();
+const SignupPage = () => {
+  const { register: doRegister } = useAuth();
   const router = useRouter();
   const Alert = () => {
-    swal("Bienvenido");
+    swal("Usuario registrado");
   };
 
   const onSubmit = (data) => {
     console.log({ data });
+    const name = data.name;
+    const lastname = data.lastname;
+    const cellphone = data.cellphone;
     const email = data.email;
     const password = data.password;
-    login({ email, password });
+    const roles = "user";
+    doRegister({ name, lastname, cellphone, email, password, roles });
   };
-
   const {
     register,
     handleSubmit,
@@ -45,11 +58,15 @@ const LoginPage = () => {
     clearErrors,
   } = useForm({
     defaultValues: {
+      name: "",
+      lastname: "",
+      cellphone: "",
       email: "",
       password: "",
     },
-    resolver: yupResolver(loginSchema),
+    resolver: yupResolver(registerSchema),
   });
+  console.log({ errors });
 
   return (
     <Container>
@@ -83,9 +100,46 @@ const LoginPage = () => {
             <Card.Body>
               <Form onSubmit={handleSubmit(onSubmit)}>
                 <div>
-                  <h1>Inicio de sesión</h1>
+                  <h1>Registro de sesion</h1>
                   <h3 className={styles.title}>Inicio de sesión</h3>
                 </div>
+                <Form.Group className="mb-3">
+                  <Form.Control
+                    className={styles.inputs}
+                    variant="outlined"
+                    placeholder="Nombre"
+                    {...register("name")}
+                    isInvalid={!!errors.name?.message}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.name?.message}
+                  </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Control
+                    className={styles.inputs}
+                    variant="outlined"
+                    placeholder="Apellido"
+                    {...register("lastname")}
+                    isInvalid={!!errors.lastname?.message}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.lastname?.message}
+                  </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Control
+                    type="number"
+                    className={styles.inputs}
+                    variant="outlined"
+                    placeholder="Celular/Telefono"
+                    {...register("cellphone")}
+                    isInvalid={!!errors.cellphone?.message}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.cellphone?.message}
+                  </Form.Control.Feedback>
+                </Form.Group>
                 <Form.Group className="mb-3">
                   <Form.Control
                     className={styles.inputs}
@@ -118,19 +172,14 @@ const LoginPage = () => {
                     type="submit"
                     onClick={() => Alert()}
                   >
-                    Ingresar
+                    Registrarse
                   </Button>
 
-                  <Button
-                    variant="outlined"
-                    size="medium"
-                    type="submit"
-                    onClick={() => router.push("/")}
-                  >
+                  <Button variant="outlined" size="medium" type="submit">
                     Salir
                   </Button>
                 </div>
-                <p className={styles.createAccount} onClick={() => router.push(ROUTES.SIGNUP)}>¿No tiene una cuenta?</p>
+                <p className={styles.createAccount} onClick={() => router.push(ROUTES.LOGIN)}>¿Ya tiene una cuenta?</p>
               </Form>
             </Card.Body>
           </Card>
@@ -139,4 +188,5 @@ const LoginPage = () => {
     </Container>
   );
 };
-export default withPublic(LoginPage, "/admin/news");
+
+export default SignupPage;

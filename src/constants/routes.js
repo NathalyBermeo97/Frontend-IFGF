@@ -1,7 +1,7 @@
 const PUBLIC_ROUTES = {
     HOME: '/',
     LOGIN: '/login',
-    SIGNUP: '/register',
+    SIGNUP: '/signup',
     EVENTS: '/eventos',
     DONATIONS: '/donations',
     VIDEOS: '/videos',

@@ -9,7 +9,7 @@ export const FinalUserLayout = ({ children }) => {
     <div className={styles.body}>
       <NavbarHome />
       <div>
-        <Container>
+        <Container style={{minHeight: '100vh'}}>
           {children}
         </Container>
       </div>

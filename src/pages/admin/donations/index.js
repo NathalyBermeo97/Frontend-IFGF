@@ -16,6 +16,7 @@ const donationPage = () => {
 
 
   const updateDonationStatus = (data) => {
+    console.log({data})
     updateDonation(data._id, data)
       .then((newDonation) => {
         if (newDonation) {
