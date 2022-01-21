@@ -1,8 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import styles from "../../styles/style.module.css";
-import {Videoscards} from "../../components/Videoscards";
-
 import { withPrivate } from "../../hocs/withPrivate";
+import { Videoscards } from "../../components/Videoscards";
 
 const Videos = ({}) => {
   const [videos, setVideos] = useState([]);
