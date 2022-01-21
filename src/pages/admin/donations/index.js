@@ -4,7 +4,7 @@ import { UpdateDonationModal } from "../../../components/UpdateDonationModal";
 import { withPrivate } from "../../../hocs/withPrivate";
 import { useDonation } from "../../../hooks/useDonation";
 
-const donationPage = () => {
+const DonationPage = () => {
   const { donations, updateDonation, setDonations } = useDonation();
   const [isOpen, setIsOpen] = useState(false);
   const [donation, setDonation] = useState({});
@@ -47,4 +47,4 @@ const donationPage = () => {
   );
 };
 
-export default withPrivate(donationPage);
+export default withPrivate(DonationPage);
