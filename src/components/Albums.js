@@ -1,6 +1,5 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "../styles/events.module.css";
 const URL = "http://localhost:3030/";
 import api from "../api/api";
 import { Card, Container, Row } from "react-bootstrap";
