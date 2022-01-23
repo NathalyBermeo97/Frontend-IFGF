@@ -45,6 +45,7 @@ export const EventItem = ({
                 <Button size="sm" onClick={() => onShowEditModal(newEvent)}>
                   Editar
                 </Button>
+
                 <Button
                   size="sm"
                   variant="danger"

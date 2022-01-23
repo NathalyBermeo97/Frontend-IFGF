@@ -1,5 +1,5 @@
 import { withPrivate } from "../../../hocs/withPrivate";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNews } from "../../../hooks/useNews";
 import { ListGroup, Button, FormControl, InputGroup } from "react-bootstrap";
 import { UpdateNewsItemModal } from "../../../components/UpdateNewsItemModal";
@@ -10,8 +10,8 @@ import { ListOfNews } from "../../../components/ListOfNews";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
-import Albums from "../../../api/albums";
 import News from "../../../api/news";
+import swal from "sweetalert";
 
 const newsItemSchema = yup.object().shape({
   title: yup
@@ -60,6 +60,7 @@ const NewsPage = () => {
   const onShowModal = (newsItem) => {
     updateNewsItemForm.reset(newsItem);
     setShowModal(true);
+
   };
 
   const handleDelete = (id) => {
@@ -68,6 +69,7 @@ const NewsPage = () => {
       if (data.message === SERVER_RESPONSE.DELETED_NEWS) {
         const newNews = news.filter((item) => item._id !== id);
         setNews(newNews);
+        swal('Noticia eliminada correctamente')
       }
     });
   };
@@ -91,43 +93,42 @@ const NewsPage = () => {
       setNews(callback);
       setShowCreateNewsItemModal(false);
       reset();
+      swal('Noticia creada exitosamente!')
     }).catch(error=>{
       console.log(error)
+      alert('Error al crear noticia!')
     });
   };
 
   const onSubmitUpdateNewsItem = (data) => {
-    const { _id: id } = data;
+    {/*const { _id: id } = data;
     updateNews(id, data).then((newNew) => {
       const newNews = news.map((item) =>
         item._id === newNew._id ? newNew : item
       );
       setNews(newNews);
       setShowModal(false);
-    });
+    });*/}
     {
-      /*const newAlbums = albums.map((albumsItem) =>
-            albumsItem._id === data._id ? data : albumsItem
+      const newNews = news.map((newsItem) =>
+            newsItem._id === data._id ? data : newsItem
         );
-        setAlbums(newAlbums);
-        setShowModal(false);*/
+        setNews(newNews);
+        setShowModal(false);
+      swal('Noticia editada correctamente')
     }
   };
 
   return (
     <>
-      <div className={styles.newsHeader}>
-        <h2>Noticias</h2>
-        <Button
-          variant="outline-primary"
-          size="sm"
-          onClick={() => setShowCreateNewsItemModal(true)}
-        >
-          Crear
-        </Button>
+      <div >
+        <div className={styles.events}>
+          <h1 className={styles.section}>Gestión de noticias</h1>
+          <div className={styles.linea}></div>
+        </div>
       </div>
 
-      <InputGroup className="mb-3" style={{ padding: "15px" }}>
+      <InputGroup style={{ padding: "15px" }}>
         <FormControl
           placeholder="Buscar Noticia"
           aria-label="search_new"
@@ -136,6 +137,18 @@ const NewsPage = () => {
           onChange={(e) => setKeyword(e.target.value)}
         />
       </InputGroup>
+      <div  className={styles.button}>
+        <Button
+
+            variant="info"
+            size="m"
+            onClick={() => setShowCreateNewsItemModal(true)}
+        >
+          Crear noticia
+        </Button>
+      </div>
+
+
 
       <ListOfNews
         news={filteredNews}

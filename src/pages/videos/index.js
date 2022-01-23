@@ -3,8 +3,7 @@ import { useVideos } from "../../hooks/useVideos";
 import {Col, Row, Button, Container, Card, InputGroup, FormControl} from "react-bootstrap";
 import styles from "../../styles/events.module.css";
 import {ListOfVideosPage} from "../../components/ListOfVideosPage";
-
-const url = "https://backend-ifgf.herokuapp.com/";
+import {withPrivate} from "../../hocs/withPrivate";
 
 const HomeVideos = ({}) => {
   const { videos } = useVideos();
@@ -56,4 +55,4 @@ const HomeVideos = ({}) => {
       </>
   );
 };
-export default HomeVideos;
+export default withPrivate(HomeVideos);

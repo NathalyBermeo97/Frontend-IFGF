@@ -2,7 +2,9 @@
     background-color: #ffffff;
 }
 .title {
-    color: #ffffff;
+    color: #408bd7;
+    text-align: center;
+    margin: 20px;
 }
 .head {
     background: rgba(155, 192, 231, 0.84);

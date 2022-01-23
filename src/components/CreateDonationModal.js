@@ -23,10 +23,10 @@ export const CreateDonationModal = ({
 
   const selectValue = watch("delivery");
   useEffect(() => {
-    if (selectValue === "Picking up At House") {
+    if (selectValue === "Donar desde el hogar") {
       setValue("address", "");
     } else {
-      setValue("address", "no direction ".repeat(2));
+      setValue("address", "No es necesaria la dirección del usuario");
     }
   }, [selectValue]);
 
@@ -49,27 +49,25 @@ export const CreateDonationModal = ({
               {...register("delivery")}
               isInvalid={!!errors.delivery?.message}
             >
-              <option value="Delivery in Church">
-                Ir a entregar en la Iglésia personalemente
+              <option value="Donar a la iglesia personalmente">
+                Donar a la iglesia personalmente
               </option>
               {donationType === "dinero" ? (
-                <option value="Delivery in Church via transaction">
-                  Enviar a la iglésia por transacción
+                <option value="Donar por medio de transacción bancaria">
+                  Donar por medio de transacción bancaria
                 </option>
               ) : (
-                <option value="Delivery in Church via some service">
-                  Enviar a la iglésia por ServiEntrega
-                </option>
+                  <option value="Donar desde el hogar">
+                    Donar desde el hogar
+                  </option>
               )}
-              <option value="Picking up At House">
-                Ser recogido en el hogar
-              </option>
+
             </Form.Select>
             <Form.Control.Feedback type="invalid">
               {errors.delivery?.message}
             </Form.Control.Feedback>
           </Form.Group>
-          {selectValue === "Picking up At House" ? (
+          {selectValue === "Donar desde el hogar" ? (
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Dirección</Form.Label>
               <Form.Control
@@ -88,7 +86,7 @@ export const CreateDonationModal = ({
                 Escribe tú dirección lo más exacta posible
               </Form.Control.Feedback>
             </Form.Group>
-          ) : selectValue === "Delivery in Church via transaction" ? (
+          ) : selectValue === "Donar por medio de transacción bancaria" ? (
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Cuenta de transacción: 17265188XX - Banco XXXXX</Form.Label>
                 <br/>
@@ -105,7 +103,8 @@ export const CreateDonationModal = ({
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Fecha de entrega</Form.Label>
             <Form.Control
-              type="date"
+               min="2022-01-22"
+                type="date"
               placeholder="Ingrese la fecha de entrega"
               {...register("date")}
               isInvalid={!!errors.date?.message}

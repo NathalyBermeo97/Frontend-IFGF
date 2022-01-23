@@ -1,5 +1,5 @@
 import { withPrivate } from "../../../hocs/withPrivate";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAlbums } from "../../../hooks/useAlbums";
 import { ListGroup, Button, FormControl, InputGroup } from "react-bootstrap";
 import { UpdateAlbumsItemModal } from "../../../components/UpdateAlbumsItemModal";
@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 import Albums from "../../../api/albums";
+import Messages from "../../../api/messages";
 
 const albumsItemSchema = yup.object().shape({
   title: yup
@@ -84,18 +85,18 @@ const AlbumsPage = () => {
     formData.append("description",data.description);
     formData.append("file",data.file[0]);
 
-    const response= await Albums.create(formData);
-    console.log("response",response)
-    createAlbumsItem(data).then((data) => {
-      if (data) {
-        //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
-        setAlbums((prevState) => [
-          ...prevState,
-          { _id: Math.floor(Math.random() * 1000000000000), ...data },
-        ]);
-        setShowCreateAlbumsItemModal(false);
-        reset();
+    Albums.create(formData).then((response) => {
+      const newAlbumsItem = response.data;
+      const callback =(prevState)=>{
+        return [...prevState,newAlbumsItem]
       }
+      setAlbums(callback);
+      setShowCreateAlbumsItemModal(false);
+      reset();
+      alert('Foto creada exitosamente!')
+    }).catch(error=>{
+      console.log(error)
+      alert('Error al subir una foto!')
     });
   };
 
@@ -121,26 +122,32 @@ const AlbumsPage = () => {
 
   return (
     <>
-      <div className={styles.newsHeader}>
-        <h2>Albums de fotos </h2>
-        <Button
-          variant="outline-primary"
-          size="sm"
-          onClick={() => setShowCreateAlbumsItemModal(true)}
-        >
-          Crear
-        </Button>
+      <div >
+        <div className={styles.events}>
+          <h1 className={styles.section}>Gestión de álbum de fotos</h1>
+          <div className={styles.linea}></div>
+        </div>
       </div>
 
-      <InputGroup className="mb-3" style={{ padding: "15px" }}>
+      <InputGroup style={{ padding: "15px" }}>
         <FormControl
-          placeholder="Buscar album"
-          aria-label="search_message"
-          aria-describedby="basic-addon1"
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
+            placeholder="Buscar foto"
+            aria-label="search_new"
+            aria-describedby="basic-addon1"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
         />
       </InputGroup>
+      <div  className={styles.button}>
+        <Button
+
+            variant="info"
+            size="m"
+            onClick={() => setShowCreateAlbumsItemModal(true)}
+        >
+          Crear foto
+        </Button>
+      </div>
 
       <ListOfAlbums
         albums={filteredAlbums}

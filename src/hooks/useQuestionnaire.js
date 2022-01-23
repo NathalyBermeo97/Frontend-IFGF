@@ -22,6 +22,13 @@ export const useQuestionnaire = () => {
       console.log('something went wrong', e)
     }
   }
-  
-  return {questionnaires, createQuestionnaire, setQuestionnaires};
+  const deleteQuestionnaire = async (newQuestionnaireItem) => {
+    try{
+      const response = await Questionnaires.delete(newQuestionnaireItem)
+      return response.data
+    }catch(e){
+      console.log('something went wrong', e)
+    }
+  }
+  return {questionnaires, createQuestionnaire, deleteQuestionnaire,setQuestionnaires};
 };

@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row } from "react-bootstrap";
 import { QuestionnaireItem } from "./QuestionnarieItem";
 
-export const ListOfQuestionnaires = ({questionnaires}) => {
+export const ListOfQuestionnaires = ({questionnaires,handleDelete}) => {
   return (
     <Container>
       <Row
@@ -16,6 +16,7 @@ export const ListOfQuestionnaires = ({questionnaires}) => {
           <QuestionnaireItem
             key={questionnaire._id}
             questionnaire={questionnaire}
+            handleDelete={handleDelete}
           />
         ))}
       </Row>

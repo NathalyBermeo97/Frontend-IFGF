@@ -28,7 +28,7 @@ export const useVideos = () => {
     const createVideosItem = async (newVideosItem) => {
         try{
             const response = await Videos.create(newVideosItem)
-            return response.data.message
+            return response.data
         }catch(e){
             console.log('something went wrong', e)
         }
@@ -36,7 +36,7 @@ export const useVideos = () => {
     const deleteVideos = async (newVideosItem) => {
         try{
             const response = await Videos.delete(newVideosItem)
-            return response.data.message
+            return response.data
         }catch(e){
             console.log('something went wrong', e)
         }

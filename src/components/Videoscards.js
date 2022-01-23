@@ -12,12 +12,12 @@ export const Videoscards = ({ videos }) => {
             display: "flex",
           }}
       >
-        <Card style={{ width: "40em",height: "30em" }}>
+        <Card style={{ width: "30em",height: "30em" }}>
           <ReactPlayer
               url={videos.url}
               className="react-player"
               controls
-              width="40em"
+              width="30em"
               height="25em"
           />
           <Card.Body>

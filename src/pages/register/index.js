@@ -9,6 +9,7 @@ import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
 import {Button, Card, Col, Container, Form, Row} from "react-bootstrap";
 import swal from "sweetalert";
+import {AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai";
 
 const registerSchema = yup.object().shape({
     name: yup
@@ -20,9 +21,8 @@ const registerSchema = yup.object().shape({
         .required(ERROR_MESSAGES.REQUIRED("apellido"))
         .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
     cellphone:yup
-        .number()
-        .lessThan(9999999999,ERROR_MESSAGES.MAX_NUMBER("celular",10))
-        .required(ERROR_MESSAGES.NUMBER("celular/telefono")),
+        .string()
+        .required(ERROR_MESSAGES.NUMBER("celular/teléfono")),
     email: yup
         .string()
         .email(ERROR_MESSAGES.EMAIL)
@@ -30,19 +30,23 @@ const registerSchema = yup.object().shape({
         .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
     password: yup
         .string()
-        .required(ERROR_MESSAGES.REQUIRED("password"))
-        .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+        .required(ERROR_MESSAGES.REQUIRED("contraseña"))
+        .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH)
+
 });
 const RegisterPage = () => {
 
 
     const { register: doRegister } = useAuth();
     const router = useRouter();
-    const Alert=()=>{
-        swal("Usuario registrado")
+    const [result, setResult] = useState("");
+
+    const[state,setState]=useState(false)
+    const btn=()=>{
+        setState(prevState => !prevState)
     }
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
 
         console.log({ data });
         const name = data.name;
@@ -51,7 +55,14 @@ const RegisterPage = () => {
         const email = data.email;
         const password = data.password;
         const roles = "user";
-        doRegister({ name,lastname,cellphone,email, password ,roles});
+        try{
+            await doRegister({ name,lastname,cellphone,email, password ,roles});
+            swal("Usuario registrado")
+        }catch (error){
+            console.log(error.code)
+            alert({errors})
+        }
+
     };
     const {
         register,
@@ -103,12 +114,10 @@ const RegisterPage = () => {
                         <Card.Body>
                             <Form onSubmit={handleSubmit(onSubmit)}>
                                 <div>
-                                    <h1>Registro de sesion</h1>
-                                    <h3 className={styles.title}>Inicio de sesión</h3>
+                                    <h3 className={styles.title}>Registro de sesión</h3>
                                 </div>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                     <Form.Control
-                                        className={styles.inputs}
                                         variant="outlined"
                                         placeholder="Nombre"
                                         {...register("name")}
@@ -120,7 +129,6 @@ const RegisterPage = () => {
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                     <Form.Control
-                                        className={styles.inputs}
                                         variant="outlined"
                                         placeholder="Apellido"
                                         {...register("lastname")}
@@ -133,9 +141,8 @@ const RegisterPage = () => {
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                     <Form.Control
                                         type="number"
-                                        className={styles.inputs}
                                         variant="outlined"
-                                        placeholder="Celular/Telefono"
+                                        placeholder="Celular/Teléfono"
                                         {...register("cellphone")}
                                         isInvalid={!!errors.cellphone?.message}
                                     />
@@ -145,7 +152,6 @@ const RegisterPage = () => {
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                     <Form.Control
-                                        className={styles.inputs}
                                         variant="outlined"
                                         placeholder="Email"
                                         {...register("email")}
@@ -156,26 +162,32 @@ const RegisterPage = () => {
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <Form.Control
-                                        className={styles.inputs}
-                                        type="password"
-                                        variant="outlined"
-                                        placeholder="Contraseña"
-                                        {...register("password")}
-                                        isInvalid={!!errors.password?.message}
-                                    />
-                                    <Form.Control.Feedback type="invalid">
-                                        {errors.password?.message}
-                                    </Form.Control.Feedback>
+                                    <Row>
+                                        <Col xs={10}>
+                                            <Form.Control
+                                                type={state ? "text":"password"}
+                                                variant="outlined"
+                                                placeholder="Contraseña"
+                                                {...register("password")}
+                                                isInvalid={!!errors.password?.message}
+                                            />
+                                            <Form.Control.Feedback type="invalid">
+                                                {errors.password?.message}
+                                            </Form.Control.Feedback>
+                                        </Col>
+                                        <Col xs={2}>
+                                            <Button className={styles.btn} onClick={btn}>
+                                                {state? <AiOutlineEyeInvisible/>:
+                                                    <AiOutlineEye/>}
+                                            </Button>
+                                        </Col>
+                                    </Row>
                                 </Form.Group>
                                 <div className={styles.loginButtons}>
-                                    <Button variant="outlined" size="medium" type="submit" onClick={()=>Alert()}>
+                                    <Button variant="outline-primary" size="medium" type="submit" >
                                         Registrarse
                                     </Button>
 
-                                    <Button variant="outlined" size="medium" type="submit">
-                                        Salir
-                                    </Button>
                                 </div>
                                 <Link href="/login">
                                     <p className={styles.createAccount}>¿Ya tiene una cuenta?</p>

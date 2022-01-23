@@ -1,6 +1,7 @@
 import { Badge, Button, Card, Col } from "react-bootstrap";
 import { USER_ROLES } from "../constants/userRoles";
 import { useAuth } from "../context/AuthContext";
+import {useEffect} from "react";
 const URL = "http://localhost:3030/";
 export const DonationItem = ({ donation, onShowModal }) => {
   console.log({ donation });
@@ -8,6 +9,10 @@ export const DonationItem = ({ donation, onShowModal }) => {
   const bg = donation.status === "aceptado" ? "success" : "danger";
   const disabledAcction =
     donation.status === "aceptado" || donation.status === "denegado";
+
+
+
+
   return (
     <Col
       style={{

@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../styles/footer.module.css";
+import {FacebookOutlined, YoutubeOutlined,WhatsAppOutlined} from "@ant-design/icons";
 
 const Footer = () => {
   return (
@@ -37,6 +38,9 @@ const Footer = () => {
                   Contáctanos en nuestras redes sociales
                 </h6>
                 <div className="text-white text-center">
+                  <a href='https://web.whatsapp.com/' target="_blank" rel="noopener noreferrer"><WhatsAppOutlined/></a>
+                  <a href='https://www.linkedin.com/' target="_blank" rel="noopener noreferrer" style={{margin:"10px"}}><FacebookOutlined/></a>
+                  <a href='https://mail.google.com/' target="_blank" rel="noopener noreferrer"><YoutubeOutlined/></a>
 
                 </div>
               </div>

@@ -71,8 +71,8 @@ export const CreateEventsItemModal = ({
             <Form.Label>Horario</Form.Label>
             <Form.Control
               style={{ height: "50px" }}
-              as="textarea"
-              type="text"
+
+              type="time"
               placeholder="Ingresar el horario del evento"
               {...register("schedule")}
               isInvalid={!!errors.schedule?.message}

@@ -80,10 +80,10 @@ const DonationsPage = () => {
         <h1 className={styles.section}>DONACIÓN DE ROPA</h1>
         <div className={styles.linea}></div>
       </div>
-      <Container className={styles.donations}>
+      <Container >
         <Row>
-          <Col xs={12}>
-            <div>
+          <Col xs={6}>
+            <div className={styles.info}>
               <div>
                 <h4>Haz tu donación voluntaria de ROPA </h4>
               </div>
@@ -100,10 +100,12 @@ const DonationsPage = () => {
                 />
               </div>
             </div>
+          </Col>
+            <Col xs={6}>
 
-            <div>
+<div className={styles.info}>
               <div>
-                <br />
+
                 <h4>Visita NUESTRAS INSTALACIONES</h4>
               </div>
 
@@ -111,6 +113,7 @@ const DonationsPage = () => {
                 Puedes visitar nuestras instalaciones para mayor información y
                 para realizar cualquier tipo de pago o donación.
               </p>
+    <br/>
 
               <div>
                 <iframe
@@ -122,19 +125,23 @@ const DonationsPage = () => {
                   loading="lazy"
                 ></iframe>
               </div>
-            </div>
 
-            <br />
 
-            <Button
-              variant="outline-primary"
-              size="sm"
-              onClick={handleModalState}
-            >
-              Donar
-            </Button>
+</div>
+
+
           </Col>
+
         </Row>
+        <div className={styles.button}>
+        <Button
+            variant="primary"
+            size="sm"
+            onClick={handleModalState}
+        >
+          Donar ropa
+        </Button>
+        </div>
       </Container>
 
       <CreateDonationModal

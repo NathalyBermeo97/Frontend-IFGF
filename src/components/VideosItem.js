@@ -12,7 +12,7 @@ export const VideosItem = ({ videos, onShowModal, handleDelete  }) => {
                 display: "flex",
             }}
         >
-            <Card style={{ width: "18rem" }}>
+            <Card style={{ width: "20rem" }}>
                 <ReactPlayer
                     url={videos.url}
                     className="react-player"

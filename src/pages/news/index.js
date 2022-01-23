@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNews } from "../../hooks/useNews";
-import { Col, Row, Button, Container, Card } from "react-bootstrap";
+import {
+  Col,
+  Row,
+  Button,
+  Container,
+  Card,
+  FormControl,
+  InputGroup,
+} from "react-bootstrap";
 import styles from "../../styles/events.module.css";
-import NewsPage from "../../components/NewsPage";
-
+import News from "../../components/News";
 
 const HomeNews = ({}) => {
   const { news } = useNews();
@@ -15,15 +22,15 @@ const HomeNews = ({}) => {
         <div className={styles.linea}></div>
       </div>
       <Container>
-        <Row style={{
+        <Row
+          style={{
             display: "flex",
             justifyContent: "center",
             gap: "15px 0px",
-        }}>
-          <Col
-          >
-
-             <NewsPage news={news}/>
+          }}
+        >
+          <Col>
+            <News news={news} />
           </Col>
         </Row>
       </Container>

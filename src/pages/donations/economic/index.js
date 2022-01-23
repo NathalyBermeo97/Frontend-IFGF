@@ -109,10 +109,10 @@ const DonationsPage = () => {
       </div>
       <Container className={styles.donations}>
         <Row>
-          <Col xs={12}>
-            <div>
+          <Col xs={6}>
+            <div className={styles.info}>
               <div>
-                <h4>Haz tu donación voluntaria ECONOMICA </h4>
+                <h4>Haz tu donación voluntaria ECONÓMICA </h4>
               </div>
 
               <p>
@@ -127,10 +127,12 @@ const DonationsPage = () => {
                 />
               </div>
             </div>
+          </Col>
+            <Col xs={6}>
 
-            <div>
+            <div className={styles.info}>
               <div>
-                <br />
+
                 <h4>Visita NUESTRAS INSTALACIONES</h4>
               </div>
 
@@ -139,6 +141,7 @@ const DonationsPage = () => {
                 para realizar cualquier tipo de pago o donación.
               </p>
               <div>
+                <br/>
                 <iframe
                   className={styles.ubicacion}
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7643285934228!2d-78.45924674973766!3d-0.2980747997814547!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d599082e934a23%3A0xe9afca3fb0d1c771!2sIFGF%20Quito!5e0!3m2!1ses!2sec!4v1637617369934!5m2!1ses!2sec"
@@ -150,17 +153,17 @@ const DonationsPage = () => {
               </div>
             </div>
 
-            <br />
-
-            <Button
-              variant="outline-primary"
-              size="sm"
-              onClick={handleModalState}
-            >
-              Donar
-            </Button>
           </Col>
         </Row>
+        <div className={styles.button}>
+          <Button
+              variant="primary"
+              size="sm"
+              onClick={handleModalState}
+          >
+            Donar dinero
+          </Button>
+        </div>
       </Container>
 
       <CreateDonationModal

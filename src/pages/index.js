@@ -50,7 +50,7 @@ const Home = ({}) => {
         </Row>
 
         <div className={styles.news}>
-          <h1 className={styles.section}>Entérate de nuestras noticias</h1>
+          <h1 className={styles.section}>Entérate de nuestro contenido</h1>
           <div className={styles.linea}></div>
         </div>
         <Col>

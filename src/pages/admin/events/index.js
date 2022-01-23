@@ -1,5 +1,5 @@
 import { withPrivate } from "../../../hocs/withPrivate";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useEvents } from "../../../hooks/useEvents";
 import { Button, FormControl, InputGroup } from "react-bootstrap";
 import { UpdateEventsItemModal } from "../../../components/UpdateEventsItemModal";
@@ -11,6 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 import { ListOfEvents_ } from "../../../components/ListOfEvents_";
 import Events from "../../../api/events";
+import Albums from "../../../api/albums";
 
 const eventsItemSchema = yup.object().shape({
   title: yup
@@ -100,19 +101,19 @@ const EventsPage = () => {
     formData.append("number",data.number);
     formData.append("file",data.file[0]);
 
-    const response= await Events.create(formData);
-    console.log("response",response)
 
-    createEventsItem(data).then((data) => {
-      if (data) {
-        //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
-        setEvents((prevState) => [
-          ...prevState,
-          { _id: Math.floor(Math.random() * 1000000000000), ...data },
-        ]);
-        setShowCreateEventsItemModal(false);
-        reset();
+    Events.create(formData).then((response) => {
+      const newEventsItem = response.data;
+      const callback =(prevState)=>{
+        return [...prevState,newEventsItem]
       }
+      setEvents(callback);
+      setShowCreateEventsItemModal(false);
+      reset();
+      alert('Evento cread exitosamente!')
+    }).catch(error=>{
+      console.log(error)
+      alert('Error al crear un evento!')
     });
     {
       /*setEvents((prevState) => [
@@ -144,26 +145,32 @@ const EventsPage = () => {
 
   return (
     <>
-      <div className={styles.newsHeader}>
-        <h2>Eventos</h2>
-        <Button
-          variant="outline-primary"
-          size="sm"
-          onClick={() => setShowCreateEventsItemModal(true)}
-        >
-          Crear
-        </Button>
+      <div >
+        <div className={styles.events}>
+          <h1 className={styles.section}>Gestión de eventos</h1>
+          <div className={styles.linea}></div>
+        </div>
       </div>
 
-      <InputGroup className="mb-3" style={{ padding: "15px" }}>
+      <InputGroup style={{ padding: "15px" }}>
         <FormControl
-          placeholder="Buscar evento"
-          aria-label="search_new"
-          aria-describedby="basic-addon1"
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
+            placeholder="Buscar evento"
+            aria-label="search_new"
+            aria-describedby="basic-addon1"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
         />
       </InputGroup>
+      <div  className={styles.button}>
+        <Button
+
+            variant="info"
+            size="m"
+            onClick={() => setShowCreateEventsItemModal(true)}
+        >
+          Crear evento
+        </Button>
+      </div>
 
       <ListOfEvents_
         events={filteredEvents}

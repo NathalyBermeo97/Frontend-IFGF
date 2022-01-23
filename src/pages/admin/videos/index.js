@@ -1,5 +1,5 @@
 import { withPrivate } from "../../../hocs/withPrivate";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useVideos } from "../../../hooks/useVideos";
 import { ListGroup, Button, FormControl, InputGroup } from "react-bootstrap";
 import { UpdateVideosItemModal } from "../../../components/UpdateVideosItemModal";
@@ -10,6 +10,8 @@ import { ListOfVideos } from "../../../components/ListOfVideos";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
+import Events from "../../../api/events";
+import Videos from "../../../api/videos";
 
 const videosItemSchema = yup.object().shape({
 
@@ -28,7 +30,7 @@ const videosItemSchema = yup.object().shape({
 });
 
 const VideosPage = () => {
-  const { videos, setVideos, updateVideos, createVideosItem } = useVideos();
+  const { videos, setVideos, updateVideos, createVideosItem,deleteVideos} = useVideos();
   const [showModal, setShowModal] = useState(false);
   const [showCreateVideosItemModal, setShowCreateVideosItemModal] =
     useState(false);
@@ -66,25 +68,34 @@ const VideosPage = () => {
   };
 
   const handleDelete = (id) => {
-    const newVideos = videos.filter((ni) => ni._id !== id);
-    setVideos(newVideos);
+      deleteVideos(id).then((data) => {
+          console.log({data})
+          if (data.message === SERVER_RESPONSE.DELETED_ALBUMS){
+
+              const newVideos = videos.filter((video) => video._id !== id);
+              setVideos(newVideos);
+          }
+          alert('Video eliminado correctamente')
+
+      });
   };
 
   console.log({ errors });
   const onSubmit = (data) => {
     console.log(data);
-    createVideosItem(data).then((newVideo) => {
-        console.log({newVideo})
-        //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
-        setVideos((prevState) => [
-          ...prevState,
-          newVideo
-
-        ]);
-        setShowCreateVideosItemModal(false);
-        reset();
-
-    });
+      Videos.create(data).then((response) => {
+          const newVideosItem = response.data;
+          const callback =(prevState)=>{
+              return [...prevState,newVideosItem]
+          }
+          setVideos(callback);
+          setShowCreateVideosItemModal(false);
+          reset();
+          alert('Video creado exitosamente!')
+      }).catch(error=>{
+          console.log(error)
+          alert('Error en el tipo de video!')
+      });
     {
       /*setVideos((prevState) => [
             ...prevState,
@@ -119,26 +130,32 @@ const VideosPage = () => {
 
   return (
     <>
-      <div className={styles.newsHeader}>
-        <h2>Videos</h2>
-        <Button
-          variant="outline-primary"
-          size="sm"
-          onClick={() => setShowCreateVideosItemModal(true)}
-        >
-          Crear
-        </Button>
-      </div>
+        <div >
+            <div className={styles.events}>
+                <h1 className={styles.section}>Gestión de videos</h1>
+                <div className={styles.linea}></div>
+            </div>
+        </div>
 
-      <InputGroup className="mb-3" style={{ padding: "15px" }}>
-        <FormControl
-          placeholder="Buscar video"
-          aria-label="search_new"
-          aria-describedby="basic-addon1"
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-        />
-      </InputGroup>
+        <InputGroup style={{ padding: "15px" }}>
+            <FormControl
+                placeholder="Buscar video"
+                aria-label="search_new"
+                aria-describedby="basic-addon1"
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
+            />
+        </InputGroup>
+        <div  className={styles.button}>
+            <Button
+
+                variant="info"
+                size="m"
+                onClick={() => setShowCreateVideosItemModal(true)}
+            >
+                Crear video
+            </Button>
+        </div>
 
 
           <ListOfVideos

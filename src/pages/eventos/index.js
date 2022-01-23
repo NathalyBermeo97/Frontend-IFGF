@@ -1,14 +1,23 @@
 import styles from "./styles.module.css";
-import React from "react";
+import React, {useEffect} from "react";
 import { EventModal } from "../../components/EventModal";
 import { useState } from "react";
-import { Container } from "react-bootstrap";
+import {Container, FormControl, InputGroup} from "react-bootstrap";
 import Events from "../../api/events";
 import { ListOfEvents_ } from "../../components/ListOfEvents_";
 
 const Eventos = ({ events }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [event, setEvent] = useState({});
+  const [keyword, setKeyword] = useState("");
+  const [filteredEvents, setFilteredEvents] = useState([]);
+
+  useEffect(() => {
+    const filteredEvents = events?.filter((ni) =>
+        ni.title.toLowerCase().includes(keyword.toLowerCase())
+    );
+    setFilteredEvents(filteredEvents);
+  }, [keyword, events]);
 
   const onShowModal = (event) => {
     setEvent(event);
@@ -21,7 +30,16 @@ const Eventos = ({ events }) => {
         <h1 className={styles.section}>Eventos</h1>
         <div className={styles.linea}></div>
       </div>
-      <ListOfEvents_ events={events} onShowModal={onShowModal} />
+      <InputGroup style={{ padding: "15px" }}>
+        <FormControl
+            placeholder="Buscar evento"
+            aria-label="search_new"
+            aria-describedby="basic-addon1"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+        />
+      </InputGroup>
+      <ListOfEvents_ events={filteredEvents} onShowModal={onShowModal} />
       <EventModal isOpen={isOpen} event={event} setIsOpen={setIsOpen} />
     </Container>
   );

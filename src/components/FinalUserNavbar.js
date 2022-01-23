@@ -34,13 +34,19 @@ const NavbarHome = () => {
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link
-                eventKey={ROUTES.EVENTS}
+              <NavDropdown title="Eventos" id="nav-dropdown-eventos">
+
+              <NavDropdown.Item
+                  eventKey={ROUTES.EVENTS}
                 onClick={() => router.push(ROUTES.EVENTS)}
                 disabled={router.pathname === ROUTES.EVENTS}
               >
                 Eventos
-              </Nav.Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item onClick={() => router.push(ROUTES.MY_EVENTS)}>
+                Mis Eventos
+              </NavDropdown.Item>
+              </NavDropdown>
             </Nav.Item>
             <Nav.Item>
               <NavDropdown title="Donaciones" id="nav-dropdown-donaciones">
@@ -58,6 +64,11 @@ const NavbarHome = () => {
                   onClick={() => router.push(ROUTES.ECONOMIC_DONATIONS)}
                 >
                   Donar dinero
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                    onClick={() => router.push(ROUTES.MY_DONATIONS)}
+                >
+                  Mis Donaciones
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav.Item>
@@ -83,14 +94,6 @@ const NavbarHome = () => {
               <NavDropdown title={currentUser.name} id="nav-dropdown">
                 <NavDropdown.Item onClick={() => logout()}>
                   Cerrar Sesión
-                </NavDropdown.Item>
-                <NavDropdown.Item
-                  onClick={() => router.push(ROUTES.MY_DONATIONS)}
-                >
-                  Mis Donaciones
-                </NavDropdown.Item>
-                <NavDropdown.Item onClick={() => router.push(ROUTES.MY_EVENTS)}>
-                  Mis Eventos
                 </NavDropdown.Item>
               </NavDropdown>
             ) : currentUser === USER_STATES.NOT_KNOWN ? (

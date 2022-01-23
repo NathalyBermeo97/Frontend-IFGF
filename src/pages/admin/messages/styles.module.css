@@ -1,12 +1,33 @@
-.newsHeader {
-    display: flex;
-    justify-content: space-around;
-    padding: 15px 15px
+.title{
+    text-align: center;
+    color:black;
+    font-family: "Arial";
+
 }
-.albumsHeader{
-    display: flex;
-    justify-content: space-around;
-    padding: 15px 15px
+.events{
+    margin: 50px;
+
+}
+.section{
+    text-align: center;
+
+}
+
+.body{
+    background: white;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+.linea {
+    border-top: 1px solid black;
+    height: 2px;
+    padding: 0;
+    margin: 20px auto 0 auto;
+}
+.button{
+    padding: 40px;
+    text-align: center;
 }
 .messagesHeader{
     display: flex;

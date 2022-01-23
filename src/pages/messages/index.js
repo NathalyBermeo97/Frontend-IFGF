@@ -2,6 +2,7 @@ import React from "react";
 import { useMessages } from "../../hooks/useMessages";
 import { Col, Row, Button, Container, Card } from "react-bootstrap";
 import styles from "../../styles/events.module.css";
+import Messages from "../../components/Messages";
 const url = "https://backend-ifgf.herokuapp.com/";
 
 const HomeMessages = ({}) => {
@@ -22,21 +23,7 @@ const HomeMessages = ({}) => {
                             gap: "15px 0px",
                         }}
                     >
-                        {messages.map((item) => (
-                            <Card
-                                key={item._id}
-                                className={styles.course}
-                                style={{ width: "15rem", height: "25rem" }}
-                            >
-                                <Card.Img src={url + item.imgURL} variant="top" />
-                                <Card.Body>
-                                    <Card.Title className={styles.name}>{item.title}</Card.Title>
-                                    <Card.Text className={styles.description}>
-                                        {item.description}
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-                        ))}
+                        <Messages messages={messages} />
                     </Col>
                 </Row>
             </Container>

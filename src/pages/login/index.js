@@ -1,16 +1,17 @@
 import styles from "./styles.module.css";
-import { Button } from "@material-ui/core";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { withPublic } from "../../hocs/withPublic";
-import { Card, Col, Container, Form, Row } from "react-bootstrap";
+import { Card, Col, Container, Form, Row, Button } from "react-bootstrap";
 import * as yup from "yup";
 import { ERROR_MESSAGES } from "../../constants/inidex";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { useAuth } from "../../context/AuthContext";
-import swal from "sweetalert"
-
+import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+import swal from "sweetalert";
+import { useState } from "react";
 
 const loginSchema = yup.object().shape({
   email: yup
@@ -27,15 +28,17 @@ const loginSchema = yup.object().shape({
 const LoginPage = () => {
   const { login } = useAuth();
   const router = useRouter();
-  const Alert=()=>{
-    swal("Bienvenido")
-  }
+  const [state, setState] = useState(false);
+  const btn = () => {
+    setState((prevState) => !prevState);
+  };
 
   const onSubmit = (data) => {
     console.log({ data });
     const email = data.email;
     const password = data.password;
     login({ email, password });
+    swal("Bienvenido")
   };
 
   const {
@@ -84,12 +87,10 @@ const LoginPage = () => {
             <Card.Body>
               <Form onSubmit={handleSubmit(onSubmit)}>
                 <div>
-                  <h1>Inicio de sesión</h1>
-                  <h3 className={styles.title}>Inicio de sesión</h3>
+                  <h1 className={styles.title}>Inicio de sesión</h1>
                 </div>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Control
-                    className={styles.inputs}
                     variant="outlined"
                     placeholder="Email"
                     {...register("email")}
@@ -100,30 +101,29 @@ const LoginPage = () => {
                   </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Control
-                    className={styles.inputs}
-                    type="password"
-                    variant="outlined"
-                    placeholder="Contraseña"
-                    {...register("password")}
-                    isInvalid={!!errors.password?.message}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.password?.message}
-                  </Form.Control.Feedback>
+                  <Row>
+                    <Col xs={10}>
+                      <Form.Control
+                        type={state ? "text" : "password"}
+                        variant="outlined"
+                        placeholder="Contraseña"
+                        {...register("password")}
+                        isInvalid={!!errors.password?.message}
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        {errors.password?.message}
+                      </Form.Control.Feedback>
+                    </Col>
+                    <Col xs={2}>
+                      <Button onClick={btn}>
+                        {state ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                      </Button>
+                    </Col>
+                  </Row>
                 </Form.Group>
                 <div className={styles.loginButtons}>
-                  <Button variant="outlined" size="medium" type="submit" onClick={()=>Alert()}>
+                  <Button variant="outline-primary" size="medium" type="submit">
                     Ingresar
-                  </Button>
-
-                  <Button
-                    variant="outlined"
-                    size="medium"
-                    type="submit"
-                    onClick={() => router.push("/")}
-                  >
-                    Salir
                   </Button>
                 </div>
                 <Link href="/register">

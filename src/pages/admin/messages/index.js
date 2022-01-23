@@ -1,5 +1,5 @@
 import { withPrivate } from "../../../hocs/withPrivate";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMessages } from "../../../hooks/useMessages";
 import { Button, FormControl, InputGroup } from "react-bootstrap";
 import { UpdateMessagesItemModal } from "../../../components/UpdateMessagesItemModal";
@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 import Messages from "../../../api/messages";
+import News from "../../../api/news";
 
 const messagesItemSchema = yup.object().shape({
   title: yup
@@ -60,6 +61,7 @@ const MessagesPage = () => {
   const onShowModal = (messagesItem) => {
     updateMessagesItemForm.reset(messagesItem);
     setShowModal(true);
+
   };
 
   const handleDelete = (id) => {
@@ -69,6 +71,7 @@ const MessagesPage = () => {
 
         const newMessages = messages.filter((message) => message._id !== id);
         setMessages(newMessages);
+        alert('Mensaje bíblico eliminado correctamente')
       }
 
     });
@@ -82,21 +85,20 @@ const MessagesPage = () => {
     const formData = new FormData();
     formData.append("title",data.title);
     formData.append("description",data.description);
-    formData.append("file",data.file[0]);
+    formData.append("file",data.file[1]);
 
-    const response= await Messages.create(formData);
-
-    console.log("response",response)
-    createMessagesItem(data).then((data) => {
-      if (data) {
-        //UPDATE THIS WITH THE NEW RESPONSE RATHER THAN THE MESSAGE
-        setMessages((prevState) => [
-          ...prevState,
-          { _id: Math.floor(Math.random() * 1000000000000), ...data },
-        ]);
-        setShowCreateMessagesItemModal(false);
-        reset();
+    Messages.create(formData).then((response) => {
+      const newMessageItem = response.data;
+      const callback =(prevState)=>{
+        return [...prevState,newMessageItem]
       }
+      setMessages(callback);
+      setShowCreateMessagesItemModal(false);
+      reset();
+      alert('Mensaje bíblico creado exitosamente!')
+    }).catch(error=>{
+      console.log(error)
+      alert('Error al crear un mensaje biblico!')
     });
 
   };
@@ -105,12 +107,12 @@ const MessagesPage = () => {
   const onSubmitUpdateMessagesItem = (data) => {
     const { _id: id } = data;
     updateMessages(id, data).then((newMessage) => {
-
       const newMessages = messages.map((message) =>
           message._id === newMessage._id ? newMessage : message
       );
       setMessages(newMessages);
       setShowModal(false);
+      alert('Mensaje bíblico editado correctamente')
 
     });
 
@@ -118,26 +120,32 @@ const MessagesPage = () => {
 
   return (
     <>
-      <div className={styles.newsHeader}>
-        <h2>Mensajes Biblicos</h2>
-        <Button
-          variant="outline-primary"
-          size="sm"
-          onClick={() => setShowCreateMessagesItemModal(true)}
-        >
-          Crear
-        </Button>
+      <div >
+        <div className={styles.events}>
+          <h1 className={styles.section}>Gestión de mensajes bíblicos</h1>
+          <div className={styles.linea}></div>
+        </div>
       </div>
 
-      <InputGroup className="mb-3" style={{ padding: "15px" }}>
+      <InputGroup style={{ padding: "15px" }}>
         <FormControl
-          placeholder="Buscar Mensaje"
-          aria-label="search_message"
-          aria-describedby="basic-addon1"
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
+            placeholder="Buscar mensaje bíblico"
+            aria-label="search_new"
+            aria-describedby="basic-addon1"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
         />
       </InputGroup>
+      <div  className={styles.button}>
+        <Button
+
+            variant="info"
+            size="m"
+            onClick={() => setShowCreateMessagesItemModal(true)}
+        >
+          Crear mensaje bíblico
+        </Button>
+      </div>
 
       <ListOfMessages
           messages={filteredMessages}

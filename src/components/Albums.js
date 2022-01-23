@@ -31,7 +31,6 @@ const Albums = ({ albums }) => {
               <Card.ImgOverlay>
 
             <Card.Body>
-              <Card.Title >{item.title}</Card.Title>
 
               <Card.Text >
                 {item.description}

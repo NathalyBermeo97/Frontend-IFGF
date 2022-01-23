@@ -2,7 +2,9 @@ import { Button, Card, Col } from "react-bootstrap";
 import styles from "./style.module.css";
 import { useRouter } from "next/router";
 import { ROUTES } from "../../constants/routes";
-export const QuestionnaireItem = ({ questionnaire }) => {
+import React from "react";
+
+export const QuestionnaireItem = ({ questionnaire,handleDelete }) => {
   const token = window.localStorage.getItem('jwt')
   const router = useRouter();
   const questionsNumber = questionnaire.questions.length;
@@ -28,8 +30,16 @@ export const QuestionnaireItem = ({ questionnaire }) => {
               gap: "0px 5px",
             }}
           >
+
             {router.pathname.startsWith(ROUTES.ADMIN) ? (
-              <></>
+              <>
+                  <Button
+                      size="sm"
+                      variant="danger"
+                      onClick={() => handleDelete(questionnaire._id)}
+                  >
+                      Eliminar
+                  </Button></>
             ) : (
               <Button
                 size="sm"
