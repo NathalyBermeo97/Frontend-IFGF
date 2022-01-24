@@ -21,7 +21,7 @@ const loginSchema = yup.object().shape({
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
   password: yup
     .string()
-    .required(ERROR_MESSAGES.REQUIRED("password"))
+    .required(ERROR_MESSAGES.REQUIRED("contraseña"))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
 });
 

@@ -38,7 +38,7 @@ export const EventModal = ({ isOpen, event, setIsOpen }) => {
         <p>🕘 Horario: {event.schedule}</p>
         <p>💰 Costo: {event.cost}</p>
         <p>👩‍👩‍👦‍👦 Número de personas inscritas: {event.inscriptions?.length}</p>
-        <p>🔢 Límite: {event.number}</p>
+        <p>🔢 Aforo permitido: {event.number}</p>
         <p>🔠 {event.description}</p>
       </Modal.Body>
       <Modal.Footer>

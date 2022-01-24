@@ -10,10 +10,12 @@ export const CreateEventsItemModal = ({
   onSubmit,
   errors,
   clearErrors,
+
 }) => {
   const handleClose = () => {
     setShowModal(false);
     clearErrors();
+
   };
 
   return (
@@ -71,8 +73,9 @@ export const CreateEventsItemModal = ({
             <Form.Label>Horario</Form.Label>
             <Form.Control
               style={{ height: "50px" }}
-
               type="time"
+              min="10:00"
+              max="19:00"
               placeholder="Ingresar el horario del evento"
               {...register("schedule")}
               isInvalid={!!errors.schedule?.message}
@@ -96,7 +99,7 @@ export const CreateEventsItemModal = ({
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Límite de personas</Form.Label>
+            <Form.Label>Aforo permitido de personas</Form.Label>
             <Form.Control
               style={{ height: "50px" }}
               type="number"

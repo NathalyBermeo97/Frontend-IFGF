@@ -1,9 +1,17 @@
 import { Badge, Button, Card, Col } from "react-bootstrap";
-import React from "react";
+import React, {useState} from "react";
+import {ImageAlbumModal} from "./ImageAlbumModal";
 const URL = "http://localhost:3030/";
 
 export const AlbumsItem = ({ albums, onShowModal, handleDelete  }) => {
     console.log({ albums });
+    const [isOpen, setIsOpen] = useState(false);
+    const [messagesItem, setAlbums] = useState(null);
+
+    const onModal = (newsImage) => {
+        setAlbums(newsImage);
+        setIsOpen(true);
+    };
 
     return (
         <Col
@@ -15,8 +23,10 @@ export const AlbumsItem = ({ albums, onShowModal, handleDelete  }) => {
             <Card style={{ width: "18rem" }}>
                 <Card.Img
                     src={URL+albums.imgURL}
+                    onClick={() => onModal(albums)}
 
                 />
+                <ImageAlbumModal isOpen={isOpen} albums={albums} setIsOpen={setIsOpen} />
                 <Card.Body>
                     <Card.Title>{albums.title}</Card.Title>
                     <Card.Text>{albums.description}</Card.Text>

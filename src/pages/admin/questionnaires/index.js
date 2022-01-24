@@ -23,7 +23,6 @@ const Questionnaires = () => {
                 const newQuestionnaires = questionnaires.filter((questionnaire) => questionnaire._id !== id);
                 setQuestionnaires(newQuestionnaires);
             }
-
         });
     };
 

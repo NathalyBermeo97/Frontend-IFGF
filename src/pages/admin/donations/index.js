@@ -27,7 +27,18 @@ const donationPage = () => {
 
 
   const updateDonationStatus = (data) => {
-    updateDonation(data._id, data)
+      const { _id: id } = data;
+      updateDonation(id, data).then((newDonation) => {
+          const newDonations = donations.map((donation) =>
+              donation._id === newDonation._id ? newDonations : donation
+          );
+          setDonations(newDonations);
+          setIsOpen(false)
+          alert('Mensaje bíblico editado correctamente')
+
+      });
+
+      updateDonation(data._id, data)
       .then((newDonation) => {
         if (newDonation) {
           const newDonations = donations.map((donation) =>

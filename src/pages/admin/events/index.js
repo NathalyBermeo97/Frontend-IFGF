@@ -11,7 +11,6 @@ import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 import { ListOfEvents_ } from "../../../components/ListOfEvents_";
 import Events from "../../../api/events";
-import Albums from "../../../api/albums";
 
 const eventsItemSchema = yup.object().shape({
   title: yup
@@ -71,6 +70,10 @@ const EventsPage = () => {
   });
 
   const onShowModal = (event) => {
+    updateEventsItemForm.reset(event);
+    setShowModal(true);
+  };
+  const onInsModal = (event) => {
     updateEventsItemForm.reset(event);
     setShowModal(true);
   };
@@ -176,7 +179,9 @@ const EventsPage = () => {
         events={filteredEvents}
         onShowEditModal={onShowModal}
         handleDelete={handleDelete}
+
       />
+
 
       <UpdateEventsItemModal
         show={showModal}

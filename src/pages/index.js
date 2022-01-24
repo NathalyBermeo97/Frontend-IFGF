@@ -58,7 +58,7 @@ const Home = ({}) => {
           <div className={styles.infonews}>
             <Link href="/news">
               <Button type="button" className={styles.button}>
-                Ir a noticias
+                Ver noticias
               </Button>
             </Link>
           </div>
@@ -69,7 +69,7 @@ const Home = ({}) => {
           <div className={styles.infonews}>
             <Link href="/messages">
               <Button type="button" className={styles.button}>
-                Ir a mensajes bíblicos
+                Ver mensajes bíblicos
               </Button>
             </Link>
           </div>
@@ -79,7 +79,7 @@ const Home = ({}) => {
           <div className={styles.infonews}>
             <Link href="/albums">
               <Button type="button" className={styles.button}>
-                Ir a albums de fotos
+                Ver fotos
               </Button>
             </Link>
           </div>

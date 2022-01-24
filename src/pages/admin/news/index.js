@@ -12,6 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 import News from "../../../api/news";
 import swal from "sweetalert";
+import {ImageNewsModal} from "../../../components/ImageNewsModal";
 
 const newsItemSchema = yup.object().shape({
   title: yup
@@ -30,6 +31,7 @@ const NewsPage = () => {
   const [showCreateNewsItemModal, setShowCreateNewsItemModal] = useState(false);
   const [keyword, setKeyword] = useState("");
   const [filteredNews, setFilteredNews] = useState([]);
+
 
   console.log({ news });
   useEffect(() => {
@@ -62,6 +64,7 @@ const NewsPage = () => {
     setShowModal(true);
 
   };
+
 
   const handleDelete = (id) => {
     deleteNews(id).then((data) => {
@@ -148,8 +151,6 @@ const NewsPage = () => {
         </Button>
       </div>
 
-
-
       <ListOfNews
         news={filteredNews}
         onShowModal={onShowModal}
@@ -164,6 +165,8 @@ const NewsPage = () => {
         onSubmit={onSubmitUpdateNewsItem}
         errors={updateNewsItemForm.formState.errors}
       />
+
+
 
       <CreateNewsItemModal
         showModal={showCreateNewsItemModal}

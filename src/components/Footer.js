@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../styles/footer.module.css";
-import {FacebookOutlined, YoutubeOutlined,WhatsAppOutlined} from "@ant-design/icons";
+
 
 const Footer = () => {
   return (
@@ -10,13 +10,13 @@ const Footer = () => {
           <div className="container text-center text-md-start mt-5">
             <div className="row mt-3">
               <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                <h6 className="text-white text-center  mb-4">
-                  <i className="fas fa-gem me-3"></i>Conócenos
+                <h6 className="text-white text-center mb-4">
+                  <i className="fas fa-gem me-6"></i>Conócenos
                 </h6>
                 <div className="text-white text-center">
                   <p>
                     NUESTRA MISIÓN ES LA GENTE
-                    (Conectados con Dios & Haciendo Discípulos)
+                    Conectados con Dios & Haciendo Discípulos
                     Trayendo lo Sobrenatural de Dios a la Tierra.
                   </p>
                 </div>
@@ -38,9 +38,6 @@ const Footer = () => {
                   Contáctanos en nuestras redes sociales
                 </h6>
                 <div className="text-white text-center">
-                  <a href='https://web.whatsapp.com/' target="_blank" rel="noopener noreferrer"><WhatsAppOutlined/></a>
-                  <a href='https://www.linkedin.com/' target="_blank" rel="noopener noreferrer" style={{margin:"10px"}}><FacebookOutlined/></a>
-                  <a href='https://mail.google.com/' target="_blank" rel="noopener noreferrer"><YoutubeOutlined/></a>
 
                 </div>
               </div>
@@ -50,7 +47,7 @@ const Footer = () => {
 
         <div className="text-center p-4 bg-dark text-white">
           <div className={styles.footerr}>
-            © 2021 IGLESIA IFGF ECUADOR. All Rights Reserved.
+            © 2022 IGLESIA IFGF ECUADOR. All Rights Reserved.
           </div>
         </div>
       </div>

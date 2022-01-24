@@ -1,10 +1,16 @@
 import { Badge, Button, Card, Col } from "react-bootstrap";
-import React from "react";
+import React, {useState} from "react";
+import {ImageNewsModal} from "./ImageNewsModal";
 const URL = "http://localhost:3030/";
 
-export const NewsItem = ({ news, onShowModal, handleDelete  }) => {
+export const NewsItem = ({ news,onShowModal, handleDelete  }) => {
     console.log({ news });
-
+    const [isOpen, setIsOpen] = useState(false);
+    const [newsItem, setNews] = useState(null);
+    const onModal = (newsImage) => {
+        setNews(newsImage);
+        setIsOpen(true);
+    };
     return (
         <Col
             style={{
@@ -12,11 +18,16 @@ export const NewsItem = ({ news, onShowModal, handleDelete  }) => {
                 display: "flex",
             }}
         >
-            <Card style={{ width: "18rem" }}>
-                <Card.Img
-                    src={URL+news.imgURL}
 
-                />
+            <Card style={{ width: "18rem" }}>
+                    <Card.Img
+                        src={URL+news.imgURL}
+                        onClick={() => onModal(news)}
+
+
+                    />
+                <ImageNewsModal isOpen={isOpen} news={news} setIsOpen={setIsOpen} />
+
                 <Card.Body>
                     <Card.Body>
                         <Card.Title>{news.title}</Card.Title>

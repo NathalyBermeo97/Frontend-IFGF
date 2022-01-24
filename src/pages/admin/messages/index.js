@@ -85,7 +85,7 @@ const MessagesPage = () => {
     const formData = new FormData();
     formData.append("title",data.title);
     formData.append("description",data.description);
-    formData.append("file",data.file[1]);
+    formData.append("file",data.file[0]);
 
     Messages.create(formData).then((response) => {
       const newMessageItem = response.data;

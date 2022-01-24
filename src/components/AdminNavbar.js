@@ -41,7 +41,7 @@ export const AdminNavbar = () => {
                 onClick={() => router.push(ROUTES.ADMIN_MESSAGES)}
                 disabled={router.pathname === ROUTES.ADMIN_MESSAGES}
               >
-                Mensajes Biblicos
+                Mensajes Bíblicos
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
@@ -50,7 +50,7 @@ export const AdminNavbar = () => {
                 onClick={() => router.push(ROUTES.ADMIN_ALBUMS)}
                 disabled={router.pathname === ROUTES.ADMIN_ALBUMS}
               >
-                Albums
+                Álbum de fotos
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>

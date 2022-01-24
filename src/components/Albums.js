@@ -14,7 +14,7 @@ const Albums = ({ albums }) => {
           gap: "15px 0px",
         }}
       >
-        <h1>Albums</h1>
+        <h1>Álbum de fotos</h1>
 
         {albums.slice(0,3).map((item) => (
           <Card
