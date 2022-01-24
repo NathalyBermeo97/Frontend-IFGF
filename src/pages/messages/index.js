@@ -3,7 +3,7 @@ import { useMessages } from "../../hooks/useMessages";
 import { Col, Row, Button, Container, Card } from "react-bootstrap";
 import styles from "../../styles/events.module.css";
 import Messages from "../../components/Messages";
-const url = "https://backend-ifgf.herokuapp.com/";
+const URL = "https://backend-ifgf.herokuapp.com/";
 
 const HomeMessages = ({}) => {
     const { messages } = useMessages();

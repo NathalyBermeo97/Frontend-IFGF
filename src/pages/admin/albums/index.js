@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 import Albums from "../../../api/albums";
-import Messages from "../../../api/messages";
+
 
 const albumsItemSchema = yup.object().shape({
   title: yup
@@ -177,4 +177,4 @@ const AlbumsPage = () => {
   );
 };
 
-export default AlbumsPage;
+export default withPrivate(AlbumsPage);

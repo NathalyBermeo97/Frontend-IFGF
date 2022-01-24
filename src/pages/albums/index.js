@@ -3,7 +3,7 @@ import { useAlbums } from "../../hooks/useAlbums";
 import { Col, Row, Button, Container, Card } from "react-bootstrap";
 import styles from "../../styles/events.module.css";
 import Albums from "../../components/Albums";
-const URL = "http://localhost:3030/";
+const URL = "https://backend-ifgf.herokuapp.com/";
 
 const HomeAlbums = ({}) => {
     const { albums } = useAlbums();

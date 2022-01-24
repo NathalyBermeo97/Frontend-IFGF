@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 import Messages from "../../../api/messages";
-import News from "../../../api/news";
+
 
 const messagesItemSchema = yup.object().shape({
   title: yup
@@ -175,4 +175,4 @@ const MessagesPage = () => {
   );
 };
 
-export default MessagesPage;
+export default withPrivate(MessagesPage);

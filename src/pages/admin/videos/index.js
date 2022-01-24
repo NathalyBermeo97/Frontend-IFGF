@@ -10,7 +10,7 @@ import { ListOfVideos } from "../../../components/ListOfVideos";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
-import Events from "../../../api/events";
+
 import Videos from "../../../api/videos";
 
 const videosItemSchema = yup.object().shape({
@@ -188,4 +188,4 @@ const VideosPage = () => {
   );
 };
 
-export default VideosPage;
+export default withPrivate(VideosPage);

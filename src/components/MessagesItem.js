@@ -1,7 +1,7 @@
 import { Badge, Button, Card, Col } from "react-bootstrap";
 import React, {useState} from "react";
 import {ImageMessagesModal} from "./ImageMessagesModal";
-const URL = "http://localhost:3030/";
+const URL = "https://backend-ifgf.herokuapp.com/";
 
 export const MessagesItem = ({ messages, onShowModal, handleDelete }) => {
   console.log({ messages });

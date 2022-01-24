@@ -12,7 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 import News from "../../../api/news";
 import swal from "sweetalert";
-import {ImageNewsModal} from "../../../components/ImageNewsModal";
+
 
 const newsItemSchema = yup.object().shape({
   title: yup
