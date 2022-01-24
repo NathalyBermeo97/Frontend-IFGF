@@ -8,7 +8,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ant-design/icons": "^4.7.0",
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",

@@ -5,8 +5,8 @@ export const AdminLayout = ({ children }) => {
   return (
     <>
       <AdminNavbar />
-      {children}
-      <Footer/>
+      <div style={{minHeight: '100vh'}}>{children}</div>
+      <Footer />
     </>
   );
 };

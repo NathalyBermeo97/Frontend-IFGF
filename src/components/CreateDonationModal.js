@@ -38,7 +38,7 @@ export const CreateDonationModal = ({
       </Modal.Header>
       <Modal.Body>
         <Form id="create-news-form" onSubmit={handleSubmit(onSubmit)}>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Group className="mb-3">
             <Form.Label>Tipo de donación</Form.Label>
             <Form.Control {...register("type")} disabled />
           </Form.Group>
@@ -49,26 +49,31 @@ export const CreateDonationModal = ({
               {...register("delivery")}
               isInvalid={!!errors.delivery?.message}
             >
-              <option value="Donar a la iglesia personalmente">
-                Donar a la iglesia personalmente
+
+              <option value="entrega en iglesia">
+                Ir a entregar en la Iglésia personalmente
               </option>
               {donationType === "dinero" ? (
-                <option value="Donar por medio de transacción bancaria">
-                  Donar por medio de transacción bancaria
+                <option value="entrega vía transacción">
+                  Enviar a la iglesia por transacción
                 </option>
               ) : (
-                  <option value="Donar desde el hogar">
-                    Donar desde el hogar
-                  </option>
+                <option value="entrega vía servicio">
+                  Enviar a la iglesia por ServiEntrega
+                </option>
               )}
+              <option value="retiro en el hogar">
+                Ser recogido en el hogar
+              </option>
 
             </Form.Select>
             <Form.Control.Feedback type="invalid">
               {errors.delivery?.message}
             </Form.Control.Feedback>
           </Form.Group>
-          {selectValue === "Donar desde el hogar" ? (
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+
+          {selectValue === "retiro en el hogar" ? (
+            <Form.Group className="mb-3" >
               <Form.Label>Dirección</Form.Label>
               <Form.Control
                 style={{ height: "50px" }}
@@ -86,8 +91,10 @@ export const CreateDonationModal = ({
                 Escribe tú dirección lo más exacta posible
               </Form.Control.Feedback>
             </Form.Group>
-          ) : selectValue === "Donar por medio de transacción bancaria" ? (
-              <Form.Group className="mb-3" controlId="formBasicPassword">
+
+          ) : selectValue === "entrega vía transacción" ? (
+              <Form.Group className="mb-3" >
+
                 <Form.Label>Cuenta de transacción: 17265188XX - Banco XXXXX</Form.Label>
                 <br/>
                 <Form.Label>Imagen de la transacción bancaria</Form.Label>
@@ -100,7 +107,7 @@ export const CreateDonationModal = ({
           ) : (
             ""
           )}
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Group className="mb-3">
             <Form.Label>Fecha de entrega</Form.Label>
             <Form.Control
                min="2022-01-22"

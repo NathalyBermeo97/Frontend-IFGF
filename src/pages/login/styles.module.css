@@ -30,6 +30,7 @@
 .createAccount{
     padding: 15px;
     cursor: pointer;
+    text-align: center;
 }
 
 .createAccount:hover{

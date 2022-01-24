@@ -113,7 +113,7 @@ const EventsPage = () => {
       setEvents(callback);
       setShowCreateEventsItemModal(false);
       reset();
-      alert('Evento cread exitosamente!')
+      alert('Evento creado exitosamente!')
     }).catch(error=>{
       console.log(error)
       alert('Error al crear un evento!')

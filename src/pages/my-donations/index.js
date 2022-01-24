@@ -3,7 +3,8 @@ import { ListOfDonations } from "../../components/ListOfDonations";
 import { withPrivate } from "../../hocs/withPrivate";
 import { useDonation } from "../../hooks/useDonation";
 import styles from "../../styles/indexHome.module.css";
-import { FormControl, InputGroup } from "react-bootstrap";
+import {FormControl, InputGroup} from "react-bootstrap";
+
 
 const MyDonationsPage = () => {
   const { userDonations } = useDonation();
@@ -46,7 +47,9 @@ const MyDonationsPage = () => {
         />
       </InputGroup>
       <br />
-      <ListOfDonations donations={filteredDonations} />;
+
+      <ListOfDonations donations={userDonations} />;
+
     </>
   );
 };

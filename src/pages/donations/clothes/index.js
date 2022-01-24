@@ -24,7 +24,10 @@ const schema = yup.object().shape({
     .min(25, ERROR_MESSAGES.MIN_STRING("dirección", 25))
     .max(60, ERROR_MESSAGES.MAX_STRING("dirección", 60))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
-  date: yup.date().required(ERROR_MESSAGES.REQUIRED("fecha de entrega")),
+  date: yup
+    .date()
+    .typeError(ERROR_MESSAGES.DATE)
+    .required(ERROR_MESSAGES.REQUIRED("fecha de entrega")),
   description: yup.string(),
 });
 
@@ -54,7 +57,7 @@ const DonationsPage = () => {
   const handleModalState = () => {
     setShowModal(true);
     setValue("type", "ropa");
-    setValue("delivery", "Delivery in Church via some service");
+    setValue("delivery", "entrega en iglesia");
   };
 
   const onSubmit = (data) => {
@@ -65,10 +68,7 @@ const DonationsPage = () => {
 
     const parsedData = { ...data, address, description, date };
     createDonation(parsedData).then((newDonation) => {
-      setDonations((prevState) => [
-        ...prevState,
-        newDonation,
-      ]);
+      setDonations((prevState) => [...prevState, newDonation]);
       setShowModal(false);
       reset();
     });
@@ -80,7 +80,7 @@ const DonationsPage = () => {
         <h1 className={styles.section}>DONACIÓN DE ROPA</h1>
         <div className={styles.linea}></div>
       </div>
-      <Container >
+      <Container>
         <Row>
           <Col xs={6}>
             <div className={styles.info}>
@@ -101,11 +101,9 @@ const DonationsPage = () => {
               </div>
             </div>
           </Col>
-            <Col xs={6}>
-
-<div className={styles.info}>
+          <Col xs={6}>
+            <div className={styles.info}>
               <div>
-
                 <h4>Visita NUESTRAS INSTALACIONES</h4>
               </div>
 
@@ -113,7 +111,7 @@ const DonationsPage = () => {
                 Puedes visitar nuestras instalaciones para mayor información y
                 para realizar cualquier tipo de pago o donación.
               </p>
-    <br/>
+              <br />
 
               <div>
                 <iframe
@@ -125,22 +123,13 @@ const DonationsPage = () => {
                   loading="lazy"
                 ></iframe>
               </div>
-
-
-</div>
-
-
+            </div>
           </Col>
-
         </Row>
         <div className={styles.button}>
-        <Button
-            variant="primary"
-            size="sm"
-            onClick={handleModalState}
-        >
-          Donar ropa
-        </Button>
+          <Button variant="primary" size="sm" onClick={handleModalState}>
+            Donar ropa
+          </Button>
         </div>
       </Container>
 
@@ -155,7 +144,7 @@ const DonationsPage = () => {
         reset={reset}
         watch={watch}
         setValue={setValue}
-        donationType='ropa'
+        donationType="ropa"
       />
     </>
   );

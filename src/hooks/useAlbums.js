@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import Albums from "../api/albums";
-import News from "../api/news";
 
 export const useAlbums = () => {
     const [albums, setAlbums] = useState([]);

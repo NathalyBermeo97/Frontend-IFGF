@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import React, { useState } from "react";
 import { ImageEventsModal } from "./ImageEventsModal";
 import { InfoEventsModal } from "./InfoEventsModal";
-const URL = "http://localhost:3030/";
+const URL = "https://backend-ifgf.herokuapp.com/api/events/";
 
 export const EventItem = ({
   event,
@@ -15,7 +15,7 @@ export const EventItem = ({
 }) => {
   const router = useRouter();
   const { users } = useAuth();
-
+  console.log({event})
   const eventUsers = event?.inscriptions?.map((userId) => {
     return users?.find((user) => user._id === userId);
   });
@@ -86,27 +86,28 @@ export const EventItem = ({
                   events={event}
                   setInfoIsOpen={setInfoIsOpen}
                 />
+                <Row>
+                  <Col
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        marginTop: "10px",
+                        gap: "0px 5px",
+                      }}
+                  >
+                    <Button size="sm" variant="success" onClick={() => infoModal()}>
+                      Ver más
+                    </Button>
+                  </Col>
+                </Row>
               </>
+
             ) : (
               <Button onClick={() => onShowModal(event)}>
                 Más información
               </Button>
             )}
           </div>
-          <Row>
-            <Col
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "10px",
-                gap: "0px 5px",
-              }}
-            >
-              <Button size="sm" variant="success" onClick={() => infoModal()}>
-                Ver más
-              </Button>
-            </Col>
-          </Row>
         </Card.Body>
       </Card>
     </Col>

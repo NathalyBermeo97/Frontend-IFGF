@@ -3,12 +3,13 @@ import "../styles/globals.css";
 import PropTypes from "prop-types";
 import Head from "next/head";
 import { UserContextProvider } from "../context/AuthContext";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/globals.css";
 import { MainLayout } from "../components/MainLayout";
 import NProgress from "nprogress";
 import "/public/nprogress.css";
 import { useRouter } from "next/router";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;

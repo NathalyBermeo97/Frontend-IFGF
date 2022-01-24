@@ -1,10 +1,7 @@
-import { Badge, Button, Card, Col } from "react-bootstrap";
-import React from "react";
+import { Card, Col } from "react-bootstrap";
 import ReactPlayer from "react-player";
 
 export const Videoscards = ({ videos }) => {
-  console.log({ videos});
-
   return (
       <Col
           style={{

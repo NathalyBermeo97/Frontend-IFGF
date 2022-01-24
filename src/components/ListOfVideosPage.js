@@ -1,6 +1,5 @@
-import React from "react";
-import {Button, Container, ListGroup, Row} from "react-bootstrap";
-import {Videoscards} from "./Videoscards";
+import { Container, Row} from "react-bootstrap";
+import { Videoscards } from "./Videoscards";
 
 
 export const ListOfVideosPage = ({ videos}) => {

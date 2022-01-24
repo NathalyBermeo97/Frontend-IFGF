@@ -1,6 +1,4 @@
-import React from "react";
-import { Button, Modal, Form, InputGroup } from "react-bootstrap";
-import {router} from "next/client";
+import { Button, Modal, Form } from "react-bootstrap";
 
 export const CreateEventsItemModal = ({
   showModal,

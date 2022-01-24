@@ -7,8 +7,8 @@ import { FinalUserLayout } from "./FinalUserLayout";
 export const MainLayout = ({ children }) => {
   const router = useRouter();
   return router.pathname.startsWith("/admin") ? (
-    <AdminLayout children={children} />
+    <AdminLayout>{children}</AdminLayout>
   ) : (
-    <FinalUserLayout children={children} />
+    <FinalUserLayout>{children}</FinalUserLayout>
   );
 };
