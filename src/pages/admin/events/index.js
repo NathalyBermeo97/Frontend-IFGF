@@ -108,6 +108,7 @@ const EventsPage = () => {
     formData.append("title", data.title);
     formData.append("description", data.description);
     formData.append("location", data.location);
+    formData.append("date", data.date);
     formData.append("schedule", data.schedule);
     formData.append("cost", data.cost);
     formData.append("number", data.number);

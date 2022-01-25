@@ -67,6 +67,19 @@ export const CreateEventsItemModal = ({
               {errors.location?.message}
             </Form.Control.Feedback>
           </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Fecha de entrega</Form.Label>
+            <Form.Control
+                min="2022-01-25"
+                type="date"
+                placeholder="Ingrese la fecha de entrega"
+                {...register("date")}
+                isInvalid={!!errors.date?.message}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.date?.message}
+            </Form.Control.Feedback>
+          </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Horario</Form.Label>
             <Form.Control
