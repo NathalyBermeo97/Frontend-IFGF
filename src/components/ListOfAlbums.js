@@ -2,7 +2,7 @@ import React from "react";
 import {Button, Container, ListGroup, Row} from "react-bootstrap";
 import {AlbumsItem} from "./AlbumsItem";
 
-export const ListOfAlbums = ({ albums, onShowModal,onShowEditModal,handleDelete }) => {
+export const ListOfAlbums = ({ albums, onShowModal,onShowEditModal,onShowDeleteModal }) => {
     return(
         <Container>
             <Row
@@ -18,7 +18,7 @@ export const ListOfAlbums = ({ albums, onShowModal,onShowEditModal,handleDelete 
                         albums={albums}
                         onShowModal={onShowModal}
                         onShowEditModal={onShowEditModal}
-                        handleDelete={handleDelete}
+                        onShowDeleteModal={onShowDeleteModal}
                     />
                 ))}
             </Row>

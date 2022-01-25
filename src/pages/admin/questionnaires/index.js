@@ -5,12 +5,15 @@ import { ROUTES } from "../../../constants/routes";
 import { withPrivate } from "../../../hocs/withPrivate";
 import { useQuestionnaire } from "../../../hooks/useQuestionnaire";
 import styles from "./style.module.css";
-import React from "react";
+import React, {useState} from "react";
 import {SERVER_RESPONSE} from "../../../constants/inidex";
+import {ConfirmModal} from "../../../components/ConfirmModal";
 
 
 const Questionnaires = () => {
   const { questionnaires ,setQuestionnaires,deleteQuestionnaire} = useQuestionnaire();
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [eventId, setEventId] = useState(null);
   const router = useRouter();
 
 
@@ -24,6 +27,16 @@ const Questionnaires = () => {
                 setQuestionnaires(newQuestionnaires);
             }
         });
+        setShowDeleteModal(false)
+    };
+    const onConfirm = () => {
+        handleDelete(eventId);
+    };
+
+    const onShowDeleteModal = (eventId) => {
+        setShowDeleteModal(true);
+        setEventId(eventId);
+        //confirm({onOk: () => handleDelete(eventId)})
     };
 
 
@@ -54,7 +67,13 @@ const Questionnaires = () => {
         </Button>
       </div>
 
-      <ListOfQuestionnaires questionnaires={questionnaires}  handleDelete={handleDelete}/>
+      <ListOfQuestionnaires questionnaires={questionnaires}   onShowDeleteModal={onShowDeleteModal}/>
+        <ConfirmModal
+            isOpen={showDeleteModal}
+            confirm={onConfirm}
+            setIsOpen={setShowDeleteModal}
+            item='cuestionario'
+        />
     </>
   );
 };

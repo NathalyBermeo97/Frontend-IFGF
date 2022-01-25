@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Card, Modal} from "react-bootstrap";
-const URL = "https://backend-ifgf.herokuapp.com/";
+const URL = "http://localhost:3030/";
 
 export const ImageMessagesModal = ({ isOpen, messages, setIsOpen }) => {
     return messages ? (

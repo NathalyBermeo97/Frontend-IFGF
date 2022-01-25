@@ -12,6 +12,7 @@ import * as yup from "yup";
 import { ListOfEvents } from "../../../components/ListOfEvents";
 import Events from "../../../api/events";
 import { ConfirmModal } from "../../../components/ConfirmModal";
+import swal from "sweetalert";
 
 const eventsItemSchema = yup.object().shape({
   title: yup
@@ -121,11 +122,11 @@ const EventsPage = () => {
         setEvents(callback);
         setShowCreateEventsItemModal(false);
         reset();
-        alert("Evento creado exitosamente!");
+        swal("Evento creado exitosamente!");
       })
       .catch((error) => {
         console.log(error);
-        alert("Error al crear un evento!");
+        swal("Error al crear un evento!");
       });
     {
       /*setEvents((prevState) => [
@@ -146,6 +147,7 @@ const EventsPage = () => {
       );
       setEvents(newEvents);
       setShowModal(false);
+      swal('Evento editado correctamente')
     });
     {
       /*const newEvents = events.map((eventsItem) =>

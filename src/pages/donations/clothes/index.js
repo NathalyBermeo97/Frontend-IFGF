@@ -118,8 +118,8 @@ const DonationsPage = () => {
                 <iframe
                   className={styles.ubicacion}
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7643285934228!2d-78.45924674973766!3d-0.2980747997814547!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d599082e934a23%3A0xe9afca3fb0d1c771!2sIFGF%20Quito!5e0!3m2!1ses!2sec!4v1637617369934!5m2!1ses!2sec"
-                  width="300"
-                  height="150"
+                  width="500"
+                  height="250"
                   allowFullScreen=""
                   loading="lazy"
                 ></iframe>

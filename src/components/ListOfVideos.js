@@ -2,7 +2,8 @@ import React from "react";
 import {Button, Container, ListGroup, Row} from "react-bootstrap";
 import {VideosItem} from "./VideosItem";
 
-export const ListOfVideos = ({ videos, onShowModal, onShowEditModal,handleDelete }) => {
+export const ListOfVideos = ({ videos, onShowModal, onShowEditModal,onShowDeleteModal }) => {
+
     return (
         <Container>
             <Row
@@ -18,7 +19,7 @@ export const ListOfVideos = ({ videos, onShowModal, onShowEditModal,handleDelete
                         videos={videos}
                         onShowModal={onShowModal}
                         onShowEditModal={onShowEditModal}
-                        handleDelete={handleDelete}
+                        onShowDeleteModal={onShowDeleteModal}
                     />
                 ))}
             </Row>

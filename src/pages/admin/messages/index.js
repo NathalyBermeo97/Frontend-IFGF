@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 import Messages from "../../../api/messages";
+import {ConfirmModal} from "../../../components/ConfirmModal";
 
 
 const messagesItemSchema = yup.object().shape({
@@ -30,6 +31,8 @@ const MessagesPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [showCreateMessagesItemModal, setShowCreateMessagesItemModal] =
     useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [eventId, setEventId] = useState(null);
   const [keyword, setKeyword] = useState("");
   const [filteredMessages, setFilteredMessages] = useState([]);
 
@@ -71,10 +74,19 @@ const MessagesPage = () => {
 
         const newMessages = messages.filter((message) => message._id !== id);
         setMessages(newMessages);
-        alert('Mensaje bíblico eliminado correctamente')
       }
 
     });
+    setShowDeleteModal(false)
+  };
+  const onConfirm = () => {
+    handleDelete(eventId);
+  };
+
+  const onShowDeleteModal = (eventId) => {
+    setShowDeleteModal(true);
+    setEventId(eventId);
+    //confirm({onOk: () => handleDelete(eventId)})
   };
 
   console.log({ errors });
@@ -95,10 +107,10 @@ const MessagesPage = () => {
       setMessages(callback);
       setShowCreateMessagesItemModal(false);
       reset();
-      alert('Mensaje bíblico creado exitosamente!')
+      swal('Mensaje bíblico creado exitosamente!')
     }).catch(error=>{
       console.log(error)
-      alert('Error al crear un mensaje biblico!')
+      swal('Error al crear un mensaje biblico!')
     });
 
   };
@@ -112,7 +124,7 @@ const MessagesPage = () => {
       );
       setMessages(newMessages);
       setShowModal(false);
-      alert('Mensaje bíblico editado correctamente')
+      swal('Mensaje bíblico editado correctamente')
 
     });
 
@@ -150,8 +162,15 @@ const MessagesPage = () => {
       <ListOfMessages
           messages={filteredMessages}
         onShowModal={onShowModal}
-        handleDelete={handleDelete}
+          onShowDeleteModal={onShowDeleteModal}
       />
+      <ConfirmModal
+          isOpen={showDeleteModal}
+          confirm={onConfirm}
+          setIsOpen={setShowDeleteModal}
+          item='mensaje bíblico'
+      />
+
 
       <UpdateMessagesItemModal
         show={showModal}

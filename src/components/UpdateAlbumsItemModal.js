@@ -13,7 +13,7 @@ export const UpdateAlbumsItemModal = ({
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Albums de fotos </Modal.Title>
+        <Modal.Title>Albúm de fotos </Modal.Title>
         <br />
       </Modal.Header>
       <Modal.Body>

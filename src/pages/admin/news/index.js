@@ -12,6 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 import News from "../../../api/news";
 import swal from "sweetalert";
+import {ConfirmModal} from "../../../components/ConfirmModal";
 
 
 const newsItemSchema = yup.object().shape({
@@ -29,6 +30,8 @@ const NewsPage = () => {
   const { news, setNews, updateNews, createNewsItem, deleteNews } = useNews();
   const [showModal, setShowModal] = useState(false);
   const [showCreateNewsItemModal, setShowCreateNewsItemModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [eventId, setEventId] = useState(null);
   const [keyword, setKeyword] = useState("");
   const [filteredNews, setFilteredNews] = useState([]);
 
@@ -65,17 +68,26 @@ const NewsPage = () => {
 
   };
 
-
   const handleDelete = (id) => {
     deleteNews(id).then((data) => {
       console.log({ data });
       if (data.message === SERVER_RESPONSE.DELETED_NEWS) {
         const newNews = news.filter((item) => item._id !== id);
         setNews(newNews);
-        swal('Noticia eliminada correctamente')
       }
     });
+    setShowDeleteModal(false)
   };
+  const onConfirm = () => {
+    handleDelete(eventId);
+  };
+
+  const onShowDeleteModal = (eventId) => {
+    setShowDeleteModal(true);
+    setEventId(eventId);
+    //confirm({onOk: () => handleDelete(eventId)})
+  };
+
 
   console.log({ errors });
 
@@ -122,6 +134,7 @@ const NewsPage = () => {
     }
   };
 
+
   return (
     <>
       <div >
@@ -155,6 +168,13 @@ const NewsPage = () => {
         news={filteredNews}
         onShowModal={onShowModal}
         handleDelete={handleDelete}
+        onShowDeleteModal={onShowDeleteModal}
+      />
+      <ConfirmModal
+          isOpen={showDeleteModal}
+          confirm={onConfirm}
+          setIsOpen={setShowDeleteModal}
+          item='noticia'
       />
 
       <UpdateNewsItemModal

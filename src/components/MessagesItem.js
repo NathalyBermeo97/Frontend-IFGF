@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import {ImageMessagesModal} from "./ImageMessagesModal";
 const URL = "https://backend-ifgf.herokuapp.com/";
 
-export const MessagesItem = ({ messages, onShowModal, handleDelete }) => {
+export const MessagesItem = ({ messages, onShowModal,onShowDeleteModal, }) => {
   console.log({ messages });
   const [isOpen, setIsOpen] = useState(false);
   const [messagesItem, setMessages] = useState(null);
@@ -43,7 +43,7 @@ export const MessagesItem = ({ messages, onShowModal, handleDelete }) => {
               <Button
                 size="sm"
                 variant="danger"
-                onClick={() => handleDelete(messages._id)}
+                onClick={() => onShowDeleteModal(messages._id)}
               >
                 Eliminar
               </Button>

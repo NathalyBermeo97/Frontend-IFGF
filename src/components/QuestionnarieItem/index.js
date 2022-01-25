@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { ROUTES } from "../../constants/routes";
 import React from "react";
 
-export const QuestionnaireItem = ({ questionnaire,handleDelete }) => {
+export const QuestionnaireItem = ({ questionnaire,onShowDeleteModal }) => {
   const token = window.localStorage.getItem('jwt')
   const router = useRouter();
   const questionsNumber = questionnaire.questions.length;
@@ -35,8 +35,15 @@ export const QuestionnaireItem = ({ questionnaire,handleDelete }) => {
               <>
                   <Button
                       size="sm"
+                      variant="primary"
+
+                  >
+                      Editar
+                  </Button>
+                  <Button
+                      size="sm"
                       variant="danger"
-                      onClick={() => handleDelete(questionnaire._id)}
+                      onClick={() => onShowDeleteModal(questionnaire._id)}
                   >
                       Eliminar
                   </Button></>
