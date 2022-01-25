@@ -3,6 +3,7 @@ import { useQuestionnaire } from "../../hooks/useQuestionnaire";
 import styles from "../donations/styles.module.css";
 import {FormControl, InputGroup} from "react-bootstrap";
 import React from "react";
+import {withPrivate} from "../../hocs/withPrivate";
 
 const Questionnaires = () => {
   const { questionnaires } = useQuestionnaire();
@@ -28,4 +29,4 @@ const Questionnaires = () => {
   );
 };
 
-export default Questionnaires;
+export default withPrivate(Questionnaires);

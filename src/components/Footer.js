@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../styles/footer.module.css";
+import {AiFillInstagram, AiFillYoutube,AiFillFacebook} from "react-icons/ai";
 
 
 const Footer = () => {
@@ -38,6 +39,12 @@ const Footer = () => {
                   Contáctanos en nuestras redes sociales
                 </h6>
                 <div className="text-white text-center">
+                  <p>Siguenos en facebook: <AiFillFacebook/></p>
+
+                  <p>Siguenos en YouTube:  <AiFillYoutube/></p>
+
+                  <p>Siguenos en Instagram:  <AiFillInstagram/></p>
+
 
                 </div>
               </div>

@@ -1,7 +1,7 @@
 import { Badge, Button, Card, Col } from "react-bootstrap";
 import React, {useState} from "react";
 import {ImageNewsModal} from "./ImageNewsModal";
-const URL = "https://backend-ifgf.herokuapp.com/";
+const URL = "http://localhost:3030/";
 
 export const NewsItem = ({ news,onShowModal, handleDelete  }) => {
     console.log({ news });

@@ -33,8 +33,6 @@ const LoginPage = () => {
   const btn = () => {
     setState((prevState) => !prevState);
   }
-
-
     const onSubmit = (data) => {
       console.log({ data });
       const email = data.email;

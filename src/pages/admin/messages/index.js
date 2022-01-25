@@ -71,7 +71,7 @@ const MessagesPage = () => {
 
         const newMessages = messages.filter((message) => message._id !== id);
         setMessages(newMessages);
-        alert('Mensaje bíblico eliminado correctamente')
+        swal('Mensaje bíblico eliminado correctamente')
       }
 
     });
@@ -95,10 +95,10 @@ const MessagesPage = () => {
       setMessages(callback);
       setShowCreateMessagesItemModal(false);
       reset();
-      alert('Mensaje bíblico creado exitosamente!')
+      swal('Mensaje bíblico creado exitosamente!')
     }).catch(error=>{
       console.log(error)
-      alert('Error al crear un mensaje biblico!')
+      swal('Error al crear un mensaje biblico!')
     });
 
   };
@@ -112,7 +112,7 @@ const MessagesPage = () => {
       );
       setMessages(newMessages);
       setShowModal(false);
-      alert('Mensaje bíblico editado correctamente')
+      swal('Mensaje bíblico editado correctamente')
 
     });
 

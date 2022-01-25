@@ -93,10 +93,10 @@ const AlbumsPage = () => {
       setAlbums(callback);
       setShowCreateAlbumsItemModal(false);
       reset();
-      alert('Foto creada exitosamente!')
+      swal('Foto creada exitosamente!')
     }).catch(error=>{
       console.log(error)
-      alert('Error al subir una foto!')
+      swal('Error al subir una foto!')
     });
   };
 
