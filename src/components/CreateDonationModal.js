@@ -57,6 +57,7 @@ export const CreateDonationModal = ({
                 </option>
               )}
               <option value="retiro en el hogar">
+
                 Donar desde el hogar
               </option>
             </Form.Select>
@@ -64,6 +65,7 @@ export const CreateDonationModal = ({
               {errors.delivery?.message}
             </Form.Control.Feedback>
           </Form.Group>
+
           {selectValue === "entrega en iglesia" ? (
                   <Form.Group className="mb-3">
                     <Form.Label>Fecha de entrega</Form.Label>
@@ -96,6 +98,7 @@ export const CreateDonationModal = ({
               <Form.Control.Feedback type="valid">
                 Escribe tú dirección lo más exacta posible
               </Form.Control.Feedback>
+
               <Form.Label>Fecha de entrega</Form.Label>
               <Form.Control
                   min="2022-01-25"
@@ -108,6 +111,7 @@ export const CreateDonationModal = ({
                 {errors.date?.message}
               </Form.Control.Feedback>
             </Form.Group>
+
           ) : selectValue === "entrega vía transacción" ? (
             <Form.Group className="mb-3">
               <Form.Label>

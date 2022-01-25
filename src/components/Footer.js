@@ -43,6 +43,10 @@ const Footer = () => {
 
                   <p>
                     Siguenos en YouTube <AiFillYoutube />
+
+                  </p>
+                  <p>
+                    Siguenos en Instagram <AiFillInstagram />
                   </p>
                     <p>
                       Siguenos en Instagram < AiFillInstagram />

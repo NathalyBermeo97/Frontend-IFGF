@@ -123,7 +123,7 @@ const DonationsPage = () => {
                 <br/>
                 <img
                   className={styles.ubicacion}
-                  width="450px"
+                  width="400px"
                   src="https://www.bbva.com/wp-content/uploads/2016/10/crowdfunding1.jpg"
                 />
               </div>
