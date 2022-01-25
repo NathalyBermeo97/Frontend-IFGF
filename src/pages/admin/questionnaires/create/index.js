@@ -113,7 +113,7 @@ const CreateQuestionnaire = () => {
       <div className={styles.header}>
         <h2>Creación de cuestionarios</h2>
         <Button variant="primary" size="sm" onClick={handleSubmit}>
-          Crear
+          Crear cuestionario
         </Button>
       </div>
 

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../styles/footer.module.css";
-import {AiFillInstagram, AiFillYoutube,AiFillFacebook} from "react-icons/ai";
-
+import { AiFillInstagram, AiFillYoutube, AiFillFacebook } from "react-icons/ai";
+import { Link } from "react-bootstrap-icons";
 
 const Footer = () => {
   return (
@@ -16,9 +16,8 @@ const Footer = () => {
                 </h6>
                 <div className="text-white text-center">
                   <p>
-                    NUESTRA MISIÓN ES LA GENTE
-                    Conectados con Dios & Haciendo Discípulos
-                    Trayendo lo Sobrenatural de Dios a la Tierra.
+                    NUESTRA MISIÓN ES LA GENTE Conectados con Dios & Haciendo
+                    Discípulos Trayendo lo Sobrenatural de Dios a la Tierra.
                   </p>
                 </div>
               </div>
@@ -28,24 +27,30 @@ const Footer = () => {
                   Visítanos
                 </h6>
                 <div className="text-white text-center">
-                  <p>
-                   Dirección: Av Ilaló, y, Quito 170804
-                  </p>
+                  <p>Dirección: Av Ilaló, y, Quito 170804</p>
                 </div>
               </div>
 
               <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                <h6 className="text-white text-center fw-bold mb-4">
+                <h6 className="text-white text-center fw-bold mb-6">
                   Contáctanos en nuestras redes sociales
                 </h6>
                 <div className="text-white text-center">
-                  <p>Siguenos en facebook: <AiFillFacebook/></p>
+                  <a>
+                    Siguenos en facebook:
+                    <AiFillFacebook />
+                  </a>
 
-                  <p>Siguenos en YouTube:  <AiFillYoutube/></p>
+                  <p>
+                    Siguenos en YouTube: <AiFillYoutube />
+                  </p>
 
-                  <p>Siguenos en Instagram:  <AiFillInstagram/></p>
-
-
+                  <div className={styles.icons}>
+                    <a href="https://www.instagram.com/ifgfecuador/">
+                      {" "}
+                      <AiFillInstagram />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

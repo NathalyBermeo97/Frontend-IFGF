@@ -35,6 +35,13 @@ export const QuestionnaireItem = ({ questionnaire,handleDelete }) => {
               <>
                   <Button
                       size="sm"
+                      variant="primary"
+
+                  >
+                      Editar
+                  </Button>
+                  <Button
+                      size="sm"
                       variant="danger"
                       onClick={() => handleDelete(questionnaire._id)}
                   >
