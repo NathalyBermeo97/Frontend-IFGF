@@ -104,7 +104,7 @@ const CreateQuestionnaire = () => {
     createQuestionnaire(questionnaire).then(data => {
       console.log({data})
       //setQuestionnaires(prevState => [...prevState, data])
-      alert('Cuestionario creado exitosamente!')
+      swal('Cuestionario creado exitosamente!')
     })
   };
 
