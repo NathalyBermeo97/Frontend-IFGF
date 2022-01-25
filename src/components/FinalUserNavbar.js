@@ -1,6 +1,6 @@
 import styles from "../styles/navbar.module.css";
 import { USER_STATES } from "../context/AuthContext";
-import { Container, Image, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Container, Image, Nav, Navbar, NavDropdown, Spinner } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import { ROUTES } from "../constants/routes";
@@ -35,17 +35,19 @@ const NavbarHome = () => {
             </Nav.Item>
             <Nav.Item>
               <NavDropdown title="Eventos" id="nav-dropdown-eventos">
-
-              <NavDropdown.Item
+                <NavDropdown.Item
                   eventKey={ROUTES.EVENTS}
-                onClick={() => router.push(ROUTES.EVENTS)}
-                disabled={router.pathname === ROUTES.EVENTS}
-              >
-                Eventos
-              </NavDropdown.Item>
-              <NavDropdown.Item onClick={() => router.push(ROUTES.MY_EVENTS)}>
-                Mis Eventos
-              </NavDropdown.Item>
+                  onClick={() => router.push(ROUTES.EVENTS)}
+                  disabled={router.pathname === ROUTES.EVENTS}
+                >
+                  Eventos
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  onClick={() => router.push(ROUTES.MY_EVENTS)}
+                  disabled={!isLoggedIn}
+                >
+                  Mis Eventos
+                </NavDropdown.Item>
               </NavDropdown>
             </Nav.Item>
             <Nav.Item>
@@ -66,7 +68,8 @@ const NavbarHome = () => {
                   Donar dinero
                 </NavDropdown.Item>
                 <NavDropdown.Item
-                    onClick={() => router.push(ROUTES.MY_DONATIONS)}
+                  onClick={() => router.push(ROUTES.MY_DONATIONS)}
+                  disabled={!isLoggedIn}
                 >
                   Mis Donaciones
                 </NavDropdown.Item>
@@ -97,7 +100,7 @@ const NavbarHome = () => {
                 </NavDropdown.Item>
               </NavDropdown>
             ) : currentUser === USER_STATES.NOT_KNOWN ? (
-              "cargando..."
+              <Spinner animation="border" />
             ) : (
               <>
                 {router.pathname === ROUTES.LOGIN ? (

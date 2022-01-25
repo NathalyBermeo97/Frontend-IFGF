@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { EventModal } from "../../components/EventModal";
-import { ListOfEvents_ } from "../../components/ListOfEvents_";
+import { ListOfEvents } from "../../components/ListOfEvents";
 import { withPrivate } from "../../hocs/withPrivate";
 import { useEvents } from "../../hooks/useEvents";
 import styles from "../../styles/indexHome.module.css";
@@ -47,7 +47,7 @@ const MyEventsPage = () => {
         />
       </InputGroup>
       <br />
-      <ListOfEvents_ events={filteredEvents} onShowModal={onShowModal} />;
+      <ListOfEvents events={filteredEvents} onShowModal={onShowModal} />;
       <EventModal isOpen={isOpen} event={event} setIsOpen={setIsOpen} />
     </>
   );

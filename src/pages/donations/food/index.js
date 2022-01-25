@@ -19,7 +19,7 @@ const donationsItemSchema = yup.object().shape({
     .string()
     .required(ERROR_MESSAGES.REQUIRED("entrega"))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
-  direction: yup
+  address: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("dirección"))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
@@ -52,10 +52,12 @@ const DonationsPage = () => {
     resolver: yupResolver(donationsItemSchema),
   });
 
+  console.log({errors})
+
   const handleModalState = () => {
     setShowModal(true);
     setValue("type", "comida");
-    setValue("delivery", "Delivery in Church");
+    setValue("delivery", "entrega en iglesia");
   };
 
   const onSubmit = (data) => {

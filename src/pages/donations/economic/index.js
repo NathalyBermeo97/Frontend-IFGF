@@ -55,7 +55,7 @@ const DonationsPage = () => {
   const handleModalState = () => {
     setShowModal(true);
     setValue("type", "dinero");
-    setValue("delivery", "Delivery in Church");
+    setValue("delivery", "entrega en iglesia");
   };
 
   const onSubmit = async (data) => {

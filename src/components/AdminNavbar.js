@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
-import React from "react";
-import { Container, Image, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Container, Image, Nav, Navbar, NavDropdown, Spinner } from "react-bootstrap";
 import { ROUTES } from "../constants/routes";
 import { useAuth, USER_STATES } from "../context/AuthContext";
 import styles from "../styles/navbar.module.css";
@@ -96,7 +95,7 @@ export const AdminNavbar = () => {
                 </NavDropdown.Item>
               </NavDropdown>
             ) : currentUser === USER_STATES.NOT_KNOWN ? (
-              "cargando..."
+              <Spinner animation="border" />
             ) : (
               <Nav.Item>
                 <Nav.Link

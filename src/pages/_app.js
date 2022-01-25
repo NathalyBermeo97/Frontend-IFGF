@@ -10,7 +10,6 @@ import "/public/nprogress.css";
 import { useRouter } from "next/router";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-
 export default function MyApp(props) {
   const { Component, pageProps } = props;
   const router = useRouter();

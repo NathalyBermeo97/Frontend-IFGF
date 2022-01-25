@@ -103,7 +103,7 @@ const LoginPage = () => {
                     </Form.Control.Feedback>
                   </Form.Group>
 
-                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Group className="mb-3" >
                     <Row>
                       <Col xs={10}>
                         <Form.Control
