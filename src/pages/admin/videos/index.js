@@ -12,9 +12,13 @@ import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 
 import Videos from "../../../api/videos";
+import {ConfirmModal} from "../../../components/ConfirmModal";
 
 const videosItemSchema = yup.object().shape({
-
+    title: yup
+        .string()
+        .required(ERROR_MESSAGES.REQUIRED("título"))
+        .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
   description: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("descripción"))
@@ -34,6 +38,8 @@ const VideosPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [showCreateVideosItemModal, setShowCreateVideosItemModal] =
     useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [eventId, setEventId] = useState(null);
   const [keyword, setKeyword] = useState("");
   const [filteredVideos, setFilteredVideos] = useState([]);
 
@@ -75,9 +81,8 @@ const VideosPage = () => {
               const newVideos = videos.filter((video) => video._id !== id);
               setVideos(newVideos);
           }
-          alert('Video eliminado correctamente')
-
       });
+      setShowDeleteModal(false)
   };
 
   console.log({ errors });
@@ -105,6 +110,15 @@ const VideosPage = () => {
         reset();*/
     }
   };
+    const onConfirm = () => {
+        handleDelete(eventId);
+    };
+
+    const onShowDeleteModal = (eventId) => {
+        setShowDeleteModal(true);
+        setEventId(eventId);
+        //confirm({onOk: () => handleDelete(eventId)})
+    };
 
 
   const onSubmitUpdateVideosItem = (data) => {
@@ -162,11 +176,15 @@ const VideosPage = () => {
 
             videos={filteredVideos}
             onShowModal={onShowModal}
-            handleDelete={handleDelete}
+            onShowDeleteModal={onShowDeleteModal}
           />
-
-
-      <UpdateVideosItemModal
+        <ConfirmModal
+            isOpen={showDeleteModal}
+            confirm={onConfirm}
+            setIsOpen={setShowDeleteModal}
+            item='vídeo'
+        />
+        <UpdateVideosItemModal
         show={showModal}
         setShowModal={setShowModal}
         register={updateVideosItemForm.register}

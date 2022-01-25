@@ -2,7 +2,7 @@ import React from "react";
 import {Button, Container, ListGroup, Row} from "react-bootstrap";
 import {MessagesItem} from "./MessagesItem";
 
-export const ListOfMessages = ({ messages, onShowModal,onShowEditModal,handleDelete }) => {
+export const ListOfMessages = ({ messages, onShowModal,onShowEditModal,onShowDeleteModal}) => {
     return(
         <Container>
             <Row
@@ -18,7 +18,7 @@ export const ListOfMessages = ({ messages, onShowModal,onShowEditModal,handleDel
                         messages={messages}
                         onShowModal={onShowModal}
                         onShowEditModal={onShowEditModal}
-                        handleDelete={handleDelete}
+                        onShowDeleteModal={onShowDeleteModal}
                     />
                 ))}
             </Row>

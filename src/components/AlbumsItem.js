@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import {ImageAlbumModal} from "./ImageAlbumModal";
 const URL = "http://localhost:3030/";
 
-export const AlbumsItem = ({ albums, onShowModal, handleDelete  }) => {
+export const AlbumsItem = ({ albums, onShowModal, onShowDeleteModal,}) => {
     console.log({ albums });
     const [isOpen, setIsOpen] = useState(false);
     const [messagesItem, setAlbums] = useState(null);
@@ -44,7 +44,7 @@ export const AlbumsItem = ({ albums, onShowModal, handleDelete  }) => {
                         <Button
                             size="sm"
                             variant="danger"
-                            onClick={() => handleDelete(albums._id)}
+                            onClick={() => onShowDeleteModal(albums._id)}
                         >
                             Eliminar
                         </Button>

@@ -2,7 +2,7 @@ import { Badge, Button, Card, Col } from "react-bootstrap";
 import React from "react";
 import ReactPlayer from "react-player";
 
-export const VideosItem = ({ videos, onShowModal, handleDelete  }) => {
+export const VideosItem = ({ videos, onShowModal,onShowDeleteModal }) => {
     console.log({ videos});
 
     return (
@@ -38,7 +38,7 @@ export const VideosItem = ({ videos, onShowModal, handleDelete  }) => {
                             <Button
                                 size="sm"
                                 variant="danger"
-                                onClick={() => handleDelete(videos._id)}
+                                onClick={() =>onShowDeleteModal(videos._id)}
                             >
                                 Eliminar
                             </Button>

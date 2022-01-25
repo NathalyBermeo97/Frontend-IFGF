@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 import Messages from "../../../api/messages";
+import {ConfirmModal} from "../../../components/ConfirmModal";
 
 
 const messagesItemSchema = yup.object().shape({
@@ -30,6 +31,8 @@ const MessagesPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [showCreateMessagesItemModal, setShowCreateMessagesItemModal] =
     useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [eventId, setEventId] = useState(null);
   const [keyword, setKeyword] = useState("");
   const [filteredMessages, setFilteredMessages] = useState([]);
 
@@ -71,10 +74,19 @@ const MessagesPage = () => {
 
         const newMessages = messages.filter((message) => message._id !== id);
         setMessages(newMessages);
-        swal('Mensaje bíblico eliminado correctamente')
       }
 
     });
+    setShowDeleteModal(false)
+  };
+  const onConfirm = () => {
+    handleDelete(eventId);
+  };
+
+  const onShowDeleteModal = (eventId) => {
+    setShowDeleteModal(true);
+    setEventId(eventId);
+    //confirm({onOk: () => handleDelete(eventId)})
   };
 
   console.log({ errors });
@@ -150,8 +162,15 @@ const MessagesPage = () => {
       <ListOfMessages
           messages={filteredMessages}
         onShowModal={onShowModal}
-        handleDelete={handleDelete}
+          onShowDeleteModal={onShowDeleteModal}
       />
+      <ConfirmModal
+          isOpen={showDeleteModal}
+          confirm={onConfirm}
+          setIsOpen={setShowDeleteModal}
+          item='mensaje bíblico'
+      />
+
 
       <UpdateMessagesItemModal
         show={showModal}

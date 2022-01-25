@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 import Albums from "../../../api/albums";
+import {ConfirmModal} from "../../../components/ConfirmModal";
 
 
 const albumsItemSchema = yup.object().shape({
@@ -29,6 +30,8 @@ const AlbumsPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [showCreateAlbumsItemModal, setShowCreateAlbumsItemModal] =
     useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [eventId, setEventId] = useState(null);
   const [keyword, setKeyword] = useState("");
   const [filteredAlbums, setFilteredAlbums] = useState([]);
 
@@ -72,6 +75,16 @@ const AlbumsPage = () => {
       }
 
     });
+    setShowDeleteModal(false)
+  };
+  const onConfirm = () => {
+    handleDelete(eventId);
+  };
+
+  const onShowDeleteModal = (eventId) => {
+    setShowDeleteModal(true);
+    setEventId(eventId);
+    //confirm({onOk: () => handleDelete(eventId)})
   };
 
   console.log({ errors });
@@ -152,7 +165,13 @@ const AlbumsPage = () => {
       <ListOfAlbums
         albums={filteredAlbums}
         onShowModal={onShowModal}
-        handleDelete={handleDelete}
+        onShowDeleteModal={onShowDeleteModal}
+      />
+      <ConfirmModal
+          isOpen={showDeleteModal}
+          confirm={onConfirm}
+          setIsOpen={setShowDeleteModal}
+          item='foto'
       />
 
       <UpdateAlbumsItemModal

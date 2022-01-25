@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import {ImageNewsModal} from "./ImageNewsModal";
 const URL = "http://localhost:3030/";
 
-export const NewsItem = ({ news,onShowModal, handleDelete  }) => {
+export const NewsItem = ({ news,onShowModal,onShowDeleteModal  }) => {
     console.log({ news });
     const [isOpen, setIsOpen] = useState(false);
     const [newsItem, setNews] = useState(null);
@@ -47,7 +47,7 @@ export const NewsItem = ({ news,onShowModal, handleDelete  }) => {
                             <Button
                                 size="sm"
                                 variant="danger"
-                                onClick={() => handleDelete(news._id)}
+                                onClick={() => onShowDeleteModal(news._id)}
                             >
                                 Eliminar
                             </Button>
