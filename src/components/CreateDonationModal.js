@@ -115,7 +115,7 @@ export const CreateDonationModal = ({
           ) : selectValue === "entrega vía transacción" ? (
             <Form.Group className="mb-3">
               <Form.Label>
-                Cuenta de transacción: 17265188XX - Banco XXXXX
+                Cuenta de transacción: 1726518845 - Banco del Pichincha
               </Form.Label>
               <br />
               <Form.Label>Imagen de la transacción bancaria</Form.Label>
