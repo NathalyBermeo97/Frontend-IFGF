@@ -96,7 +96,7 @@ const DonationsPage = () => {
               <div>
                 <img
                   className={styles.ubicacion}
-                  width="300px"
+                  width="400px"
                   src="https://www.caritas.org.mx/wp-content/uploads/2020/08/donde-donar-ropa-usada-1024x768.jpg"
                 />
               </div>

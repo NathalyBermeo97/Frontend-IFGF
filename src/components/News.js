@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "../styles/events.module.css";
-const URL = "http://localhost:3030/";
+const URL = "https://backend-ifgf.herokuapp.com/";
 import api from "../api/api";
 import { Card, Col, Container, Row } from "react-bootstrap";
 const News = ({ news }) => {

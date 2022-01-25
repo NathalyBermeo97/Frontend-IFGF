@@ -36,21 +36,18 @@ const Footer = () => {
                   Contáctanos en nuestras redes sociales
                 </h6>
                 <div className="text-white text-center">
-                  <a>
-                    Siguenos en facebook:
-                    <AiFillFacebook />
-                  </a>
-
                   <p>
-                    Siguenos en YouTube: <AiFillYoutube />
+                    Siguenos en facebook
+                    <AiFillFacebook />
                   </p>
 
-                  <div className={styles.icons}>
-                    <a href="https://www.instagram.com/ifgfecuador/">
-                      {" "}
-                      <AiFillInstagram />
-                    </a>
-                  </div>
+                  <p>
+                    Siguenos en YouTube <AiFillYoutube />
+                  </p>
+                  <p>
+                    Siguenos en Instagram <AiFillInstagram />
+                  </p>
+
                 </div>
               </div>
             </div>
