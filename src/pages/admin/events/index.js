@@ -5,12 +5,13 @@ import { Button, FormControl, InputGroup } from "react-bootstrap";
 import { UpdateEventsItemModal } from "../../../components/UpdateEventsItemModal";
 import styles from "./styles.module.css";
 import { CreateEventsItemModal } from "../../../components/CreateEventsItemModal";
-import {ERROR_MESSAGES, SERVER_RESPONSE} from "../../../constants/inidex";
+import { ERROR_MESSAGES, SERVER_RESPONSE } from "../../../constants/inidex";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
-import { ListOfEvents_ } from "../../../components/ListOfEvents_";
+import { ListOfEvents } from "../../../components/ListOfEvents";
 import Events from "../../../api/events";
+import { ConfirmModal } from "../../../components/ConfirmModal";
 
 const eventsItemSchema = yup.object().shape({
   title: yup
@@ -37,12 +38,15 @@ const eventsItemSchema = yup.object().shape({
 });
 
 const EventsPage = () => {
-  const { events, setEvents, updateEvents, createEventsItem,deleteEvents} = useEvents();
+  const { events, setEvents, updateEvents, createEventsItem, deleteEvents } =
+    useEvents();
   const [showModal, setShowModal] = useState(false);
   const [showCreateEventsItemModal, setShowCreateEventsItemModal] =
     useState(false);
   const [keyword, setKeyword] = useState("");
   const [filteredEvents, setFilteredEvents] = useState([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [eventId, setEventId] = useState(null);
 
   useEffect(() => {
     const filteredEvents = events?.filter((ni) =>
@@ -73,51 +77,56 @@ const EventsPage = () => {
     updateEventsItemForm.reset(event);
     setShowModal(true);
   };
-  const onInsModal = (event) => {
-    updateEventsItemForm.reset(event);
-    setShowModal(true);
-  };
 
   const handleDelete = (id) => {
     deleteEvents(id).then((data) => {
-      console.log({data})
-      if (data.message === SERVER_RESPONSE.DELETED_ALBUMS){
-
+      console.log({ data });
+      if (data.message === SERVER_RESPONSE.DELETED_EVENT) {
         const newEvents = events.filter((event) => event._id !== id);
         setEvents(newEvents);
       }
-
     });
+    setShowDeleteModal(false)
   };
 
-  console.log({ errors });
+  const onConfirm = () => {
+    handleDelete(eventId);
+  };
+
+  const onShowDeleteModal = (eventId) => {
+    setShowDeleteModal(true);
+    setEventId(eventId);
+    //confirm({onOk: () => handleDelete(eventId)})
+  };
+
   const onSubmit = async (data) => {
-    console.log("data",data.file);
+    console.log("data", data.file);
     console.log(data);
 
     const formData = new FormData();
-    formData.append("title",data.title);
-    formData.append("description",data.description);
-    formData.append("location",data.location);
-    formData.append("schedule",data.schedule);
-    formData.append("cost",data.cost);
-    formData.append("number",data.number);
-    formData.append("file",data.file[0]);
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("location", data.location);
+    formData.append("schedule", data.schedule);
+    formData.append("cost", data.cost);
+    formData.append("number", data.number);
+    formData.append("file", data.file[0]);
 
-
-    Events.create(formData).then((response) => {
-      const newEventsItem = response.data;
-      const callback =(prevState)=>{
-        return [...prevState,newEventsItem]
-      }
-      setEvents(callback);
-      setShowCreateEventsItemModal(false);
-      reset();
-      alert('Evento creado exitosamente!')
-    }).catch(error=>{
-      console.log(error)
-      alert('Error al crear un evento!')
-    });
+    Events.create(formData)
+      .then((response) => {
+        const newEventsItem = response.data;
+        const callback = (prevState) => {
+          return [...prevState, newEventsItem];
+        };
+        setEvents(callback);
+        setShowCreateEventsItemModal(false);
+        reset();
+        alert("Evento creado exitosamente!");
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Error al crear un evento!");
+      });
     {
       /*setEvents((prevState) => [
       ...prevState,
@@ -130,6 +139,7 @@ const EventsPage = () => {
 
   const onSubmitUpdateEventsItem = (data) => {
     const { _id: id } = data;
+    console.log({id})
     updateEvents(id, data).then((returnedEvent) => {
       const newEvents = events.map((event) =>
         event._id === returnedEvent._id ? returnedEvent : event
@@ -148,7 +158,7 @@ const EventsPage = () => {
 
   return (
     <>
-      <div >
+      <div>
         <div className={styles.events}>
           <h1 className={styles.section}>Gestión de eventos</h1>
           <div className={styles.linea}></div>
@@ -157,31 +167,35 @@ const EventsPage = () => {
 
       <InputGroup style={{ padding: "15px" }}>
         <FormControl
-            placeholder="Buscar evento"
-            aria-label="search_new"
-            aria-describedby="basic-addon1"
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
+          placeholder="Buscar evento"
+          aria-label="search_new"
+          aria-describedby="basic-addon1"
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
         />
       </InputGroup>
-      <div  className={styles.button}>
+      <div className={styles.button}>
         <Button
-
-            variant="info"
-            size="m"
-            onClick={() => setShowCreateEventsItemModal(true)}
+          variant="info"
+          size="m"
+          onClick={() => setShowCreateEventsItemModal(true)}
         >
           Crear evento
         </Button>
       </div>
 
-      <ListOfEvents_
+      <ListOfEvents
         events={filteredEvents}
         onShowEditModal={onShowModal}
-        handleDelete={handleDelete}
-
+        onShowDeleteModal={onShowDeleteModal}
       />
 
+      <ConfirmModal
+        isOpen={showDeleteModal}
+        confirm={onConfirm}
+        setIsOpen={setShowDeleteModal}
+        item='evento'
+      />
 
       <UpdateEventsItemModal
         show={showModal}

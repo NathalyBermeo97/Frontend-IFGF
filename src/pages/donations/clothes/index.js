@@ -65,8 +65,9 @@ const DonationsPage = () => {
     const address =
       data.address === "no direction no direction " ? "" : data.address;
     const date = new Date(data.date).toISOString();
-
+    console.log('subtmit')
     const parsedData = { ...data, address, description, date };
+    console.log({parsedData})
     createDonation(parsedData).then((newDonation) => {
       setDonations((prevState) => [...prevState, newDonation]);
       setShowModal(false);

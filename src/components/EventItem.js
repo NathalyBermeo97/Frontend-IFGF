@@ -11,11 +11,11 @@ export const EventItem = ({
   event,
   onShowModal,
   onShowEditModal,
-  handleDelete,
+  onShowDeleteModal,
 }) => {
   const router = useRouter();
   const { users } = useAuth();
-  console.log({event})
+  console.log({ event });
   const eventUsers = event?.inscriptions?.map((userId) => {
     return users?.find((user) => user._id === userId);
   });
@@ -23,93 +23,78 @@ export const EventItem = ({
   const newEvent = { ...event, inscriptions: eventUsers };
   const [isOpen, setIsOpen] = useState(false);
   const [isInfoOpen, setInfoIsOpen] = useState(false);
-  const [isInscriptionOpen, setInscriptionIsOpen] = useState(false);
-  const [eventsItem, setEvents] = useState(null);
-  const [eventsInfoItem, setInfoEvents] = useState(null);
-  const [eventsInscriptionItem, setInscriptionEvents] = useState(null);
 
   const onModal = (newsImage) => {
     setEvents(newsImage);
     setIsOpen(true);
   };
 
-  const infoModal = (newsInfo) => {
-    setInfoEvents(newsInfo);
+  const infoModal = () => {
     setInfoIsOpen(true);
-  };
-  const inscriptionModal = (newsInscription) => {
-    setInscriptionEvents(newsInscription);
-    setInscriptionIsOpen(true);
   };
 
   return (
-    <Col
-      style={{
-        justifyContent: "center",
-        display: "flex",
-      }}
-    >
-      <Card style={{ width: "18rem" }}>
-        <Card.Img src={URL + event.imgURL} onClick={() => onModal(event)} />
-        <ImageEventsModal
-          isOpen={isOpen}
-          events={event}
-          setIsOpen={setIsOpen}
-        />
-        <Card.Body>
-          <Card.Title>{event.title}</Card.Title>
-          <Card.Text>{event.description}</Card.Text>
-          <Card.Text>{eventUsers.name}</Card.Text>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              gap: "0px 5px",
-            }}
-          >
-            {router.pathname.startsWith(ROUTES.ADMIN) ? (
-              <>
-                <Button size="sm" onClick={() => onShowEditModal(newEvent)}>
-                  Editar
-                </Button>
+    <>
+      <Col
+        style={{
+          justifyContent: "center",
+          display: "flex",
+        }}
+      >
+        <Card style={{ width: "18rem" }}>
+          <Card.Img src={URL + event.imgURL} onClick={() => onModal(event)} />
+          <ImageEventsModal
+            isOpen={isOpen}
+            events={event}
+            setIsOpen={setIsOpen}
+          />
+          <Card.Body>
+            <Card.Title>{event.title}</Card.Title>
+            <Card.Text>{event.description}</Card.Text>
+            <Card.Text>{eventUsers.name}</Card.Text>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                gap: "0px 5px",
+              }}
+            >
+              {router.pathname.startsWith(ROUTES.ADMIN) ? (
+                <>
+                  <Button size="sm" onClick={() => onShowEditModal(newEvent)}>
+                    Editar
+                  </Button>
 
-                <Button
-                  size="sm"
-                  variant="danger"
-                  onClick={() => handleDelete(event._id)}
-                >
-                  Eliminar
-                </Button>
-
-                <InfoEventsModal
-                  isInfoOpen={isInfoOpen}
-                  events={event}
-                  setInfoIsOpen={setInfoIsOpen}
-                />
-                <Row>
-                  <Col
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        marginTop: "10px",
-                        gap: "0px 5px",
-                      }}
+                  <Button
+                    size="sm"
+                    variant="danger"
+                    onClick={() => onShowDeleteModal(event._id)}
                   >
-                    <Button size="sm" variant="success" onClick={() => infoModal()}>
-                      Ver más
-                    </Button>
-                  </Col>
-                </Row>
-              </>
+                    Eliminar
+                  </Button>
 
-            ) : (
-              <Button onClick={() => onShowModal(event)}>
-                Más información
-              </Button>
-            )}
-          </div>
-        </Card.Body>
-      </Card>
-    </Col>
+                  <Button
+                    size="sm"
+                    variant="success"
+                    onClick={() => infoModal()}
+                  >
+                    Ver más
+                  </Button>
+                </>
+              ) : (
+                <Button onClick={() => onShowModal(event)}>
+                  Más información
+                </Button>
+              )}
+            </div>
+          </Card.Body>
+        </Card>
+      </Col>
+      <InfoEventsModal
+        isInfoOpen={isInfoOpen}
+        event={newEvent}
+        setInfoIsOpen={setInfoIsOpen}
+      />
+    </>
   );
 };

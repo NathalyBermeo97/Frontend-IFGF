@@ -7,7 +7,6 @@ export const useEvents = () => {
   const [events, setEvents] = useState([]);
   const [userEvents, setUserEvents] = useState([]);
 
-  console.log({ events });
   useEffect(() => {
     const userEvents = events.filter((event) =>
       event?.inscriptions.includes(currentUser?._id)

@@ -4,7 +4,7 @@ import { EventModal } from "../../components/EventModal";
 import { useState } from "react";
 import {Container, FormControl, InputGroup} from "react-bootstrap";
 import Events from "../../api/events";
-import { ListOfEvents_ } from "../../components/ListOfEvents_";
+import { ListOfEvents } from "../../components/ListOfEvents";
 
 const Eventos = ({ events }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +39,7 @@ const Eventos = ({ events }) => {
             onChange={(e) => setKeyword(e.target.value)}
         />
       </InputGroup>
-      <ListOfEvents_ events={filteredEvents} onShowModal={onShowModal} />
+      <ListOfEvents events={filteredEvents} onShowModal={onShowModal} />
       <EventModal isOpen={isOpen} event={event} setIsOpen={setIsOpen} />
     </Container>
   );

@@ -1,10 +1,10 @@
 export const SERVER_RESPONSE = {
     SUCCESFUL_USER_REGISTRATION: "Usuario registrado con éxito",
     NEWS_ITEM_CREATED: 'registro de donación correctamente',
-    DELETED_ALBUMS:'Eliminado con exito',
-    DELETED_MESSAGES:'Eliminado con exito',
-    DELETED_NEWS:'Eliminado con exito'
-
+    DELETED_ALBUMS:'Eliminado con éxito',
+    DELETED_MESSAGES:'Eliminado con éxito',
+    DELETED_NEWS:'Eliminado con éxito',
+    DELETED_EVENT:'Eliminado con éxito'
 }
 
 export const ERROR_MESSAGES = {

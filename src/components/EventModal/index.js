@@ -16,12 +16,14 @@ export const EventModal = ({ isOpen, event, setIsOpen }) => {
       return router.push(ROUTES.LOGIN);
     }
     const { _id: event_id } = event;
-    createInscription(event_id).then((res) => {
-      console.log(res);
-      if (res?.data?.message) {
-        setIsOpen(false);
-      }
-    }).catch(e => console.log('something went wrong', e));
+    createInscription(event_id)
+      .then((res) => {
+        console.log(res);
+        if (res?.data?.message) {
+          setIsOpen(false);
+        }
+      })
+      .catch((e) => console.log("something went wrong", e));
   };
 
   const handleCancelInscription = () => {
@@ -34,7 +36,7 @@ export const EventModal = ({ isOpen, event, setIsOpen }) => {
         <Modal.Title>{event.title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>🌎 Ubicación: {event.location}</p>
+        <p>🌎Ubicación: {event.location}</p>
         <p>🕘 Horario: {event.schedule}</p>
         <p>💰 Costo: {event.cost}</p>
         <p>👩‍👩‍👦‍👦 Número de personas inscritas: {event.inscriptions?.length}</p>

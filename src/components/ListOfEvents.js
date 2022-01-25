@@ -1,29 +1,36 @@
 import React from "react";
-import { Button, ListGroup } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
+import { EventItem } from "./EventItem";
 
-export const ListOfEvents = ({ eventsItem, onShowModal, handleDelete }) => {
-    return (
-        <ListGroup.Item
-            as="li"
-            className="d-flex justify-content-between align-items-start"
-        >
-            <div className="ms-2 me-auto">
-                <div className="fw-bold">{eventsItem.title}</div>
-                <p>{eventsItem.description}</p>
-                <p>{eventsItem.ubication}</p>
-                <p>{eventsItem.schedule}</p>
-                <p>{eventsItem.cost}</p>
-            </div>
-            <Button size="sm" onClick={() => onShowModal(eventsItem)}>
-                Editar
-            </Button>
-            <Button
-                size="sm"
-                variant="danger"
-                onClick={() => handleDelete(eventsItem._id)}
-            >
-                Eliminar
-            </Button>
-        </ListGroup.Item>
-    );
+export const ListOfEvents = ({
+  events,
+  onShowModal,
+  onShowEditModal,
+  onShowDeleteModal,
+  getValues,
+  onInsModal,
+}) => {
+  return (
+    <Container>
+      <Row
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "15px 0px",
+        }}
+      >
+        {events?.map((event) => (
+          <EventItem
+            key={event._id}
+            event={event}
+            onShowModal={onShowModal}
+            onShowEditModal={onShowEditModal}
+            onShowDeleteModal={onShowDeleteModal}
+            getValues={getValues}
+            onInsModal={onInsModal}
+          />
+        ))}
+      </Row>
+    </Container>
+  );
 };
