@@ -1,7 +1,7 @@
 import { Badge, Button, Card, Col } from "react-bootstrap";
 import { USER_ROLES } from "../constants/userRoles";
 import { useAuth } from "../context/AuthContext";
-const URL = "http://localhost:3030/";
+const URL = "https://backend-ifgf.herokuapp.com/";
 export const DonationItem = ({ donation, onShowModal }) => {
   console.log({ donation });
   const { role } = useAuth();

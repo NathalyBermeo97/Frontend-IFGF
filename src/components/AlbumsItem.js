@@ -1,7 +1,7 @@
 import { Badge, Button, Card, Col } from "react-bootstrap";
 import React, {useState} from "react";
 import {ImageAlbumModal} from "./ImageAlbumModal";
-const URL = "http://localhost:3030/";
+const URL = "https://backend-ifgf.herokuapp.com/";
 
 export const AlbumsItem = ({ albums, onShowModal, onShowDeleteModal,}) => {
     console.log({ albums });
