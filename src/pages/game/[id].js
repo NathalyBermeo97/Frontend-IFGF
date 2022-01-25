@@ -37,7 +37,7 @@ const GamePage = ({ questionsBank }) => {
       console.log({newGame})
       const response = await Game.create(newGame)
       if(response.data){
-        swal('Cuestionario enviado')
+        alert('Cuestionario enviado')
       }
       setShowResult(true);
     } catch (e) {
