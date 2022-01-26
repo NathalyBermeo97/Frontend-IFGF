@@ -24,7 +24,7 @@ export const UpdateDonationModal = ({
         <Modal.Title>Donación de {donation.type}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>👨Por: {donation.user.name}</p>
+        <p>👨Por: {donation.user?.name}</p>
         <p>📅 Fechas: {donation.date}</p>
         <p>ℹ Estado: {donation.status}</p>
         <p>📦 Modo de entrega: {donation.delivery}</p>
