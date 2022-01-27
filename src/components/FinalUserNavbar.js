@@ -44,8 +44,7 @@ const NavbarHome = () => {
                 </NavDropdown.Item>
                 <NavDropdown.Item
                   onClick={() => router.push(ROUTES.MY_EVENTS)}
-                  disabled={!isLoggedIn}
-                >
+                  disabled={!isLoggedIn || router.pathname === ROUTES.MY_EVENTS}                >
                   Mis Eventos
                 </NavDropdown.Item>
               </NavDropdown>
@@ -54,22 +53,25 @@ const NavbarHome = () => {
               <NavDropdown title="Donaciones" id="nav-dropdown-donaciones">
                 <NavDropdown.Item
                   onClick={() => router.push(ROUTES.CLOTHES_DONATIONS)}
+                  disabled={router.pathname === ROUTES.CLOTHES_DONATIONS}
                 >
                   Donar ropa
                 </NavDropdown.Item>
                 <NavDropdown.Item
                   onClick={() => router.push(ROUTES.FOOD_DONATIONS)}
+                  disabled={router.pathname === ROUTES.FOOD_DONATIONS}
                 >
                   Donar comida
                 </NavDropdown.Item>
                 <NavDropdown.Item
                   onClick={() => router.push(ROUTES.ECONOMIC_DONATIONS)}
+                  disabled={router.pathname === ROUTES.ECONOMIC_DONATIONS}
                 >
                   Donar dinero
                 </NavDropdown.Item>
                 <NavDropdown.Item
                   onClick={() => router.push(ROUTES.MY_DONATIONS)}
-                  disabled={!isLoggedIn}
+                  disabled={!isLoggedIn || router.pathname === ROUTES.MY_DONATIONS}
                 >
                   Mis Donaciones
                 </NavDropdown.Item>

@@ -29,7 +29,7 @@ describe("Event modal testing", () => {
     component.getByText("this is an event");
   });
 
-  it("should not allowed to signin a event", () => {
+  it("should not allowed to signin an event", () => {
     const event = {
       title: "new event",
       description: "description",

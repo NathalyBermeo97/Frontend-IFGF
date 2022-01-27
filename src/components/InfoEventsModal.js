@@ -25,7 +25,8 @@ export const InfoEventsModal = ({ isInfoOpen, event, setInfoIsOpen }) => {
           </thead>
           <tbody>
             {event.inscriptions?.length > 0 ? (
-              event.inscriptions.map((user) => (
+              event.inscriptions[0]?._id &&
+              event.inscriptions?.map((user) => (
                 <tr key={user._id}>
                   <td>{user.name}</td>
                   <td>{user.lastname}</td>

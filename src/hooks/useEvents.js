@@ -52,6 +52,15 @@ export const useEvents = () => {
     }
   };
 
+  const calloffInscription = async (eventId) => {
+    try{
+      const response = await Events.calloffInscription(eventId)
+      return response.data
+    }catch(e){
+      console.log('something went wrong', e)
+    }
+  }
+
   const deleteEvents = async (newEventsItem) => {
     try {
       const response = await Events.delete(newEventsItem);
@@ -68,6 +77,7 @@ export const useEvents = () => {
     updateEvents,
     createEventsItem,
     createInscription,
+    calloffInscription,
     userEvents,
   };
 };

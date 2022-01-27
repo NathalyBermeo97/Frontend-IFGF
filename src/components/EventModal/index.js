@@ -4,8 +4,8 @@ import { ROUTES } from "../../constants/routes";
 import { useAuth } from "../../context/AuthContext";
 import { useEvents } from "../../hooks/useEvents";
 
-export const EventModal = ({ isOpen, event, setIsOpen }) => {
-  const { createInscription } = useEvents();
+export const EventModal = ({ isOpen, event, setIsOpen, onCancelInscription }) => {
+  const { createInscription, calloffInscription, setEvents } = useEvents();
   const { currentUser } = useAuth();
   const router = useRouter();
   const isInTheLimit = event?.inscriptions?.length === event.number;
@@ -20,14 +20,11 @@ export const EventModal = ({ isOpen, event, setIsOpen }) => {
       .then((res) => {
         console.log(res);
         if (res?.data?.message) {
+          
           setIsOpen(false);
         }
       })
       .catch((e) => console.log("something went wrong", e));
-  };
-
-  const handleCancelInscription = () => {
-    alert("inscription canceled");
   };
 
   return (
@@ -60,10 +57,9 @@ export const EventModal = ({ isOpen, event, setIsOpen }) => {
               : "Inscribirse"}
           </Button>
         ) : (
-          <></>
-          // <Button variant="primary" onClick={handleCancelInscription}>
-          //   Cancelar Inscripción
-          // </Button>
+          <Button variant="primary" onClick={onCancelInscription}>
+            Cancelar Inscripción
+          </Button>
         )}
       </Modal.Footer>
     </Modal>

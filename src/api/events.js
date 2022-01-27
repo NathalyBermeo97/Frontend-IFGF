@@ -14,8 +14,8 @@ const Events = {
     update: (id, newObject) => {
         return api.put(`/events/${id}`, newObject)
     },
-    delete: (id) => {
-        return api.delete(`/events/${id}`)
+    calloffInscription: (eventId) => {
+        return api.delete(`/inscriptions/${eventId}`)
     }
 };
 
