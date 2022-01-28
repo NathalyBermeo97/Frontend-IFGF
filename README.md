@@ -1,5 +1,9 @@
+#Proyecto Integrador
 
-Informe tecnico
+Estudiante: Nathaly Bermeo
+
+
+-[Informe técnico: ]
 
 
 
