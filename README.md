@@ -8,7 +8,7 @@ Estudiante: Nathaly Lissette Bermeo Panchi
 
 ## Documentación
 
-- [Informe técnico](https://drive.google.com/drive/u/0/my-drive)
+- [Informe técnico](https://drive.google.com/file/d/1E_F6vzw58R6t3lx1X6j2ZRnduGyQZ3bV/view?usp=sharing)
 - [Manual de Usuario](https://www.youtube.com/watch?v=SQKP-GNjwq4)
 
 
