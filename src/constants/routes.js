@@ -24,7 +24,8 @@ const PRIVATE_ROUTES = {
     MY_DONATIONS: '/my-donations',
     MY_EVENTS: '/my-events',
     GAME: (id, token) => `/game/${id}?token=${token}`,
-    CREATE_QUESTIONNAIRE: '/admin/questionnaires/create'
+    CREATE_QUESTIONNAIRE: '/admin/questionnaires/create',
+    UPDATE_QUESTIONNAIRE: (id, token) => `/admin/questionnaires/update/${id}?token=${token}`
 }
 
 export const ROUTES = {
