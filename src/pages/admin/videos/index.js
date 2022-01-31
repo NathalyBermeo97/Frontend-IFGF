@@ -13,12 +13,14 @@ import * as yup from "yup";
 
 import Videos from "../../../api/videos";
 import {ConfirmModal} from "../../../components/ConfirmModal";
+import swal from "sweetalert";
 
 const videosItemSchema = yup.object().shape({
-    title: yup
+   title: yup
         .string()
         .required(ERROR_MESSAGES.REQUIRED("título"))
         .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+
   description: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("descripción"))
@@ -130,17 +132,12 @@ const VideosPage = () => {
         );
         setVideos(newVideos);
         setShowModal(false);
+
         swal('Video editado exitosamente!')
+
 
     });
 
-    {
-      /* const newVideos = videos.map((videosItem) =>
-            videosItem._id === data._id ? data : videosItem
-        );
-        setVideos(newVideos);
-        setShowModal(false);*/
-    }
   };
 
   return (

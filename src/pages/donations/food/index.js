@@ -93,6 +93,7 @@ const DonationsPage = () => {
                 alimento.
               </p>
               <div>
+
                 <img
                   className={styles.ubicacion}
                   width="400px"

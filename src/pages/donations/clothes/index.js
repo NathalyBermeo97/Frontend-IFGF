@@ -94,6 +94,7 @@ const DonationsPage = () => {
                 colaboración, puedes ayudarlos donando cualquier tipo de ropa.
               </p>
               <div>
+
                 <img
                   className={styles.ubicacion}
                   width="400px"
