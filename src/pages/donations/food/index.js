@@ -93,9 +93,10 @@ const DonationsPage = () => {
                 alimento.
               </p>
               <div>
+
                 <img
                   className={styles.ubicacion}
-                  width="300px"
+                  width="400px"
                   src="https://st.depositphotos.com/1177973/4836/i/600/depositphotos_48368247-stock-photo-volunteers-with-donation-box-with.jpg"
                 />
               </div>

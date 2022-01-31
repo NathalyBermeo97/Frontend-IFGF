@@ -11,6 +11,7 @@ export const InfoEventsModal = ({ isInfoOpen, event, setInfoIsOpen }) => {
         <p>🔠 Título: {event.title}</p>
         <p>🔠 Descripción: {event.description}</p>
         <p>🌎 Ubicación: {event.location}</p>
+        <p>🌎 Fecha: {event.date}</p>
         <p>🕘 Horario: {event.schedule}</p>
         <p>💰 Costo: {event.cost}</p>
         <p>🔢 Aforo permitido: {event.number}</p>

@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import React, { useState } from "react";
 import { ImageEventsModal } from "./ImageEventsModal";
 import { InfoEventsModal } from "./InfoEventsModal";
-const URL = "http://localhost:3030/";
+const URL = "https://backend-ifgf.herokuapp.com/";
 
 export const EventItem = ({
   event,

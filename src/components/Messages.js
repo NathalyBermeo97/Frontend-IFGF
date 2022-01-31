@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-const URL = "http://localhost:3030/";
+const URL = "https://backend-ifgf.herokuapp.com/";
 import api from "../api/api";
 import { Card, Container, Row } from "react-bootstrap";
 

@@ -12,6 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 import Albums from "../../../api/albums";
 import {ConfirmModal} from "../../../components/ConfirmModal";
+import swal from "sweetalert";
 
 
 const albumsItemSchema = yup.object().shape({
@@ -124,6 +125,7 @@ const AlbumsPage = () => {
       setShowModal(false);
 
     });
+    swal('Foto editada correctamente')
     {
       /*const newAlbums = albums.map((albumsItem) =>
             albumsItem._id === data._id ? data : albumsItem
