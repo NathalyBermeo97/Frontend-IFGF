@@ -40,7 +40,7 @@ const Footer = () => {
                     <li>
                       <a
                         href="https://www.facebook.com/IFGF-Ecuador-688959017800567"
-                        target="_blank"
+
                       >
                         <i>
                           <AiFillFacebook />
@@ -50,7 +50,7 @@ const Footer = () => {
                     <li>
                       <a
                         href="https://www.youtube.com/channel/UC1Sla0tLHgFpMkdfiihyUaQ"
-                        target="_blank"
+
                       >
                         <i>
                           <AiFillYoutube />
@@ -60,7 +60,6 @@ const Footer = () => {
                     <li>
                       <a
                         href="https://www.instagram.com/ifgfecuador/"
-                        target="_blank"
                       >
                         <i>
                           <AiFillInstagram />
