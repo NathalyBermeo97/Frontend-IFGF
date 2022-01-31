@@ -35,19 +35,37 @@ const Footer = () => {
                 <h6 className="text-white text-center fw-bold mb-6">
                   Contáctanos en nuestras redes sociales
                 </h6>
-                <div className="text-white text-center">
-                  <p>
-                    Siguenos en facebook
-                    <AiFillFacebook />
-                  </p>
+                <div className={styles.redes_container}>
 
-                  <p>
-                    Siguenos en YouTube <AiFillYoutube />
-                  </p>
-                  <p>
-                    Siguenos en Instagram <AiFillInstagram />
-                  </p>
+                  <ul>
+                    <li>
+                     <a   href="https://www.facebook.com/IFGF-Ecuador-688959017800567" target="_blank">
 
+                       <i>
+                         <AiFillFacebook />
+                       </i>
+
+                     </a>
+                    </li>
+                    <li>
+                      <a   href="https://www.youtube.com/channel/UC1Sla0tLHgFpMkdfiihyUaQ" target="_blank">
+
+                        <i>
+                          <AiFillYoutube />
+                        </i>
+
+                      </a>
+                    </li>
+                    <li>
+                      <a   href="https://www.instagram.com/ifgfecuador/" target="_blank">
+
+                        <i>
+                          <AiFillInstagram />
+                        </i>
+
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
