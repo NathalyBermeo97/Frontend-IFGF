@@ -8,7 +8,7 @@ const CarouselEventos = () => {
       <Carousel.Item>
         <img
           className="d-flex w-100"
-          src="https://scontent.fuio1-1.fna.fbcdn.net/v/t39.30808-6/271551051_5413025732060515_3690654432448099915_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=a26aad&_nc_ohc=S8m0zjSgXRkAX_Oxjsy&_nc_ht=scontent.fuio1-1.fna&oh=00_AT9HukeAT5Jb4Xikhvzg7jXAZeQ2A3mgRQeFpklqlNqyaQ&oe=61F524B8"
+          src="https://scontent.fuio1-1.fna.fbcdn.net/v/t39.30808-6/272855924_5503242313038856_3573026290570383353_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=a26aad&_nc_ohc=pJTzcSJz3CwAX-Hu80g&tn=Wkw3FJ9iNf8T3MBj&_nc_ht=scontent.fuio1-1.fna&oh=00_AT_wIC7NMBej3F1au8o7P7bKzEQh_yXvw8aiUT_tsk9cWg&oe=61FCB7A3"
           alt="First slide"
         />
       </Carousel.Item>
