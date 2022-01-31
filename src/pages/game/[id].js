@@ -13,10 +13,14 @@ const GamePage = ({ questionsBank }) => {
   const [showResult, setShowResult] = useState(false);
   const [isPlayingAgain, setIsPlayingAgain] = useState(false)
 
-  const computeAnswer = (answer, correctAnswer) => {
+  const computeAnswer = (answer, correctAnswer, questionId) => {
     if (answer === correctAnswer) {
       setScore((prevState) => prevState + 1);
     }
+    const questions = questionnaire.questions.map((question, qId) => {
+      return qId === questionId ? {...question, selectedAnswer: answer} : question
+    })
+    setQuestionnaire({...questionnaire, questions})
     setResponses((prevState) => (prevState < 5 ? prevState + 1 : 5));
   };
 
@@ -63,6 +67,7 @@ const GamePage = ({ questionsBank }) => {
         <Result
           score={score}
           length={questionnaire.questions.length}
+          questionnaire={questionnaire}
           playAgain={playAgain}
         />
       )}
