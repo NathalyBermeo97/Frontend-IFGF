@@ -27,9 +27,9 @@
   cursor: pointer;
 }
 
-.deleteOption:hover{
-  background-color:rgb(224, 224, 224);
-  border-radius: 99px
+.deleteOption:hover {
+  background-color: rgb(224, 224, 224);
+  border-radius: 99px;
 }
 
 @media (max-width: 580px) {

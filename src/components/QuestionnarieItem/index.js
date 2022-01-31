@@ -36,7 +36,7 @@ export const QuestionnaireItem = ({ questionnaire,onShowDeleteModal }) => {
                   <Button
                       size="sm"
                       variant="primary"
-
+                      onClick={() => router.push(ROUTES.UPDATE_QUESTIONNAIRE(questionnaire._id, token))}
                   >
                       Editar
                   </Button>

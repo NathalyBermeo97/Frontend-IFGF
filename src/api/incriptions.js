@@ -13,8 +13,8 @@ const Inscriptions = {
     update: (id, newObject) => {
         return api.put(`/events/${id}`, newObject)
     },
-    delete: (id) => {
-        return api.delete(`/events/${id}`)
+    delete: (eventId) => {
+        return api.delete(`/inscriptions/${eventId}`)
     }
 };
 

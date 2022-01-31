@@ -28,12 +28,20 @@ export const DonationItem = ({ donation, onShowModal }) => {
               <Badge bg={bg}>{donation.status}</Badge>
             )}
           </Card.Text>
-          <Card.Text style={{ fontWeight: "bold" }}>Descripción:</Card.Text>
-          <Card.Text> {donation.description}</Card.Text>
           <Card.Text style={{ fontWeight: "bold" }}>Entrega:</Card.Text>
           <Card.Text> {donation.delivery} </Card.Text>
-          <Card.Text style={{ fontWeight: "bold" }}>Dirección:</Card.Text>
-          <Card.Text> {donation.address} </Card.Text>
+          {donation.address && (
+            <>
+              <Card.Text style={{ fontWeight: "bold" }}>Dirección:</Card.Text>
+              <Card.Text> {donation.address} </Card.Text>
+            </>
+          )}
+          {donation.description && (
+            <>
+              <Card.Text style={{ fontWeight: "bold" }}>Descripción:</Card.Text>
+              <Card.Text> {donation.description}</Card.Text>
+            </>
+          )}
           {donation.message ? (
             <>
               <Card.Text style={{ fontWeight: "bold" }}>

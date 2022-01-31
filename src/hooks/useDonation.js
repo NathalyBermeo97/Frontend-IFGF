@@ -18,6 +18,7 @@ export const useDonation = () => {
   useEffect(() => {
     const getDonations = async () => {
       const donations = await Donations.get();
+      
       setDonations(donations);
     };
     getDonations();

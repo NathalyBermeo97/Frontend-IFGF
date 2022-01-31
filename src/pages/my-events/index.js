@@ -7,7 +7,7 @@ import styles from "../../styles/indexHome.module.css";
 import { FormControl, InputGroup } from "react-bootstrap";
 
 const MyEventsPage = () => {
-  const { userEvents } = useEvents();
+  const { userEvents, setEvents, calloffInscription } = useEvents();
   const [isOpen, setIsOpen] = useState(false);
   const [event, setEvent] = useState({});
   const [keyword, setKeyword] = useState("");
@@ -23,6 +23,19 @@ const MyEventsPage = () => {
   const onShowModal = (event) => {
     setEvent(event);
     setIsOpen(true);
+  };
+
+  const onCancelInscription = () => {
+    const { _id: event_id } = event;
+    calloffInscription(event_id)
+      .then((newEvent) => {
+        setEvents((prevEvents) =>
+          prevEvents.filter((event) => event._id !== newEvent._id)
+        );
+        setIsOpen(false);
+        alert("inscription canceled");
+      })
+      .catch((e) => console.log("something went wrong", e));
   };
 
   if (userEvents.length === 0)
@@ -48,7 +61,12 @@ const MyEventsPage = () => {
       </InputGroup>
       <br />
       <ListOfEvents events={filteredEvents} onShowModal={onShowModal} />;
-      <EventModal isOpen={isOpen} event={event} setIsOpen={setIsOpen} />
+      <EventModal
+        isOpen={isOpen}
+        event={event}
+        setIsOpen={setIsOpen}
+        onCancelInscription={onCancelInscription}
+      />
     </>
   );
 };
