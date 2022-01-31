@@ -98,10 +98,10 @@ const VideosPage = () => {
           setVideos(callback);
           setShowCreateVideosItemModal(false);
           reset();
-          alert('Video creado exitosamente!')
+          swal('Video creado exitosamente!')
       }).catch(error=>{
           console.log(error)
-          alert('Error en el tipo de video!')
+          swal('Error en el tipo de video, debe ser de tipo: familia,jovenes,niños!')
       });
     {
       /*setVideos((prevState) => [
@@ -132,7 +132,9 @@ const VideosPage = () => {
         );
         setVideos(newVideos);
         setShowModal(false);
-        swal('Foto editada correctamente')
+
+        swal('Video editado exitosamente!')
+
 
     });
 

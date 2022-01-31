@@ -11,6 +11,7 @@ export const InfoEventsModal = ({ isInfoOpen, event, setInfoIsOpen }) => {
         <p>🔠 Título: {event.title}</p>
         <p>🔠 Descripción: {event.description}</p>
         <p>🌎 Ubicación: {event.location}</p>
+        <p>🌎 Fecha: {event.date}</p>
         <p>🕘 Horario: {event.schedule}</p>
         <p>💰 Costo: {event.cost}</p>
         <p>🔢 Aforo permitido: {event.number}</p>
@@ -25,7 +26,8 @@ export const InfoEventsModal = ({ isInfoOpen, event, setInfoIsOpen }) => {
           </thead>
           <tbody>
             {event.inscriptions?.length > 0 ? (
-              event.inscriptions.map((user) => (
+              event.inscriptions[0]?._id &&
+              event.inscriptions?.map((user) => (
                 <tr key={user._id}>
                   <td>{user.name}</td>
                   <td>{user.lastname}</td>

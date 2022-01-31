@@ -4,8 +4,8 @@ import { ROUTES } from "../../constants/routes";
 import { useAuth } from "../../context/AuthContext";
 import { useEvents } from "../../hooks/useEvents";
 
-export const EventModal = ({ isOpen, event, setIsOpen }) => {
-  const { createInscription } = useEvents();
+export const EventModal = ({ isOpen, event, setIsOpen, onCancelInscription }) => {
+  const { createInscription, calloffInscription, setEvents } = useEvents();
   const { currentUser } = useAuth();
   const router = useRouter();
   const isInTheLimit = event?.inscriptions?.length === event.number;
@@ -20,14 +20,11 @@ export const EventModal = ({ isOpen, event, setIsOpen }) => {
       .then((res) => {
         console.log(res);
         if (res?.data?.message) {
+          
           setIsOpen(false);
         }
       })
       .catch((e) => console.log("something went wrong", e));
-  };
-
-  const handleCancelInscription = () => {
-    alert("inscription canceled");
   };
 
   return (
@@ -37,7 +34,8 @@ export const EventModal = ({ isOpen, event, setIsOpen }) => {
       </Modal.Header>
       <Modal.Body>
         <p>🌎Ubicación: {event.location}</p>
-        <p>🕘 Horario: {event.schedule}</p>
+          <p>🌎Fecha: {event.date}</p>
+        <p>🕘 Hora: {event.schedule}</p>
         <p>💰 Costo: {event.cost}</p>
         <p>👩‍👩‍👦‍👦 Número de personas inscritas: {event.inscriptions?.length}</p>
         <p>🔢 Aforo permitido: {event.number}</p>
@@ -60,10 +58,9 @@ export const EventModal = ({ isOpen, event, setIsOpen }) => {
               : "Inscribirse"}
           </Button>
         ) : (
-          <></>
-          // <Button variant="primary" onClick={handleCancelInscription}>
-          //   Cancelar Inscripción
-          // </Button>
+          <Button variant="primary" onClick={onCancelInscription}>
+            Cancelar Inscripción
+          </Button>
         )}
       </Modal.Footer>
     </Modal>

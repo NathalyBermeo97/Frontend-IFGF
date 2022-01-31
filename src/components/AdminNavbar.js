@@ -13,7 +13,7 @@ export const AdminNavbar = () => {
     <Navbar bg="light" expand="lg" sticky="top">
       <Container>
         <Navbar.Brand
-          onClick={() => router.push(ROUTES.HOME)}
+          //onClick={() => router.push(ROUTES.HOME)}
           style={{ cursor: "pointer" }}
         >
           <Image

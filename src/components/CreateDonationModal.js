@@ -67,18 +67,20 @@ export const CreateDonationModal = ({
           </Form.Group>
 
           {selectValue === "entrega en iglesia" ? (
-                  <Form.Group className="mb-3">
-                    <Form.Label>Fecha de entrega</Form.Label>
-                    <Form.Control
-                        min="2022-01-25"
-                        type="date"
-                        placeholder="Ingrese la fecha de entrega"
-                        {...register("date")}
-                        isInvalid={!!errors.date?.message}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.date?.message}
-                    </Form.Control.Feedback>
+
+                    <Form.Group className="mb-3">
+                      <Form.Label>Fecha de entrega</Form.Label>
+                      <Form.Control
+                          min="2022-01-25"
+                          type="date"
+                          placeholder="Ingrese la fecha de entrega"
+                          {...register("date")}
+                          isInvalid={!!errors.date?.message}
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        {errors.date?.message}
+                      </Form.Control.Feedback>
+
                   </Form.Group>
               ):selectValue === "retiro en el hogar" ? (
             <Form.Group className="mb-3">
@@ -115,7 +117,10 @@ export const CreateDonationModal = ({
           ) : selectValue === "entrega vía transacción" ? (
             <Form.Group className="mb-3">
               <Form.Label>
+
                 Cuenta de transacción: 172651881029- Banco del Pichincha
+
+
               </Form.Label>
               <br />
               <Form.Label>Imagen de la transacción bancaria</Form.Label>
