@@ -108,10 +108,10 @@ const NewsPage = () => {
       setNews(callback);
       setShowCreateNewsItemModal(false);
       reset();
-      swal('Noticia creada exitosamente!')
+      swal('Noticia creada exitosamente')
     }).catch(error=>{
       console.log(error)
-      alert('Error al crear noticia!')
+      swal('Ya existe un registro almacenado con este título')
     });
   };
 

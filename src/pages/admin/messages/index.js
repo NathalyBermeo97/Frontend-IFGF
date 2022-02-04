@@ -110,7 +110,7 @@ const MessagesPage = () => {
       swal('Mensaje bíblico creado exitosamente!')
     }).catch(error=>{
       console.log(error)
-      swal('Error al crear un mensaje biblico!')
+      swal('Ya existe un registro almacenado con este título')
     });
 
   };

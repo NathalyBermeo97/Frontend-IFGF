@@ -57,6 +57,7 @@ export const CreateNewsItemModal = ({
             <Form.Control
                 name="file"
                 type="file"
+                accept="image/png,image/jpeg"
                 {...register("file")}
             />
           </Form.Group>

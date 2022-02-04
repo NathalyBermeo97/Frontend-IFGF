@@ -110,7 +110,7 @@ const AlbumsPage = () => {
       swal('Foto creada exitosamente!')
     }).catch(error=>{
       console.log(error)
-      swal('Error al subir una foto!')
+      swal('Ya existe un registro almacenado con este título')
     });
   };
 

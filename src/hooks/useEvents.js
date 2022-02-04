@@ -64,7 +64,7 @@ export const useEvents = () => {
   const deleteEvents = async (newEventsItem) => {
     try {
       const response = await Events.delete(newEventsItem);
-      return response.data;
+      return response.data
     } catch (e) {
       console.log("something went wrong", e);
     }
