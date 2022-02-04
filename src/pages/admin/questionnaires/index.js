@@ -16,8 +16,6 @@ const Questionnaires = () => {
     const [eventId, setEventId] = useState(null);
   const router = useRouter();
 
-
-
     const handleDelete = (id) => {
         deleteQuestionnaire(id).then((data) => {
             console.log({data})

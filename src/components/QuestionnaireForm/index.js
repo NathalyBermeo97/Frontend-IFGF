@@ -5,6 +5,7 @@ import { withPrivate } from "../../hocs/withPrivate";
 import styles from "./style.module.css";
 import { useState } from "react";
 import { useQuestionnaire } from "../../hooks/useQuestionnaire";
+import swal from "sweetalert";
 
 const QUESTION = {
   title: "Pregunta",
@@ -112,17 +113,21 @@ const CreateQuestionnaire = ({ action, questions = state, title = "", id }) => {
           .then((data) => {
             console.log({ data });
             //setQuestionnaires(prevState => [...prevState, data])
-            router.push(ROUTES.ADMIN_QUESTIONNAIRES)
-            alert("Cuestionario creado exitosamente!");
+            swal("Cuestionario creado exitosamente");
+            router.push(ROUTES.ADMIN_QUESTIONNAIRES);
           })
-          .catch((e) => console.log("error", e));
+            .catch((e)=>
+              console.log("error", e),swal("Ya existe un registro alamavenado con este título")
+            );
+
+        break;
       case "update":
         updateQuestionnaire(id, questionnaire)
           .then((data) => {
             console.log({ data });
             //setQuestionnaires(prevState => [...prevState, data])
-            alert("Cuestionario actualizado exitosamente!");
-            router.push(ROUTES.ADMIN_QUESTIONNAIRES)
+            swal("Cuestionario actualizado exitosamente");
+            router.push(ROUTES.ADMIN_QUESTIONNAIRES);
           })
           .catch((e) => console.log("error", e));
 

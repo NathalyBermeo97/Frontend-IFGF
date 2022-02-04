@@ -16,6 +16,9 @@ const Events = {
     },
     calloffInscription: (eventId) => {
         return api.delete(`/inscriptions/${eventId}`)
+    },
+    delete: (id) => {
+        return api.delete(`/events/${id}`)
     }
 };
 

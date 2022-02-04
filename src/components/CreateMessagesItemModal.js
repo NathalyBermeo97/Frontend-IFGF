@@ -55,9 +55,9 @@ export const CreateMessagesItemModal = ({
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Imagen</Form.Label>
             <Form.Control
-
                 name="file"
                 type="file"
+                accept="image/png,image/jpeg"
                 {...register("file")}
             />
           </Form.Group>

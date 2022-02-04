@@ -4,6 +4,7 @@ import api from "../../api/api";
 import Game from "../../api/score";
 import { ListOfQuestions } from "../../components/ListOfQuestions";
 import { Result } from "../../components/Result";
+import swal from "sweetalert";
 import styles from "./style.module.css";
 
 const GamePage = ({ questionsBank }) => {
@@ -41,7 +42,7 @@ const GamePage = ({ questionsBank }) => {
       console.log({newGame})
       const response = await Game.create(newGame)
       if(response.data){
-        alert('Cuestionario enviado')
+        swal('Cuestionario enviado')
       }
       setShowResult(true);
     } catch (e) {

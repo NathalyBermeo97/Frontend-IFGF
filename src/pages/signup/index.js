@@ -30,6 +30,7 @@ const registerSchema = yup.object().shape({
     .string()
     .required(ERROR_MESSAGES.REQUIRED("contraseña"))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+
 });
 const SignupPage = () => {
   const { register: doRegister } = useAuth();
@@ -54,7 +55,7 @@ const SignupPage = () => {
       swal("Usuario registrado");
     } catch (error) {
       console.log(error.code);
-      alert({ errors });
+      alert("no se puede registrar");
     }
   };
   const {
@@ -74,6 +75,7 @@ const SignupPage = () => {
     resolver: yupResolver(registerSchema),
   });
   console.log({ errors });
+
 
   return (
     <Container>
@@ -176,7 +178,7 @@ const SignupPage = () => {
                   </Row>
                 </Form.Group>
                 <div className={styles.loginButtons}>
-                  <Button variant="outline-primary" size="medium" type="submit">
+                  <Button variant="outline-primary" size="medium" type="submit" >
                     Registrarse
                   </Button>
                 </div>

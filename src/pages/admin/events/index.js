@@ -127,7 +127,7 @@ const EventsPage = () => {
       })
       .catch((error) => {
         console.log(error);
-        swal("Error al crear un evento!");
+        swal("Ya existe un registro almacenado con este título");
       });
     {
       /*setEvents((prevState) => [

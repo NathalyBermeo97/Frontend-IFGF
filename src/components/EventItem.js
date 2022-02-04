@@ -22,6 +22,7 @@ export const EventItem = ({
 
   const newEvent = { ...event, inscriptions: eventUsers };
   const [isOpen, setIsOpen] = useState(false);
+  const [events,setEvents] = useState(null);
   const [isInfoOpen, setInfoIsOpen] = useState(false);
 
   const onModal = (newsImage) => {
