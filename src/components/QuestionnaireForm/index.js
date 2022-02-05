@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { Badge, Button, Card, Form } from "react-bootstrap";
+import { Badge, Button, Form } from "react-bootstrap";
 import { ROUTES } from "../../constants/routes";
 import { withPrivate } from "../../hocs/withPrivate";
 import styles from "./style.module.css";
@@ -64,9 +64,9 @@ const CreateQuestionnaire = ({ action, questions = state, title = "", id }) => {
     const newQuestions = questionsGroup.map((question, id) => {
       return id === questionId
         ? {
-            ...question,
-            title: value,
-          }
+          ...question,
+          title: value,
+        }
         : question;
     });
     setQuestionsGroup(newQuestions);
@@ -97,6 +97,8 @@ const CreateQuestionnaire = ({ action, questions = state, title = "", id }) => {
   };
 
   const handleSubmit = (action) => {
+    if (questionnaireTitle === '') return swal('Oops', "Ingresar título del cuestionario", 'error');
+
     const newQuestionsGroup = questionsGroup.map((question) => {
       return question.answer
         ? question
@@ -116,9 +118,9 @@ const CreateQuestionnaire = ({ action, questions = state, title = "", id }) => {
             swal("Cuestionario creado exitosamente");
             router.push(ROUTES.ADMIN_QUESTIONNAIRES);
           })
-            .catch((e)=>
-              console.log("error", e),swal("Ya existe un registro alamavenado con este título")
-            );
+          .catch((e) =>
+            console.log("error", e),//swal("Ya existe un registro creado con este título")
+          );
 
         break;
       case "update":
@@ -165,6 +167,7 @@ const CreateQuestionnaire = ({ action, questions = state, title = "", id }) => {
             <Form.Group className={styles.groupForm} key={questionId}>
               <Form.Control
                 type="text"
+                placeholder="Pregunta"
                 value={question.title}
                 onChange={({ target }) =>
                   handleQuestionTitleChange(target.value, questionId)
@@ -207,7 +210,7 @@ const CreateQuestionnaire = ({ action, questions = state, title = "", id }) => {
                       )}
                     </div>
                     {optionId === question.options.length - 1 &&
-                    optionId < 3 ? (
+                      optionId < 3 ? (
                       <Badge
                         bg="success"
                         style={{
