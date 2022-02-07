@@ -97,7 +97,7 @@ const CreateQuestionnaire = ({ action, questions = state, title = "", id }) => {
   };
 
   const handleSubmit = (action) => {
-    if (questionnaireTitle === '') return swal( "Ingresar título del cuestionario", 'error');
+    if (questionnaireTitle === '') return swal( "Ingresar título del cuestionario");
 
     const newQuestionsGroup = questionsGroup.map((question) => {
       return question.answer
