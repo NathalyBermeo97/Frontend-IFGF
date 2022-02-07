@@ -1,9 +1,9 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import {useRouter} from 'next/router'
+import { useRouter } from "next/router";
 import styles from "../pages/admin/albums/styles.module.css";
 import { ListOfQuestions } from "./ListOfQuestions";
-import {ROUTES} from '../constants/routes'
+import { ROUTES } from "../constants/routes";
 
 export const Result = ({ score, length, playAgain, questionnaire }) => {
   const router = useRouter();
@@ -12,6 +12,13 @@ export const Result = ({ score, length, playAgain, questionnaire }) => {
       <h1 style={{ margin: "10px", textAlign: "center" }}>
         Tu puntaje es : {score}/{length}
       </h1>
+      <div style={{ margin: "10px", textAlign: "center" }}>
+        <p>Preguntas correctas : ✔ </p>
+        <p>Preguntas incorrectas : ❌ </p>
+      </div>
+
+      <ListOfQuestions questions={questionnaire.questions} isReport={true} />
+
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Button
           style={{ margin: "10px" }}
@@ -28,7 +35,6 @@ export const Result = ({ score, length, playAgain, questionnaire }) => {
           Buscar otro cuestionario
         </Button>
       </div>
-      <ListOfQuestions questions={questionnaire.questions} isReport={true} />
     </>
   );
 };

@@ -97,7 +97,7 @@ const CreateQuestionnaire = ({ action, questions = state, title = "", id }) => {
   };
 
   const handleSubmit = (action) => {
-    if (questionnaireTitle === '') return swal('Oops', "Ingresar título del cuestionario", 'error');
+    if (questionnaireTitle === '') return swal( "Ingresar título del cuestionario", 'error');
 
     const newQuestionsGroup = questionsGroup.map((question) => {
       return question.answer
@@ -119,7 +119,7 @@ const CreateQuestionnaire = ({ action, questions = state, title = "", id }) => {
             router.push(ROUTES.ADMIN_QUESTIONNAIRES);
           })
           .catch((e) =>
-            console.log("error", e),//swal("Ya existe un registro creado con este título")
+            console.log("error", e),swal("Ya existe un registro creado con este título")
           );
 
         break;
