@@ -3,6 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 import { ROUTES } from "../../constants/routes";
 import { useAuth } from "../../context/AuthContext";
 import { useEvents } from "../../hooks/useEvents";
+import swal from "sweetalert";
 
 export const EventModal = ({ isOpen, event, setIsOpen, onCancelInscription }) => {
   const { createInscription, calloffInscription, setEvents } = useEvents();
@@ -23,6 +24,7 @@ export const EventModal = ({ isOpen, event, setIsOpen, onCancelInscription }) =>
           
           setIsOpen(false);
         }
+        swal("Usted se ha inscrito al evento con éxito")
       })
       .catch((e) => console.log("something went wrong", e));
   };
@@ -34,7 +36,7 @@ export const EventModal = ({ isOpen, event, setIsOpen, onCancelInscription }) =>
       </Modal.Header>
       <Modal.Body>
         <p>🌎Ubicación: {event.location}</p>
-          <p>🌎Fecha: {event.date}</p>
+          <p>📅 Fecha: {event.date}</p>
         <p>🕘 Hora: {event.schedule}</p>
         <p>💰 Costo: {event.cost}</p>
         <p>👩‍👩‍👦‍👦 Número de personas inscritas: {event.inscriptions?.length}</p>
@@ -58,9 +60,10 @@ export const EventModal = ({ isOpen, event, setIsOpen, onCancelInscription }) =>
               : "Inscribirse"}
           </Button>
         ) : (
-          <Button variant="primary" onClick={onCancelInscription}>
+          <Button variant="primary" onClick={onCancelInscription} >
             Cancelar Inscripción
           </Button>
+
         )}
       </Modal.Footer>
     </Modal>

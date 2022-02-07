@@ -71,6 +71,7 @@ const DonationsPage = () => {
     createDonation(parsedData).then((newDonation) => {
       setDonations((prevState) => [...prevState, newDonation]);
       setShowModal(false);
+      swal("La donación se ha enviado con éxito")
       reset();
     });
   };

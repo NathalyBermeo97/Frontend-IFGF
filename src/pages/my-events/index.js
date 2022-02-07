@@ -5,6 +5,7 @@ import { withPrivate } from "../../hocs/withPrivate";
 import { useEvents } from "../../hooks/useEvents";
 import styles from "../../styles/indexHome.module.css";
 import { FormControl, InputGroup } from "react-bootstrap";
+import swal from "sweetalert";
 
 const MyEventsPage = () => {
   const { userEvents, setEvents, calloffInscription } = useEvents();
@@ -33,7 +34,7 @@ const MyEventsPage = () => {
           prevEvents.filter((event) => event._id !== newEvent._id)
         );
         setIsOpen(false);
-        alert("inscription canceled");
+        swal("Ha cancelado la inscripción al evento");
       })
       .catch((e) => console.log("something went wrong", e));
   };
