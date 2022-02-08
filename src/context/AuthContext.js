@@ -53,7 +53,7 @@ export function UserContextProvider({ children }) {
 
   const login = ({ email, password }) => {
     console.log({ email, password });
-    User.login({ email, password })
+    return User.login({ email, password })
       .then((res) => {
         console.log({ res });
         const token = res.data.token;
@@ -64,11 +64,13 @@ export function UserContextProvider({ children }) {
         delete res.data.token;
         const user = res.data;
         setCurrentUser(user);
+        return 'Inicio de sesión exitoso'
       })
       .catch((err) => {
-        console.log("something went wrong", err);
+        console.log("something went wrong", {err});
         window.localStorage.removeItem("jwt");
         window.localStorage.removeItem("role");
+        return err
       });
   };
 
