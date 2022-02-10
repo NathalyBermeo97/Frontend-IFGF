@@ -8,7 +8,7 @@ import {
   FormControl,
 } from "react-bootstrap";
 import styles from "../../styles/events.module.css";
-import { ListOfVideosPage } from "../../components/ListOfVideosPage";
+import {ListOfVideos} from "../../components/ListOfVideos";
 
 
 const HomeVideos = ({}) => {
@@ -47,7 +47,7 @@ const HomeVideos = ({}) => {
               gap: "15px 0px",
             }}
           >
-            <ListOfVideosPage videos={filteredVideos} />
+            <ListOfVideos videos={filteredVideos} />
           </Col>
         </Row>
       </Container>

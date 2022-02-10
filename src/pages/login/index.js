@@ -21,6 +21,7 @@ const loginSchema = yup.object().shape({
   password: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("contraseña"))
+      .min(8,ERROR_MESSAGES.MIN_STRING("contraseña",8))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
 });
 
@@ -44,7 +45,7 @@ const LoginPage = () => {
         : "Ocurrio un error al iniciar sesión";
     res === "Inicio de sesión exitoso"
       ? swal('', res, 'success')
-      : swal("Oops", message, "error");
+      : swal("Error", message, "error");
   };
 
   const {

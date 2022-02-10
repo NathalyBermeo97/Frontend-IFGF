@@ -1,6 +1,8 @@
 import { Badge, Button, Card, Col } from "react-bootstrap";
 import React from "react";
 import ReactPlayer from "react-player";
+import {ROUTES} from "../constants/routes";
+import {router} from "next/client";
 
 export const VideosItem = ({ videos, onShowModal,onShowDeleteModal }) => {
     console.log({ videos});
@@ -31,17 +33,24 @@ export const VideosItem = ({ videos, onShowModal,onShowDeleteModal }) => {
                                 gap: "0px 5px",
                             }}
                         >
-                            <Button size="sm" onClick={() => onShowModal(videos)}>
-                                Editar
-                            </Button>
-                            <br />
-                            <Button
-                                size="sm"
-                                variant="danger"
-                                onClick={() =>onShowDeleteModal(videos._id)}
-                            >
-                                Eliminar
-                            </Button>
+                            {router.pathname.startsWith(ROUTES.ADMIN) ? (
+                                <>
+                                    <Button size="sm" onClick={() => onShowModal(videos)}>
+                                        Editar
+                                    </Button>
+
+                                    <Button
+                                        size="sm"
+                                        variant="danger"
+                                        onClick={() => onShowDeleteModal(videos._id)}
+                                    >
+                                        Eliminar
+                                    </Button>
+
+                                </>
+                            ) : (
+                                ''
+                            )}
                         </div>
 
                     </Card.Body>
