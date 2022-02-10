@@ -116,24 +116,21 @@ const NewsPage = () => {
   };
 
   const onSubmitUpdateNewsItem = (data) => {
-    {/*const { _id: id } = data;
+    const { _id: id } = data;
     updateNews(id, data).then((newNew) => {
       const newNews = news.map((item) =>
-        item._id === newNew._id ? newNew : item
+          item._id === newNew._id ? newNew : item
       );
       setNews(newNews);
       setShowModal(false);
-    });*/}
-    {
-      const newNews = news.map((newsItem) =>
-            newsItem._id === data._id ? data : newsItem
-        );
-        setNews(newNews);
-        setShowModal(false);
       swal('Noticia editada correctamente')
 
+    }).catch(
+        error=>{
+          console.log(error)
+          swal('Ya existe un registro almacenado con este título')
+        });
 
-    }
   };
 
 
