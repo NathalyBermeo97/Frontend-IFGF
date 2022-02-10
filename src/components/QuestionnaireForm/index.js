@@ -131,7 +131,9 @@ const CreateQuestionnaire = ({ action, questions = state, title = "", id }) => {
             swal("Cuestionario actualizado exitosamente");
             router.push(ROUTES.ADMIN_QUESTIONNAIRES);
           })
-          .catch((e) => console.log("error", e));
+            .catch((e) =>
+                console.log("error", e),swal("Ya existe un registro creado con este título")
+            );
 
       default:
         () => console.log("an action must be pass");

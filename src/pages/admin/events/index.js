@@ -149,14 +149,11 @@ const EventsPage = () => {
       setEvents(newEvents);
       setShowModal(false);
       swal('Evento editado correctamente')
-    });
-    {
-      /*const newEvents = events.map((eventsItem) =>
-      eventsItem._id === data._id ? data : eventsItem
-    );
-    setEvents(newEvents);
-    setShowModal(false);*/
-    }
+    }).catch(
+        error=>{
+          console.log(error)
+          swal('Ya existe un registro almacenado con este título')
+        });
   };
 
   return (

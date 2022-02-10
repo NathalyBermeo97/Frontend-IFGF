@@ -123,16 +123,13 @@ const AlbumsPage = () => {
       );
       setAlbums(newAlbums);
       setShowModal(false);
+      swal('Foto editada correctamente')
 
-    });
-    swal('Foto editada correctamente')
-    {
-      /*const newAlbums = albums.map((albumsItem) =>
-            albumsItem._id === data._id ? data : albumsItem
-        );
-        setAlbums(newAlbums);
-        setShowModal(false);*/
-    }
+    }).catch(
+        error=>{
+          console.log(error)
+          swal('Ya existe un registro almacenado con este título')
+        });
   };
 
   return (

@@ -133,9 +133,11 @@ const VideosPage = () => {
         setShowModal(false);
 
         swal('Video editado exitosamente!')
-
-
-    });
+    }).catch(
+        error=>{
+            console.log(error)
+            swal('Ya existe un registro almacenado con este título')
+        });
 
   };
 
