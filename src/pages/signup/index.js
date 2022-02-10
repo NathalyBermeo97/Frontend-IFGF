@@ -29,6 +29,7 @@ const registerSchema = yup.object().shape({
   password: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("contraseña"))
+      .min(8,ERROR_MESSAGES.MIN_STRING("contraseña",8))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
 
 });

@@ -131,6 +131,8 @@ const NewsPage = () => {
         setNews(newNews);
         setShowModal(false);
       swal('Noticia editada correctamente')
+
+
     }
   };
 

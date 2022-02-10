@@ -126,7 +126,11 @@ const MessagesPage = () => {
       setShowModal(false);
       swal('Mensaje bíblico editado correctamente')
 
-    });
+    }).catch(
+        error=>{
+          console.log(error)
+          swal('Ya existe un registro almacenado con este título')
+        });
 
   };
 
