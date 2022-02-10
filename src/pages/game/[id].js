@@ -1,19 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import api from "../../api/api";
-import Game from "../../api/score";
 import { ListOfQuestions } from "../../components/ListOfQuestions";
 import { Result } from "../../components/Result";
 import swal from "sweetalert";
 import styles from "./style.module.css";
+import { useAuth } from "../../context/AuthContext";
+import { useGames } from "../../hooks/useGames";
+import Game from "../../api/score";
 
-const GamePage = ({ questionsBank }) => {
+const GamePage = ({ questionsBank, isAttemptingAgain }) => {
   const [questionnaire, setQuestionnaire] = useState(questionsBank);
   const [score, setScore] = useState(0);
   const [responses, setResponses] = useState(0);
   const [showResult, setShowResult] = useState(false);
-  const [isPlayingAgain, setIsPlayingAgain] = useState(false)
+  const [isPlayingAgain, setIsPlayingAgain] = useState(isAttemptingAgain);
+  const {getUserQuestionnaireScore} = useGames()
+  const {currentUser} = useAuth()
+  const [gameId, setGameId] = useState(null)
 
+  console.log({gameId})
   const computeAnswer = (answer, correctAnswer, questionId) => {
     if (answer === correctAnswer) {
       setScore((prevState) => prevState + 1);
@@ -25,26 +31,40 @@ const GamePage = ({ questionsBank }) => {
     setResponses((prevState) => (prevState < 5 ? prevState + 1 : 5));
   };
 
-  const playAgain = () => {
+  const playAgain = async () => {
     setQuestionnaire(questionsBank);
     setScore(0);
     setResponses(0);
     setShowResult(false)
     setIsPlayingAgain(true)
+    console.log('getUserScore', questionnaire._id, currentUser._id)
+    //fix gameId problem when it's entered from list of questionnaires
   };
+
+  useEffect(() => {
+    const getGameId = async () => {
+      const data = await getUserQuestionnaireScore(questionnaire._id, currentUser._id)
+      setGameId(data[0]._id)
+    }
+    if(isPlayingAgain) getGameId()
+  }, [])
 
   const sendScore = async () => {
     try {
       const newGame = {questionary_id: questionnaire._id, score}
-      // if(isPlayingAgain){
-      //   const response = await Game.update(newGame)
-      // }
-      console.log({newGame})
-      const response = await Game.create(newGame)
-      if(response.data){
-        swal('Cuestionario enviado')
+      if(isPlayingAgain){
+        const response = await Game.update(gameId, newGame)
+        if(response.data){
+          swal('Cuestionario actualizado')
+        }
+        setShowResult(true);
+      }else{
+        const response = await Game.create(newGame)
+        if(response.data){
+          swal('Cuestionario creado')
+        }
+        setShowResult(true);
       }
-      setShowResult(true);
     } catch (e) {
       console.log("something went wrong", e);
     }
@@ -79,13 +99,14 @@ const GamePage = ({ questionsBank }) => {
 export default GamePage;
 
 export async function getServerSideProps(context) {
-  const { id, token } = context.query;
+  const { id, token, isTryingAgain } = context.query;
+  const isAttemptingAgain = isTryingAgain === 'true' ? true : false
   api.defaults.headers.common["x-access-token"] = token;
   try {
     const response = await api.get(`/questionaries/${id}`);
     const questionsBank = await response.data;
     return {
-      props: { questionsBank },
+      props: { questionsBank, isAttemptingAgain },
     };
   } catch (e) {
     console.log("Something went wrong", e);

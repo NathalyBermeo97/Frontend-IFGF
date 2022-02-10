@@ -2,12 +2,16 @@ import { Button, Card, Col } from "react-bootstrap";
 import styles from "./style.module.css";
 import { useRouter } from "next/router";
 import { ROUTES } from "../../constants/routes";
-import React from "react";
+import { useGames } from "../../hooks/useGames";
 
-export const QuestionnaireItem = ({ questionnaire,onShowDeleteModal }) => {
-  const token = window.localStorage.getItem('jwt')
+export const QuestionnaireItem = ({ questionnaire, onShowDeleteModal }) => {
+  const token = window.localStorage.getItem("jwt");
   const router = useRouter();
   const questionsNumber = questionnaire.questions.length;
+  const { hasAlreadyAttemptedGame } = useGames();
+  const existsAttempt = hasAlreadyAttemptedGame(questionnaire._id);
+  const isTryingAgain = existsAttempt ? true : false
+
   return (
     <Col
       style={{
@@ -30,29 +34,36 @@ export const QuestionnaireItem = ({ questionnaire,onShowDeleteModal }) => {
               gap: "0px 5px",
             }}
           >
-
             {router.pathname.startsWith(ROUTES.ADMIN) ? (
               <>
-                  <Button
-                      size="sm"
-                      variant="primary"
-                      onClick={() => router.push(ROUTES.UPDATE_QUESTIONNAIRE(questionnaire._id, token))}
-                  >
-                      Editar
-                  </Button>
-                  <Button
-                      size="sm"
-                      variant="danger"
-                      onClick={() => onShowDeleteModal(questionnaire._id)}
-                  >
-                      Eliminar
-                  </Button></>
+                <Button
+                  size="sm"
+                  variant="primary"
+                  onClick={() =>
+                    router.push(
+                      ROUTES.UPDATE_QUESTIONNAIRE(questionnaire._id, token)
+                    )
+                  }
+                >
+                  Editar
+                </Button>
+                <Button
+                  size="sm"
+                  variant="danger"
+                  onClick={() => onShowDeleteModal(questionnaire._id)}
+                >
+                  Eliminar
+                </Button>
+              </>
             ) : (
               <Button
                 size="sm"
-                onClick={() => router.push(ROUTES.GAME(questionnaire._id, token))}
+                onClick={() =>
+                  router.push(ROUTES.GAME(questionnaire._id, token, isTryingAgain))
+                }
+                variant={existsAttempt ? 'success' : 'primary'}
               >
-                Intentar
+                {existsAttempt ? "Intentar de nuevo" : "Intentar"}
               </Button>
             )}
           </div>
