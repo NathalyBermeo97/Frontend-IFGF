@@ -2,10 +2,12 @@ import { Badge, Button, Card, Col } from "react-bootstrap";
 import React from "react";
 import ReactPlayer from "react-player";
 import {ROUTES} from "../constants/routes";
-import {router} from "next/client";
+import {useRouter} from "next/router";
+
 
 export const VideosItem = ({ videos, onShowModal,onShowDeleteModal }) => {
     console.log({ videos});
+    const router = useRouter();
 
     return (
         <Col

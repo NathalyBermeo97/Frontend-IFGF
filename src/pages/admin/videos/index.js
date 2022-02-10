@@ -10,7 +10,6 @@ import { ListOfVideos } from "../../../components/ListOfVideos";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
-
 import Videos from "../../../api/videos";
 import {ConfirmModal} from "../../../components/ConfirmModal";
 import swal from "sweetalert";
