@@ -1,23 +1,15 @@
 import styles from "./styles.module.css";
-import React, {useEffect} from "react";
 import { EventModal } from "../../components/EventModal";
 import { useState } from "react";
 import {Container, FormControl, InputGroup} from "react-bootstrap";
 import Events from "../../api/events";
 import { ListOfEvents } from "../../components/ListOfEvents";
+import { useFilter } from "../../hooks/useFilter";
 
 const Eventos = ({ events }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [event, setEvent] = useState({});
-  const [keyword, setKeyword] = useState("");
-  const [filteredEvents, setFilteredEvents] = useState([]);
-
-  useEffect(() => {
-    const filteredEvents = events?.filter((ni) =>
-        ni.title.toLowerCase().includes(keyword.toLowerCase())
-    );
-    setFilteredEvents(filteredEvents);
-  }, [keyword, events]);
+  const {newItems: filteredEvents, registerInput} = useFilter(events, 'title')
 
   const onShowModal = (event) => {
     setEvent(event);
@@ -35,8 +27,7 @@ const Eventos = ({ events }) => {
             placeholder="Buscar evento"
             aria-label="search_new"
             aria-describedby="basic-addon1"
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
+            {...registerInput('BuscarEventos')}
         />
       </InputGroup>
       <ListOfEvents events={filteredEvents} onShowModal={onShowModal} />
