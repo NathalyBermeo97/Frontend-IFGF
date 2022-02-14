@@ -15,11 +15,11 @@ const registerSchema = yup.object().shape({
   name: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("nombre"))
-    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+    .matches("^[a-zA-Z ]+$", ERROR_MESSAGES.MATCHLETTER),
   lastname: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("apellido"))
-    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+      .matches("^[a-zA-Z ]+$", ERROR_MESSAGES.MATCHLETTER),
   cellphone: yup.string().required(ERROR_MESSAGES.NUMBER("celular/teléfono")),
   email: yup
     .string()
@@ -115,6 +115,7 @@ const SignupPage = () => {
                 <Form.Group className="mb-3">
                   <Form.Control
                     variant="outlined"
+                    type="text"
                     placeholder="Nombre"
                     {...register("name")}
                     isInvalid={!!errors.name?.message}
@@ -178,11 +179,15 @@ const SignupPage = () => {
                     </Col>
                   </Row>
                 </Form.Group>
-                <div className={styles.loginButtons}>
-                  <Button variant="outline-primary" size="medium" type="submit" >
-                    Registrarse
-                  </Button>
-                </div>
+
+                  <div className={styles.loginButtons}>
+                    <Button variant="outline-primary" size="medium" type="submit" >
+
+                      Registrarse
+
+                    </Button>
+                  </div>
+
                 <Link href="/login">
                   <p className={styles.createAccount}>¿Ya tiene una cuenta?</p>
                 </Link>

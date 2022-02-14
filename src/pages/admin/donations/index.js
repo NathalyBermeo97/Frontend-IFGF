@@ -83,7 +83,7 @@ const DonationPage = () => {
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
           >
-            <option>Tipos de donación</option>
+            <option>Estado de la donación</option>
             <option value="aceptado">Aceptado</option>
             <option value="denegado">Denegado</option>
             <option value="undefined">Sin definir</option>

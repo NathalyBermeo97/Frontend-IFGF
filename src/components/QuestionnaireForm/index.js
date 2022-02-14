@@ -8,8 +8,8 @@ import { useQuestionnaire } from "../../hooks/useQuestionnaire";
 import swal from "sweetalert";
 
 const QUESTION = {
-  title: "Pregunta",
-  options: ["Opción 1"],
+  title: "",
+  options: [""],
   answer: "",
 };
 
@@ -30,7 +30,7 @@ const CreateQuestionnaire = ({ action, questions = state, title = "", id }) => {
   const addOption = (questionId) => {
     const question = questionsGroup.find((_, qI) => qI === questionId);
     const options = [...question.options];
-    options.push(`Opción ${options.length + 1}`);
+    options.push(``);
     const newQuestion = {
       ...question,
       options,
@@ -191,6 +191,7 @@ const CreateQuestionnaire = ({ action, questions = state, title = "", id }) => {
                       <Form.Control
                         style={{ marginTop: "8px" }}
                         type="text"
+                        placeholder="Opción"
                         value={option}
                         onChange={({ target }) =>
                           handleQuestionOptionChange(

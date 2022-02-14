@@ -49,11 +49,11 @@ export const CreateDonationModal = ({
               isInvalid={!!errors.delivery?.message}
             >
               <option value="entrega en iglesia">
-                Donar en la Iglésia personalmente
+                Donar en la Iglesia personalmente
               </option>
               {donationType === "dinero" && (
                 <option value="entrega vía transacción">
-                  Donar a la iglesia por transacción
+                  Donar a la Iglesia por transacción
                 </option>
               )}
               <option value="retiro en el hogar">
@@ -116,7 +116,19 @@ export const CreateDonationModal = ({
           ) : selectValue === "entrega vía transacción" ? (
             <Form.Group className="mb-3">
               <Form.Label>
-                Cuenta de transacción: 172651881029- Banco del Pichincha
+                Beneficiario: Iglesia IFGF
+              </Form.Label>
+              <br/>
+              <Form.Label>
+                Banco: Pichincha
+              </Form.Label>
+              <br/>
+              <Form.Label>
+                Tipo de cuenta: Cuenta Corriente
+              </Form.Label>
+              <br/>
+              <Form.Label>
+                Número de cuenta: 3022575104
               </Form.Label>
             </Form.Group>
           ) : (

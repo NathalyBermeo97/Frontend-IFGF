@@ -109,7 +109,7 @@ const VideosPage = () => {
       .catch((error) => {
         console.log(error);
         swal(
-          "Error en el tipo de video, debe ser de tipo: familia,jovenes,niños!"
+            "Ya existe un registro almacenado de este vídeo"
         );
       });
     {
@@ -145,7 +145,7 @@ const VideosPage = () => {
       })
       .catch((error) => {
         console.log(error);
-        swal("Ya existe un registro almacenado con este título");
+        swal("Ya existe un registro almacenado de este vídeo");
       });
   };
 

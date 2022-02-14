@@ -12,6 +12,7 @@ export const EventModal = ({ isOpen, event, setIsOpen, onCancelInscription }) =>
   const isInTheLimit = event?.inscriptions?.length === event.number;
   const isDisabled =
     event.inscriptions?.includes(currentUser?._id) || isInTheLimit;
+
   const handleCreateInscription = () => {
     if (!currentUser) {
       return router.push(ROUTES.LOGIN);
@@ -21,7 +22,6 @@ export const EventModal = ({ isOpen, event, setIsOpen, onCancelInscription }) =>
       .then((res) => {
         console.log(res);
         if (res?.data?.message) {
-          
           setIsOpen(false);
         }
         swal("Usted se ha inscrito al evento con éxito")

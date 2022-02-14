@@ -8,12 +8,10 @@ export const CreateEventsItemModal = ({
   onSubmit,
   errors,
   clearErrors,
-
 }) => {
   const handleClose = () => {
     setShowModal(false);
     clearErrors();
-
   };
 
   return (
@@ -68,13 +66,13 @@ export const CreateEventsItemModal = ({
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Fecha de entrega</Form.Label>
+            <Form.Label>Fecha </Form.Label>
             <Form.Control
-                min="2022-01-25"
-                type="date"
-                placeholder="Ingrese la fecha de entrega"
-                {...register("date")}
-                isInvalid={!!errors.date?.message}
+              min="2022-02-14"
+              type="date"
+              placeholder="Ingrese la fecha de entrega"
+              {...register("date")}
+              isInvalid={!!errors.date?.message}
             />
             <Form.Control.Feedback type="invalid">
               {errors.date?.message}
@@ -82,6 +80,11 @@ export const CreateEventsItemModal = ({
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Horario</Form.Label>
+            <Form.Label>
+              <p>
+                El horario de eventos es a partir de las 10:00 AM hasta 19:00 PM
+              </p>
+            </Form.Label>
             <Form.Control
               style={{ height: "50px" }}
               type="time"
@@ -114,6 +117,7 @@ export const CreateEventsItemModal = ({
             <Form.Control
               style={{ height: "50px" }}
               type="number"
+              max="30"
               placeholder="Ingresar el límite de personas"
               {...register("number")}
               isInvalid={!!errors.number?.message}
@@ -125,10 +129,10 @@ export const CreateEventsItemModal = ({
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Imagen</Form.Label>
             <Form.Control
-                name="file"
-                type="file"
-                accept="image/png,image/jpeg"
-                {...register("file")}
+              name="file"
+              type="file"
+              accept="image/png,image/jpeg"
+              {...register("file")}
             />
           </Form.Group>
         </Form>
@@ -137,7 +141,7 @@ export const CreateEventsItemModal = ({
         <Button variant="secondary" onClick={handleClose}>
           Cerrar
         </Button>
-        <Button form="create-events-form" variant="primary" type="submit" >
+        <Button form="create-events-form" variant="primary" type="submit">
           Guardar
         </Button>
       </Modal.Footer>

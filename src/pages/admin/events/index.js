@@ -35,7 +35,10 @@ const eventsItemSchema = yup.object().shape({
     .string()
     .required(ERROR_MESSAGES.REQUIRED("costo"))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
-  number: yup.number().required(ERROR_MESSAGES.REQUIRED("costo")),
+  number: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED("aforo permitido"))
+    .matches("^[0-9]+$", ERROR_MESSAGES.MATCHNUMBER),
 });
 
 const EventsPage = () => {

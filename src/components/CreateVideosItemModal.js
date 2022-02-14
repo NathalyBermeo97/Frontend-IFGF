@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Modal, Form, InputGroup } from "react-bootstrap";
+import {Button, Modal, Form, InputGroup, FormSelect} from "react-bootstrap";
 
 export const CreateVideosItemModal = ({
   showModal,
@@ -54,14 +54,20 @@ export const CreateVideosItemModal = ({
           </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Tipo</Form.Label>
-                <Form.Control
+                <FormSelect
                     style={{ height: "50px" }}
                     as="textarea"
                     type="text"
                     placeholder="Ingresar el tipo de video "
                     {...register("type")}
                     isInvalid={!!errors.type?.message}
-                />
+
+                >
+                    <option>Tipo de videos</option>
+                    <option value="familia">Familia</option>
+                    <option value="jovenes">Jóvenes</option>
+                    <option value="niños">Niños</option>
+                </FormSelect>
                 <Form.Control.Feedback type="invalid">
                     {errors.type?.message}
                 </Form.Control.Feedback>

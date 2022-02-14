@@ -9,11 +9,13 @@ export const SERVER_RESPONSE = {
 
 export const ERROR_MESSAGES = {
     MATCH: 'Entrada no válida',
+    MATCHLETTER: 'Ingrese solo letras',
+    MATCHNUMBER:'Ingrese solo números',
     EMAIL: 'El campo debe ser un email válido',
     DATE: 'Ingrese una fecha válida',
     REQUIRED: (field) => `El campo ${field} es requerido`,
     NUMBER: (field) => `El campo ${field} debe ser un número`,
     MIN_STRING: (field, min) => `El campo ${field} debe tener al menos ${min} caracteres`,
-    MAX_STRING: (field, max) => `El campo ${field} debe tener como máximo ${max} caracteres`,
+    MAX_STRING: (field, max) => `El campo ${field} debe tener como máximo ${max} inscripciones`,
     MAX_NUMBER: (field, max) => `El campo ${field} debe tener como máximo ${max} dígitos`
 }
