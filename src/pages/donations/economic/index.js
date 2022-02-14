@@ -86,9 +86,6 @@ const DonationsPage = () => {
       }).catch(error=>{
         console.log("error",error)
       })
-
-
-
     {/*console.log("response",response)
     const description = data.description.trim();
     const address =

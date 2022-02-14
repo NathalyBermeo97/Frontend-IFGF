@@ -1,7 +1,7 @@
 import { withPrivate } from "../../../hocs/withPrivate";
 import React, { useEffect, useState } from "react";
 import { useMessages } from "../../../hooks/useMessages";
-import { Button, FormControl, InputGroup } from "react-bootstrap";
+import { Button, Container, FormControl, InputGroup } from "react-bootstrap";
 import { UpdateMessagesItemModal } from "../../../components/UpdateMessagesItemModal";
 import styles from "./styles.module.css";
 import { CreateMessagesItemModal } from "../../../components/CreateMessagesItemModal";
@@ -11,8 +11,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 import Messages from "../../../api/messages";
-import {ConfirmModal} from "../../../components/ConfirmModal";
-
+import { ConfirmModal } from "../../../components/ConfirmModal";
 
 const messagesItemSchema = yup.object().shape({
   title: yup
@@ -26,8 +25,13 @@ const messagesItemSchema = yup.object().shape({
 });
 
 const MessagesPage = () => {
-  const { messages, setMessages, updateMessages, createMessagesItem,deleteMessages } =
-    useMessages();
+  const {
+    messages,
+    setMessages,
+    updateMessages,
+    createMessagesItem,
+    deleteMessages,
+  } = useMessages();
   const [showModal, setShowModal] = useState(false);
   const [showCreateMessagesItemModal, setShowCreateMessagesItemModal] =
     useState(false);
@@ -52,7 +56,7 @@ const MessagesPage = () => {
   } = useForm({
     defaultValues: {
       title: "",
-      description: ""
+      description: "",
     },
     resolver: yupResolver(messagesItemSchema),
   });
@@ -64,20 +68,17 @@ const MessagesPage = () => {
   const onShowModal = (messagesItem) => {
     updateMessagesItemForm.reset(messagesItem);
     setShowModal(true);
-
   };
 
   const handleDelete = (id) => {
     deleteMessages(id).then((data) => {
-      console.log({data})
-      if (data.message === SERVER_RESPONSE.DELETED_MESSAGES){
-
+      console.log({ data });
+      if (data.message === SERVER_RESPONSE.DELETED_MESSAGES) {
         const newMessages = messages.filter((message) => message._id !== id);
         setMessages(newMessages);
       }
-
     });
-    setShowDeleteModal(false)
+    setShowDeleteModal(false);
   };
   const onConfirm = () => {
     handleDelete(eventId);
@@ -91,109 +92,108 @@ const MessagesPage = () => {
 
   console.log({ errors });
   const onSubmit = async (data) => {
-    console.log("data",data.file);
+    console.log("data", data.file);
     console.log(data);
 
     const formData = new FormData();
-    formData.append("title",data.title);
-    formData.append("description",data.description);
-    formData.append("file",data.file[0]);
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("file", data.file[0]);
 
-    Messages.create(formData).then((response) => {
-      const newMessageItem = response.data;
-      const callback =(prevState)=>{
-        return [...prevState,newMessageItem]
-      }
-      setMessages(callback);
-      setShowCreateMessagesItemModal(false);
-      reset();
-      swal('Mensaje bíblico creado exitosamente!')
-    }).catch(error=>{
-      console.log(error)
-      swal('Ya existe un registro almacenado con este título')
-    });
-
+    Messages.create(formData)
+      .then((response) => {
+        const newMessageItem = response.data;
+        const callback = (prevState) => {
+          return [...prevState, newMessageItem];
+        };
+        setMessages(callback);
+        setShowCreateMessagesItemModal(false);
+        reset();
+        swal("Mensaje bíblico creado exitosamente!");
+      })
+      .catch((error) => {
+        console.log(error);
+        swal("Ya existe un registro almacenado con este título");
+      });
   };
-
 
   const onSubmitUpdateMessagesItem = (data) => {
     const { _id: id } = data;
-    updateMessages(id, data).then((newMessage) => {
-      const newMessages = messages.map((message) =>
+    updateMessages(id, data)
+      .then((newMessage) => {
+        const newMessages = messages.map((message) =>
           message._id === newMessage._id ? newMessage : message
-      );
-      setMessages(newMessages);
-      setShowModal(false);
-      swal('Mensaje bíblico editado correctamente')
-
-    }).catch(
-        error=>{
-          console.log(error)
-          swal('Ya existe un registro almacenado con este título')
-        });
-
+        );
+        setMessages(newMessages);
+        setShowModal(false);
+        swal("Mensaje bíblico editado correctamente");
+      })
+      .catch((error) => {
+        console.log(error);
+        swal("Ya existe un registro almacenado con este título");
+      });
   };
 
   return (
     <>
-      <div >
-        <div className={styles.events}>
-          <h1 className={styles.section}>Gestión de mensajes bíblicos</h1>
-          <div className={styles.linea}></div>
+      <Container>
+        <div>
+          <div className={styles.events}>
+            <h1 className={styles.section}>Gestión de mensajes bíblicos</h1>
+            <div className={styles.linea}></div>
+          </div>
         </div>
-      </div>
 
-      <InputGroup style={{ padding: "15px" }}>
-        <FormControl
+        <InputGroup style={{ padding: "15px" }}>
+          <FormControl
             placeholder="Buscar mensaje bíblico"
             aria-label="search_new"
             aria-describedby="basic-addon1"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
-        />
-      </InputGroup>
-      <div  className={styles.button}>
-        <Button
-
+          />
+        </InputGroup>
+        <div className={styles.button}>
+          <Button
             variant="info"
             size="m"
             onClick={() => setShowCreateMessagesItemModal(true)}
-        >
-          Crear mensaje bíblico
-        </Button>
-      </div>
+          >
+            Crear mensaje bíblico
+          </Button>
+        </div>
 
-      <ListOfMessages
+        <ListOfMessages
           messages={filteredMessages}
-        onShowModal={onShowModal}
+          onShowModal={onShowModal}
           onShowDeleteModal={onShowDeleteModal}
-      />
-      <ConfirmModal
+        />
+        <ConfirmModal
           isOpen={showDeleteModal}
           confirm={onConfirm}
           setIsOpen={setShowDeleteModal}
-          item='mensaje bíblico'
-      />
+          item="el mensaje bíblico"
+        />
 
+        <UpdateMessagesItemModal
+          show={showModal}
+          setShowModal={setShowModal}
+          register={updateMessagesItemForm.register}
+          handleSubmit={updateMessagesItemForm.handleSubmit}
+          onSubmit={onSubmitUpdateMessagesItem}
+          errors={updateMessagesItemForm.formState.errors}
+        />
 
-      <UpdateMessagesItemModal
-        show={showModal}
-        setShowModal={setShowModal}
-        register={updateMessagesItemForm.register}
-        handleSubmit={updateMessagesItemForm.handleSubmit}
-        onSubmit={onSubmitUpdateMessagesItem}
-        errors={updateMessagesItemForm.formState.errors}
-      />
-
-      <CreateMessagesItemModal
-        showModal={showCreateMessagesItemModal}
-        setShowModal={setShowCreateMessagesItemModal}
-        register={register}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-        clearErrors={clearErrors}
-      />
+        <CreateMessagesItemModal
+          showModal={showCreateMessagesItemModal}
+          setShowModal={setShowCreateMessagesItemModal}
+          register={register}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          clearErrors={clearErrors}
+        />
+      </Container>
     </>
   );
 };

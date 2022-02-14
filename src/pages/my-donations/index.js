@@ -48,7 +48,7 @@ const MyDonationsPage = () => {
       </InputGroup>
       <br />
 
-      <ListOfDonations donations={userDonations} />;
+      <ListOfDonations donations={filteredDonations} />
 
     </>
   );

@@ -33,7 +33,7 @@ const HomeVideos = ({}) => {
       <Container>
         <InputGroup className="mb-3" style={{ padding: "15px" }}>
           <FormControl
-            placeholder="Buscar video"
+            placeholder="Buscar vídeo"
             aria-label="search_new"
             aria-describedby="basic-addon1"
             value={keyword}

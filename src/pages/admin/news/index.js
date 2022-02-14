@@ -1,7 +1,13 @@
 import { withPrivate } from "../../../hocs/withPrivate";
 import React, { useEffect, useState } from "react";
 import { useNews } from "../../../hooks/useNews";
-import { ListGroup, Button, FormControl, InputGroup } from "react-bootstrap";
+import {
+  ListGroup,
+  Button,
+  FormControl,
+  InputGroup,
+  Container,
+} from "react-bootstrap";
 import { UpdateNewsItemModal } from "../../../components/UpdateNewsItemModal";
 import styles from "./styles.module.css";
 import { CreateNewsItemModal } from "../../../components/CreateNewsItemModal";
@@ -12,8 +18,7 @@ import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 import News from "../../../api/news";
 import swal from "sweetalert";
-import {ConfirmModal} from "../../../components/ConfirmModal";
-
+import { ConfirmModal } from "../../../components/ConfirmModal";
 
 const newsItemSchema = yup.object().shape({
   title: yup
@@ -34,7 +39,6 @@ const NewsPage = () => {
   const [eventId, setEventId] = useState(null);
   const [keyword, setKeyword] = useState("");
   const [filteredNews, setFilteredNews] = useState([]);
-
 
   console.log({ news });
   useEffect(() => {
@@ -65,7 +69,6 @@ const NewsPage = () => {
   const onShowModal = (newsItem) => {
     updateNewsItemForm.reset(newsItem);
     setShowModal(true);
-
   };
 
   const handleDelete = (id) => {
@@ -76,7 +79,7 @@ const NewsPage = () => {
         setNews(newNews);
       }
     });
-    setShowDeleteModal(false)
+    setShowDeleteModal(false);
   };
   const onConfirm = () => {
     handleDelete(eventId);
@@ -87,7 +90,6 @@ const NewsPage = () => {
     setEventId(eventId);
     //confirm({onOk: () => handleDelete(eventId)})
   };
-
 
   console.log({ errors });
 
@@ -100,102 +102,101 @@ const NewsPage = () => {
     formData.append("description", data.description);
     formData.append("file", data.file[0]);
 
-    News.create(formData).then((response) => {
-      const newNewsItem = response.data;
-      const callback =(prevState)=>{
-        return [...prevState,newNewsItem]
-      }
-      setNews(callback);
-      setShowCreateNewsItemModal(false);
-      reset();
-      swal('Noticia creada exitosamente')
-    }).catch(error=>{
-      console.log(error)
-      swal('Ya existe un registro almacenado con este título')
-    });
+    News.create(formData)
+      .then((response) => {
+        const newNewsItem = response.data;
+        const callback = (prevState) => {
+          return [...prevState, newNewsItem];
+        };
+        setNews(callback);
+        setShowCreateNewsItemModal(false);
+        reset();
+        swal("Noticia creada exitosamente");
+      })
+      .catch((error) => {
+        console.log(error);
+        swal("Ya existe un registro almacenado con este título");
+      });
   };
 
   const onSubmitUpdateNewsItem = (data) => {
     const { _id: id } = data;
-    updateNews(id, data).then((newNew) => {
-      const newNews = news.map((item) =>
+    updateNews(id, data)
+      .then((newNew) => {
+        const newNews = news.map((item) =>
           item._id === newNew._id ? newNew : item
-      );
-      setNews(newNews);
-      setShowModal(false);
-      swal('Noticia editada correctamente')
-
-    }).catch(
-        error=>{
-          console.log(error)
-          swal('Ya existe un registro almacenado con este título')
-        });
-
+        );
+        setNews(newNews);
+        setShowModal(false);
+        swal("Noticia editada correctamente");
+      })
+      .catch((error) => {
+        console.log(error);
+        swal("Ya existe un registro almacenado con este título");
+      });
   };
-
 
   return (
     <>
-      <div >
-        <div className={styles.events}>
-          <h1 className={styles.section}>Gestión de noticias</h1>
-          <div className={styles.linea}></div>
+      <Container>
+        <div>
+          <div className={styles.events}>
+            <h1 className={styles.section}>Gestión de noticias</h1>
+            <div className={styles.linea}></div>
+          </div>
         </div>
-      </div>
 
-      <InputGroup style={{ padding: "15px" }}>
-        <FormControl
-          placeholder="Buscar Noticia"
-          aria-label="search_new"
-          aria-describedby="basic-addon1"
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-        />
-      </InputGroup>
-      <div  className={styles.button}>
-        <Button
-
+        <InputGroup style={{ padding: "15px" }}>
+          <FormControl
+            placeholder="Buscar Noticia"
+            aria-label="search_new"
+            aria-describedby="basic-addon1"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+          />
+        </InputGroup>
+        <div className={styles.button}>
+          <Button
             variant="info"
             size="m"
             onClick={() => setShowCreateNewsItemModal(true)}
-        >
-          Crear noticia
-        </Button>
-      </div>
+          >
+            Crear noticia
+          </Button>
+        </div>
 
-      <ListOfNews
-        news={filteredNews}
-        onShowModal={onShowModal}
-        handleDelete={handleDelete}
-        onShowDeleteModal={onShowDeleteModal}
-      />
-      <ConfirmModal
+        <ListOfNews
+          news={filteredNews}
+          onShowModal={onShowModal}
+          handleDelete={handleDelete}
+          onShowDeleteModal={onShowDeleteModal}
+        />
+        <ConfirmModal
           isOpen={showDeleteModal}
           confirm={onConfirm}
           setIsOpen={setShowDeleteModal}
-          item='noticia'
-      />
+          item="la noticia"
+        />
 
-      <UpdateNewsItemModal
-        show={showModal}
-        setShowModal={setShowModal}
-        register={updateNewsItemForm.register}
-        handleSubmit={updateNewsItemForm.handleSubmit}
-        onSubmit={onSubmitUpdateNewsItem}
-        errors={updateNewsItemForm.formState.errors}
-      />
+        <UpdateNewsItemModal
+          show={showModal}
+          setShowModal={setShowModal}
+          register={updateNewsItemForm.register}
+          handleSubmit={updateNewsItemForm.handleSubmit}
+          onSubmit={onSubmitUpdateNewsItem}
+          errors={updateNewsItemForm.formState.errors}
+        />
 
-
-
-      <CreateNewsItemModal
-        showModal={showCreateNewsItemModal}
-        setShowModal={setShowCreateNewsItemModal}
-        register={register}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-        clearErrors={clearErrors}
-      />
+        <CreateNewsItemModal
+          showModal={showCreateNewsItemModal}
+          setShowModal={setShowCreateNewsItemModal}
+          register={register}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          clearErrors={clearErrors}
+        />
+      </Container>
     </>
   );
 };

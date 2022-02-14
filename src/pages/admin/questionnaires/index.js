@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { Button, FormControl, InputGroup } from "react-bootstrap";
+import { Button, Container, FormControl, InputGroup } from "react-bootstrap";
 import { ListOfQuestionnaires } from "../../../components/ListOfQuestionnaires";
 import { ROUTES } from "../../../constants/routes";
 import { withPrivate } from "../../../hocs/withPrivate";
@@ -44,41 +44,43 @@ const Questionnaires = () => {
 
   return (
     <>
-      <div>
-        <div className={styles.events}>
-          <h1 className={styles.section}>Gestión de cuestionarios</h1>
-          <div className={styles.linea}></div>
+      <Container>
+        <div>
+          <div className={styles.events}>
+            <h1 className={styles.section}>Gestión de cuestionarios</h1>
+            <div className={styles.linea}></div>
+          </div>
         </div>
-      </div>
-      <InputGroup style={{ padding: "15px" }}>
-        <FormControl
-          placeholder="Buscar cuestionario"
-          aria-label="search_new"
-          aria-describedby="basic-addon1"
-          {...registerInput("SearchQuestionnaires")}
+        <InputGroup style={{ padding: "15px" }}>
+          <FormControl
+            placeholder="Buscar cuestionario"
+            aria-label="search_new"
+            aria-describedby="basic-addon1"
+            {...registerInput("SearchQuestionnaires")}
+          />
+        </InputGroup>
+
+        <div className={styles.button}>
+          <Button
+            variant="info"
+            size="sm"
+            onClick={() => router.push(ROUTES.CREATE_QUESTIONNAIRE)}
+          >
+            Crear cuestionario
+          </Button>
+        </div>
+
+        <ListOfQuestionnaires
+          questionnaires={filteredQuestionnaires}
+          onShowDeleteModal={onShowDeleteModal}
         />
-      </InputGroup>
-
-      <div className={styles.button}>
-        <Button
-          variant="info"
-          size="sm"
-          onClick={() => router.push(ROUTES.CREATE_QUESTIONNAIRE)}
-        >
-          Crear cuestionario
-        </Button>
-      </div>
-
-      <ListOfQuestionnaires
-        questionnaires={filteredQuestionnaires}
-        onShowDeleteModal={onShowDeleteModal}
-      />
-      <ConfirmModal
-        isOpen={showDeleteModal}
-        confirm={onConfirm}
-        setIsOpen={setShowDeleteModal}
-        item="cuestionario"
-      />
+        <ConfirmModal
+          isOpen={showDeleteModal}
+          confirm={onConfirm}
+          setIsOpen={setShowDeleteModal}
+          item=" el cuestionario"
+        />
+      </Container>
     </>
   );
 };

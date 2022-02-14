@@ -1,7 +1,13 @@
 import { withPrivate } from "../../../hocs/withPrivate";
 import React, { useEffect, useState } from "react";
 import { useVideos } from "../../../hooks/useVideos";
-import { ListGroup, Button, FormControl, InputGroup } from "react-bootstrap";
+import {
+  ListGroup,
+  Button,
+  FormControl,
+  InputGroup,
+  Container,
+} from "react-bootstrap";
 import { UpdateVideosItemModal } from "../../../components/UpdateVideosItemModal";
 import styles from "./styles.module.css";
 import { CreateVideosItemModal } from "../../../components/CreateVideosItemModal";
@@ -11,14 +17,14 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 import Videos from "../../../api/videos";
-import {ConfirmModal} from "../../../components/ConfirmModal";
+import { ConfirmModal } from "../../../components/ConfirmModal";
 import swal from "sweetalert";
 
 const videosItemSchema = yup.object().shape({
-   title: yup
-        .string()
-        .required(ERROR_MESSAGES.REQUIRED("título"))
-        .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+  title: yup
+    .string()
+    .required(ERROR_MESSAGES.REQUIRED("título"))
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
 
   description: yup
     .string()
@@ -35,12 +41,13 @@ const videosItemSchema = yup.object().shape({
 });
 
 const VideosPage = () => {
-  const { videos, setVideos, updateVideos, createVideosItem,deleteVideos} = useVideos();
+  const { videos, setVideos, updateVideos, createVideosItem, deleteVideos } =
+    useVideos();
   const [showModal, setShowModal] = useState(false);
   const [showCreateVideosItemModal, setShowCreateVideosItemModal] =
     useState(false);
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [eventId, setEventId] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [eventId, setEventId] = useState(null);
   const [keyword, setKeyword] = useState("");
   const [filteredVideos, setFilteredVideos] = useState([]);
 
@@ -75,32 +82,35 @@ const VideosPage = () => {
   };
 
   const handleDelete = (id) => {
-      deleteVideos(id).then((data) => {
-          console.log({data})
-          if (data.message === SERVER_RESPONSE.DELETED_ALBUMS){
-
-              const newVideos = videos.filter((video) => video._id !== id);
-              setVideos(newVideos);
-          }
-      });
-      setShowDeleteModal(false)
+    deleteVideos(id).then((data) => {
+      console.log({ data });
+      if (data.message === SERVER_RESPONSE.DELETED_ALBUMS) {
+        const newVideos = videos.filter((video) => video._id !== id);
+        setVideos(newVideos);
+      }
+    });
+    setShowDeleteModal(false);
   };
 
   console.log({ errors });
   const onSubmit = (data) => {
     console.log(data);
-      Videos.create(data).then((response) => {
-          const newVideosItem = response.data;
-          const callback =(prevState)=>{
-              return [...prevState,newVideosItem]
-          }
-          setVideos(callback);
-          setShowCreateVideosItemModal(false);
-          reset();
-          swal('Video creado exitosamente!')
-      }).catch(error=>{
-          console.log(error)
-          swal('Error en el tipo de video, debe ser de tipo: familia,jovenes,niños!')
+    Videos.create(data)
+      .then((response) => {
+        const newVideosItem = response.data;
+        const callback = (prevState) => {
+          return [...prevState, newVideosItem];
+        };
+        setVideos(callback);
+        setShowCreateVideosItemModal(false);
+        reset();
+        swal("Video creado exitosamente!");
+      })
+      .catch((error) => {
+        console.log(error);
+        swal(
+          "Error en el tipo de video, debe ser de tipo: familia,jovenes,niños!"
+        );
       });
     {
       /*setVideos((prevState) => [
@@ -111,96 +121,93 @@ const VideosPage = () => {
         reset();*/
     }
   };
-    const onConfirm = () => {
-        handleDelete(eventId);
-    };
+  const onConfirm = () => {
+    handleDelete(eventId);
+  };
 
-    const onShowDeleteModal = (eventId) => {
-        setShowDeleteModal(true);
-        setEventId(eventId);
-        //confirm({onOk: () => handleDelete(eventId)})
-    };
-
+  const onShowDeleteModal = (eventId) => {
+    setShowDeleteModal(true);
+    setEventId(eventId);
+    //confirm({onOk: () => handleDelete(eventId)})
+  };
 
   const onSubmitUpdateVideosItem = (data) => {
     const { _id: id } = data;
-    updateVideos(id, data).then((newVideo) => {
-
+    updateVideos(id, data)
+      .then((newVideo) => {
         const newVideos = videos.map((video) =>
           video._id === newVideo._id ? newVideo : video
         );
         setVideos(newVideos);
         setShowModal(false);
 
-        swal('Video editado exitosamente!')
-    }).catch(
-        error=>{
-            console.log(error)
-            swal('Ya existe un registro almacenado con este título')
-        });
-
+        swal("Video editado exitosamente!");
+      })
+      .catch((error) => {
+        console.log(error);
+        swal("Ya existe un registro almacenado con este título");
+      });
   };
 
   return (
     <>
-        <div >
-            <div className={styles.events}>
-                <h1 className={styles.section}>Gestión de videos</h1>
-                <div className={styles.linea}></div>
-            </div>
+      <Container>
+        <div>
+          <div className={styles.events}>
+            <h1 className={styles.section}>Gestión de videos</h1>
+            <div className={styles.linea}></div>
+          </div>
         </div>
 
         <InputGroup style={{ padding: "15px" }}>
-            <FormControl
-                placeholder="Buscar video"
-                aria-label="search_new"
-                aria-describedby="basic-addon1"
-                value={keyword}
-                onChange={(e) => setKeyword(e.target.value)}
-            />
+          <FormControl
+            placeholder="Buscar vídeo"
+            aria-label="search_new"
+            aria-describedby="basic-addon1"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+          />
         </InputGroup>
-        <div  className={styles.button}>
-            <Button
-
-                variant="info"
-                size="m"
-                onClick={() => setShowCreateVideosItemModal(true)}
-            >
-                Crear video
-            </Button>
+        <div className={styles.button}>
+          <Button
+            variant="info"
+            size="m"
+            onClick={() => setShowCreateVideosItemModal(true)}
+          >
+            Crear vídeo
+          </Button>
         </div>
 
-
-          <ListOfVideos
-
-            videos={filteredVideos}
-            onShowModal={onShowModal}
-            onShowDeleteModal={onShowDeleteModal}
-          />
+        <ListOfVideos
+          videos={filteredVideos}
+          onShowModal={onShowModal}
+          onShowDeleteModal={onShowDeleteModal}
+        />
         <ConfirmModal
-            isOpen={showDeleteModal}
-            confirm={onConfirm}
-            setIsOpen={setShowDeleteModal}
-            item='vídeo'
+          isOpen={showDeleteModal}
+          confirm={onConfirm}
+          setIsOpen={setShowDeleteModal}
+          item=" el vídeo"
         />
         <UpdateVideosItemModal
-        show={showModal}
-        setShowModal={setShowModal}
-        register={updateVideosItemForm.register}
-        handleSubmit={updateVideosItemForm.handleSubmit}
-        onSubmit={onSubmitUpdateVideosItem}
-        errors={updateVideosItemForm.formState.errors}
-      />
+          show={showModal}
+          setShowModal={setShowModal}
+          register={updateVideosItemForm.register}
+          handleSubmit={updateVideosItemForm.handleSubmit}
+          onSubmit={onSubmitUpdateVideosItem}
+          errors={updateVideosItemForm.formState.errors}
+        />
 
-      <CreateVideosItemModal
-        showModal={showCreateVideosItemModal}
-        setShowModal={setShowCreateVideosItemModal}
-        register={register}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-        clearErrors={clearErrors}
-      />
+        <CreateVideosItemModal
+          showModal={showCreateVideosItemModal}
+          setShowModal={setShowCreateVideosItemModal}
+          register={register}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          clearErrors={clearErrors}
+        />
+      </Container>
     </>
   );
 };

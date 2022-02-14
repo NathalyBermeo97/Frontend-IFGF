@@ -8,6 +8,7 @@ import { ERROR_MESSAGES } from "../../../constants/inidex";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
+import Donations from "../../../api/donations";
 
 const schema = yup.object().shape({
   type: yup
@@ -60,20 +61,45 @@ const DonationsPage = () => {
     setValue("delivery", "entrega en iglesia");
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    console.log("data",data.file);
+    console.log(data);
+
+    const description = data.description.trim();
+    const address =
+        data.address === "no direction no direction " ? "" : data.address;
+    const date = new Date(data.date).toISOString();
+
+    const formData = new FormData();
+    formData.append("title",data.title);
+    formData.append("description",description);
+    formData.append("type",data.type);
+    formData.append("delivery",data.delivery);
+    formData.append("address",address);
+    formData.append("date",date);
+    formData.append("file",data.file[0]);
+
+    console.log({formData})
+
+    Donations.create(formData).then(response=>{
+      if (response.data){
+        setShowModal(false);
+        reset();
+      }
+    }).catch(error=>{
+      console.log("error",error)
+    })
+    {/*console.log("response",response)
     const description = data.description.trim();
     const address =
       data.address === "no direction no direction " ? "" : data.address;
     const date = new Date(data.date).toISOString();
-    console.log('subtmit')
     const parsedData = { ...data, address, description, date };
-    console.log({parsedData})
     createDonation(parsedData).then((newDonation) => {
       setDonations((prevState) => [...prevState, newDonation]);
       setShowModal(false);
-      swal("La donación se ha enviado con éxito")
       reset();
-    });
+    });*/}
   };
 
   return (

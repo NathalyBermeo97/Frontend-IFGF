@@ -1,10 +1,16 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { ListOfDonations } from "../../../components/ListOfDonations";
 import { UpdateDonationModal } from "../../../components/UpdateDonationModal";
 import { withPrivate } from "../../../hocs/withPrivate";
 import { useDonation } from "../../../hooks/useDonation";
 import styles from "../events/styles.module.css";
-import {Button, FormControl, InputGroup} from "react-bootstrap";
+import {
+  Button,
+  Container,
+  FormControl,
+  FormSelect,
+  InputGroup,
+} from "react-bootstrap";
 
 const DonationPage = () => {
   const { donations, updateDonation, setDonations } = useDonation();
@@ -13,21 +19,27 @@ const DonationPage = () => {
   const [keyword, setKeyword] = useState("");
   const [filteredDonations, setFilteredDonations] = useState([]);
 
-    useEffect(() => {
-        const filteredDonations = donations?.filter((ni) =>
-            ni.type.toLowerCase().includes(keyword.toLowerCase())
-        );
-        setFilteredDonations(filteredDonations);
-    }, [keyword, donations]);
+  useEffect(() => {
+    const filteredDonations = donations?.filter((ni) =>
+      ni.type.toLowerCase().includes(keyword.toLowerCase())
+    );
+    setFilteredDonations(filteredDonations);
+  }, [keyword, donations]);
+
+  useEffect(() => {
+    const filteredDonations = donations?.filter((ni) =>
+      ni.status.toLowerCase().includes(keyword.toLowerCase())
+    );
+    setFilteredDonations(filteredDonations);
+  }, [keyword, donations]);
 
   const onShowModal = (donation) => {
     setDonation(donation);
     setIsOpen(true);
   };
 
-
   const updateDonationStatus = (data) => {
-    console.log({data})
+    console.log({ data });
     updateDonation(data._id, data)
       .then((newDonation) => {
         if (newDonation) {
@@ -35,7 +47,7 @@ const DonationPage = () => {
             donation._id === data._id ? data : donation
           );
           setDonations(newDonations);
-          setIsOpen(false)
+          setIsOpen(false);
         }
       })
       .catch((e) => console.log("something went wrong", e));
@@ -43,33 +55,52 @@ const DonationPage = () => {
 
   return (
     <>
-        <div >
-            <div className={styles.events}>
-                <h1 className={styles.section}>Gestión de donaciones</h1>
-                <div className={styles.linea}></div>
-            </div>
+      <Container>
+        <div>
+          <div className={styles.events}>
+            <h1 className={styles.section}>Gestión de donaciones</h1>
+            <div className={styles.linea}></div>
+          </div>
         </div>
 
-        <InputGroup style={{ padding: "15px" }}>
-            <FormControl
-                placeholder="Buscar donación"
-                aria-label="search_new"
-                aria-describedby="basic-addon1"
-                value={keyword}
-                onChange={(e) => setKeyword(e.target.value)}
-            />
-        </InputGroup>
-
-      <ListOfDonations
+        <div style={{ padding: "15px" }}>
+          <h5>Selecciona el tipo de donación:</h5>
+          <FormSelect
+            aria-label="Default select example"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+          >
+            <option>Tipos de donación</option>
+            <option value="ropa">Ropa</option>
+            <option value="comida">Comida</option>
+            <option value="dinero">Dinero</option>
+          </FormSelect>
+        </div>
+        <div style={{ padding: "15px" }}>
+          <h5>Selecciona el tipo de donación:</h5>
+          <FormSelect
+            aria-label="Default select example"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+          >
+            <option>Tipos de donación</option>
+            <option value="aceptado">Aceptado</option>
+            <option value="denegado">Denegado</option>
+            <option value="undefined">Sin definir</option>
+          </FormSelect>
+        </div>
+        <br />
+        <ListOfDonations
           donations={filteredDonations}
-        onShowModal={onShowModal}
-      />
-      <UpdateDonationModal
-        isOpen={isOpen}
-        donation={donation}
-        setIsOpen={setIsOpen}
-        updateDonation={updateDonationStatus}
-      />
+          onShowModal={onShowModal}
+        />
+        <UpdateDonationModal
+          isOpen={isOpen}
+          donation={donation}
+          setIsOpen={setIsOpen}
+          updateDonation={updateDonationStatus}
+        />
+      </Container>
     </>
   );
 };

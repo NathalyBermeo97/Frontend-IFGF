@@ -7,7 +7,7 @@ export const ConfirmModal = ({isOpen, item, confirm, setIsOpen}) => {
         <Modal.Title>Eliminar {item}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>¿Esta seguro que desea eliminar el item {item}?</p>
+        <p>¿Esta seguro que desea eliminar {item}?</p>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={() => setIsOpen(false)}>

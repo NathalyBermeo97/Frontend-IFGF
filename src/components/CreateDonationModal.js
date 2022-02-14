@@ -57,7 +57,6 @@ export const CreateDonationModal = ({
                 </option>
               )}
               <option value="retiro en el hogar">
-
                 Donar desde el hogar
               </option>
             </Form.Select>
@@ -117,19 +116,12 @@ export const CreateDonationModal = ({
           ) : selectValue === "entrega vía transacción" ? (
             <Form.Group className="mb-3">
               <Form.Label>
-
                 Cuenta de transacción: 172651881029- Banco del Pichincha
-
-
               </Form.Label>
-              <br />
-              <Form.Label>Imagen de la transacción bancaria</Form.Label>
-              <Form.Control name="file" type="file" {...register("file")} />
             </Form.Group>
           ) : (
             ""
           )}
-
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Descripción</Form.Label>
             <Form.Control
@@ -143,6 +135,10 @@ export const CreateDonationModal = ({
             <Form.Control.Feedback type="invalid">
               {errors.description?.message}
             </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Imagen de la donación</Form.Label>
+            <Form.Control name="file" accept="image/png,image/jpeg" type="file" {...register("file")} />
           </Form.Group>
         </Form>
       </Modal.Body>

@@ -1,7 +1,7 @@
 import { withPrivate } from "../../../hocs/withPrivate";
 import React, { useEffect, useState } from "react";
 import { useEvents } from "../../../hooks/useEvents";
-import { Button, FormControl, InputGroup } from "react-bootstrap";
+import { Button, Container, FormControl, InputGroup } from "react-bootstrap";
 import { UpdateEventsItemModal } from "../../../components/UpdateEventsItemModal";
 import styles from "./styles.module.css";
 import { CreateEventsItemModal } from "../../../components/CreateEventsItemModal";
@@ -87,7 +87,7 @@ const EventsPage = () => {
         setEvents(newEvents);
       }
     });
-    setShowDeleteModal(false)
+    setShowDeleteModal(false);
   };
 
   const onConfirm = () => {
@@ -141,81 +141,84 @@ const EventsPage = () => {
 
   const onSubmitUpdateEventsItem = (data) => {
     const { _id: id } = data;
-    console.log({id})
-    updateEvents(id, data).then((returnedEvent) => {
-      const newEvents = events.map((event) =>
-        event._id === returnedEvent._id ? returnedEvent : event
-      );
-      setEvents(newEvents);
-      setShowModal(false);
-      swal('Evento editado correctamente')
-    }).catch(
-        error=>{
-          console.log(error)
-          swal('Ya existe un registro almacenado con este título')
-        });
+    console.log({ id });
+    updateEvents(id, data)
+      .then((returnedEvent) => {
+        const newEvents = events.map((event) =>
+          event._id === returnedEvent._id ? returnedEvent : event
+        );
+        setEvents(newEvents);
+        setShowModal(false);
+        swal("Evento editado correctamente");
+      })
+      .catch((error) => {
+        console.log(error);
+        swal("Ya existe un registro almacenado con este título");
+      });
   };
 
   return (
     <>
-      <div>
-        <div className={styles.events}>
-          <h1 className={styles.section}>Gestión de eventos</h1>
-          <div className={styles.linea}></div>
+      <Container>
+        <div>
+          <div className={styles.events}>
+            <h1 className={styles.section}>Gestión de eventos</h1>
+            <div className={styles.linea}></div>
+          </div>
         </div>
-      </div>
 
-      <InputGroup style={{ padding: "15px" }}>
-        <FormControl
-          placeholder="Buscar evento"
-          aria-label="search_new"
-          aria-describedby="basic-addon1"
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
+        <InputGroup style={{ padding: "15px" }}>
+          <FormControl
+            placeholder="Buscar evento"
+            aria-label="search_new"
+            aria-describedby="basic-addon1"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+          />
+        </InputGroup>
+        <div className={styles.button}>
+          <Button
+            variant="info"
+            size="m"
+            onClick={() => setShowCreateEventsItemModal(true)}
+          >
+            Crear evento
+          </Button>
+        </div>
+
+        <ListOfEvents
+          events={filteredEvents}
+          onShowEditModal={onShowModal}
+          onShowDeleteModal={onShowDeleteModal}
         />
-      </InputGroup>
-      <div className={styles.button}>
-        <Button
-          variant="info"
-          size="m"
-          onClick={() => setShowCreateEventsItemModal(true)}
-        >
-          Crear evento
-        </Button>
-      </div>
 
-      <ListOfEvents
-        events={filteredEvents}
-        onShowEditModal={onShowModal}
-        onShowDeleteModal={onShowDeleteModal}
-      />
+        <ConfirmModal
+          isOpen={showDeleteModal}
+          confirm={onConfirm}
+          setIsOpen={setShowDeleteModal}
+          item=" el evento"
+        />
 
-      <ConfirmModal
-        isOpen={showDeleteModal}
-        confirm={onConfirm}
-        setIsOpen={setShowDeleteModal}
-        item='evento'
-      />
+        <UpdateEventsItemModal
+          show={showModal}
+          setShowModal={setShowModal}
+          register={updateEventsItemForm.register}
+          handleSubmit={updateEventsItemForm.handleSubmit}
+          onSubmit={onSubmitUpdateEventsItem}
+          errors={updateEventsItemForm.formState.errors}
+          getValues={updateEventsItemForm.getValues}
+        />
 
-      <UpdateEventsItemModal
-        show={showModal}
-        setShowModal={setShowModal}
-        register={updateEventsItemForm.register}
-        handleSubmit={updateEventsItemForm.handleSubmit}
-        onSubmit={onSubmitUpdateEventsItem}
-        errors={updateEventsItemForm.formState.errors}
-        getValues={updateEventsItemForm.getValues}
-      />
-
-      <CreateEventsItemModal
-        showModal={showCreateEventsItemModal}
-        setShowModal={setShowCreateEventsItemModal}
-        register={register}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-        clearErrors={clearErrors}
-      />
+        <CreateEventsItemModal
+          showModal={showCreateEventsItemModal}
+          setShowModal={setShowCreateEventsItemModal}
+          register={register}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          clearErrors={clearErrors}
+        />
+      </Container>
     </>
   );
 };

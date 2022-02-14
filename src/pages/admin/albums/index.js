@@ -1,7 +1,13 @@
 import { withPrivate } from "../../../hocs/withPrivate";
 import React, { useEffect, useState } from "react";
 import { useAlbums } from "../../../hooks/useAlbums";
-import { ListGroup, Button, FormControl, InputGroup } from "react-bootstrap";
+import {
+  ListGroup,
+  Button,
+  FormControl,
+  InputGroup,
+  Container,
+} from "react-bootstrap";
 import { UpdateAlbumsItemModal } from "../../../components/UpdateAlbumsItemModal";
 import styles from "./styles.module.css";
 import { CreateAlbumsItemModal } from "../../../components/CreateAlbumsItemModal";
@@ -11,9 +17,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 import Albums from "../../../api/albums";
-import {ConfirmModal} from "../../../components/ConfirmModal";
+import { ConfirmModal } from "../../../components/ConfirmModal";
 import swal from "sweetalert";
-
 
 const albumsItemSchema = yup.object().shape({
   title: yup
@@ -27,7 +32,8 @@ const albumsItemSchema = yup.object().shape({
 });
 
 const AlbumsPage = () => {
-  const { albums, setAlbums, updateAlbums, createAlbumsItem,deleteAlbums } = useAlbums();
+  const { albums, setAlbums, updateAlbums, createAlbumsItem, deleteAlbums } =
+    useAlbums();
   const [showModal, setShowModal] = useState(false);
   const [showCreateAlbumsItemModal, setShowCreateAlbumsItemModal] =
     useState(false);
@@ -52,7 +58,7 @@ const AlbumsPage = () => {
   } = useForm({
     defaultValues: {
       title: "",
-      description: ""
+      description: "",
     },
     resolver: yupResolver(albumsItemSchema),
   });
@@ -68,15 +74,13 @@ const AlbumsPage = () => {
 
   const handleDelete = (id) => {
     deleteAlbums(id).then((data) => {
-      console.log({data})
-      if (data.message === SERVER_RESPONSE.DELETED_ALBUMS){
-
+      console.log({ data });
+      if (data.message === SERVER_RESPONSE.DELETED_ALBUMS) {
         const newAlbums = albums.filter((album) => album._id !== id);
         setAlbums(newAlbums);
       }
-
     });
-    setShowDeleteModal(false)
+    setShowDeleteModal(false);
   };
   const onConfirm = () => {
     handleDelete(eventId);
@@ -91,98 +95,99 @@ const AlbumsPage = () => {
   console.log({ errors });
 
   const onSubmit = async (data) => {
-    console.log("data",data.file);
+    console.log("data", data.file);
     console.log(data);
 
     const formData = new FormData();
-    formData.append("title",data.title);
-    formData.append("description",data.description);
-    formData.append("file",data.file[0]);
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("file", data.file[0]);
 
-    Albums.create(formData).then((response) => {
-      const newAlbumsItem = response.data;
-      const callback =(prevState)=>{
-        return [...prevState,newAlbumsItem]
-      }
-      setAlbums(callback);
-      setShowCreateAlbumsItemModal(false);
-      reset();
-      swal('Foto creada exitosamente!')
-    }).catch(error=>{
-      console.log(error)
-      swal('Ya existe un registro almacenado con este título')
-    });
+    Albums.create(formData)
+      .then((response) => {
+        const newAlbumsItem = response.data;
+        const callback = (prevState) => {
+          return [...prevState, newAlbumsItem];
+        };
+        setAlbums(callback);
+        setShowCreateAlbumsItemModal(false);
+        reset();
+        swal("Foto creada exitosamente!");
+      })
+      .catch((error) => {
+        console.log(error);
+        swal("Ya existe un registro almacenado con este título");
+      });
   };
 
   const onSubmitUpdateAlbumsItem = (data) => {
     const { _id: id } = data;
-    updateAlbums(id, data).then((newAlbum) => {
-
-      const newAlbums = albums.map((album) =>
+    updateAlbums(id, data)
+      .then((newAlbum) => {
+        const newAlbums = albums.map((album) =>
           album._id === newAlbum._id ? newAlbum : album
-      );
-      setAlbums(newAlbums);
-      setShowModal(false);
-      swal('Foto editada correctamente')
-
-    }).catch(
-        error=>{
-          console.log(error)
-          swal('Ya existe un registro almacenado con este título')
-        });
+        );
+        setAlbums(newAlbums);
+        setShowModal(false);
+        swal("Foto editada correctamente");
+      })
+      .catch((error) => {
+        console.log(error);
+        swal("Ya existe un registro almacenado con este título");
+      });
   };
 
   return (
     <>
-      <div >
-        <div className={styles.events}>
-          <h1 className={styles.section}>Gestión de álbum de fotos</h1>
-          <div className={styles.linea}></div>
+      <Container>
+        <div>
+          <div className={styles.events}>
+            <h1 className={styles.section}>Gestión de álbum de fotos</h1>
+            <div className={styles.linea}></div>
+          </div>
         </div>
-      </div>
 
-      <InputGroup style={{ padding: "15px" }}>
-        <FormControl
+        <InputGroup style={{ padding: "15px" }}>
+          <FormControl
             placeholder="Buscar foto"
             aria-label="search_new"
             aria-describedby="basic-addon1"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
-        />
-      </InputGroup>
-      <div  className={styles.button}>
-        <Button
-
+          />
+        </InputGroup>
+        <div className={styles.button}>
+          <Button
             variant="info"
             size="m"
             onClick={() => setShowCreateAlbumsItemModal(true)}
-        >
-          Crear foto
-        </Button>
-      </div>
+          >
+            Crear foto
+          </Button>
+        </div>
 
-      <ListOfAlbums
-        albums={filteredAlbums}
-        onShowModal={onShowModal}
-        onShowDeleteModal={onShowDeleteModal}
-      />
-      <ConfirmModal
+        <ListOfAlbums
+          albums={filteredAlbums}
+          onShowModal={onShowModal}
+          onShowDeleteModal={onShowDeleteModal}
+        />
+        <ConfirmModal
           isOpen={showDeleteModal}
           confirm={onConfirm}
           setIsOpen={setShowDeleteModal}
-          item='foto'
-      />
+          item=" la foto"
+        />
 
-      <UpdateAlbumsItemModal
-        show={showModal}
-        setShowModal={setShowModal}
-        register={updateAlbumsItemForm.register}
-        handleSubmit={updateAlbumsItemForm.handleSubmit}
-        onSubmit={onSubmitUpdateAlbumsItem}
-        errors={updateAlbumsItemForm.formState.errors}
-      />
+        <UpdateAlbumsItemModal
+          show={showModal}
+          setShowModal={setShowModal}
+          register={updateAlbumsItemForm.register}
+          handleSubmit={updateAlbumsItemForm.handleSubmit}
+          onSubmit={onSubmitUpdateAlbumsItem}
+          errors={updateAlbumsItemForm.formState.errors}
+        />
 
-      <CreateAlbumsItemModal
+        <CreateAlbumsItemModal
           showModal={showCreateAlbumsItemModal}
           setShowModal={setShowCreateAlbumsItemModal}
           register={register}
@@ -190,7 +195,8 @@ const AlbumsPage = () => {
           onSubmit={onSubmit}
           errors={errors}
           clearErrors={clearErrors}
-      />
+        />
+      </Container>
     </>
   );
 };
