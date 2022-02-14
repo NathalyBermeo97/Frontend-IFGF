@@ -26,11 +26,16 @@ const HomeVideos = ({}) => {
 
   return (
     <>
+      <Container>
       <div className={styles.news}>
         <h1 className={styles.section}>Videos</h1>
         <div className={styles.linea}></div>
       </div>
-      <Container>
+        <div className={styles.info}>
+          <p>
+            En esta sección puede visualizar videos referentes a la Iglesia IFGF
+          </p>
+        </div>
         <InputGroup className="mb-3" style={{ padding: "15px" }}>
           <FormControl
             placeholder="Buscar vídeo"

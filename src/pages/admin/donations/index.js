@@ -5,11 +5,11 @@ import { withPrivate } from "../../../hocs/withPrivate";
 import { useDonation } from "../../../hooks/useDonation";
 import styles from "../events/styles.module.css";
 import {
-  Button,
+  Button, Col,
   Container,
   FormControl,
   FormSelect,
-  InputGroup,
+  InputGroup, Row,
 } from "react-bootstrap";
 import {useFilter} from "../../../hooks/useFilter";
 
@@ -65,33 +65,48 @@ const DonationPage = () => {
             <div className={styles.linea}></div>
           </div>
         </div>
+        <div className={styles.info}>
+          <p >
+            En esta sección se visualiza las donaciones realizadas por el usuario miembro de la Iglesia de la Iglesia IFGF
+          </p>
+        </div>
 
-        <div style={{ padding: "15px" }}>
-          <h5>Selecciona el tipo de donación:</h5>
-          <FormSelect
-            aria-label="Default select example"
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
-          >
-            <option>Tipos de donación</option>
-            <option value="ropa">Ropa</option>
-            <option value="comida">Comida</option>
-            <option value="dinero">Dinero</option>
-          </FormSelect>
-        </div>
-        <div style={{ padding: "15px" }}>
-          <h5>Selecciona el estado de la donación:</h5>
-          <FormSelect
-            aria-label="Default select example"
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
-          >
-            <option>Estado de la donación</option>
-            <option value="aceptado">Aceptado</option>
-            <option value="denegado">Denegado</option>
-            <option value="undefined">Sin definir</option>
-          </FormSelect>
-        </div>
+        <Row>
+          <Col>
+            <div style={{ padding: "15px" }}>
+
+              <FormSelect
+                  aria-label="Default select example"
+                  value={keyword}
+                  onChange={(e) => setKeyword(e.target.value)}
+              >
+                <option>Tipos de donación</option>
+                <option value="ropa">Ropa</option>
+                <option value="comida">Comida</option>
+                <option value="dinero">Dinero</option>
+              </FormSelect>
+            </div>
+          </Col>
+          <Col>
+            <div style={{ padding: "15px" }}>
+
+              <FormSelect
+                  aria-label="Default select example"
+                  value={keyword}
+                  onChange={(e) => setKeyword(e.target.value)}
+              >
+                <option>Estados de la donación</option>
+                <option value="aceptado">Aceptado</option>
+                <option value="denegado">Denegado</option>
+                <option value="undefined">Sin definir</option>
+              </FormSelect>
+            </div>
+
+          </Col>
+        </Row>
+
+
+
         <br />
         <ListOfDonations
           donations={filteredDonationss}

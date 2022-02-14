@@ -50,6 +50,13 @@ const MyEventsPage = () => {
       <div>
         <h1 className={styles.section}>Mis eventos</h1>
         <div className={styles.linea}></div>
+        <br />
+      </div>
+      <div className={styles.info}>
+        <p>
+          En esta sección puede visualizar los eventos a los que se ha incrito
+          en la Iglesia IFGF
+        </p>
       </div>
       <InputGroup style={{ padding: "15px" }}>
         <FormControl

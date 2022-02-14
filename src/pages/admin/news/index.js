@@ -145,6 +145,11 @@ const NewsPage = () => {
             <div className={styles.linea}></div>
           </div>
         </div>
+        <div className={styles.info}>
+          <p >
+            En esta sección se visualiza ,crea,edita y elimina información referente a las noticias de la Iglesia IFGF
+          </p>
+        </div>
 
         <InputGroup style={{ padding: "15px" }}>
           <FormControl

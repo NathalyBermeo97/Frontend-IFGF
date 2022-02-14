@@ -3,8 +3,7 @@ import { ListOfDonations } from "../../components/ListOfDonations";
 import { withPrivate } from "../../hocs/withPrivate";
 import { useDonation } from "../../hooks/useDonation";
 import styles from "../../styles/indexHome.module.css";
-import {FormControl, InputGroup} from "react-bootstrap";
-
+import { Container, FormControl, InputGroup } from "react-bootstrap";
 
 const MyDonationsPage = () => {
   const { userDonations } = useDonation();
@@ -33,23 +32,31 @@ const MyDonationsPage = () => {
 
   return (
     <>
-      <div>
-        <h1 className={styles.section}>Mis donaciones</h1>
-        <div className={styles.linea}></div>
-      </div>
-      <InputGroup style={{ padding: "15px" }}>
-        <FormControl
-          placeholder="Buscar donación"
-          aria-label="search_new"
-          aria-describedby="basic-addon1"
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-        />
-      </InputGroup>
-      <br />
+      <Container>
+        <div>
+          <h1 className={styles.section}>Mis donaciones</h1>
+          <div className={styles.linea}></div>
+        </div>
+        <br />
+        <div className={styles.info}>
+          <p>
+            En esta sección puede visualizar las donaciones que ha realizado a
+            la Iglesia IFGF
+          </p>
+        </div>
+        <InputGroup style={{ padding: "15px" }}>
+          <FormControl
+            placeholder="Buscar donación"
+            aria-label="search_new"
+            aria-describedby="basic-addon1"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+          />
+        </InputGroup>
+        <br />
 
-      <ListOfDonations donations={filteredDonations} />
-
+        <ListOfDonations donations={filteredDonations} />
+      </Container>
     </>
   );
 };

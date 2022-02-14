@@ -1,7 +1,7 @@
 import { ListOfQuestionnaires } from "../../components/ListOfQuestionnaires";
 import { useQuestionnaire } from "../../hooks/useQuestionnaire";
 import styles from "../donations/styles.module.css";
-import { FormControl, InputGroup } from "react-bootstrap";
+import {Container, FormControl, InputGroup} from "react-bootstrap";
 import React from "react";
 import { withPrivate } from "../../hocs/withPrivate";
 import { useFilter } from "../../hooks/useFilter";
@@ -14,20 +14,27 @@ const Questionnaires = () => {
   );
   return (
     <>
-      <div className={styles.events}>
-        <h1 className={styles.section}>Cuestionarios</h1>
-        <div className={styles.linea}></div>
-      </div>
-      <InputGroup style={{ padding: "15px" }}>
-        <FormControl
-          placeholder="Buscar cuestionario"
-          aria-label="search_new"
-          aria-describedby="basic-addon1"
-          {...registerInput("SearchQuestionnaires")}
-        />
-      </InputGroup>
+      <Container>
+        <div className={styles.events}>
+          <h1 className={styles.section}>Cuestionarios</h1>
+          <div className={styles.linea}></div>
+        </div>
+        <div className={styles.info}>
+          <p>
+            En esta sección puede visualizar y realizar cuestionarios referentes a la Iglesia IFGF
+          </p>
+        </div>
+        <InputGroup style={{ padding: "15px" }}>
+          <FormControl
+            placeholder="Buscar cuestionario"
+            aria-label="search_new"
+            aria-describedby="basic-addon1"
+            {...registerInput("SearchQuestionnaires")}
+          />
+        </InputGroup>
 
-      <ListOfQuestionnaires questionnaires={filteredQuestionnaires} />
+        <ListOfQuestionnaires questionnaires={filteredQuestionnaires} />
+      </Container>
     </>
   );
 };

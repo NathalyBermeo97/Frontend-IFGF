@@ -1,6 +1,6 @@
 import styles from "./styles.module.css";
 import { EventModal } from "../../components/EventModal";
-import { useState } from "react";
+import React, { useState } from "react";
 import {Container, FormControl, InputGroup} from "react-bootstrap";
 import Events from "../../api/events";
 import { ListOfEvents } from "../../components/ListOfEvents";
@@ -22,6 +22,11 @@ const Eventos = ({ events }) => {
         <h1 className={styles.section}>Eventos</h1>
         <div className={styles.linea}></div>
       </div>
+        <div className={styles.info}>
+            <p >
+                En esta sección puede visualizar información referente a los eventos de la Iglesia IFGF
+            </p>
+        </div>
       <InputGroup style={{ padding: "15px" }}>
         <FormControl
             placeholder="Buscar evento"
