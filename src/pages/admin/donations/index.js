@@ -11,13 +11,15 @@ import {
   FormSelect,
   InputGroup,
 } from "react-bootstrap";
+import {useFilter} from "../../../hooks/useFilter";
 
 const DonationPage = () => {
-  const { donations, updateDonation, setDonations } = useDonation();
+  const { donations,updateDonation, setDonations } = useDonation();
   const [isOpen, setIsOpen] = useState(false);
   const [donation, setDonation] = useState({});
   const [keyword, setKeyword] = useState("");
   const [filteredDonations, setFilteredDonations] = useState([]);
+  const [filteredDonationss, setFilteredDonationss] = useState([]);
 
   useEffect(() => {
     const filteredDonations = donations?.filter((ni) =>
@@ -27,11 +29,12 @@ const DonationPage = () => {
   }, [keyword, donations]);
 
   useEffect(() => {
-    const filteredDonations = donations?.filter((ni) =>
-      ni.status.toLowerCase().includes(keyword.toLowerCase())
+    const filteredDonationss = donations?.filter((ni) =>
+        ni.status.toLowerCase().includes(keyword.toLowerCase())
     );
-    setFilteredDonations(filteredDonations);
+    setFilteredDonationss(filteredDonationss);
   }, [keyword, donations]);
+
 
   const onShowModal = (donation) => {
     setDonation(donation);
@@ -77,7 +80,7 @@ const DonationPage = () => {
           </FormSelect>
         </div>
         <div style={{ padding: "15px" }}>
-          <h5>Selecciona el tipo de donación:</h5>
+          <h5>Selecciona el estado de la donación:</h5>
           <FormSelect
             aria-label="Default select example"
             value={keyword}
@@ -91,8 +94,13 @@ const DonationPage = () => {
         </div>
         <br />
         <ListOfDonations
-          donations={filteredDonations}
+          donations={filteredDonationss}
           onShowModal={onShowModal}
+        />
+        <br/>
+        <ListOfDonations
+            donations={filteredDonations}
+            onShowModal={onShowModal}
         />
         <UpdateDonationModal
           isOpen={isOpen}

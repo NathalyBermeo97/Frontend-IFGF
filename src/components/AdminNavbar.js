@@ -89,11 +89,17 @@ export const AdminNavbar = () => {
               </Nav.Link>
             </Nav.Item>
             {isLoggedIn ? (
-              <NavDropdown title={currentUser.name} id="nav-dropdown">
-                <NavDropdown.Item onClick={() => logout()}>
-                  Cerrar Sesión
-                </NavDropdown.Item>
-              </NavDropdown>
+                <NavDropdown title={currentUser.name} id="nav-dropdown">
+                  <NavDropdown.Item onClick={() => logout()}>
+                    <Nav.Link
+                        eventKey={ROUTES.HOME}
+                        onClick={() => router.push(ROUTES.HOME)}
+                        disabled={router.pathname === ROUTES.HOME}
+                    >
+                      Cerrar sesión
+                    </Nav.Link>
+                  </NavDropdown.Item>
+                </NavDropdown>
             ) : currentUser === USER_STATES.NOT_KNOWN ? (
               <Spinner animation="border" />
             ) : (
