@@ -5,8 +5,8 @@ import { useAuth } from "../context/AuthContext";
 
 export const useGames = () => {
   const [games, setGames] = useState([]);
-  const {currentUser} = useAuth()
-  console.log({games})
+  const { currentUser, users } = useAuth();
+  console.log({ games });
   useEffect(() => {
     const getGames = () => {
       Games.get()
@@ -58,15 +58,28 @@ export const useGames = () => {
   };
 
   const hasAlreadyAttemptedGame = (questionnaireId) => {
-    // try {
-    //   const response = await Games.get();
-      return games.filter(
-        (game) =>
-          game.user_id === currentUser._id
-      ).some(game => game.questionary_id === questionnaireId)
-    // } catch (e) {
-    //   console.log("something went wrong", e);
-    // }
+    return games
+      .filter((game) => game.user_id === currentUser._id)
+      .some((game) => game.questionary_id === questionnaireId);
+  };
+
+  const getQuestionnairesGames = (questionnaireId) => {
+    const newGames = games.map(game => ({...game}))
+    const gamesWithUsers = newGames.map(game => {
+      const user = users.find(user => user._id === game.user_id)
+      if(user){
+        delete game.user_id
+        return {...game, user}
+      }
+      return game
+    })
+    let qg = {};
+    gamesWithUsers.forEach((game) => {
+      qg = qg[game.questionary_id]
+        ? { ...qg, [game.questionary_id]: [...qg[game.questionary_id], game] }
+        : { ...qg, [game.questionary_id]: [game] };
+    });
+    return qg[questionnaireId]
   };
 
   return {
@@ -76,6 +89,7 @@ export const useGames = () => {
     updateGames,
     createGamesItem,
     getUserQuestionnaireScore,
-    hasAlreadyAttemptedGame
+    hasAlreadyAttemptedGame,
+    getQuestionnairesGames
   };
 };

@@ -5,16 +5,18 @@ import { withPrivate } from "../../../hocs/withPrivate";
 import { useDonation } from "../../../hooks/useDonation";
 import styles from "../events/styles.module.css";
 import {
-  Button, Col,
+  Button,
+  Col,
   Container,
   FormControl,
   FormSelect,
-  InputGroup, Row,
+  InputGroup,
+  Row,
 } from "react-bootstrap";
-import {useFilter} from "../../../hooks/useFilter";
+import { useFilter } from "../../../hooks/useFilter";
 
 const DonationPage = () => {
-  const { donations,updateDonation, setDonations } = useDonation();
+  const { donations, updateDonation, setDonations } = useDonation();
   const [isOpen, setIsOpen] = useState(false);
   const [donation, setDonation] = useState({});
   const [keyword, setKeyword] = useState("");
@@ -30,11 +32,12 @@ const DonationPage = () => {
 
   useEffect(() => {
     const filteredDonationss = donations?.filter((ni) =>
-        ni.status.toLowerCase().includes(keyword.toLowerCase())
+      ni.status.toLowerCase().includes(keyword.toLowerCase())
     );
     setFilteredDonationss(filteredDonationss);
   }, [keyword, donations]);
 
+  console.log({keyword, filteredDonations, filteredDonationss})
 
   const onShowModal = (donation) => {
     setDonation(donation);
@@ -66,19 +69,19 @@ const DonationPage = () => {
           </div>
         </div>
         <div className={styles.info}>
-          <p >
-            En esta sección se visualiza las donaciones realizadas por el usuario miembro de la Iglesia de la Iglesia IFGF
+          <p>
+            En esta sección se visualiza las donaciones realizadas por el
+            usuario miembro de la Iglesia IFGF
           </p>
         </div>
 
         <Row>
           <Col>
             <div style={{ padding: "15px" }}>
-
               <FormSelect
-                  aria-label="Default select example"
-                  value={keyword}
-                  onChange={(e) => setKeyword(e.target.value)}
+                aria-label="Default select example"
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
               >
                 <option>Tipos de donación</option>
                 <option value="ropa">Ropa</option>
@@ -89,11 +92,10 @@ const DonationPage = () => {
           </Col>
           <Col>
             <div style={{ padding: "15px" }}>
-
               <FormSelect
-                  aria-label="Default select example"
-                  value={keyword}
-                  onChange={(e) => setKeyword(e.target.value)}
+                aria-label="Default select example"
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
               >
                 <option>Estados de la donación</option>
                 <option value="aceptado">Aceptado</option>
@@ -101,21 +103,18 @@ const DonationPage = () => {
                 <option value="undefined">Sin definir</option>
               </FormSelect>
             </div>
-
           </Col>
         </Row>
-
-
 
         <br />
         <ListOfDonations
           donations={filteredDonationss}
           onShowModal={onShowModal}
         />
-        <br/>
+        <br />
         <ListOfDonations
-            donations={filteredDonations}
-            onShowModal={onShowModal}
+          donations={filteredDonations}
+          onShowModal={onShowModal}
         />
         <UpdateDonationModal
           isOpen={isOpen}

@@ -3,15 +3,19 @@ import styles from "./style.module.css";
 import { useRouter } from "next/router";
 import { ROUTES } from "../../constants/routes";
 import { useGames } from "../../hooks/useGames";
+import { QuestionnairesGamesModal } from "../QuestionnairesGamesModal";
+import { useState } from "react";
 
 export const QuestionnaireItem = ({ questionnaire, onShowDeleteModal }) => {
   const token = window.localStorage.getItem("jwt");
   const router = useRouter();
   const questionsNumber = questionnaire.questions.length;
-  const { hasAlreadyAttemptedGame } = useGames();
+  const { hasAlreadyAttemptedGame, getQuestionnairesGames } = useGames();
   const existsAttempt = hasAlreadyAttemptedGame(questionnaire._id);
-  const isTryingAgain = existsAttempt ? true : false
-
+  const isTryingAgain = existsAttempt ? true : false;
+  const questionnairesGames = getQuestionnairesGames(questionnaire._id);
+  const [isOpen, setIsOpen] = useState(false)
+  console.log({ questionnairesGames });
   return (
     <Col
       style={{
@@ -54,14 +58,23 @@ export const QuestionnaireItem = ({ questionnaire, onShowDeleteModal }) => {
                 >
                   Eliminar
                 </Button>
+                <Button
+                  size="sm"
+                  variant="success"
+                  onClick={() => setIsOpen(true)}
+                >
+                  Ver usuarios
+                </Button>
               </>
             ) : (
               <Button
                 size="sm"
                 onClick={() =>
-                  router.push(ROUTES.GAME(questionnaire._id, token, isTryingAgain))
+                  router.push(
+                    ROUTES.GAME(questionnaire._id, token, isTryingAgain)
+                  )
                 }
-                variant={existsAttempt ? 'success' : 'primary'}
+                variant={existsAttempt ? "success" : "primary"}
               >
                 {existsAttempt ? "Intentar de nuevo" : "Intentar"}
               </Button>
@@ -69,6 +82,11 @@ export const QuestionnaireItem = ({ questionnaire, onShowDeleteModal }) => {
           </div>
         </Card.Body>
       </Card>
+      <QuestionnairesGamesModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        questionnairesGames={questionnairesGames}
+      />
     </Col>
   );
 };

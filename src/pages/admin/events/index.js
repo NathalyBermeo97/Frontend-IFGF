@@ -170,8 +170,9 @@ const EventsPage = () => {
           </div>
         </div>
         <div className={styles.info}>
-          <p >
-            En esta sección se visualiza,crea,edita y elimina información referente a los eventos de la Iglesia IFGF
+          <p>
+            En esta sección se visualiza, crea, edita y elimina información
+            referente a los eventos de la Iglesia IFGF
           </p>
         </div>
 
