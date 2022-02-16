@@ -19,25 +19,18 @@ const DonationPage = () => {
   const { donations, updateDonation, setDonations } = useDonation();
   const [isOpen, setIsOpen] = useState(false);
   const [donation, setDonation] = useState({});
-  const [keyword, setKeyword] = useState("");
+  const [donationType, setDonationType] = useState("");
+  const [donationStatus, setDonationStatus] = useState("");
   const [filteredDonations, setFilteredDonations] = useState([]);
-  const [filteredDonationss, setFilteredDonationss] = useState([]);
 
   useEffect(() => {
-    const filteredDonations = donations?.filter((ni) =>
-      ni.type.toLowerCase().includes(keyword.toLowerCase())
+    const filteredDonations = donations?.filter(
+      (donation) =>
+        donation.type.toLowerCase().includes(donationType.toLowerCase()) &&
+        donation.status.toLowerCase().includes(donationStatus.toLowerCase())
     );
     setFilteredDonations(filteredDonations);
-  }, [keyword, donations]);
-
-  useEffect(() => {
-    const filteredDonationss = donations?.filter((ni) =>
-      ni.status.toLowerCase().includes(keyword.toLowerCase())
-    );
-    setFilteredDonationss(filteredDonationss);
-  }, [keyword, donations]);
-
-  console.log({keyword, filteredDonations, filteredDonationss})
+  }, [donationType, donationStatus, donations]);
 
   const onShowModal = (donation) => {
     setDonation(donation);
@@ -80,10 +73,10 @@ const DonationPage = () => {
             <div style={{ padding: "15px" }}>
               <FormSelect
                 aria-label="Default select example"
-                value={keyword}
-                onChange={(e) => setKeyword(e.target.value)}
+                value={donationType}
+                onChange={(e) => setDonationType(e.target.value)}
               >
-                <option>Tipos de donación</option>
+                <option value=''>Tipos de donación</option>
                 <option value="ropa">Ropa</option>
                 <option value="comida">Comida</option>
                 <option value="dinero">Dinero</option>
@@ -94,10 +87,10 @@ const DonationPage = () => {
             <div style={{ padding: "15px" }}>
               <FormSelect
                 aria-label="Default select example"
-                value={keyword}
-                onChange={(e) => setKeyword(e.target.value)}
+                value={donationStatus}
+                onChange={(e) => setDonationStatus(e.target.value)}
               >
-                <option>Estados de la donación</option>
+                <option value=''>Estados de la donación</option>
                 <option value="aceptado">Aceptado</option>
                 <option value="denegado">Denegado</option>
                 <option value="undefined">Sin definir</option>
@@ -106,12 +99,6 @@ const DonationPage = () => {
           </Col>
         </Row>
 
-        <br />
-        <ListOfDonations
-          donations={filteredDonationss}
-          onShowModal={onShowModal}
-        />
-        <br />
         <ListOfDonations
           donations={filteredDonations}
           onShowModal={onShowModal}

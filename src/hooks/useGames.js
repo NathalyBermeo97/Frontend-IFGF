@@ -59,8 +59,8 @@ export const useGames = () => {
 
   const hasAlreadyAttemptedGame = (questionnaireId) => {
     return games
-      .filter((game) => game.user_id === currentUser._id)
-      .some((game) => game.questionary_id === questionnaireId);
+      .filter((game) => game.user_id === currentUser._id)//obtener los juegos del usuario logeado
+      .some((game) => game.questionary_id === questionnaireId);//preguntar si el cuestionario recibido como argumento existe en los cuestionarios resueltos por el usuario logeado
   };
 
   const getQuestionnairesGames = (questionnaireId) => {
@@ -79,6 +79,11 @@ export const useGames = () => {
         ? { ...qg, [game.questionary_id]: [...qg[game.questionary_id], game] }
         : { ...qg, [game.questionary_id]: [game] };
     });
+    // gamesWithUsers.forEach((game) => {
+    //   qg[game.questionary_id]
+    //     ? qg[game.questionary_id].push(game)
+    //     : qg[game.questionary_id] = [game];
+    // });
     return qg[questionnaireId]
   };
 
