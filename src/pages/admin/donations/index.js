@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ListOfDonations } from "../../../components/ListOfDonations";
 import { UpdateDonationModal } from "../../../components/UpdateDonationModal";
 import { withPrivate } from "../../../hocs/withPrivate";
 import { useDonation } from "../../../hooks/useDonation";
 import styles from "../events/styles.module.css";
 import {
-  Button,
   Col,
   Container,
-  FormControl,
   FormSelect,
-  InputGroup,
   Row,
 } from "react-bootstrap";
 import { useFilter } from "../../../hooks/useFilter";
@@ -19,18 +16,8 @@ const DonationPage = () => {
   const { donations, updateDonation, setDonations } = useDonation();
   const [isOpen, setIsOpen] = useState(false);
   const [donation, setDonation] = useState({});
-  const [donationType, setDonationType] = useState("");
-  const [donationStatus, setDonationStatus] = useState("");
-  const [filteredDonations, setFilteredDonations] = useState([]);
 
-  useEffect(() => {
-    const filteredDonations = donations?.filter(
-      (donation) =>
-        donation.type.toLowerCase().includes(donationType.toLowerCase()) &&
-        donation.status.toLowerCase().includes(donationStatus.toLowerCase())
-    );
-    setFilteredDonations(filteredDonations);
-  }, [donationType, donationStatus, donations]);
+  const { newItems: filteredDonations, registerInput, selects } = useFilter(donations);
 
   const onShowModal = (donation) => {
     setDonation(donation);
@@ -73,13 +60,14 @@ const DonationPage = () => {
             <div style={{ padding: "15px" }}>
               <FormSelect
                 aria-label="Default select example"
-                value={donationType}
-                onChange={(e) => setDonationType(e.target.value)}
+                {...registerInput('type')}
               >
-                <option value=''>Tipos de donación</option>
                 <option value="ropa">Ropa</option>
                 <option value="comida">Comida</option>
                 <option value="dinero">Dinero</option>
+                <option value="">
+                  {selects.type ? "Todos" : "Tipos de donación"}
+                </option>
               </FormSelect>
             </div>
           </Col>
@@ -87,13 +75,14 @@ const DonationPage = () => {
             <div style={{ padding: "15px" }}>
               <FormSelect
                 aria-label="Default select example"
-                value={donationStatus}
-                onChange={(e) => setDonationStatus(e.target.value)}
+                {...registerInput('status')}
               >
-                <option value=''>Estados de la donación</option>
                 <option value="aceptado">Aceptado</option>
                 <option value="denegado">Denegado</option>
                 <option value="undefined">Sin definir</option>
+                <option value="">
+                  {selects.status ? "Todos" : "Estados de la donación"}
+                </option>
               </FormSelect>
             </div>
           </Col>

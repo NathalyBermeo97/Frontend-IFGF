@@ -16,10 +16,8 @@ const Questionnaires = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [eventId, setEventId] = useState(null);
   const router = useRouter();
-  const { newItems: filteredQuestionnaires, registerInput } = useFilter(
-    questionnaires,
-    "name"
-  );
+  const { newItems: filteredQuestionnaires, registerInput } =
+    useFilter(questionnaires);
 
   const handleDelete = (id) => {
     deleteQuestionnaire(id).then((data) => {
@@ -52,8 +50,9 @@ const Questionnaires = () => {
           </div>
         </div>
         <div className={styles.info}>
-          <p >
-            En esta sección se visualiza,crea,edita y elimina información referente a los cuestionarios de la Iglesia IFGF
+          <p>
+            En esta sección se visualiza,crea,edita y elimina información
+            referente a los cuestionarios de la Iglesia IFGF
           </p>
         </div>
         <InputGroup style={{ padding: "15px" }}>
@@ -61,7 +60,7 @@ const Questionnaires = () => {
             placeholder="Buscar cuestionario"
             aria-label="search_new"
             aria-describedby="basic-addon1"
-            {...registerInput("SearchQuestionnaires")}
+            {...registerInput("name")}
           />
         </InputGroup>
 
