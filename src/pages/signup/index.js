@@ -16,11 +16,13 @@ const registerSchema = yup.object().shape({
   name: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("nombre"))
-    .matches("^[a-zA-Z ]+$", ERROR_MESSAGES.MATCHLETTER),
+    .matches("^[a-zA-Z]+$", ERROR_MESSAGES.MATCHLETTER)
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
   lastname: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("apellido"))
-    .matches("^[a-zA-Z ]+$", ERROR_MESSAGES.MATCHLETTER),
+    .matches("^[a-zA-Z ]+$", ERROR_MESSAGES.MATCHLETTER)
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
   cellphone: yup.string().required(ERROR_MESSAGES.NUMBER("celular/teléfono")),
   email: yup
     .string()
@@ -108,9 +110,7 @@ const SignupPage = () => {
             }}
           >
             <Card.Body>
-              <Form
-                onSubmit={handleSubmit(onSubmit)}
-              >
+              <Form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                   <h3 className={styles.title}>Registro de sesión</h3>
                 </div>
@@ -184,12 +184,14 @@ const SignupPage = () => {
 
                 <div className={styles.loginButtons}>
                   <Button variant="outline-primary" size="medium" type="submit">
-                     Registrarse
+                    Registrarse
                   </Button>
                 </div>
 
                 <Link href="/login">
-                  <p className={styles.createAccount}>¿Ya tiene una cuenta? Iniciar sesión</p>
+                  <p className={styles.createAccount}>
+                    ¿Ya tiene una cuenta? Iniciar sesión
+                  </p>
                 </Link>
               </Form>
             </Card.Body>
