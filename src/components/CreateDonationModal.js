@@ -102,7 +102,7 @@ export const CreateDonationModal = ({
 
               <Form.Label>Fecha de entrega</Form.Label>
               <Form.Control
-                  min="2022-01-25"
+                  min="2022-02-17"
                   type="date"
                   placeholder="Ingrese la fecha de entrega"
                   {...register("date")}
@@ -129,6 +129,15 @@ export const CreateDonationModal = ({
               <br/>
               <Form.Label>
                 Número de cuenta: 3022575104
+              </Form.Label>
+              <Form.Label>
+                Número de cuenta: 3022575104
+              </Form.Label>
+              <Form.Label>
+                Correo: ifgf@gmail.com
+              </Form.Label>
+              <Form.Label>
+                Teléfono: 0986754364
               </Form.Label>
             </Form.Group>
           ) : (

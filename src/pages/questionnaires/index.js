@@ -1,6 +1,6 @@
 import { ListOfQuestionnaires } from "../../components/ListOfQuestionnaires";
 import { useQuestionnaire } from "../../hooks/useQuestionnaire";
-import styles from "../donations/styles.module.css";
+import styles from "../questionnaires/styles.module.css";
 import {Container, FormControl, InputGroup} from "react-bootstrap";
 import React from "react";
 import { withPrivate } from "../../hocs/withPrivate";

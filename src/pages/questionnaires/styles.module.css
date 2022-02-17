@@ -30,8 +30,8 @@
     text-align: center;
 }
 .info{
-    align-content: center;
-    text-align: center;
+    text-align: left;
+    margin-left: 15px;
 }
 .button{
     align-content: center;

@@ -28,17 +28,6 @@ const Albums = ({ albums }) => {
                   alt="Card image"
                   style={{display:"flex"}}
               />
-              <Card.ImgOverlay>
-
-            <Card.Body>
-
-              <Card.Text >
-                {item.description}
-
-              </Card.Text>
-
-            </Card.Body>
-              </Card.ImgOverlay>
           </Card>
         ))}
       </Row>

@@ -112,6 +112,7 @@
     text-align: center;
 }
 .info{
-    text-align: center;
+    text-align: left;
+    margin-left: 15px;
 
 }

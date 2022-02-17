@@ -10,6 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import swal from "sweetalert";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { ROUTES } from "../../constants/routes";
 
 const registerSchema = yup.object().shape({
   name: yup
@@ -19,7 +20,7 @@ const registerSchema = yup.object().shape({
   lastname: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("apellido"))
-      .matches("^[a-zA-Z ]+$", ERROR_MESSAGES.MATCHLETTER),
+    .matches("^[a-zA-Z ]+$", ERROR_MESSAGES.MATCHLETTER),
   cellphone: yup.string().required(ERROR_MESSAGES.NUMBER("celular/teléfono")),
   email: yup
     .string()
@@ -29,9 +30,8 @@ const registerSchema = yup.object().shape({
   password: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("contraseña"))
-      .min(8,ERROR_MESSAGES.MIN_STRING("contraseña",8))
+    .min(8, ERROR_MESSAGES.MIN_STRING("contraseña", 8))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
-
 });
 const SignupPage = () => {
   const { register: doRegister } = useAuth();
@@ -54,9 +54,10 @@ const SignupPage = () => {
     try {
       await doRegister({ name, lastname, cellphone, email, password, roles });
       swal("Usuario registrado");
+      reset();
     } catch (error) {
       console.log(error.code);
-      alert("no se puede registrar");
+      swal("no se puede registrar");
     }
   };
   const {
@@ -76,7 +77,6 @@ const SignupPage = () => {
     resolver: yupResolver(registerSchema),
   });
   console.log({ errors });
-
 
   return (
     <Container>
@@ -108,7 +108,9 @@ const SignupPage = () => {
             }}
           >
             <Card.Body>
-              <Form onSubmit={handleSubmit(onSubmit)}>
+              <Form
+                onSubmit={handleSubmit(onSubmit)}
+              >
                 <div>
                   <h3 className={styles.title}>Registro de sesión</h3>
                 </div>
@@ -180,16 +182,14 @@ const SignupPage = () => {
                   </Row>
                 </Form.Group>
 
-                  <div className={styles.loginButtons}>
-                    <Button variant="outline-primary" size="medium" type="submit" >
-
-                      Registrarse
-
-                    </Button>
-                  </div>
+                <div className={styles.loginButtons}>
+                  <Button variant="outline-primary" size="medium" type="submit">
+                     Registrarse
+                  </Button>
+                </div>
 
                 <Link href="/login">
-                  <p className={styles.createAccount}>¿Ya tiene una cuenta?</p>
+                  <p className={styles.createAccount}>¿Ya tiene una cuenta? Iniciar sesión</p>
                 </Link>
               </Form>
             </Card.Body>

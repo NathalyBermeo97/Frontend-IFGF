@@ -139,7 +139,7 @@ const LoginPage = () => {
                   className={styles.createAccount}
                   onClick={() => router.push(ROUTES.SIGNUP)}
                 >
-                  ¿No tiene una cuenta?
+                  ¿No tiene una cuenta? Registrarse
                 </p>
               </Form>
             </Card.Body>
