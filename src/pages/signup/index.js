@@ -91,7 +91,7 @@ const SignupPage = () => {
         >
           <Card.Img
             className="d-flex w-100"
-            src="https://scontent.fuio1-2.fna.fbcdn.net/v/t1.6435-9/65510633_2787099614653153_7989606629123293184_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=730e14&_nc_ohc=hKw6qg18Hl8AX9bDyxy&_nc_ht=scontent.fuio1-2.fna&oh=00_AT9I1x7TlXnC2iYUY0Tsbliu66t_x_zOtdVxDosDpmQVhw&oe=6204C3D5"
+            src="https://scontent.fuio1-2.fna.fbcdn.net/v/t1.6435-9/73126792_3032923500070762_3219151423702827008_n.jpg?_nc_cat=107&ccb=1-5&_nc_sid=730e14&_nc_ohc=dAKxeaO4lY0AX-ZpzyM&_nc_ht=scontent.fuio1-2.fna&oh=00_AT9ZqljZnS8EcC1uVo36jX0mo2CpTX69IUtFOLtGK-4I-g&oe=623D2165"
           />
         </Col>
 
