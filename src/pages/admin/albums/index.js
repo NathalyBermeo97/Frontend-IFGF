@@ -41,6 +41,7 @@ const AlbumsPage = () => {
   const [eventId, setEventId] = useState(null);
   const [keyword, setKeyword] = useState("");
   const [filteredAlbums, setFilteredAlbums] = useState([]);
+  const [firstNewsItemTitle, setFirstNewsItemTitle] = useState("");
 
   useEffect(() => {
     const filteredAlbums = albums.filter((ni) =>
@@ -69,6 +70,7 @@ const AlbumsPage = () => {
 
   const onShowModal = (albumsItem) => {
     updateAlbumsItemForm.reset(albumsItem);
+    setFirstNewsItemTitle(albumsItem.title);
     setShowModal(true);
   };
 
@@ -95,8 +97,6 @@ const AlbumsPage = () => {
   console.log({ errors });
 
   const onSubmit = async (data) => {
-    console.log("data", data.file);
-    console.log(data);
 
     const formData = new FormData();
     formData.append("title", data.title);
@@ -122,7 +122,14 @@ const AlbumsPage = () => {
 
   const onSubmitUpdateAlbumsItem = (data) => {
     const { _id: id } = data;
-    updateAlbums(id, data)
+    const formData = new FormData();
+    data.title !== firstNewsItemTitle && formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("file", data.file[0]);
+    console.log({file: data.file[0]})
+
+
+    updateAlbums(id, formData)
       .then((newAlbum) => {
         const newAlbums = albums.map((album) =>
           album._id === newAlbum._id ? newAlbum : album

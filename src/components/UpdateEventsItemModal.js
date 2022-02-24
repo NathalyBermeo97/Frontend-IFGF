@@ -1,4 +1,5 @@
-import { Button, Modal, Form } from "react-bootstrap";
+import {Button, Modal, Form, FormGroup} from "react-bootstrap";
+import React from "react";
 
 export const UpdateEventsItemModal = ({
   show,
@@ -102,6 +103,19 @@ export const UpdateEventsItemModal = ({
               {errors.cost?.message}
             </Form.Control.Feedback>
           </Form.Group>
+          <FormGroup>
+            <Form.Label>Imagen</Form.Label>
+            <Form.Control
+                name="file"
+                type="file"
+                accept="image/png,image/jpeg"
+                {...register("file")}
+                isInvalid={!!errors.file?.message}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.file?.message}
+            </Form.Control.Feedback>
+          </FormGroup>
         </Form>
       </Modal.Body>
       <Modal.Footer>

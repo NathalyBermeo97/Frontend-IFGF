@@ -39,6 +39,7 @@ const MessagesPage = () => {
   const [eventId, setEventId] = useState(null);
   const [keyword, setKeyword] = useState("");
   const [filteredMessages, setFilteredMessages] = useState([]);
+  const [firstNewsItemTitle, setFirstNewsItemTitle] = useState("");
 
   useEffect(() => {
     const filteredMessages = messages.filter((ni) =>
@@ -67,6 +68,7 @@ const MessagesPage = () => {
 
   const onShowModal = (messagesItem) => {
     updateMessagesItemForm.reset(messagesItem);
+    setFirstNewsItemTitle(messagesItem.title);
     setShowModal(true);
   };
 
@@ -92,8 +94,6 @@ const MessagesPage = () => {
 
   console.log({ errors });
   const onSubmit = async (data) => {
-    console.log("data", data.file);
-    console.log(data);
 
     const formData = new FormData();
     formData.append("title", data.title);
@@ -119,7 +119,13 @@ const MessagesPage = () => {
 
   const onSubmitUpdateMessagesItem = (data) => {
     const { _id: id } = data;
-    updateMessages(id, data)
+    const formData = new FormData();
+    data.title !== firstNewsItemTitle && formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("file", data.file[0]);
+    console.log({file: data.file[0]})
+
+    updateMessages(id, formData)
       .then((newMessage) => {
         const newMessages = messages.map((message) =>
           message._id === newMessage._id ? newMessage : message

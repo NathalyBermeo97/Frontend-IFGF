@@ -47,7 +47,7 @@ export const UpdateNewsItemModal = ({
               {errors.description?.message}
             </Form.Control.Feedback>
           </InputGroup>
-          <InputGroup>
+          <FormGroup>
             <Form.Label>Imagen</Form.Label>
             <Form.Control
                 name="file"
@@ -59,7 +59,7 @@ export const UpdateNewsItemModal = ({
             <Form.Control.Feedback type="invalid">
               {errors.file?.message}
             </Form.Control.Feedback>
-          </InputGroup>
+          </FormGroup>
         </Form>
       </Modal.Body>
       <Modal.Footer>

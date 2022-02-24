@@ -1,4 +1,5 @@
-import { Button, Modal, InputGroup, FormControl, Form } from "react-bootstrap";
+import {Button, Modal, InputGroup, FormControl, Form, FormGroup} from "react-bootstrap";
+import React from "react";
 
 export const UpdateAlbumsItemModal = ({
   show,
@@ -45,6 +46,19 @@ export const UpdateAlbumsItemModal = ({
               {errors.description?.message}
             </Form.Control.Feedback>
           </InputGroup>
+          <FormGroup>
+            <Form.Label>Imagen</Form.Label>
+            <Form.Control
+                name="file"
+                type="file"
+                accept="image/png,image/jpeg"
+                {...register("file")}
+                isInvalid={!!errors.file?.message}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.file?.message}
+            </Form.Control.Feedback>
+          </FormGroup>
         </Form>
       </Modal.Body>
       <Modal.Footer>

@@ -51,6 +51,7 @@ const EventsPage = () => {
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [eventId, setEventId] = useState(null);
+  const [firstNewsItemTitle, setFirstNewsItemTitle] = useState("");
 
   useEffect(() => {
     const filteredEvents = events?.filter((ni) =>
@@ -79,6 +80,7 @@ const EventsPage = () => {
 
   const onShowModal = (event) => {
     updateEventsItemForm.reset(event);
+    setFirstNewsItemTitle(event.title);
     setShowModal(true);
   };
 
@@ -104,8 +106,7 @@ const EventsPage = () => {
   };
 
   const onSubmit = async (data) => {
-    console.log("data", data.file);
-    console.log(data);
+
 
     const formData = new FormData();
     formData.append("title", data.title);
@@ -145,7 +146,13 @@ const EventsPage = () => {
   const onSubmitUpdateEventsItem = (data) => {
     const { _id: id } = data;
     console.log({ id });
-    updateEvents(id, data)
+    const formData = new FormData();
+    data.title !== firstNewsItemTitle && formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("file", data.file[0]);
+    console.log({file: data.file[0]})
+
+    updateEvents(id, formData)
       .then((returnedEvent) => {
         const newEvents = events.map((event) =>
           event._id === returnedEvent._id ? returnedEvent : event
