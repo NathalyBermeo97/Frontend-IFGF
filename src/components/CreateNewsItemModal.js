@@ -52,16 +52,19 @@ export const CreateNewsItemModal = ({
               {errors.description?.message}
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          <InputGroup>
             <Form.Label>Imagen</Form.Label>
             <Form.Control
                 name="file"
                 type="file"
                 accept="image/png,image/jpeg"
                 {...register("file")}
+                isInvalid={!!errors.file?.message}
             />
-          </Form.Group>
-
+            <Form.Control.Feedback type="invalid">
+              {errors.file?.message}
+            </Form.Control.Feedback>
+          </InputGroup>
         </Form>
       </Modal.Body>
       <Modal.Footer>

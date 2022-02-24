@@ -86,6 +86,7 @@ export const QuestionnaireItem = ({ questionnaire, onShowDeleteModal }) => {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         questionnairesGames={questionnairesGames}
+        length={questionnaire.questions.length}
       />
     </Col>
   );

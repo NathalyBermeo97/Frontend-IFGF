@@ -1,4 +1,5 @@
-import { Button, Modal, InputGroup, FormControl, Form } from "react-bootstrap";
+import { Button, Modal, InputGroup, FormControl, Form,FormGroup } from "react-bootstrap";
+import React from "react";
 
 export const UpdateNewsItemModal = ({
   show,
@@ -40,10 +41,23 @@ export const UpdateNewsItemModal = ({
               aria-label="With textarea"
               style={{ height: "80px" }}
               {...register("description")}
-              isInvalid={errors.description?.message}
+              isInvalid={!!errors.description?.message}
             />
             <Form.Control.Feedback type="invalid">
               {errors.description?.message}
+            </Form.Control.Feedback>
+          </InputGroup>
+          <InputGroup>
+            <Form.Label>Imagen</Form.Label>
+            <Form.Control
+                name="file"
+                type="file"
+                accept="image/png,image/jpeg"
+                {...register("file")}
+                isInvalid={!!errors.file?.message}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.file?.message}
             </Form.Control.Feedback>
           </InputGroup>
         </Form>

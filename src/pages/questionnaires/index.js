@@ -10,7 +10,6 @@ const Questionnaires = () => {
   const { questionnaires } = useQuestionnaire();
   const { newItems: filteredQuestionnaires, registerInput } = useFilter(
     questionnaires,
-    "name"
   );
   return (
     <>
@@ -29,7 +28,7 @@ const Questionnaires = () => {
             placeholder="Buscar cuestionario"
             aria-label="search_new"
             aria-describedby="basic-addon1"
-            {...registerInput("SearchQuestionnaires")}
+            {...registerInput("name")}
           />
         </InputGroup>
 

@@ -29,6 +29,8 @@ const newsItemSchema = yup.object().shape({
     .string()
     .required(ERROR_MESSAGES.REQUIRED("descripción"))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+  file: yup
+      .mixed().required(ERROR_MESSAGES.REQUIRED("título")),
 });
 
 const NewsPage = () => {
@@ -58,6 +60,7 @@ const NewsPage = () => {
     defaultValues: {
       title: "",
       description: "",
+      file: "",
     },
     resolver: yupResolver(newsItemSchema),
   });
@@ -119,7 +122,7 @@ const NewsPage = () => {
       });
   };
 
-  const onSubmitUpdateNewsItem = (data) => {
+  const onSubmitUpdateNewsItem = async (data) => {
     const { _id: id } = data;
     updateNews(id, data)
       .then((newNew) => {
@@ -146,8 +149,9 @@ const NewsPage = () => {
           </div>
         </div>
         <div className={styles.info}>
-          <p >
-            En esta sección se visualiza ,crea,edita y elimina información referente a las noticias de la Iglesia IFGF
+          <p>
+            En esta sección se visualiza ,crea,edita y elimina información
+            referente a las noticias de la Iglesia IFGF
           </p>
         </div>
 

@@ -78,7 +78,7 @@ export const CreateVideosItemModal = ({
                     style={{ height: "50px" }}
                     as="textarea"
                     type="text"
-                    placeholder="Ingresar la url del video"
+                    placeholder="Ingresar la url del vídeo"
                     {...register("url")}
                     isInvalid={!!errors.url?.message}
                 />

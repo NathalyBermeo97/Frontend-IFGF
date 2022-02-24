@@ -5,6 +5,7 @@ export const QuestionnairesGamesModal = ({
   isOpen,
   setIsOpen,
   questionnairesGames,
+  length,
 }) => {
   return (
     <Modal show={isOpen} onHide={() => setIsOpen(false)}>
@@ -17,7 +18,7 @@ export const QuestionnairesGamesModal = ({
             <tr>
               <th>Nombre</th>
               <th>Apellido</th>
-              <th>Score</th>
+              <th>Puntuación</th>
             </tr>
           </thead>
           <tbody>
@@ -26,7 +27,7 @@ export const QuestionnairesGamesModal = ({
                 <tr key={game._id}>
                   <td>{game.user.name}</td>
                   <td>{game.user.lastname}</td>
-                  <td>{game.score}</td>
+                  <td>{game.score}/{length}</td>
                 </tr>
               ))
             ) : (

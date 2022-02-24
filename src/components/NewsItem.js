@@ -33,6 +33,7 @@ export const NewsItem = ({ news,onShowModal,onShowDeleteModal  }) => {
                         <Card.Title>{news.title}</Card.Title>
                         <Card.Text>{news.description}</Card.Text>
 
+
                         <div
                             style={{
                                 display: "flex",

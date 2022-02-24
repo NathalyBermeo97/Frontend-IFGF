@@ -9,7 +9,9 @@ import { useFilter } from "../../hooks/useFilter";
 const Eventos = ({ events }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [event, setEvent] = useState({});
-  const {newItems: filteredEvents, registerInput} = useFilter(events, 'title')
+    const { newItems: filteredEvents, registerInput } = useFilter(
+        events,
+    );
 
   const onShowModal = (event) => {
     setEvent(event);
@@ -32,7 +34,7 @@ const Eventos = ({ events }) => {
             placeholder="Buscar evento"
             aria-label="search_new"
             aria-describedby="basic-addon1"
-            {...registerInput('BuscarEventos')}
+            {...registerInput("title")}
         />
       </InputGroup>
       <ListOfEvents events={filteredEvents} onShowModal={onShowModal} />
