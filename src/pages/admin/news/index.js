@@ -2,7 +2,6 @@ import { withPrivate } from "../../../hocs/withPrivate";
 import React, { useEffect, useState } from "react";
 import { useNews } from "../../../hooks/useNews";
 import {
-  ListGroup,
   Button,
   FormControl,
   InputGroup,
@@ -29,8 +28,7 @@ const newsItemSchema = yup.object().shape({
     .string()
     .required(ERROR_MESSAGES.REQUIRED("descripción"))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
-  file: yup
-      .mixed().required(ERROR_MESSAGES.REQUIRED("título")),
+  file: yup.mixed().required(ERROR_MESSAGES.REQUIRED("imagen")),
 });
 
 const NewsPage = () => {
@@ -41,8 +39,9 @@ const NewsPage = () => {
   const [eventId, setEventId] = useState(null);
   const [keyword, setKeyword] = useState("");
   const [filteredNews, setFilteredNews] = useState([]);
+  const [firstNewsItemTitle, setFirstNewsItemTitle] = useState("");
 
-  console.log({ news });
+  console.log({ newsFromPage: news, firstNewsItemTitle });
   useEffect(() => {
     const filteredNews = news.filter((ni) =>
       ni.title.toLowerCase().includes(keyword.toLowerCase())
@@ -71,12 +70,12 @@ const NewsPage = () => {
 
   const onShowModal = (newsItem) => {
     updateNewsItemForm.reset(newsItem);
+    setFirstNewsItemTitle(newsItem.title);
     setShowModal(true);
   };
 
   const handleDelete = (id) => {
     deleteNews(id).then((data) => {
-      console.log({ data });
       if (data.message === SERVER_RESPONSE.DELETED_NEWS) {
         const newNews = news.filter((item) => item._id !== id);
         setNews(newNews);
@@ -97,9 +96,6 @@ const NewsPage = () => {
   console.log({ errors });
 
   const onSubmit = async (data) => {
-    console.log("data", data.file);
-    console.log(data);
-
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("description", data.description);
@@ -124,7 +120,13 @@ const NewsPage = () => {
 
   const onSubmitUpdateNewsItem = async (data) => {
     const { _id: id } = data;
-    updateNews(id, data)
+    const formData = new FormData();
+    data.title !== firstNewsItemTitle && formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("file", data.file[0]);
+    console.log({file: data.file[0]})
+
+    updateNews(id, formData)
       .then((newNew) => {
         const newNews = news.map((item) =>
           item._id === newNew._id ? newNew : item

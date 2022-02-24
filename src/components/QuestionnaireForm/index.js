@@ -20,6 +20,7 @@ const CreateQuestionnaire = ({ action, questions = state, title = "", id }) => {
   const [questionsGroup, setQuestionsGroup] = useState(questions);
   const [questionnaireTitle, setQuestionnaireTitle] = useState(title);
   const { createQuestionnaire, updateQuestionnaire } = useQuestionnaire();
+  const firstTitle = title;
 
   const addQuestion = (questionId) => {
     let newQuestions = [...questionsGroup];
@@ -64,9 +65,9 @@ const CreateQuestionnaire = ({ action, questions = state, title = "", id }) => {
     const newQuestions = questionsGroup.map((question, id) => {
       return id === questionId
         ? {
-          ...question,
-          title: value,
-        }
+            ...question,
+            title: value,
+          }
         : question;
     });
     setQuestionsGroup(newQuestions);
@@ -97,43 +98,51 @@ const CreateQuestionnaire = ({ action, questions = state, title = "", id }) => {
   };
 
   const handleSubmit = (action) => {
-    if (questionnaireTitle === '') return swal( "Ingresar título del cuestionario");
-
+    if (questionnaireTitle === "")
+      return swal("Ingresar título del cuestionario");
     const newQuestionsGroup = questionsGroup.map((question) => {
       return question.answer
         ? question
         : { ...question, answer: question.options[0] };
     });
+
     const questionnaire = {
       name: questionnaireTitle,
       questions: newQuestionsGroup,
     };
 
+    const dataToUpdate =
+      firstTitle === questionnaireTitle
+        ? { questions: newQuestionsGroup }
+        : questionnaire;
+
     switch (action) {
       case "create":
-        createQuestionnaire(questionnaire)
+        createQuestionnaire(dataToUpdate)
           .then((data) => {
             console.log({ data });
             //setQuestionnaires(prevState => [...prevState, data])
             swal("Cuestionario creado exitosamente");
             router.push(ROUTES.ADMIN_QUESTIONNAIRES);
           })
-          .catch((e) =>
-            console.log("error", e),swal("Ya existe un registro creado con este título")
+          .catch(
+            (e) => console.log("error", e),
+            swal("Ya existe un registro creado con este título")
           );
 
         break;
       case "update":
-        updateQuestionnaire(id, questionnaire)
+        updateQuestionnaire(id, dataToUpdate)
           .then((data) => {
             console.log({ data });
             //setQuestionnaires(prevState => [...prevState, data])
             swal("Cuestionario actualizado exitosamente");
             router.push(ROUTES.ADMIN_QUESTIONNAIRES);
           })
-            .catch((e) =>
-                console.log("error", e),swal("Ya existe un registro creado con este título")
-            );
+          .catch(
+            (e) => console.log("error", e),
+            swal("Ya existe un registro creado con este título")
+          );
 
       default:
         () => console.log("an action must be pass");
@@ -213,7 +222,7 @@ const CreateQuestionnaire = ({ action, questions = state, title = "", id }) => {
                       )}
                     </div>
                     {optionId === question.options.length - 1 &&
-                      optionId < 3 ? (
+                    optionId < 3 ? (
                       <Badge
                         bg="success"
                         style={{
