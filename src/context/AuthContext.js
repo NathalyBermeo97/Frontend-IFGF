@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useEffect } from "react";
 import api from "../api/api";
 import User from "../api/user";
+import swal from "sweetalert";
 
 export const USER_STATES = {
   NOT_LOGGED: null,
@@ -106,6 +107,7 @@ export function UserContextProvider({ children }) {
       return res;
     } catch (e) {
       console.log("something went wrong");
+
     }
   };
 

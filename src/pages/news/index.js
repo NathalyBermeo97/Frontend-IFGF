@@ -10,10 +10,20 @@ import {
   InputGroup,
 } from "react-bootstrap";
 import styles from "../../styles/events.module.css";
-import News from "../../components/News";
+import NewsPage from "../../components/NewsPage";
+
 
 const HomeNews = ({}) => {
   const { news } = useNews();
+    const [keyword, setKeyword] = useState("");
+    const [filteredNews, setFilteredNews] = useState([]);
+
+    useEffect(() => {
+        const filteredNews = news.filter((ni) =>
+            ni.title.toLowerCase().includes(keyword.toLowerCase())
+        );
+        setFilteredNews(filteredNews);
+    }, [keyword, news]);
 
   return (
     <>
@@ -22,6 +32,15 @@ const HomeNews = ({}) => {
         <div className={styles.linea}></div>
       </div>
       <Container>
+          <InputGroup style={{ padding: "15px" }}>
+              <FormControl
+                  placeholder="Buscar noticia"
+                  aria-label="search_new"
+                  aria-describedby="basic-addon1"
+                  value={keyword}
+                  onChange={(e) => setKeyword(e.target.value)}
+              />
+          </InputGroup>
         <Row
           style={{
             display: "flex",
@@ -30,7 +49,7 @@ const HomeNews = ({}) => {
           }}
         >
           <Col>
-            <News news={news} />
+            <NewsPage news={filteredNews} />
           </Col>
         </Row>
       </Container>

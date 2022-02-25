@@ -4,7 +4,8 @@ import styles from "../styles/events.module.css";
 const URL = "https://backend-ifgf.herokuapp.com/";
 import api from "../api/api";
 import { Card, Col, Container, Row } from "react-bootstrap";
-const News = ({ news }) => {
+
+const MessagePage = ({ messages }) => {
     return (
         <Container>
             <Row
@@ -15,7 +16,7 @@ const News = ({ news }) => {
                 }}
             >
 
-                {news.map((item) => (
+                {messages.map((item) => (
                     <Card
                         key={item._id}
                         className={styles.course}
@@ -29,20 +30,20 @@ const News = ({ news }) => {
         </Container>
     );
 };
-export default News;
+export default MessagePage;
 export async function getStaticProps() {
-    let news = [];
+    let messages = [];
     try {
-        const response = await api.get("news");
+        const response = await api.get("/messages");
         console.log("response", response);
-        news = response.data.data;
+        messages = response.data.data;
     } catch (e) {
         console.log(e);
     }
 
     return {
         props: {
-            news,
+            messages,
         },
     };
 }

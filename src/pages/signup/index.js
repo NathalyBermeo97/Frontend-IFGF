@@ -58,7 +58,7 @@ const SignupPage = () => {
       swal("Usuario registrado");
       reset();
     } catch (error) {
-      console.log(error.code);
+      console.log("register error",error);
       swal("no se puede registrar");
     }
   };

@@ -14,7 +14,6 @@ const QUESTION = {
 };
 
 const state = [QUESTION];
-
 const CreateQuestionnaire = ({ action, questions = state, title = "", id }) => {
   const router = useRouter();
   const [questionsGroup, setQuestionsGroup] = useState(questions);
