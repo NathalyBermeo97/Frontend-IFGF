@@ -6,6 +6,7 @@ export const UpdateDonationModal = ({
                                         donation,
                                         setIsOpen,
                                         updateDonation,
+
                                     }) => {
     const [feedback, setFeedback] = useState("");
 
@@ -16,6 +17,7 @@ export const UpdateDonationModal = ({
             message: feedback,
         };
         updateDonation(changedDonation);
+
     };
 
     return (
