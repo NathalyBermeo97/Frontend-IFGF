@@ -132,10 +132,6 @@ export const CreateDonationModal = ({
               </Form.Label>
               <br/>
               <Form.Label>
-                Número de cuenta: 3022575104
-              </Form.Label>
-              <br/>
-              <Form.Label>
                 Correo: ifgf@gmail.com
               </Form.Label>
               <br/>
