@@ -33,7 +33,7 @@ Estudiante: Nathaly Lissette Bermeo Panchi
 El proyecto se visualiza de manera local añadiendo la siguiente URL http://localhost:3000 en cualquier navegador.
 
 
-## Acceso del sistema web desplegado en vercel
+## Acceso al sistema web 
 
 - [Iglesia IFGF Ecuador](https://ifgf.vercel.app)
 
