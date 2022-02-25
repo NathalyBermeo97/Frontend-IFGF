@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const URL = "https://backend-ifgf.herokuapp.com/";
 import api from "../api/api";
 import { Card, Container, Row } from "react-bootstrap";
+import styles from "../styles/events.module.css";
 
 const Messages = ({ messages }) => {
   return (
@@ -17,9 +18,13 @@ const Messages = ({ messages }) => {
         <h1>Mensajes bíblicos</h1>
 
         {messages.slice(0, 3).map((item) => (
-          <Card key={item._id} style={{ width: "28rem", margin: "20px" }}>
-            <Card.Img src={URL + item.imgURL} style={{ display: "flex" }} />
-          </Card>
+            <Card
+                key={item._id}
+                className={styles.course}
+                style={{ width: "23rem"}}
+            >
+                <Card.Img src={URL + item.imgURL} style={{ marginTop: "11px",marginBottom: "11px"}}/>
+            </Card>
         ))}
       </Row>
     </Container>

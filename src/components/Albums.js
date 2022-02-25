@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const URL = "https://backend-ifgf.herokuapp.com/";
 import api from "../api/api";
 import { Card, Container, Row } from "react-bootstrap";
+import styles from "../styles/events.module.css";
 
 const Albums = ({ albums }) => {
   return (
@@ -17,18 +18,13 @@ const Albums = ({ albums }) => {
         <h1>Álbum de fotos</h1>
 
         {albums.slice(0,3).map((item) => (
-          <Card
-            key={item._id}
-            style={{ width: "28rem" ,margin:"20px"}}
-            className="bg-dark text-white"
-
-          >
-              <Card.Img
-                  src={URL+item.imgURL}
-                  alt="Card image"
-                  style={{display:"flex"}}
-              />
-          </Card>
+            <Card
+                key={item._id}
+                className={styles.course}
+                style={{ width: "23rem"}}
+            >
+                <Card.Img src={URL + item.imgURL} style={{ marginTop: "11px",marginBottom: "11px"}}/>
+            </Card>
         ))}
       </Row>
     </Container>

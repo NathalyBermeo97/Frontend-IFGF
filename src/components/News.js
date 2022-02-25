@@ -22,9 +22,9 @@ const News = ({ news }) => {
           <Card
             key={item._id}
             className={styles.course}
-            style={{ width: "28rem", margin: "20px" }}
+            style={{ width: "23rem"}}
           >
-              <Card.Img src={URL + item.imgURL} style={{ display: "flex" }} />
+              <Card.Img src={URL + item.imgURL} style={{ marginTop: "11px",marginBottom: "11px"}}/>
           </Card>
         ))}
       </Row>

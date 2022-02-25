@@ -19,10 +19,10 @@ const News = ({ news }) => {
                     <Card
                         key={item._id}
                         className={styles.course}
-                        style={{ width: "28rem", margin: "20px" }}
+                        style={{ width: "23rem", marginTop: "20px" }}
                     >
-                        <Card.Img src={URL + item.imgURL} style={{ display: "flex" }} />
-                        <Card.Title>{item.title}</Card.Title>
+                        <Card.Img src={URL + item.imgURL} style={{ marginTop: "15px",display: "flex" }} />
+                        <Card.Title style={{ marginTop: "15px",display: "flex" }}>{item.title}</Card.Title>
                     </Card>
                 ))}
             </Row>
