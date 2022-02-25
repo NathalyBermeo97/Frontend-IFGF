@@ -20,7 +20,7 @@ Estudiante: Nathaly Lissette Bermeo Panchi
 ```bash
   https://github.com/NathalyBermeo97/ifgf.git
 ```
-- Instalar dependencias en su entorno de desarrollo
+- Instalar dependencias en el entorno de desarrollo
 
 ```bash
   npm install
