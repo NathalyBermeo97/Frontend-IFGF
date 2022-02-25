@@ -25,7 +25,7 @@ Estudiante: Nathaly Lissette Bermeo Panchi
 ```bash
   npm install
 ```
--Ejecutar el proyecto 
+- Ejecutar el proyecto 
 
 ```bash
   npm run dev o npm yarn dev
