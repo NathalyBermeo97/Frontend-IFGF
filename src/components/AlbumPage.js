@@ -24,6 +24,7 @@ const Albums = ({ albums }) => {
                     >
                         <Card.Img src={URL + item.imgURL} style={{ marginTop: "15px",display: "flex" }} />
                         <Card.Title  style={{ marginTop: "15px",display: "flex" }}>{item.title}</Card.Title>
+                        <Card.Text style={{ marginBottom: "15px",display: "flex" }}>{item.description}</Card.Text>
                     </Card>
                 ))}
             </Row>
