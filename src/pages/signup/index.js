@@ -7,7 +7,15 @@ import { useAuth } from "../../context/AuthContext";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
-import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Col,
+  Container,
+  Form,
+  FormGroup,
+  Row,
+} from "react-bootstrap";
 import swal from "sweetalert";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { ROUTES } from "../../constants/routes";
@@ -23,8 +31,10 @@ const registerSchema = yup.object().shape({
     .required(ERROR_MESSAGES.REQUIRED("apellido"))
     .matches("^[a-zA-Z ]+$", ERROR_MESSAGES.MATCHLETTER)
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
-  cellphone: yup.string().required(ERROR_MESSAGES.NUMBER("celular/teléfono"))
-  .max(13, ERROR_MESSAGES.MAX1_STRING("celular/teléfono", 13)),
+  cellphone: yup
+    .string()
+    .required(ERROR_MESSAGES.NUMBER("celular/teléfono"))
+    .max(13, ERROR_MESSAGES.MAX1_STRING("celular/teléfono", 13)),
   email: yup
     .string()
     .email(ERROR_MESSAGES.EMAIL)
@@ -59,7 +69,7 @@ const SignupPage = () => {
       swal("Usuario registrado");
       reset();
     } catch (error) {
-      console.log("register error",error);
+      console.log("register error", error);
       swal("no se puede registrar");
     }
   };
@@ -161,7 +171,7 @@ const SignupPage = () => {
                     {errors.email?.message}
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group className="mb-3">
+                <Form.Group className="mb-2">
                   <Row>
                     <Col xs={10}>
                       <Form.Control
@@ -175,10 +185,13 @@ const SignupPage = () => {
                         {errors.password?.message}
                       </Form.Control.Feedback>
                     </Col>
+
                     <Col xs={2}>
-                      <Button className={styles.btn} onClick={btn}>
-                        {state ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
-                      </Button>
+                      <div className={styles.btn}>
+                        <Button onClick={btn}>
+                          {state ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                        </Button>
+                      </div>
                     </Col>
                   </Row>
                 </Form.Group>

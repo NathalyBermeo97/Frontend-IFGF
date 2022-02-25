@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { useAuth } from "../../context/AuthContext";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
-import { useState } from "react";
+import React, { useState } from "react";
 import swal from "sweetalert";
 import { ROUTES } from "../../constants/routes";
 import { withPublic } from "../../hocs/withPublic";
@@ -124,9 +124,11 @@ const LoginPage = () => {
                       </Form.Control.Feedback>
                     </Col>
                     <Col xs={2}>
-                      <Button onClick={btn}>
-                        {state ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
-                      </Button>
+                      <div className={styles.btn}>
+                        <Button onClick={btn}>
+                          {state ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                        </Button>
+                      </div>
                     </Col>
                   </Row>
                 </Form.Group>
