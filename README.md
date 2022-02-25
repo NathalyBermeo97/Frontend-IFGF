@@ -9,7 +9,7 @@ Estudiante: Nathaly Lissette Bermeo Panchi
 ## Documentación
 
 - [Informe técnico](https://drive.google.com/file/d/1qV1a25Mtmk5_Mrxg9QLWBFXbQ_WjckT7/view?usp=sharing)
-- [Manual de Usuario](https://www.youtube.com/watch?v=SQKP-GNjwq4)
+- [Manual de Usuario]![image](https://user-images.githubusercontent.com/66235614/155800722-8b2938c4-bf90-45fb-848f-d1706c2f90dd.png)(https://www.youtube.com/watch?v=SQKP-GNjwq4)
 
 ## Acceso al sistema web
 
