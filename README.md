@@ -9,8 +9,8 @@ Estudiante: Nathaly Lissette Bermeo Panchi
 ## Documentación
 
 - [Informe técnico](https://drive.google.com/file/d/1qV1a25Mtmk5_Mrxg9QLWBFXbQ_WjckT7/view?usp=sharing)
-
-- [![Manual técnico](https://user-images.githubusercontent.com/66235614/155801867-b8d9fa7b-1f1f-4eb4-ac9b-08dba4ef4c1a.png)](https://www.youtube.com/watch?v=3RFAX3CbSGA)
+- [Manual de usuario](https://www.youtube.com/watch?v=SQKP-GNjwq4)
+[![Manual técnico](https://user-images.githubusercontent.com/66235614/155801867-b8d9fa7b-1f1f-4eb4-ac9b-08dba4ef4c1a.png)](https://www.youtube.com/watch?v=SQKP-GNjwq4)
 
 ## Acceso al sistema web
 
