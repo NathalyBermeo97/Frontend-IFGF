@@ -102,7 +102,7 @@ export const CreateDonationModal = ({
 
               <Form.Label>Fecha de entrega</Form.Label>
               <Form.Control
-                  min="2022-02-24"
+                  min="2022-02-25"
                   type="date"
                   placeholder="Ingrese la fecha de entrega"
                   {...register("date")}

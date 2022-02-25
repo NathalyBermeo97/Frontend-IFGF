@@ -68,7 +68,7 @@ export const CreateEventsItemModal = ({
           <Form.Group className="mb-3">
             <Form.Label>Fecha </Form.Label>
             <Form.Control
-              min="2022-02-24"
+              min="2022-02-25"
               type="date"
               placeholder="Ingrese la fecha de entrega"
               {...register("date")}

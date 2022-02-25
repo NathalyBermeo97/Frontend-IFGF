@@ -23,7 +23,8 @@ const registerSchema = yup.object().shape({
     .required(ERROR_MESSAGES.REQUIRED("apellido"))
     .matches("^[a-zA-Z ]+$", ERROR_MESSAGES.MATCHLETTER)
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
-  cellphone: yup.string().required(ERROR_MESSAGES.NUMBER("celular/teléfono")),
+  cellphone: yup.string().required(ERROR_MESSAGES.NUMBER("celular/teléfono"))
+  .max(13, ERROR_MESSAGES.MAX1_STRING("celular/teléfono", 13)),
   email: yup
     .string()
     .email(ERROR_MESSAGES.EMAIL)
