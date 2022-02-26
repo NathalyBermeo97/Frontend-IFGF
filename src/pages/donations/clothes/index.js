@@ -23,13 +23,15 @@ const schema = yup.object().shape({
     .string()
     .required(ERROR_MESSAGES.REQUIRED("dirección"))
     .min(25, ERROR_MESSAGES.MIN_STRING("dirección", 25))
-    .max(60, ERROR_MESSAGES.MAX_STRING("dirección", 60))
+    .max(60, ERROR_MESSAGES.MAX2_STRING("dirección", 60))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
   date: yup
     .date()
     .typeError(ERROR_MESSAGES.DATE)
     .required(ERROR_MESSAGES.REQUIRED("fecha de entrega")),
-  description: yup.string(),
+  description: yup.string()
+      .max(60, ERROR_MESSAGES.MAX2_STRING("descripción", 60))
+
 });
 
 const DonationsPage = () => {

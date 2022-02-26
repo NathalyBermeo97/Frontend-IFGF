@@ -18,5 +18,6 @@ export const ERROR_MESSAGES = {
     MIN_STRING: (field, min) => `El campo ${field} debe tener al menos ${min} caracteres`,
     MAX_STRING: (field, max) => `El campo ${field} debe tener como máximo ${max} inscripciones`,
     MAX1_STRING: (field, max) => `El campo ${field} debe tener como máximo ${max} números`,
+    MAX2_STRING: (field, max) => `El campo ${field} debe tener como máximo ${max} caracteres`,
     MAX_NUMBER: (field, max) => `El campo ${field} debe tener como máximo ${max} dígitos`
 }

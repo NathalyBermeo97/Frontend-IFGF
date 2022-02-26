@@ -21,6 +21,7 @@ const messagesItemSchema = yup.object().shape({
   description: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("descripción"))
+    .max(250, ERROR_MESSAGES.MAX2_STRING("descripción", 250))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
 });
 
@@ -94,7 +95,6 @@ const MessagesPage = () => {
 
   console.log({ errors });
   const onSubmit = async (data) => {
-
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("description", data.description);
@@ -123,7 +123,7 @@ const MessagesPage = () => {
     data.title !== firstNewsItemTitle && formData.append("title", data.title);
     formData.append("description", data.description);
     formData.append("file", data.file[0]);
-    console.log({file: data.file[0]})
+    console.log({ file: data.file[0] });
 
     updateMessages(id, formData)
       .then((newMessage) => {
@@ -150,8 +150,9 @@ const MessagesPage = () => {
           </div>
         </div>
         <div className={styles.info}>
-          <p >
-            En esta sección se visualiza,crea,edita y elimina información referente a los mensajes bíblicos de la Iglesia IFGF
+          <p>
+            En esta sección se visualiza,crea,edita y elimina información
+            referente a los mensajes bíblicos de la Iglesia IFGF
           </p>
         </div>
 

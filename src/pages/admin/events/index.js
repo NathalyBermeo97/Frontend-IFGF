@@ -22,6 +22,7 @@ const eventsItemSchema = yup.object().shape({
   description: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("descripción"))
+    .max(250, ERROR_MESSAGES.MAX2_STRING("descripción", 250))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
   location: yup
     .string()
@@ -106,8 +107,6 @@ const EventsPage = () => {
   };
 
   const onSubmit = async (data) => {
-
-
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("description", data.description);
@@ -150,7 +149,7 @@ const EventsPage = () => {
     data.title !== firstNewsItemTitle && formData.append("title", data.title);
     formData.append("description", data.description);
     formData.append("file", data.file[0]);
-    console.log({file: data.file[0]})
+    console.log({ file: data.file[0] });
 
     updateEvents(id, formData)
       .then((returnedEvent) => {

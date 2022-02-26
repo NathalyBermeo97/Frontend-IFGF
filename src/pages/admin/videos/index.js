@@ -29,6 +29,7 @@ const videosItemSchema = yup.object().shape({
   description: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("descripción"))
+    .max(250, ERROR_MESSAGES.MAX2_STRING("descripción", 250))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
   type: yup
     .string()
@@ -108,9 +109,7 @@ const VideosPage = () => {
       })
       .catch((error) => {
         console.log(error);
-        swal(
-            "Ya existe un registro almacenado de este vídeo"
-        );
+        swal("Ya existe un registro almacenado de este vídeo");
       });
     {
       /*setVideos((prevState) => [
@@ -159,8 +158,9 @@ const VideosPage = () => {
           </div>
         </div>
         <div className={styles.info}>
-          <p >
-            En esta sección se visualiza ,crea,edita y elimina información referente a los videos de la Iglesia IFGF
+          <p>
+            En esta sección se visualiza ,crea,edita y elimina información
+            referente a los videos de la Iglesia IFGF
           </p>
         </div>
 

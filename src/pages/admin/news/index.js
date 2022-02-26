@@ -1,12 +1,7 @@
 import { withPrivate } from "../../../hocs/withPrivate";
 import React, { useEffect, useState } from "react";
 import { useNews } from "../../../hooks/useNews";
-import {
-  Button,
-  FormControl,
-  InputGroup,
-  Container,
-} from "react-bootstrap";
+import { Button, FormControl, InputGroup, Container } from "react-bootstrap";
 import { UpdateNewsItemModal } from "../../../components/UpdateNewsItemModal";
 import styles from "./styles.module.css";
 import { CreateNewsItemModal } from "../../../components/CreateNewsItemModal";
@@ -27,6 +22,7 @@ const newsItemSchema = yup.object().shape({
   description: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("descripción"))
+    .max(250, ERROR_MESSAGES.MAX2_STRING("descripción", 250))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
   file: yup.mixed().required(ERROR_MESSAGES.REQUIRED("imagen")),
 });
@@ -124,7 +120,7 @@ const NewsPage = () => {
     data.title !== firstNewsItemTitle && formData.append("title", data.title);
     formData.append("description", data.description);
     formData.append("file", data.file[0]);
-    console.log({file: data.file[0]})
+    console.log({ file: data.file[0] });
 
     updateNews(id, formData)
       .then((newNew) => {
