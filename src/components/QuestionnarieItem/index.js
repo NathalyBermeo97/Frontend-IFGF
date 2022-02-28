@@ -100,9 +100,9 @@ export const QuestionnaireItem = ({ questionnaire, onShowDeleteModal }) => {
                   {existsAttempt ? "Intentar de nuevo" : "Intentar"}
                 </Button>
                 {userScore === 0 ? (
-                  <p>Nota final: {userScore}</p>
+                  <p>Nota final: {userScore}/{questionsNumber}</p>
                 ) : userScore ? (
-                  <p>Nota final: {userScore}</p>
+                  <p>Nota final: {userScore}/{questionsNumber}</p>
                 ) : (
                   ""
                 )}
