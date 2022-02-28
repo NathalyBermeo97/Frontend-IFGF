@@ -28,7 +28,13 @@ Estudiante: Nathaly Lissette Bermeo Panchi
 - Ejecutar el proyecto 
 
 ```bash
-  npm run dev o npm yarn dev
+  npm run dev 
+```
+
+o 
+
+```bash
+  npm yarn dev
 ```
 El proyecto se visualiza de manera local añadiendo la siguiente URL http://localhost:3000 en cualquier navegador.
 
