@@ -31,7 +31,7 @@ Estudiante: Nathaly Lissette Bermeo Panchi
   npm run dev 
 ```
 
-o 
+o también con el siguiente comando
 
 ```bash
   npm yarn dev
