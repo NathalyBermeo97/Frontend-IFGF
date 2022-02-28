@@ -4,18 +4,36 @@ import { useRouter } from "next/router";
 import { ROUTES } from "../../constants/routes";
 import { useGames } from "../../hooks/useGames";
 import { QuestionnairesGamesModal } from "../QuestionnairesGamesModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 export const QuestionnaireItem = ({ questionnaire, onShowDeleteModal }) => {
   const token = window.localStorage.getItem("jwt");
   const router = useRouter();
   const questionsNumber = questionnaire.questions.length;
-  const { hasAlreadyAttemptedGame, getQuestionnairesGames } = useGames();
+  const { currentUser } = useAuth();
+  const {
+    hasAlreadyAttemptedGame,
+    getQuestionnairesGames,
+    getUserQuestionnaireScore,
+  } = useGames();
   const existsAttempt = hasAlreadyAttemptedGame(questionnaire._id);
   const isTryingAgain = existsAttempt ? true : false;
   const questionnairesGames = getQuestionnairesGames(questionnaire._id);
-  const [isOpen, setIsOpen] = useState(false)
-  console.log({ questionnairesGames });
+  const [isOpen, setIsOpen] = useState(false);
+  const [userScore, setUserScore] = useState(null);
+
+  useEffect(() => {
+    const getUserScore = async () => {
+      const data = await getUserQuestionnaireScore(
+        questionnaire._id,
+        currentUser._id
+      );
+      setUserScore(data[0]?.score);
+    };
+    getUserScore();
+  }, []);
+  
   return (
     <Col
       style={{
@@ -34,8 +52,10 @@ export const QuestionnaireItem = ({ questionnaire, onShowDeleteModal }) => {
           <div
             style={{
               display: "flex",
+              flexDirection: "column",
               justifyContent: "center",
-              gap: "0px 5px",
+              alignItems: "center",
+              gap: "5px 5px",
             }}
           >
             {router.pathname.startsWith(ROUTES.ADMIN) ? (
@@ -67,17 +87,26 @@ export const QuestionnaireItem = ({ questionnaire, onShowDeleteModal }) => {
                 </Button>
               </>
             ) : (
-              <Button
-                size="sm"
-                onClick={() =>
-                  router.push(
-                    ROUTES.GAME(questionnaire._id, token, isTryingAgain)
-                  )
-                }
-                variant={existsAttempt ? "success" : "primary"}
-              >
-                {existsAttempt ? "Intentar de nuevo" : "Intentar"}
-              </Button>
+              <>
+                <Button
+                  size="sm"
+                  onClick={() =>
+                    router.push(
+                      ROUTES.GAME(questionnaire._id, token, isTryingAgain)
+                    )
+                  }
+                  variant={existsAttempt ? "success" : "primary"}
+                >
+                  {existsAttempt ? "Intentar de nuevo" : "Intentar"}
+                </Button>
+                {userScore === 0 ? (
+                  <p>Nota final: {userScore}</p>
+                ) : userScore ? (
+                  <p>Nota final: {userScore}</p>
+                ) : (
+                  ""
+                )}
+              </>
             )}
           </div>
         </Card.Body>

@@ -1,5 +1,5 @@
 import { withPrivate } from "../../../hocs/withPrivate";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDonation } from "../../../hooks/useDonation";
 import styles from "../styles.module.css";
 import { Button, Col, Container, Row } from "react-bootstrap";
@@ -29,9 +29,9 @@ const schema = yup.object().shape({
     .date()
     .typeError(ERROR_MESSAGES.DATE)
     .required(ERROR_MESSAGES.REQUIRED("fecha de entrega")),
-  description: yup.string()
-      .max(60, ERROR_MESSAGES.MAX2_STRING("descripción", 60))
-
+  description: yup
+    .string()
+    .max(60, ERROR_MESSAGES.MAX2_STRING("descripción", 60)),
 });
 
 const DonationsPage = () => {
@@ -64,34 +64,37 @@ const DonationsPage = () => {
   };
 
   const onSubmit = async (data) => {
-    console.log("data",data.file);
+    console.log("data", data.file);
     console.log(data);
 
     const description = data.description.trim();
     const address =
-        data.address === "no direction no direction " ? "" : data.address;
+      data.address === "no direction no direction " ? "" : data.address;
     const date = new Date(data.date).toISOString();
 
     const formData = new FormData();
-    formData.append("title",data.title);
-    formData.append("description",description);
-    formData.append("type",data.type);
-    formData.append("delivery",data.delivery);
-    formData.append("address",address);
-    formData.append("date",date);
-    formData.append("file",data.file[0]);
+    formData.append("title", data.title);
+    formData.append("description", description);
+    formData.append("type", data.type);
+    formData.append("delivery", data.delivery);
+    formData.append("address", address);
+    formData.append("date", date);
+    formData.append("file", data.file[0]);
 
-    console.log({formData})
+    console.log({ formData });
 
-    Donations.create(formData).then(response=>{
-      if (response.data){
-        setShowModal(false);
-        reset();
-      }
-    }).catch(error=>{
-      console.log("error",error)
-    })
-    {/*console.log("response",response)
+    Donations.create(formData)
+      .then((response) => {
+        if (response.data) {
+          setShowModal(false);
+          reset();
+        }
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+    {
+      /*console.log("response",response)
     const description = data.description.trim();
     const address =
       data.address === "no direction no direction " ? "" : data.address;
@@ -101,7 +104,8 @@ const DonationsPage = () => {
       setDonations((prevState) => [...prevState, newDonation]);
       setShowModal(false);
       reset();
-    });*/}
+    });*/
+    }
   };
 
   return (
@@ -123,7 +127,6 @@ const DonationsPage = () => {
                 colaboración, puedes ayudarlos donando cualquier tipo de ropa.
               </p>
               <div>
-
                 <img
                   className={styles.ubicacion}
                   width="400px"

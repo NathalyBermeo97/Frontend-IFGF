@@ -19,7 +19,9 @@ export const CreateDonationModal = ({
     clearErrors();
     reset();
   };
+  const date = new Date().toLocaleDateString().split('/')
 
+  console.log({ date });
   const selectValue = watch("delivery");
   useEffect(() => {
     if (selectValue === "retiro en el hogar") {
@@ -70,7 +72,7 @@ export const CreateDonationModal = ({
                     <Form.Group className="mb-3">
                       <Form.Label>Fecha de entrega</Form.Label>
                       <Form.Control
-                          min="2022-02-25"
+                          min={`${date[2]}-0${date[0]}-${date[1]}`}
                           type="date"
                           placeholder="Ingrese la fecha de entrega"
                           {...register("date")}
