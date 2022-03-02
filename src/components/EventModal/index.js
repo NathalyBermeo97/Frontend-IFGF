@@ -5,8 +5,8 @@ import { useAuth } from "../../context/AuthContext";
 import { useEvents } from "../../hooks/useEvents";
 import swal from "sweetalert";
 
-export const EventModal = ({ isOpen, event, setIsOpen, onCancelInscription }) => {
-  const { createInscription, calloffInscription, setEvents } = useEvents();
+export const EventModal = ({ isOpen, event, setIsOpen, onCancelInscription, setEventsState }) => {
+  const { createInscription } = useEvents();
   const { currentUser } = useAuth();
   const router = useRouter();
   const isInTheLimit = event?.inscriptions?.length === event.number;
@@ -23,8 +23,13 @@ export const EventModal = ({ isOpen, event, setIsOpen, onCancelInscription }) =>
         console.log(res);
         if (res?.data?.message) {
           setIsOpen(false);
+          setEventsState(prevState => {
+            const event = prevState.find(e => e._id === event_id)
+            const newEvent = {...event, inscriptions: [...event.inscriptions, currentUser._id]}
+            return [...prevState, newEvent]
+          })
+          swal("Usted se ha inscrito al evento con éxito")
         }
-        swal("Usted se ha inscrito al evento con éxito")
       })
       .catch((e) => console.log("something went wrong", e));
   };

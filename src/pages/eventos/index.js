@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import { EventModal } from "../../components/EventModal";
 import React, { useState } from "react";
-import {Container, FormControl, InputGroup} from "react-bootstrap";
+import { Container, FormControl, InputGroup } from "react-bootstrap";
 import Events from "../../api/events";
 import { ListOfEvents } from "../../components/ListOfEvents";
 import { useFilter } from "../../hooks/useFilter";
@@ -9,9 +9,8 @@ import { useFilter } from "../../hooks/useFilter";
 const Eventos = ({ events }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [event, setEvent] = useState({});
-    const { newItems: filteredEvents, registerInput } = useFilter(
-        events,
-    );
+  const [eventsState, setEventsState] = useState(events);
+  const { newItems: filteredEvents, registerInput } = useFilter(eventsState);
 
   const onShowModal = (event) => {
     setEvent(event);
@@ -24,21 +23,27 @@ const Eventos = ({ events }) => {
         <h1 className={styles.section}>Eventos</h1>
         <div className={styles.linea}></div>
       </div>
-        <div className={styles.info}>
-            <p >
-                En esta sección puede visualizar información referente a los eventos de la Iglesia IFGF
-            </p>
-        </div>
+      <div className={styles.info}>
+        <p>
+          En esta sección puede visualizar información referente a los eventos
+          de la Iglesia IFGF
+        </p>
+      </div>
       <InputGroup style={{ padding: "15px" }}>
         <FormControl
-            placeholder="Buscar evento"
-            aria-label="search_new"
-            aria-describedby="basic-addon1"
-            {...registerInput("title")}
+          placeholder="Buscar evento"
+          aria-label="search_new"
+          aria-describedby="basic-addon1"
+          {...registerInput("title")}
         />
       </InputGroup>
       <ListOfEvents events={filteredEvents} onShowModal={onShowModal} />
-      <EventModal isOpen={isOpen} event={event} setIsOpen={setIsOpen} />
+      <EventModal
+        isOpen={isOpen}
+        event={event}
+        setIsOpen={setIsOpen}
+        setEventsState={setEventsState}
+      />
     </Container>
   );
 };
