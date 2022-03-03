@@ -16,6 +16,7 @@ const Eventos = ({ events }) => {
     setEvent(event);
     setIsOpen(true);
   };
+  console.log({filteredEvents})
 
   return (
     <Container>

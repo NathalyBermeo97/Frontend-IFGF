@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./styles.module.css";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { ERROR_MESSAGES, SERVER_RESPONSE } from "../../constants/inidex";
+import { ERROR_MESSAGES } from "../../constants/inidex";
 import { useAuth } from "../../context/AuthContext";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
@@ -66,11 +66,11 @@ const SignupPage = () => {
     const roles = "user";
     try {
       await doRegister({ name, lastname, cellphone, email, password, roles });
-      swal("Usuario registrado");
+      router.push(ROUTES.LOGIN)
+      swal('Genial', "Usuario registrado", 'success');
       reset();
     } catch (error) {
-      console.log("register error", error);
-      swal("no se puede registrar");
+      swal('Oops', error.response.data.message, 'error');
     }
   };
   const {
@@ -89,7 +89,6 @@ const SignupPage = () => {
     },
     resolver: yupResolver(registerSchema),
   });
-  console.log({ errors });
 
   return (
     <Container>

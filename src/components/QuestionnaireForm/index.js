@@ -23,6 +23,10 @@ const CreateQuestionnaire = ({ action, questions = state, title = "", id }) => {
 
   const addQuestion = (questionId) => {
     let newQuestions = [...questionsGroup];
+    // validation
+    const existsEmptyQuestionTitle = newQuestions.some(question => !question.title)
+    if(existsEmptyQuestionTitle) return swal('Oops', 'No debe existir ninguna pregunta vacía', 'error')
+    
     newQuestions.splice(questionId + 1, 0, QUESTION);
     setQuestionsGroup(newQuestions);
   };
@@ -30,6 +34,8 @@ const CreateQuestionnaire = ({ action, questions = state, title = "", id }) => {
   const addOption = (questionId) => {
     const question = questionsGroup.find((_, qI) => qI === questionId);
     const options = [...question.options];
+    const existsEmptyOption = options.some(op => !op)
+    if(existsEmptyOption) return swal('Oops', 'No debe existir ninguna opción vacía', 'error')
     options.push(``);
     const newQuestion = {
       ...question,
@@ -97,8 +103,15 @@ const CreateQuestionnaire = ({ action, questions = state, title = "", id }) => {
   };
 
   const handleSubmit = (action) => {
+    //validations
     if (questionnaireTitle === "")
-      return swal("Ingresar título del cuestionario");
+      return swal('Oops', "Ingresar el título del cuestionario", 'error');
+    const existsEmptyQuestionTitle = questionsGroup.some(question => !question.title)
+    if(existsEmptyQuestionTitle) return swal('Oops', 'No debe existir ninguna pregunta vacía', 'error')
+    console.log({questionsGroup})
+    const existsEmptyOption = questionsGroup.some(question => question.options.some(op => !op))
+    if(existsEmptyOption) return swal('Oops', 'No debe existir ninguna opción vacía', 'error')
+    
     const newQuestionsGroup = questionsGroup.map((question) => {
       return question.answer
         ? question
@@ -121,12 +134,12 @@ const CreateQuestionnaire = ({ action, questions = state, title = "", id }) => {
           .then((data) => {
             console.log({ data });
             //setQuestionnaires(prevState => [...prevState, data])
-            swal("Cuestionario creado exitosamente");
+            swal('Genial', "Cuestionario creado exitosamente", 'success');
             router.push(ROUTES.ADMIN_QUESTIONNAIRES);
           })
           .catch(
             (e) => console.log("error", e),
-            swal("Ya existe un registro creado con este título")
+            swal('Oops', "Ya existe un registro creado con este título", 'error')
           );
 
         break;

@@ -65,13 +65,13 @@ export function UserContextProvider({ children }) {
         delete res.data.token;
         const user = res.data;
         setCurrentUser(user);
-        return 'Inicio de sesión exitoso'
+        return "Inicio de sesión exitoso";
       })
       .catch((err) => {
-        console.log("something went wrong", {err});
+        console.log("something went wrong", { err });
         window.localStorage.removeItem("jwt");
         window.localStorage.removeItem("role");
-        return err
+        return err;
       });
   };
 
@@ -94,21 +94,16 @@ export function UserContextProvider({ children }) {
     password,
     roles,
   }) => {
-    try {
-      const res = await User.register({
-        name,
-        lastname,
-        cellphone,
-        email,
-        password,
-        roles,
-      });
-      console.log({ res });
-      return res;
-    } catch (e) {
-      console.log("something went wrong");
-
-    }
+    const res = await User.register({
+      name,
+      lastname,
+      cellphone,
+      email,
+      password,
+      roles,
+    });
+    console.log({ res });
+    return res;
   };
 
   return (

@@ -20,13 +20,13 @@ export const EventModal = ({ isOpen, event, setIsOpen, onCancelInscription, setE
     const { _id: event_id } = event;
     createInscription(event_id)
       .then((res) => {
-        console.log(res);
+        console.log({res});
         if (res?.data?.message) {
           setIsOpen(false);
           setEventsState(prevState => {
             const event = prevState.find(e => e._id === event_id)
             const newEvent = {...event, inscriptions: [...event.inscriptions, currentUser._id]}
-            return [...prevState, newEvent]
+            return prevState.map(event => event._id === event_id ? newEvent : event)
           })
           swal("Usted se ha inscrito al evento con éxito")
         }
