@@ -38,7 +38,7 @@ const videosItemSchema = yup.object().shape({
   url: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("url"))
-    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+    .matches(/https:\/\/www.youtube.com\//, ERROR_MESSAGES.MATCHYOUTUBE),
 });
 
 const VideosPage = () => {
@@ -93,9 +93,15 @@ const VideosPage = () => {
     setShowDeleteModal(false);
   };
 
+
   console.log({ errors });
   const onSubmit = (data) => {
     console.log(data);
+
+    //if(!data.url.startsWith("www.youtube.com")){
+     // return swal("El video debe ser de youtube ")
+    //}
+
     Videos.create(data)
       .then((response) => {
         const newVideosItem = response.data;

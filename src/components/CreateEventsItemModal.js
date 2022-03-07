@@ -68,7 +68,7 @@ export const CreateEventsItemModal = ({
           <Form.Group className="mb-3">
             <Form.Label>Fecha </Form.Label>
             <Form.Control
-              min="2022-02-25"
+              min="2022-03-7"
               type="date"
               placeholder="Ingrese la fecha de entrega"
               {...register("date")}
@@ -88,8 +88,6 @@ export const CreateEventsItemModal = ({
             <Form.Control
               style={{ height: "50px" }}
               type="time"
-              min="10:00"
-              max="19:00"
               placeholder="Ingresar el horario del evento"
               {...register("schedule")}
               isInvalid={!!errors.schedule?.message}

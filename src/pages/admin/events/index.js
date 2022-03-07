@@ -28,18 +28,23 @@ const eventsItemSchema = yup.object().shape({
     .string()
     .required(ERROR_MESSAGES.REQUIRED("dirección"))
     .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+  date: yup
+      .string()
+      .required(ERROR_MESSAGES.REQUIRED("fecha"))
+      .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
   schedule: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("horario"))
-    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH)
+    .matches(/^1[0-9]/, ERROR_MESSAGES.MATCH),
   cost: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("costo"))
-    .matches(/^[A-Za-z0-9!@#$%_\-^&*]+/, ERROR_MESSAGES.MATCH),
+    .matches(/^[A-Za-z0-9]+/, ERROR_MESSAGES.MATCH),
   number: yup
     .string()
     .required(ERROR_MESSAGES.REQUIRED("aforo permitido"))
-    .matches("^[0-9]+$", ERROR_MESSAGES.MATCHNUMBER),
+    .matches(/^[0-9]+$/, ERROR_MESSAGES.MATCHNUMBER),
 });
 
 const EventsPage = () => {
@@ -65,6 +70,7 @@ const EventsPage = () => {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
     clearErrors,
   } = useForm({
@@ -116,6 +122,8 @@ const EventsPage = () => {
     formData.append("cost", data.cost);
     formData.append("number", data.number);
     formData.append("file", data.file[0]);
+
+    console.log({ data });
 
     Events.create(formData)
       .then((response) => {
@@ -230,6 +238,7 @@ const EventsPage = () => {
           register={register}
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
+          watch={watch}
           errors={errors}
           clearErrors={clearErrors}
         />
