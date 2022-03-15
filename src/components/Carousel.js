@@ -7,7 +7,7 @@ const CarouselHome = () => {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://scontent.fuio1-2.fna.fbcdn.net/v/t1.6435-9/110184420_3722734127756359_3408679904642241617_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=e3f864&_nc_ohc=p40A_2i4v5EAX_z36P4&_nc_ht=scontent.fuio1-2.fna&oh=00_AT8Gj-QzbIjwkJ3305WeXx5_JFzulEgg4OgeB8rc1j37ig&oe=6225FDA7"
+          src="https://scontent.fuio1-2.fna.fbcdn.net/v/t1.6435-9/110184420_3722734127756359_3408679904642241617_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=e3f864&_nc_ohc=iaobcemtQzUAX-SX9bh&_nc_ht=scontent.fuio1-2.fna&oh=00_AT8A01ohLRxDXSupkoUCGORwj5OdbGD_P06Xhz-pw02H-Q&oe=625573A7"
           alt="First slide"
         />
       </Carousel.Item>

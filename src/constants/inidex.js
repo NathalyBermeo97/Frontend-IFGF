@@ -9,7 +9,7 @@ export const SERVER_RESPONSE = {
 
 export const ERROR_MESSAGES = {
     MATCH: 'Entrada no válida',
-    MATCHYOUTUBE: 'Ingrese videos de YouTube',
+    MATCHYOUTUBE: 'Url de YouTube no valido',
     MATCHLETTER: 'Ingrese solo letras',
     MATCHNUMBER:'Ingrese solo números',
     EMAIL: 'El campo debe ser un email válido',
