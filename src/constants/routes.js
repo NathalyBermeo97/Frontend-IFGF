@@ -8,7 +8,8 @@ const PUBLIC_ROUTES = {
     QUESTIONNAIRES: '/questionnaires',
     ECONOMIC_DONATIONS: '/donations/economic',
     FOOD_DONATIONS: '/donations/food',
-    CLOTHES_DONATIONS: '/donations/clothes'
+    CLOTHES_DONATIONS: '/donations/clothes',
+    FORGOT_PASSWORD: '/reset-password',
 }
 
 const PRIVATE_ROUTES = {

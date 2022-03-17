@@ -143,6 +143,12 @@ const LoginPage = () => {
                 >
                   ¿No tiene una cuenta? Registrarse
                 </p>
+                <p
+                  className={styles.createAccount}
+                  onClick={() => router.push(ROUTES.FORGOT_PASSWORD)}
+                >
+                  ¿Olvidó su contraseña?
+                </p>
               </Form>
             </Card.Body>
           </Card>

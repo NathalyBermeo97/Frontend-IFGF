@@ -11,13 +11,11 @@ const User = {
         return api.get("/auth/logout");
     },
     sendPasswordResetEmail: (email) => {
-        return api.post("/forgot-password", { email });
+        return api.post("/password-reset", { email });
     },
-    confirmPasswordReset: ({ email, password,token }) => {
-        return api.post("/reset-password", {
-            email,
-            password,
-            token,
+    confirmPasswordReset: (userId, newPassword) => {
+        return api.post(`/password-reset/${userId}`, {
+            password: newPassword,
         });
     },
     getAuthenticatedUser: () => {
