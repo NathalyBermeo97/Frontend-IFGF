@@ -74,7 +74,7 @@ const SendEmail = () => {
             <Card.Body>
               <Form onSubmit={handleSubmit(onSubmit)}>
                 <div>
-                  <h1 className={styles.title}>Enviar email</h1>
+                  <h1 className={styles.title}>Recuperación de contraseña</h1>
                 </div>
                 <Form.Group className="mb-3">
                   <Form.Control
@@ -87,7 +87,7 @@ const SendEmail = () => {
                     {errors.email?.message}
                   </Form.Control.Feedback>
                 </Form.Group>
-                <div className={styles.sendEmail}>
+                <div  className={styles.loginButtons}>
                   <Button variant="outline-primary" size="medium" type="submit">
                     Enviar
                   </Button>

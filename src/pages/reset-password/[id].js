@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import { withPublic } from "../../hocs/withPublic";
 import User from "../../api/user";
 import { ROUTES } from "../../constants/routes";
+import {AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai";
 
 const loginSchema = yup.object().shape({
   password: yup
@@ -31,6 +32,10 @@ const SendEmail = () => {
     } catch (error) {
       swal("Oops", error.response?.data?.message || 'Ocurrio un error', "error");
     }
+  };
+  const [state, setState] = useState(false);
+  const btn = () => {
+    setState((prevState) => !prevState);
   };
 
   const {
@@ -79,20 +84,33 @@ const SendEmail = () => {
                 <div>
                   <h1 className={styles.title}>Cambiar contraseña</h1>
                 </div>
-                <Form.Group className="mb-3">
-                  <Form.Control
-                    variant="outlined"
-                    placeholder="Password"
-                    {...register("password")}
-                    isInvalid={!!errors.password?.message}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.password?.message}
-                  </Form.Control.Feedback>
+                <Form.Group className="mb-2">
+                  <Row>
+                    <Col xs={10}>
+                      <Form.Control
+                          type={state ? "text" : "password"}
+                          variant="outlined"
+                          placeholder="Contraseña"
+                          {...register("password")}
+                          isInvalid={!!errors.password?.message}
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        {errors.password?.message}
+                      </Form.Control.Feedback>
+                    </Col>
+
+                    <Col xs={2}>
+                      <div className={styles.btn}>
+                        <Button onClick={btn}>
+                          {state ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                        </Button>
+                      </div>
+                    </Col>
+                  </Row>
                 </Form.Group>
-                <div className={styles.sendEmail}>
+                <div  className={styles.loginButtons}>
                   <Button variant="outline-primary" size="medium" type="submit">
-                    Cambiar
+                    Cambiar contraseña
                   </Button>
                 </div>
               </Form>
